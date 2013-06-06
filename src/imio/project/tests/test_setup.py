@@ -2,7 +2,6 @@
 """Setup/installation tests for this package."""
 
 from imio.project.testing import IntegrationTestCase
-from plone import api
 
 
 class TestInstall(IntegrationTestCase):
@@ -11,7 +10,7 @@ class TestInstall(IntegrationTestCase):
     def setUp(self):
         """Custom shared utility setup for tests."""
         self.portal = self.layer['portal']
-        self.installer = api.portal.get_tool('portal_quickinstaller')
+        self.installer = self.portal.portal_quickinstaller
 
     def test_product_installed(self):
         """Test if imio.project is installed with portal_quickinstaller."""
