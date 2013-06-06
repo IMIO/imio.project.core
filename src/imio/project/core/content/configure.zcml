@@ -1,17 +1,17 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    i18n_domain="imio.project">
+    i18n_domain="imio.project.core">
 
     <utility
       provides="zope.schema.interfaces.IVocabularyFactory"
       component=".project.category_vocabulary_factory"
-      name="imio.project.content.project.category_vocabulary"
+      name="imio.project.core.content.project.category_vocabulary"
     />
 
     <utility
       provides="zope.schema.interfaces.IVocabularyFactory"
       component=".project.priority_vocabulary_factory"
-      name="imio.project.content.project.priority_vocabulary"
+      name="imio.project.core.content.project.priority_vocabulary"
     />
 
 </configure>

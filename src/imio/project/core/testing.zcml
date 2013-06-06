@@ -1,7 +1,7 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    i18n_domain="imio.project">
+    i18n_domain="imio.project.core">
 
   <include file="configure.zcml" />
   <include package="collective.z3cform.datagridfield" />
@@ -9,9 +9,9 @@
 
   <genericsetup:registerProfile
       name="testing"
-      title="imio.project tests"
+      title="imio.project.core tests"
       directory="profiles/testing"
-      description="Steps to ease tests of imio.project"
+      description="Steps to ease tests of imio.project.core"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 

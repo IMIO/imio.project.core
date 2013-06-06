@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<object name="project" meta_type="Dexterity FTI" i18n:domain="imio.project"
+<object name="project" meta_type="Dexterity FTI" i18n:domain="imio.project.core"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title" i18n:translate="">Project</property>
  <property name="description" i18n:translate=""></property>
- <property name="icon_expr">string:${portal_url}/++resource++imio.project/project_icon.png</property>
+ <property name="icon_expr">string:${portal_url}/++resource++imio.project.core/project_icon.png</property>
  <property name="factory">project</property>
  <property name="add_view_expr">string:${folder_url}/++add++project</property>
  <property name="link_target"></property>
@@ -20,8 +20,8 @@
  </property>
  <property name="default_view_fallback">False</property>
  <property name="add_permission">cmf.AddPortalContent</property>
- <property name="schema_policy">schema_policy_imioproject</property>
- <property name="klass">imio.project.content.project.Project</property>
+ <property name="schema_policy">schema_policy_imioprojectcore</property>
+ <property name="klass">imio.project.core.content.project.Project</property>
  <property name="behaviors">
   <element value="plone.app.dexterity.behaviors.metadata.IDublinCore"/>
   <element value="plone.app.content.interfaces.INameFromTitle" />

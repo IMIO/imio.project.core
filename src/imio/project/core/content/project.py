@@ -16,7 +16,7 @@ from plone.supermodel import model
 from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
 from collective.z3cform.rolefield.field import LocalRolesToPrincipals
 
-from imio.project import _
+from imio.project.core import _
 
 
 class IResultIndicatorSchema(Interface):
@@ -39,14 +39,14 @@ class IProject(model.Schema):
         description=_(u"Choose a category."),
         required=False,
         value_type=schema.Choice(
-            vocabulary=u'imio.project.content.project.category_vocabulary',
+            vocabulary=u'imio.project.core.content.project.category_vocabulary',
         ),
     )
 
     priority = schema.Choice(
         title=_(u'Priority'),
         description=_(u"Choose a priority."),
-        vocabulary=u'imio.project.content.project.priority_vocabulary',
+        vocabulary=u'imio.project.core.content.project.priority_vocabulary',
     )
 
     budget = schema.Text(

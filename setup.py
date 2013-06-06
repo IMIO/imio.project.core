@@ -18,7 +18,7 @@ long_description = (
 
 
 setup(
-    name='imio.project',
+    name='imio.project.core',
     version='0.1',
     description="Project management",
     long_description=long_description,
@@ -33,14 +33,15 @@ setup(
     keywords='',
     author='IMIO',
     author_email='dev@imio.be',
-    url='http://pypi.python.org/pypi/imio.project',
+    url='http://pypi.python.org/pypi/imio.project.core',
     license='GPL',
     packages=find_packages('src', exclude=['ez_setup']),
-    namespace_packages=['imio'],
+    namespace_packages=['imio', 'imio.project'],
     package_dir={'': 'src'},
     include_package_data=True,
     zip_safe=False,
     install_requires=[
+        'Plone',
         'collective.z3cform.datagridfield',
         'collective.z3cform.rolefield',
         'plone.app.dexterity',

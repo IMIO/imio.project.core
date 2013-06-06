@@ -14,7 +14,7 @@ from plone.testing import z2
 
 import unittest2 as unittest
 
-import imio.project
+import imio.project.core
 
 
 class ImioProjectLayer(PloneSandboxLayer):
@@ -24,14 +24,14 @@ class ImioProjectLayer(PloneSandboxLayer):
     def setUpZope(self, app, configurationContext):
         """Set up Zope."""
         # Load ZCML
-        self.loadZCML(package=imio.project,
+        self.loadZCML(package=imio.project.core,
                       name='testing.zcml')
-        z2.installProduct(app, 'imio.project')
+        z2.installProduct(app, 'imio.project.core')
 
     def setUpPloneSite(self, portal):
         """Set up Plone."""
         # Install into Plone site using portal_setup
-        applyProfile(portal, 'imio.project:default')
+        applyProfile(portal, 'imio.project.core:default')
 
         # Login and create some test content
         setRoles(portal, TEST_USER_ID, ['Manager'])
@@ -45,7 +45,7 @@ class ImioProjectLayer(PloneSandboxLayer):
 
     def tearDownZope(self, app):
         """Tear down Zope."""
-        z2.uninstallProduct(app, 'imio.project')
+        z2.uninstallProduct(app, 'imio.project.core')
 
 
 FIXTURE = ImioProjectLayer(
