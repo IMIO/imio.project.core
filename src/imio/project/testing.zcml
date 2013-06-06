@@ -4,7 +4,8 @@
     i18n_domain="imio.project">
 
   <include file="configure.zcml" />
-  <include package="collective.task" />
+  <include package="collective.z3cform.datagridfield" />
+  <include package="plone.app.dexterity" />
 
   <genericsetup:registerProfile
       name="testing"

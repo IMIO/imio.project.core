@@ -42,6 +42,10 @@ setup(
     zip_safe=False,
     install_requires=[
         'collective.z3cform.datagridfield',
+        'collective.z3cform.rolefield',
+        'plone.app.dexterity',
+        'plone.principalsource',
+        'plone.formwidget.datetime',
         'setuptools',
     ],
     extras_require={
