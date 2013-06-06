@@ -1,3 +1,6 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -9,117 +12,116 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: fr\n"
-"Language-Name: French\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: imio.project.core\n"
-"X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
 #: ./content/project.py:53
 msgid "Budget"
-msgstr "Budget"
+msgstr ""
 
 #: ./content/project.py:54
 msgid "Budget details"
-msgstr "Détails financiers"
+msgstr ""
 
 #: ./content/project.py:38
 msgid "Category"
-msgstr "Catégorie"
+msgstr ""
 
 #: ./content/project.py:39
 msgid "Choose a category."
-msgstr "Sélectionner une catégorie"
+msgstr ""
 
 #: ./content/project.py:48
 msgid "Choose a priority."
-msgstr "Choisir la priorité"
+msgstr ""
 
-#: ./content/project.py:69
+#: ./content/project.py:70
 msgid "Choose principals that can see this project."
-msgstr "Sélectionner les utilisateurs qui pourront visualiser le projet."
+msgstr ""
 
 #: ./content/project.py:60
 msgid "Choose principals that will manage this project."
-msgstr Sélectionner les utilisateurs qui vont gérer le projet.""
+msgstr ""
 
-#: ./content/project.py:127
+#: ./content/project.py:128
 msgid "Comments"
-msgstr "Commentaires"
-
-#: ./content/project.py:97
-msgid "Effective begin date"
-msgstr "Date de début effective"
-
-#: ./content/project.py:113
-msgid "Effective end date"
-msgstr "Date de fin effective"
-
-#: ./content/project.py:79
-msgid "Enter one indicator by row. Value is a number. Label must precise the signification of this number."
-msgstr "Entrer un indicateur par ligne. La valeur est un nombre. Le libellé doit préciser la signification de ce nombre."
+msgstr ""
 
 #: ./content/project.py:98
-msgid "Enter the effective begin date."
-msgstr "Définir la date de début effective."
+msgid "Effective begin date"
+msgstr ""
 
 #: ./content/project.py:114
+msgid "Effective end date"
+msgstr ""
+
+#: ./content/project.py:80
+msgid "Enter one indicator by row. Value is a number. Label must precise the signification of this number."
+msgstr ""
+
+#: ./content/project.py:99
+msgid "Enter the effective begin date."
+msgstr ""
+
+#: ./content/project.py:115
 msgid "Enter the effective end date."
-msgstr "Définir la date de fin effective."
+msgstr ""
 
-#: ./content/project.py:90
+#: ./content/project.py:91
 msgid "Enter the planned begin date."
-msgstr "Définir la date de début prévue."
+msgstr ""
 
-#: ./content/project.py:106
+#: ./content/project.py:107
 msgid "Enter the planned end date."
-msgstr "Définir la date d'échéance."
+msgstr ""
 
 #: ./content/project.py:25
 msgid "Label"
-msgstr "Libellé"
+msgstr ""
 
 #: ./content/project.py:59
 msgid "Manager"
-msgstr "Gestionnaire"
+msgstr ""
 
-#: ./content/project.py:89
+#: ./content/project.py:90
 msgid "Planned begin date"
-msgstr "Date de début prévue"
+msgstr ""
 
-#: ./content/project.py:105
+#: ./content/project.py:106
 msgid "Planned end date"
-msgstr "Échéance"
+msgstr ""
 
 #: ./content/project.py:47
 msgid "Priority"
-msgstr "Priorité"
-
-#: ./content/project.py:121
-msgid "Progress"
-msgstr "Progression"
+msgstr ""
 
 #: ./content/project.py:122
+msgid "Progress"
+msgstr ""
+
+#: ./content/project.py:123
 msgid "Progress estimation in %."
-msgstr "Entrer la progression en %."
+msgstr ""
 
 #: ./profiles/default/types/project.xml
 msgid "Project"
-msgstr "Projet"
+msgstr ""
 
-#: ./content/project.py:78
+#: ./content/project.py:79
 msgid "Result indicator"
-msgstr "Indicateur de résultat"
+msgstr ""
 
 #: ./content/project.py:28
 msgid "Value"
-msgstr "Valeur"
+msgstr ""
 
-#: ./content/project.py:128
+#: ./content/project.py:129
 msgid "Various comments"
-msgstr "Commentaires divers"
+msgstr ""
 
-#: ./content/project.py:68
+#: ./content/project.py:69
 msgid "Visible for"
-msgstr "En lecture pour"
+msgstr ""
 
