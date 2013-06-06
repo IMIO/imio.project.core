@@ -55,8 +55,9 @@ class IProject(model.Schema):
         required=False,
     )
 
-    responsible = LocalRolesToPrincipals(
-        title=_(u"Responsible"),
+    manager = LocalRolesToPrincipals(
+        title=_(u"Manager"),
+        description=_(u"Choose principals that will manage this project."),
         roles_to_assign=('Editor',),
         value_type=schema.Choice(
             vocabulary="plone.principalsource.Principals"
