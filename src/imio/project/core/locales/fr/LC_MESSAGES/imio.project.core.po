@@ -41,7 +41,7 @@ msgstr "Sélectionner les utilisateurs qui pourront visualiser le projet."
 
 #: ./content/project.py:60
 msgid "Choose principals that will manage this project."
-msgstr Sélectionner les utilisateurs qui vont gérer le projet.""
+msgstr "Sélectionner les utilisateurs qui vont gérer le projet."
 
 #: ./content/project.py:127
 msgid "Comments"
@@ -121,5 +121,5 @@ msgstr "Commentaires divers"
 
 #: ./content/project.py:68
 msgid "Visible for"
-msgstr "En lecture pour"
+msgstr "En lecture"
 

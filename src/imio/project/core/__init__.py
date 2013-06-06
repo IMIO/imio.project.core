@@ -3,7 +3,7 @@
 
 from zope.i18nmessageid import MessageFactory
 
-_ = MessageFactory('imio.project')
+_ = MessageFactory('imio.project.core')
 
 
 def initialize(context):
