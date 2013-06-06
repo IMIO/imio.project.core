@@ -61,8 +61,6 @@ class IProject(model.Schema):
         value_type=schema.Choice(
             vocabulary="plone.principalsource.Principals"
         ),
-        min_length=1,
-        max_length=1,
         required=True,
     )
 
