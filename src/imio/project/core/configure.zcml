@@ -31,7 +31,7 @@
 
     <utility
         factory=".content.project.ProjectSchemaPolicy"
-        name="schema_policy_imioprojectcore"
+        name="schema_policy_project"
     />
 
 </configure>
