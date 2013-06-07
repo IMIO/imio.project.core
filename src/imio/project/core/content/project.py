@@ -34,13 +34,11 @@ class IProject(model.Schema):
         Project schema, field ordering
     """
 
-    category = schema.List(
+    category = schema.Choice(
         title=_(u'Category'),
         description=_(u"Choose a category."),
         required=False,
-        value_type=schema.Choice(
-            vocabulary=u'imio.project.core.content.project.category_vocabulary',
-        ),
+        vocabulary=u'imio.project.core.content.project.category_vocabulary',
     )
 
     priority = schema.Choice(
@@ -73,6 +71,12 @@ class IProject(model.Schema):
         value_type=schema.Choice(
             vocabulary=u'plone.principalsource.Principals'
         ),
+    )
+
+    extra_concerned_people = schema.Text(
+        title=_(u"Extra concerned people"),
+        description=_("Specify here concerned people that do not have access to the application, this will just be informational."),
+        required=False,
     )
 
     result_indicator = schema.List(
@@ -146,7 +150,6 @@ class CategoryVocabulary(object):
         terms = []
         terms.append(SimpleTerm(u'Category 1', u'cat1', u'Category 1'))
         return SimpleVocabulary(terms)
-category_vocabulary_factory = CategoryVocabulary()
 
 
 class PriorityVocabulary(object):
@@ -159,7 +162,6 @@ class PriorityVocabulary(object):
         terms.append(SimpleTerm(u'Normal', u'normal', u'Normal'))
         terms.append(SimpleTerm(u'High', u'high', u'High'))
         return SimpleVocabulary(terms)
-priority_vocabulary_factory = PriorityVocabulary()
 
 
 class ProjectSchemaPolicy(DexteritySchemaPolicy):

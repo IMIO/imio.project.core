@@ -4,13 +4,12 @@
 
     <utility
       provides="zope.schema.interfaces.IVocabularyFactory"
-      component=".project.category_vocabulary_factory"
+      factory=".project.CategoryVocabulary"
       name="imio.project.core.content.project.category_vocabulary"
     />
-
     <utility
       provides="zope.schema.interfaces.IVocabularyFactory"
-      component=".project.priority_vocabulary_factory"
+      factory=".project.PriorityVocabulary"
       name="imio.project.core.content.project.priority_vocabulary"
     />
 
