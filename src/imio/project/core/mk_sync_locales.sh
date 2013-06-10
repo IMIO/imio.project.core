@@ -1,10 +1,7 @@
 #!/bin/bash
-#
 # Shell script to manage locales, languages, .po files...
-#
-# Run this file in your product folder
-# E.g. : in yourproduct.name/yourproduct/name
-#
+# Run this file in your product folder. E.g. : in yourproduct.name/yourproduct/name
+# Enter your manual added msgids in file locales/manual.pot
 
 CATALOGNAME="imio.project.core"
 
@@ -15,21 +12,22 @@ LANGUAGES="fr|French|fr-fr;fr-be;fr-ca"
 # Create locales folder structure for languages
 install -d locales
 
-# Rebuild .pot
-echo "Rebuilding locales/generated.pot"
-i18ndude rebuild-pot --pot locales/generated.pot --create $CATALOGNAME .
-
-#creating the first pot
-if ! test -f locales/$CATALOGNAME.pot; then
-    echo "Copying locales/generated.pot to locales/$CATALOGNAME.pot"
-    cp locales/generated.pot locales/$CATALOGNAME.pot
+if ! test -f locales/manual.pot; then
+    echo "Creating manual.pot"
+    echo '# Manual msgids
+msgid ""
+msgstr ""' > locales/manual.pot
 fi
 
+# Rebuild .pot
+echo "Rebuilding locales/$CATALOGNAME.pot"
+i18ndude rebuild-pot --pot locales/$CATALOGNAME.pot --create $CATALOGNAME .
+
 #merging new messages
-if [ `svn diff locales/generated.pot |grep "^\+[^+]" |wc -l` -le "1" ]; then
-    svn revert locales/generated.pot
-else
-    i18ndude merge --pot locales/$CATALOGNAME.pot --merge locales/generated.pot 2>/dev/null
+i18ndude merge --pot locales/$CATALOGNAME.pot --merge locales/manual.pot 2>/dev/null
+
+if [ `svn diff locales/$CATALOGNAME.pot |grep "^\+[^+]" |wc -l` -le "1" ]; then
+    svn revert locales/$CATALOGNAME.pot
 fi
 
 if ! test -f locales/plone.pot || [ "$1" == "rebuild-plone" ]; then
@@ -38,7 +36,7 @@ if ! test -f locales/plone.pot || [ "$1" == "rebuild-plone" ]; then
 fi
 
 # Finding pot files
-for pot in $(find locales -mindepth 1 -maxdepth 1 -type f -name "*.pot" ! -name generated.pot); do
+for pot in $(find locales -mindepth 1 -maxdepth 1 -type f -name "*.pot" ! -name generated.pot ! -name manual.pot); do
     #finding pot basename as catalog
     catalog=`basename $pot .pot`
     echo "=> Found pot $pot"
