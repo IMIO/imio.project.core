@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-06-06 13:30+0000\n"
+"POT-Creation-Date: 2013-06-10 08:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: imio.project.core\n"
 
-#: ./content/project.py:53
+#: ./content/project.py:51
 msgid "Budget"
 msgstr ""
 
-#: ./content/project.py:54
+#: ./content/project.py:52
 msgid "Budget details"
 msgstr ""
 
@@ -33,75 +33,79 @@ msgstr ""
 msgid "Choose a category."
 msgstr ""
 
-#: ./content/project.py:48
+#: ./content/project.py:46
 msgid "Choose a priority."
 msgstr ""
 
-#: ./content/project.py:69
+#: ./content/project.py:68
 msgid "Choose principals that can see this project."
 msgstr ""
 
-#: ./content/project.py:60
+#: ./content/project.py:58
 msgid "Choose principals that will manage this project."
 msgstr ""
 
-#: ./content/project.py:127
+#: ./content/project.py:133
 msgid "Comments"
 msgstr ""
 
-#: ./content/project.py:97
+#: ./content/project.py:103
 msgid "Effective begin date"
 msgstr ""
 
-#: ./content/project.py:113
+#: ./content/project.py:119
 msgid "Effective end date"
 msgstr ""
 
-#: ./content/project.py:79
+#: ./content/project.py:85
 msgid "Enter one indicator by row. Value is a number. Label must precise the signification of this number."
 msgstr ""
 
-#: ./content/project.py:98
+#: ./content/project.py:104
 msgid "Enter the effective begin date."
 msgstr ""
 
-#: ./content/project.py:114
+#: ./content/project.py:120
 msgid "Enter the effective end date."
 msgstr ""
 
-#: ./content/project.py:90
+#: ./content/project.py:96
 msgid "Enter the planned begin date."
 msgstr ""
 
-#: ./content/project.py:106
+#: ./content/project.py:112
 msgid "Enter the planned end date."
+msgstr ""
+
+#: ./content/project.py:77
+msgid "Extra concerned people"
 msgstr ""
 
 #: ./content/project.py:25
 msgid "Label"
 msgstr ""
 
-#: ./content/project.py:59
+#: ./content/project.py:57
 msgid "Manager"
 msgstr ""
 
-#: ./content/project.py:89
+#: ./content/project.py:95
 msgid "Planned begin date"
 msgstr ""
 
-#: ./content/project.py:105
+#: ./content/project.py:111
 msgid "Planned end date"
 msgstr ""
 
-#: ./content/project.py:47
+#: ./content/project.py:45
 msgid "Priority"
 msgstr ""
 
-#: ./content/project.py:121
+#: ./content/project.py:127
 msgid "Progress"
 msgstr ""
 
-#: ./content/project.py:122
+#: ./content/project.py:128
 msgid "Progress estimation in %."
 msgstr ""
 
@@ -109,19 +113,23 @@ msgstr ""
 msgid "Project"
 msgstr ""
 
-#: ./content/project.py:78
+#: ./content/project.py:84
 msgid "Result indicator"
+msgstr ""
+
+#: ./content/project.py:78
+msgid "Specify here concerned people that do not have access to the application,this will just be informational."
 msgstr ""
 
 #: ./content/project.py:28
 msgid "Value"
 msgstr ""
 
-#: ./content/project.py:128
+#: ./content/project.py:134
 msgid "Various comments"
 msgstr ""
 
-#: ./content/project.py:68
+#: ./content/project.py:67
 msgid "Visible for"
 msgstr ""
 
