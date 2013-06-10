@@ -17,6 +17,7 @@ from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
 from collective.z3cform.rolefield.field import LocalRolesToPrincipals
 
 from imio.project.core import _
+from imio.project.core.utils import getVocabularyTermsForOrganization
 
 
 class IResultIndicatorSchema(Interface):
@@ -58,7 +59,7 @@ class IProject(model.Schema):
         description=_(u"Choose principals that will manage this project."),
         roles_to_assign=('Editor',),
         value_type=schema.Choice(
-            vocabulary="plone.principalsource.Principals"
+            vocabulary='imio.project.core.content.project.manager_vocabulary'
         ),
         required=True,
     )
@@ -69,14 +70,14 @@ class IProject(model.Schema):
         required=False,
         roles_to_assign=('Reader',),
         value_type=schema.Choice(
-            vocabulary=u'plone.principalsource.Principals'
+            vocabulary='imio.project.core.content.project.visible_for_vocabulary'
         ),
     )
 
     extra_concerned_people = schema.Text(
         title=_(u"Extra concerned people"),
-        description=_("Specify here concerned people that do not have access to the application,"
-                      "this will just be informational."),
+        description=_(u"Specify here concerned people that do not have access "
+                      "to the application, this will just be informational."),
         required=False,
     )
 
@@ -163,6 +164,26 @@ class PriorityVocabulary(object):
         terms.append(SimpleTerm(u'Normal', u'normal', u'Normal'))
         terms.append(SimpleTerm(u'High', u'high', u'High'))
         return SimpleVocabulary(terms)
+
+
+class ManagerVocabulary(object):
+    """
+    """
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        """"""
+        return getVocabularyTermsForOrganization(context)
+
+
+class VisibleForVocabulary(object):
+    """
+    """
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        """"""
+        return getVocabularyTermsForOrganization(context)
 
 
 class ProjectSchemaPolicy(DexteritySchemaPolicy):

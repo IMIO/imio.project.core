@@ -12,5 +12,15 @@
       factory=".project.PriorityVocabulary"
       name="imio.project.core.content.project.priority_vocabulary"
     />
+    <utility
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      factory=".project.ManagerVocabulary"
+      name="imio.project.core.content.project.manager_vocabulary"
+    />
+    <utility
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      factory=".project.VisibleForVocabulary"
+      name="imio.project.core.content.project.visible_for_vocabulary"
+    />
 
 </configure>
