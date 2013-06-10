@@ -75,7 +75,8 @@ class IProject(model.Schema):
 
     extra_concerned_people = schema.Text(
         title=_(u"Extra concerned people"),
-        description=_("Specify here concerned people that do not have access to the application, this will just be informational."),
+        description=_("Specify here concerned people that do not have access to the application,"
+                      "this will just be informational."),
         required=False,
     )
 
