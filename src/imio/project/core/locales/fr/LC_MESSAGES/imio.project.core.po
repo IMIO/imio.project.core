@@ -129,5 +129,5 @@ msgstr "Commentaires divers"
 
 #: ./content/project.py:67
 msgid "Visible for"
-msgstr "En lecture"
+msgstr "Visible pour"
 
