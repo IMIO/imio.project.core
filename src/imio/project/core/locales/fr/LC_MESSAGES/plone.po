@@ -37,7 +37,7 @@ msgstr "En création"
 
 #: profiles/default/workflows/project_workflow/definition.xml
 msgid "finish"
-msgstr "Clôturer"
+msgstr "Finaliser"
 
 #: profiles/default/workflows/project_workflow/definition.xml
 msgid "ongoing"
@@ -45,7 +45,7 @@ msgstr "En cours"
 
 #: profiles/default/workflows/project_workflow/definition.xml
 msgid "set_to_be_scheduled"
-msgstr "Mettre à agender"
+msgstr "Mettre à programmer"
 
 #: profiles/default/workflows/project_workflow/definition.xml
 msgid "stop"
@@ -57,9 +57,9 @@ msgstr "Annulé"
 
 #: profiles/default/workflows/project_workflow/definition.xml
 msgid "terminated"
-msgstr "Clôturé"
+msgstr "Finalisé"
 
 #: profiles/default/workflows/project_workflow/definition.xml
 msgid "to_be_scheduled"
-msgstr "À agender"
+msgstr "À programmer"
 
