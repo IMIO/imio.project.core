@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-12 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: fr\n"
+"Language-Name: French\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+"X-is-fallback-for: fr-fr fr-be fr-ca\n"
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "back_to_be_scheduled"
+msgstr "Remettre à agender"
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "back_to_created"
+msgstr "Remettre en création"
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "back_to_ongoing"
+msgstr "Remettre en cours"
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "begin"
+msgstr "Commencer"
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "created"
+msgstr "En création"
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "finish"
+msgstr "Clôturer"
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "ongoing"
+msgstr "En cours"
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "set_to_be_scheduled"
+msgstr "Mettre à agender"
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "stop"
+msgstr "Annuler"
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "stopped"
+msgstr "Annulé"
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "terminated"
+msgstr "Clôturé"
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "to_be_scheduled"
+msgstr "À agender"
+
