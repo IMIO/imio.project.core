@@ -128,6 +128,7 @@ class IProject(model.Schema):
         title=_(u"Progress"),
         description=_(u"Progress estimation in %."),
         required=False,
+        default=0,
     )
 
     comments = schema.Text(
