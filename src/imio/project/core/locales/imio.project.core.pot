@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-06-12 10:01+0000\n"
+"POT-Creation-Date: 2013-06-14 09:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,7 +45,7 @@ msgstr ""
 msgid "Choose principals that will manage this project."
 msgstr ""
 
-#: ./content/project.py:134
+#: ./content/project.py:135
 msgid "Comments"
 msgstr ""
 
@@ -125,7 +125,7 @@ msgstr ""
 msgid "Value"
 msgstr ""
 
-#: ./content/project.py:135
+#: ./content/project.py:136
 msgid "Various comments"
 msgstr ""
 

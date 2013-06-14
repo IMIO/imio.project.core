@@ -34,12 +34,12 @@ class IProject(model.Schema):
     """
         Project schema, field ordering
     """
-
-    category = schema.Choice(
+    # use 'categories' field name  even if mono-valued for now, because 'category' is reserved
+    categories = schema.Choice(
         title=_(u'Category'),
         description=_(u"Choose a category."),
         required=False,
-        vocabulary=u'imio.project.core.content.project.category_vocabulary',
+        vocabulary=u'imio.project.core.content.project.categories_vocabulary',
     )
 
     priority = schema.Choice(
@@ -145,13 +145,17 @@ class Project(Container):
     __ac_local_roles_block__ = False
 
 
-class CategoryVocabulary(object):
+class CategoriesVocabulary(object):
     implements(IVocabularyFactory)
 
     def __call__(self, context):
         """"""
         terms = []
         terms.append(SimpleTerm(u'Category 1', u'cat1', u'Category 1'))
+        terms.append(SimpleTerm(u'Category 2', u'cat1', u'Category 2'))
+        terms.append(SimpleTerm(u'Category 3', u'cat1', u'Category 3'))
+        terms.append(SimpleTerm(u'Category 4', u'cat1', u'Category 4'))
+        terms.append(SimpleTerm(u'Category 5', u'cat1', u'Category 5'))
         return SimpleVocabulary(terms)
 
 

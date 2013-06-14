@@ -4,8 +4,8 @@
 
     <utility
       provides="zope.schema.interfaces.IVocabularyFactory"
-      factory=".project.CategoryVocabulary"
-      name="imio.project.core.content.project.category_vocabulary"
+      factory=".project.CategoriesVocabulary"
+      name="imio.project.core.content.project.categories_vocabulary"
     />
     <utility
       provides="zope.schema.interfaces.IVocabularyFactory"
