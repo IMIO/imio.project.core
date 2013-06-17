@@ -33,8 +33,9 @@ def getVocabularyTermsForOrganization(context, organization_id='services'):
                                   portal_type="organization",
                                   sort_on="getObjPositionInParent")
         if not services_brains:
-            terms.append(SimpleTerm(dep.Title(), token=brain.id, title=dep.Title()))
+            terms.append(SimpleTerm(dep.getId(), token=brain.id, title=dep.Title()))
         for service_brain in services_brains:
             comb = "%s - %s" % (dep.Title(), service_brain.Title)
-            terms.append(SimpleTerm(comb, token="%s-%s" % (brain.id, service_brain.id), title=comb))
+            termId = "%s-%s" % (brain.id, service_brain.id)
+            terms.append(SimpleTerm(termId, token=termId, title=comb))
     return SimpleVocabulary(terms)
