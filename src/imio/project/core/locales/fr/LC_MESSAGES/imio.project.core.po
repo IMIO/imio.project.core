@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-06-14 09:47+0000\n"
+"POT-Creation-Date: 2013-06-25 11:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,67 +15,71 @@ msgstr ""
 "Domain: imio.project.core\n"
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
-#: ./content/project.py:52
+#: ./content/project.py:56
 msgid "Budget"
 msgstr "Budget"
 
-#: ./content/project.py:53
+#: ./content/project.py:57
 msgid "Budget details"
 msgstr "Détails financiers"
 
-#: ./content/project.py:39
+#: ./content/project.py:43
 msgid "Category"
 msgstr "Catégorie"
 
-#: ./content/project.py:40
+#: ./content/project.py:44
 msgid "Choose a category."
 msgstr "Sélectionner une catégorie"
 
-#: ./content/project.py:47
+#: ./content/project.py:51
 msgid "Choose a priority."
 msgstr "Choisir la priorité"
 
-#: ./content/project.py:69
+#: ./content/project.py:73
 msgid "Choose principals that can see this project."
 msgstr "Sélectionner les utilisateurs qui pourront visualiser le projet."
 
-#: ./content/project.py:59
+#: ./content/project.py:63
 msgid "Choose principals that will manage this project."
 msgstr "Sélectionner les utilisateurs qui vont gérer le projet."
 
-#: ./content/project.py:135
+#: ./content/project.py:139
 msgid "Comments"
 msgstr "Commentaires"
 
-#: ./content/project.py:104
+#: ./content/project.py:108
 msgid "Effective begin date"
 msgstr "Date de début effective"
 
-#: ./content/project.py:120
+#: ./content/project.py:124
 msgid "Effective end date"
 msgstr "Date de fin effective"
 
-#: ./content/project.py:86
+#: ./content/project.py:90
 msgid "Enter one indicator by row. Value is a number. Label must precise the signification of this number."
 msgstr "Entrer un indicateur par ligne. La valeur est un nombre. Le libellé doit préciser la signification de ce nombre."
 
-#: ./content/project.py:105
+#: ./content/project.py:109
 msgid "Enter the effective begin date."
 msgstr "Définir la date de début effective."
 
-#: ./content/project.py:121
+#: ./content/project.py:125
 msgid "Enter the effective end date."
 msgstr "Définir la date de fin effective."
 
-#: ./content/project.py:97
+#: ./content/project.py:101
 msgid "Enter the planned begin date."
 msgstr "Définir la date de début prévue."
 
-#: ./content/project.py:113
+#: ./content/project.py:117
 msgid "Enter the planned end date."
 msgstr "Définir la date d'échéance."
 
-#: ./content/project.py:78
+#: ./content/project.py:29
+msgid "Expected value"
+msgstr "Valeur à atteindre"
+
+#: ./content/project.py:82
 msgid "Extra concerned people"
 msgstr "Partenaires externes"
 
@@ -83,27 +87,27 @@ msgstr "Partenaires externes"
 msgid "Label"
 msgstr "Libellé"
 
-#: ./content/project.py:58
+#: ./content/project.py:62
 msgid "Manager"
 msgstr "Gestionnaire"
 
-#: ./content/project.py:96
+#: ./content/project.py:100
 msgid "Planned begin date"
 msgstr "Date de début prévue"
 
-#: ./content/project.py:112
+#: ./content/project.py:116
 msgid "Planned end date"
 msgstr "Échéance"
 
-#: ./content/project.py:46
+#: ./content/project.py:50
 msgid "Priority"
 msgstr "Priorité"
 
-#: ./content/project.py:128
+#: ./content/project.py:132
 msgid "Progress"
 msgstr "Progression"
 
-#: ./content/project.py:129
+#: ./content/project.py:133
 msgid "Progress estimation in %."
 msgstr "Entrer la progression en %."
 
@@ -111,23 +115,23 @@ msgstr "Entrer la progression en %."
 msgid "Project"
 msgstr "Projet"
 
-#: ./content/project.py:85
+#: ./content/project.py:32
+msgid "Reached value"
+msgstr "Valeur déjà atteinte"
+
+#: ./content/project.py:89
 msgid "Result indicator"
 msgstr "Indicateur de résultat"
 
-#: ./content/project.py:79
+#: ./content/project.py:83
 msgid "Specify here concerned people that do not have access to the application, this will just be informational."
 msgstr "Spécifier les partenaires externes impliqués dans le projet."
 
-#: ./content/project.py:29
-msgid "Value"
-msgstr "Valeur"
-
-#: ./content/project.py:136
+#: ./content/project.py:140
 msgid "Various comments"
 msgstr "Commentaires divers"
 
-#: ./content/project.py:68
+#: ./content/project.py:72
 msgid "Visible for"
 msgstr "Visible pour"
 

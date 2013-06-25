@@ -26,8 +26,12 @@ class IResultIndicatorSchema(Interface):
         title=_("Label"),
         required=True,)
     value = schema.Int(
-        title=_("Value"),
+        title=_("Expected value"),
         required=True,)
+    reached_value = schema.Int(
+        title=_("Reached value"),
+        required=True,
+        default=0,)
 
 
 class IProject(model.Schema):
