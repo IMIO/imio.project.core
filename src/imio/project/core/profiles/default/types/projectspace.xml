@@ -2,7 +2,7 @@
 <object name="projectspace" meta_type="Dexterity FTI" i18n:domain="imio.project.core"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title" i18n:translate="">Project space</property>
- <property name="description" i18n:translate=""></property>
+ <property name="description" i18n:translate="">Will contain projects sharing same configuration values</property>
  <property name="icon_expr">string:${portal_url}/++resource++imio.project.core/projectspace_icon.png</property>
  <property name="factory">projectspace</property>
  <property name="add_view_expr">string:${folder_url}/++add++projectspace</property>

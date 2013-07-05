@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-06-25 11:24+0000\n"
+"POT-Creation-Date: 2013-07-05 12:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,99 +17,116 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: imio.project.core\n"
 
-#: ./content/project.py:56
+#: ./content/project.py:66
 msgid "Budget"
 msgstr ""
 
-#: ./content/project.py:57
+#: ./content/project.py:67
 msgid "Budget details"
 msgstr ""
 
-#: ./content/project.py:43
+#: ./content/projectspace.py:40
+msgid "Categories values"
+msgstr ""
+
+#: ./content/project.py:53
 msgid "Category"
 msgstr ""
 
-#: ./content/project.py:44
+#: ./content/project.py:54
 msgid "Choose a category."
 msgstr ""
 
-#: ./content/project.py:51
+#: ./content/project.py:61
 msgid "Choose a priority."
 msgstr ""
 
-#: ./content/project.py:73
+#: ./content/project.py:83
 msgid "Choose principals that can see this project."
 msgstr ""
 
-#: ./content/project.py:63
+#: ./content/project.py:73
 msgid "Choose principals that will manage this project."
 msgstr ""
 
-#: ./content/project.py:139
+#: ./content/project.py:149
 msgid "Comments"
 msgstr ""
 
-#: ./content/project.py:108
+#: ./content/project.py:118
 msgid "Effective begin date"
 msgstr ""
 
-#: ./content/project.py:124
+#: ./content/project.py:134
 msgid "Effective end date"
 msgstr ""
 
-#: ./content/project.py:90
-msgid "Enter one indicator by row. Value is a number. Label must precise the signification of this number."
-msgstr ""
-
-#: ./content/project.py:109
-msgid "Enter the effective begin date."
-msgstr ""
-
-#: ./content/project.py:125
-msgid "Enter the effective end date."
-msgstr ""
-
-#: ./content/project.py:101
-msgid "Enter the planned begin date."
-msgstr ""
-
-#: ./content/project.py:117
-msgid "Enter the planned end date."
-msgstr ""
-
-#: ./content/project.py:29
-msgid "Expected value"
-msgstr ""
-
-#: ./content/project.py:82
-msgid "Extra concerned people"
-msgstr ""
-
-#: ./content/project.py:26
-msgid "Label"
-msgstr ""
-
-#: ./content/project.py:62
-msgid "Manager"
+#: ./content/projectspace.py:41
+msgid "Enter one different value by row. Label is the displayed value. Key is the stored value: in lowercase, without space."
 msgstr ""
 
 #: ./content/project.py:100
+msgid "Enter one indicator by row. Value is a number. Label must precise the signification of this number."
+msgstr ""
+
+#: ./content/project.py:119
+msgid "Enter the effective begin date."
+msgstr ""
+
+#: ./content/project.py:135
+msgid "Enter the effective end date."
+msgstr ""
+
+#: ./content/project.py:111
+msgid "Enter the planned begin date."
+msgstr ""
+
+#: ./content/project.py:127
+msgid "Enter the planned end date."
+msgstr ""
+
+#: ./content/project.py:39
+msgid "Expected value"
+msgstr ""
+
+#: ./content/project.py:92
+msgid "Extra concerned people"
+msgstr ""
+
+#: ./content/projectspace.py:31
+msgid "Key"
+msgstr ""
+
+#: ./content/project.py:36
+#: ./content/projectspace.py:28
+msgid "Label"
+msgstr ""
+
+#: ./content/project.py:72
+msgid "Manager"
+msgstr ""
+
+#: ./content/project.py:110
 msgid "Planned begin date"
 msgstr ""
 
-#: ./content/project.py:116
+#: ./content/project.py:126
 msgid "Planned end date"
 msgstr ""
 
-#: ./content/project.py:50
+#: ./content/project.py:60
 msgid "Priority"
 msgstr ""
 
-#: ./content/project.py:132
+#: ./content/projectspace.py:51
+msgid "Priority values"
+msgstr ""
+
+#: ./content/project.py:142
 msgid "Progress"
 msgstr ""
 
-#: ./content/project.py:133
+#: ./content/project.py:143
 msgid "Progress estimation in %."
 msgstr ""
 
@@ -117,23 +134,31 @@ msgstr ""
 msgid "Project"
 msgstr ""
 
-#: ./content/project.py:32
+#: ./profiles/default/types/projectspace.xml
+msgid "Project space"
+msgstr ""
+
+#: ./content/project.py:42
 msgid "Reached value"
 msgstr ""
 
-#: ./content/project.py:89
+#: ./content/project.py:99
 msgid "Result indicator"
 msgstr ""
 
-#: ./content/project.py:83
+#: ./content/project.py:93
 msgid "Specify here concerned people that do not have access to the application, this will just be informational."
 msgstr ""
 
-#: ./content/project.py:140
+#: ./content/project.py:150
 msgid "Various comments"
 msgstr ""
 
-#: ./content/project.py:72
+#: ./content/project.py:82
 msgid "Visible for"
+msgstr ""
+
+#: ./profiles/default/types/projectspace.xml
+msgid "Will contain projects sharing same configuration values"
 msgstr ""
 

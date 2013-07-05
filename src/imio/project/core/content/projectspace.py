@@ -38,10 +38,10 @@ class IProjectSpace(model.Schema):
     """
     categories = schema.List(
         title=_(u'Categories values'),
-        description=_(u"Enter one category by row. Label is the displayed value. Key is the stored value:"
+        description=_(u"Enter one different value by row. Label is the displayed value. Key is the stored value:"
                       " in lowercase, without space."),
         required=True,
-        value_type=DictRow(title=_("Categories"),
+        value_type=DictRow(title=u"",
                            schema=IVocabularySchema,
                            required=False),
     )
@@ -49,10 +49,10 @@ class IProjectSpace(model.Schema):
 
     priority = schema.List(
         title=_(u'Priority values'),
-        description=_(u"Enter one priority by row. Label is the displayed value. Key is the stored value:"
+        description=_(u"Enter one different value by row. Label is the displayed value. Key is the stored value:"
                       " in lowercase, without space."),
         required=True,
-        value_type=DictRow(title=_("Priority"),
+        value_type=DictRow(title=u"",
                            schema=IVocabularySchema,
                            required=False),
     )
