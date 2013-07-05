@@ -19,6 +19,7 @@ from collective.z3cform.rolefield.field import LocalRolesToPrincipals
 
 from imio.project.core import _
 from imio.project.core.utils import getVocabularyTermsForOrganization
+from imio.project.core.utils import getProjectSpace
 
 
 def DataGridFieldWithListingTableFactory(field, request):
@@ -164,12 +165,11 @@ class CategoriesVocabulary(object):
 
     def __call__(self, context):
         """"""
+        projectspace = getProjectSpace(context)
         terms = []
-        terms.append(SimpleTerm(u'Category 1', u'cat1', u'Category 1'))
-        terms.append(SimpleTerm(u'Category 2', u'cat1', u'Category 2'))
-        terms.append(SimpleTerm(u'Category 3', u'cat1', u'Category 3'))
-        terms.append(SimpleTerm(u'Category 4', u'cat1', u'Category 4'))
-        terms.append(SimpleTerm(u'Category 5', u'cat1', u'Category 5'))
+        categories = projectspace.categories
+        for category in categories:
+            terms.append(SimpleTerm(category['key'], category['key'], category['label'], ))
         return SimpleVocabulary(terms)
 
 
@@ -178,10 +178,11 @@ class PriorityVocabulary(object):
 
     def __call__(self, context):
         """"""
+        projectspace = getProjectSpace(context)
         terms = []
-        terms.append(SimpleTerm(u'Low', u'low', u'Low'))
-        terms.append(SimpleTerm(u'Normal', u'normal', u'Normal'))
-        terms.append(SimpleTerm(u'High', u'high', u'High'))
+        priorities = projectspace.priority
+        for priority in priorities:
+            terms.append(SimpleTerm(priority['key'], priority['key'], priority['label'], ))
         return SimpleVocabulary(terms)
 
 

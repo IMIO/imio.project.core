@@ -39,3 +39,13 @@ def getVocabularyTermsForOrganization(context, organization_id='services'):
             termId = "%s-%s" % (brain.id, service_brain.id)
             terms.append(SimpleTerm(termId, token=termId, title=comb))
     return SimpleVocabulary(terms)
+
+
+def getProjectSpace(context):
+    """
+      Return the projectspace object, context is an element in a projectspace
+    """
+    parent = context.aq_inner.aq_parent
+    while not parent.portal_type == 'projectspace':
+        parent = parent.aq_inner.aq_parent
+    return parent
