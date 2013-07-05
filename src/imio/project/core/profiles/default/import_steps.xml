@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<import-steps>
+    <import-step
+            id="imioprojectcore-postInstall"
+            handler="imio.project.core.setuphandlers.post_install"
+            title="imio.project.core post_install import step"
+            version="2013-06-10T11:00:00.00000">
+        Post install import step from imio.project.core
+    </import-step>
+</import-steps>

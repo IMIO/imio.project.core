@@ -22,12 +22,10 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
-    <genericsetup:importStep
-        name="imioprojectcore-postInstall"
-        title="imio.project.core post_install import step"
-        description="Post install import step from imio.project.core"
-        handler=".setuphandlers.post_install">
-    </genericsetup:importStep>
+    <utility
+        factory=".content.projectspace.ProjectSpaceSchemaPolicy"
+        name="schema_policy_projectspace"
+    />
 
     <utility
         factory=".content.project.ProjectSchemaPolicy"
