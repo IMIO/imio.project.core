@@ -61,7 +61,7 @@ msgstr "Date de fin effective"
 
 #: ./content/projectspace.py:41
 msgid "Enter one different value by row. Label is the displayed value. Key is the stored value: in lowercase, without space."
-msgstr "Entrer une valeur différente par ligne. Le libellé est la valeur affichée. La clé est la valeur stockée: en minuscule, sans espace."
+msgstr "Entrer une valeur différente par ligne. Le libellé est la valeur affichée. La clé est la valeur stockée: en minuscule, sans espace, sans accent."
 
 #: ./content/project.py:100
 msgid "Enter one indicator by row. Value is a number. Label must precise the signification of this number."

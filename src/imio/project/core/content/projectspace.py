@@ -27,7 +27,7 @@ class IVocabularySchema(Interface):
     label = schema.TextLine(
         title=_("Label"),
         required=True,)
-    key = schema.TextLine(
+    key = schema.ASCIILine(
         title=_("Key"),
         required=True,)
 
