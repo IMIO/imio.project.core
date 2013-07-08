@@ -7,7 +7,6 @@ def isNotCurrentProfile(context):
 
 def post_install(context):
     """Post install script"""
-    import ipdb; ipdb.set_trace()
     if isNotCurrentProfile(context):
         return
 
