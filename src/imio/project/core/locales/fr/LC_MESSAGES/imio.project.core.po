@@ -163,3 +163,4 @@ msgstr "Visible pour"
 #: ./profiles/default/types/projectspace.xml
 msgid "Will contain projects sharing same configuration values"
 msgstr "Espace pour des projets partageant la même configuration"
+
