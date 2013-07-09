@@ -55,21 +55,21 @@ class FunctionalTestCase(unittest2.TestCase):
         # datagridfield categories
         categories = [
             {'label': u"Category 1",
-             'key': u"category-1"},
+             'key': 'category-1'},
             {'label': u"Category 2",
-             'key': u"category-2"},
+             'key': 'category-2'},
             {'label': u"Category 3",
-             'key': u"category-3"},
+             'key': 'category-3'},
         ]
         params['categories'] = categories
         # datagridfield priority
         priority = [
-            {'label': u"High",
-             'key': u"high"},
-            {'label': u"Normal",
-             'key': u"normal"},
-            {'label': u"Low",
-             'key': u"low"},
+            {'label': u"Priority 1",
+             'key': 'priority-1'},
+            {'label': u"Priority 2",
+             'key': 'priority-2'},
+            {'label': u"Priority 3",
+             'key': 'priority-3'},
         ]
         params['priority'] = priority
         projectspace = createContentInContainer(self.portal, 'projectspace', **params)
@@ -77,11 +77,11 @@ class FunctionalTestCase(unittest2.TestCase):
             {'id': u"project1",
              'title': u"Project 1",
              'categories': u"category-1",
-             'priority': u"high", },
+             'priority': u"priority-1", },
             {'id': u"project2",
              'title': u"Project 2",
              'categories': u"category-2",
-             'priority': u"normal", },
+             'priority': u"priority-3", },
         ]
         for project in projects:
             createContentInContainer(projectspace, 'project', **project)
