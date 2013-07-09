@@ -32,9 +32,9 @@ def DataGridFieldWithListingTableFactory(field, request):
 
 def _validateKeyNotUsed(context, value, stored_value, attribute_using_keys, portal_types=[]):
     """
-      Check if a key was removed in the given p_value regarding value stored on context.
+      Check if a key was removed in the given p_value regarding p_stored_value on context.
       If a key was removed, check that no given p_portal_types is using it.
-      It suppose that given value is a list of dicts with 'key' and 'label' as existing keys."""
+      It suppose that given p_value is a list of dicts with 'key' and 'label' as existing keys."""
     # we only go further if a key was actually removed
     # so compare stored values to new given values
     storedKeys = [stored['key'] for stored in stored_value]
