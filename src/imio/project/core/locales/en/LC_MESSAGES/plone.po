@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-06-12 10:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+"X-is-fallback-for: en-au en-ca en-gb en-us\n"
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "back_to_be_scheduled"
+msgstr ""
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "back_to_created"
+msgstr ""
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "back_to_ongoing"
+msgstr ""
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "begin"
+msgstr ""
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "created"
+msgstr ""
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "finish"
+msgstr ""
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "ongoing"
+msgstr ""
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "set_to_be_scheduled"
+msgstr ""
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "stop"
+msgstr ""
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "stopped"
+msgstr ""
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "terminated"
+msgstr ""
+
+#: profiles/default/workflows/project_workflow/definition.xml
+msgid "to_be_scheduled"
+msgstr ""
+
