@@ -7,7 +7,7 @@ from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 from z3c.form.widget import FieldWidget
 
-from plone.app.z3cform.wysiwyg import WysiwygFieldWidget
+from plone.app.textfield import RichText
 from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
@@ -146,12 +146,14 @@ class IProject(model.Schema):
         default=0,
     )
 
-    comments = schema.Text(
+    comments = RichText(
         title=_(u"Comments"),
         description=_(u"Various comments"),
         required=False,
+        default_mime_type='text/html',
+        output_mime_type='text/html',
+        allowed_mime_types=('text/html',),
     )
-    directives.widget(comments=WysiwygFieldWidget)
 
 
 class Project(Container):
