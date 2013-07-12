@@ -45,7 +45,7 @@ def getProjectSpace(context):
     """
       Return the projectspace object, context is an element in a projectspace
     """
-    parent = context.aq_inner.aq_parent
+    parent = context
     while not parent.portal_type == 'projectspace':
         parent = parent.aq_inner.aq_parent
     return parent
