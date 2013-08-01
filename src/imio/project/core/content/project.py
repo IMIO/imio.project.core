@@ -53,7 +53,7 @@ class IProject(model.Schema):
     categories = schema.Choice(
         title=_(u'Category'),
         description=_(u"Choose a category."),
-        required=False,
+        required=True,
         vocabulary=u'imio.project.core.content.project.categories_vocabulary',
     )
 
