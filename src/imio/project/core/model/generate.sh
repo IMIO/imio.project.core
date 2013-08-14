@@ -1,4 +1,4 @@
-/srv/archgenxml/agx26/bin/archgenxml --cfg agx.conf imioprojectcore.zargo
+/srv/archgenxml/agx27/bin/archgenxml --cfg agx.conf imioprojectcore.zargo
 #manage generated.pot
 #cp temp/i18n/generated.pot ../locales/agx.pot
 
