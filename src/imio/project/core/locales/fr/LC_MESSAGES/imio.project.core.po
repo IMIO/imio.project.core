@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-07-08 13:09+0000\n"
+"POT-Creation-Date: 2013-08-21 09:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "Sélectionner les utilisateurs qui pourront visualiser le projet."
 msgid "Choose principals that will manage this project."
 msgstr "Sélectionner les utilisateurs qui vont gérer le projet."
 
-#: ./content/project.py:150
+#: ./content/project.py:159
 msgid "Comments"
 msgstr "Commentaires"
 
@@ -104,6 +104,10 @@ msgstr "Libellé"
 msgid "Manager"
 msgstr "Gestionnaire"
 
+#: ./content/project.py:150
+msgid "Observation"
+msgstr "Constat"
+
 #: ./content/project.py:111
 msgid "Planned begin date"
 msgstr "Date de début prévue"
@@ -111,6 +115,10 @@ msgstr "Date de début prévue"
 #: ./content/project.py:127
 msgid "Planned end date"
 msgstr "Échéance"
+
+#: ./content/project.py:151
+msgid "Prior determination"
+msgstr "Constat préalable"
 
 #: ./content/project.py:61
 msgid "Priority"
@@ -152,7 +160,7 @@ msgstr "Spécifier les partenaires externes impliqués dans le projet."
 msgid "The key '${removed_key}' can not be removed because it is currently used (for example by '${used_by_url}')."
 msgstr "La clé '${removed_key}' ne peut être supprimée car elle est utilisée (par exemple : '${used_by_url}')."
 
-#: ./content/project.py:151
+#: ./content/project.py:160
 msgid "Various comments"
 msgstr "Commentaires divers"
 
@@ -163,4 +171,3 @@ msgstr "Visible pour"
 #: ./profiles/default/types/projectspace.xml
 msgid "Will contain projects sharing same configuration values"
 msgstr "Espace pour des projets partageant la même configuration"
-

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-07-08 13:09+0000\n"
+"POT-Creation-Date: 2013-08-21 09:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "Choose principals that can see this project."
 msgid "Choose principals that will manage this project."
 msgstr "Choose principals that will manage this project."
 
-#: ./content/project.py:150
+#: ./content/project.py:159
 msgid "Comments"
 msgstr "Comments"
 
@@ -104,6 +104,10 @@ msgstr "Label"
 msgid "Manager"
 msgstr "Manager"
 
+#: ./content/project.py:150
+msgid "Observation"
+msgstr ""
+
 #: ./content/project.py:111
 msgid "Planned begin date"
 msgstr "Planned begin date"
@@ -111,6 +115,10 @@ msgstr "Planned begin date"
 #: ./content/project.py:127
 msgid "Planned end date"
 msgstr "Planned end date"
+
+#: ./content/project.py:151
+msgid "Prior determination"
+msgstr ""
 
 #: ./content/project.py:61
 msgid "Priority"
@@ -152,7 +160,7 @@ msgstr "Specify here concerned people that do not have access to the application
 msgid "The key '${removed_key}' can not be removed because it is currently used (for example by '${used_by_url}')."
 msgstr "The key '${removed_key}' can not be removed because it is currently used (for example by '${used_by_url}')."
 
-#: ./content/project.py:151
+#: ./content/project.py:160
 msgid "Various comments"
 msgstr "Various comments"
 

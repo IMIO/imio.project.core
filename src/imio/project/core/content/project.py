@@ -146,6 +146,15 @@ class IProject(model.Schema):
         default=0,
     )
 
+    observation = RichText(
+        title=_(u"Observation"),
+        description=_(u"Prior determination"),
+        required=False,
+        default_mime_type='text/html',
+        output_mime_type='text/html',
+        allowed_mime_types=('text/html',),
+    )
+
     comments = RichText(
         title=_(u"Comments"),
         description=_(u"Various comments"),
