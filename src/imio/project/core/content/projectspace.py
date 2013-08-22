@@ -99,6 +99,19 @@ class RemovedValueIsNotUsedByPriorityFieldValidator(validator.SimpleFieldValidat
                             [])
 
 
+class RemovedValueIsNotUsedByBudgetTypesFieldValidator(validator.SimpleFieldValidator):
+    def validate(self, value):
+        # while removing a value from a defined vocabulary, check that
+        # it is not used anywhere...
+        super(validator.SimpleFieldValidator, self).validate(value)
+        stored_value = getattr(self.context, self.field.getName())
+        _validateKeyNotUsed(self.context,
+                            value,
+                            stored_value,
+                            'budget_type',
+                            [])
+
+
 class IVocabularySchema(Interface):
     """
         Schema used for the vocabulary datagrid field.
@@ -137,6 +150,17 @@ class IProjectSpace(model.Schema):
     )
     directives.widget(priority=DataGridFieldWithListingTableFactory)
 
+    budget_types = schema.List(
+        title=_(u'Budget types values'),
+        description=_(u"Enter one different value by row. Label is the displayed value. Key is the stored value:"
+                      " in lowercase, without space."),
+        required=True,
+        value_type=DictRow(title=u"",
+                           schema=IVocabularySchema,
+                           required=False),
+    )
+    directives.widget(budget_types=DataGridFieldWithListingTableFactory)
+
 validator.WidgetValidatorDiscriminators(RemovedValueIsNotUsedByCategoriesFieldValidator,
                                         field=IProjectSpace['categories'])
 provideAdapter(RemovedValueIsNotUsedByCategoriesFieldValidator)
@@ -144,6 +168,10 @@ provideAdapter(RemovedValueIsNotUsedByCategoriesFieldValidator)
 validator.WidgetValidatorDiscriminators(RemovedValueIsNotUsedByPriorityFieldValidator,
                                         field=IProjectSpace['priority'])
 provideAdapter(RemovedValueIsNotUsedByPriorityFieldValidator)
+
+validator.WidgetValidatorDiscriminators(RemovedValueIsNotUsedByBudgetTypesFieldValidator,
+                                        field=IProjectSpace['budget_types'])
+provideAdapter(RemovedValueIsNotUsedByBudgetTypesFieldValidator)
 
 
 class ProjectSpace(Container):

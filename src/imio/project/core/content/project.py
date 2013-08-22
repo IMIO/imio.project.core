@@ -1,6 +1,7 @@
 import datetime
 
 from zope import schema
+from zope.component.hooks import getSite
 from zope.interface import implements
 from zope.interface import Interface
 from zope.schema.interfaces import IVocabularyFactory
@@ -45,6 +46,24 @@ class IResultIndicatorSchema(Interface):
         default=0,)
 
 
+class IBudgetDetailsSchema(Interface):
+    """Schema used for the datagrid field 'budget_details' of IProject."""
+    budget_type = schema.Choice(
+        title=_(u'Budget_type'),
+        description=_(u"Choose a budget type."),
+        vocabulary=u'imio.project.core.content.project.budget_type_vocabulary',
+    )
+    year = schema.Choice(
+        title=_(u'Year'),
+        description=_(u"Choose a year."),
+        vocabulary=u'imio.project.core.content.project.year_vocabulary',
+    )
+    amount = schema.Float(
+        title=_("Amount"),
+        required=True,
+        default=0.0,)
+
+
 class IProject(model.Schema):
     """
         Project schema, field ordering
@@ -63,10 +82,24 @@ class IProject(model.Schema):
         vocabulary=u'imio.project.core.content.project.priority_vocabulary',
     )
 
-    budget = schema.Text(
-        title=_(u"Budget"),
-        description=_("Budget details"),
+    budget = schema.List(
+        title=_(u'Budget details'),
+        description=_(u"Enter budget details.  If you have comments about budget,"
+                      "use the field here above."),
         required=False,
+        value_type=DictRow(title=_("Budget details"),
+                           schema=IBudgetDetailsSchema,
+                           required=False),
+    )
+    directives.widget(budget=DataGridFieldWithListingTableFactory)
+
+    budget_comments = RichText(
+        title=_(u"Budget comments"),
+        description=_(u"Write here comments you have about budget"),
+        required=False,
+        default_mime_type='text/html',
+        output_mime_type='text/html',
+        allowed_mime_types=('text/html',),
     )
 
     manager = LocalRolesToPrincipals(
@@ -194,6 +227,34 @@ class PriorityVocabulary(object):
         priorities = projectspace.priority
         for priority in priorities:
             terms.append(SimpleTerm(priority['key'], priority['key'], priority['label'], ))
+        return SimpleVocabulary(terms)
+
+
+class BudgetTypeVocabulary(object):
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        """"""
+        # here the context is not relevant as we are "out of nowhere"
+        portal = getSite()
+        current_obj = portal.REQUEST['PUBLISHED'].context
+        projectspace = getProjectSpace(current_obj)
+        terms = []
+        budget_types = projectspace.budget_types
+        for budget_type in budget_types:
+            terms.append(SimpleTerm(budget_type['key'], budget_type['key'], budget_type['label'], ))
+        return SimpleVocabulary(terms)
+
+
+class YearVocabulary(object):
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        """"""
+        years = range(2013, 2030)
+        terms = []
+        for year in years:
+            terms.append(SimpleTerm(year, year, year, ))
         return SimpleVocabulary(terms)
 
 

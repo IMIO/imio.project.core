@@ -14,6 +14,16 @@
     />
     <utility
       provides="zope.schema.interfaces.IVocabularyFactory"
+      factory=".project.BudgetTypeVocabulary"
+      name="imio.project.core.content.project.budget_type_vocabulary"
+    />
+    <utility
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      factory=".project.YearVocabulary"
+      name="imio.project.core.content.project.year_vocabulary"
+    />
+    <utility
+      provides="zope.schema.interfaces.IVocabularyFactory"
       factory=".project.ManagerVocabulary"
       name="imio.project.core.content.project.manager_vocabulary"
     />
