@@ -32,6 +32,13 @@ def DataGridFieldWithListingTableFactory(field, request):
     return FieldWidget(field, widget)
 
 
+def default_year():
+    """
+      defaultFactory for the field IBudgetSchema.year
+    """
+    return datetime.date.today().year
+
+
 class IResultIndicatorSchema(Interface):
     """Schema used for the datagrid field 'result_indicator' of IProject."""
     label = schema.TextLine(
@@ -46,8 +53,8 @@ class IResultIndicatorSchema(Interface):
         default=0,)
 
 
-class IBudgetDetailsSchema(Interface):
-    """Schema used for the datagrid field 'budget_details' of IProject."""
+class IBudgetSchema(Interface):
+    """Schema used for the datagrid field 'budget' of IProject."""
     budget_type = schema.Choice(
         title=_(u'Budget_type'),
         description=_(u"Choose a budget type."),
@@ -57,6 +64,7 @@ class IBudgetDetailsSchema(Interface):
         title=_(u'Year'),
         description=_(u"Choose a year."),
         vocabulary=u'imio.project.core.content.project.year_vocabulary',
+        defaultFactory=default_year,
     )
     amount = schema.Float(
         title=_("Amount"),
@@ -83,19 +91,19 @@ class IProject(model.Schema):
     )
 
     budget = schema.List(
-        title=_(u'Budget details'),
-        description=_(u"Enter budget details.  If you have comments about budget,"
+        title=_(u'Budget'),
+        description=_(u"Enter budget details.  If you have comments about budget, "
                       "use the field here above."),
         required=False,
-        value_type=DictRow(title=_("Budget details"),
-                           schema=IBudgetDetailsSchema,
+        value_type=DictRow(title=_("Budget"),
+                           schema=IBudgetSchema,
                            required=False),
     )
     directives.widget(budget=DataGridFieldWithListingTableFactory)
 
     budget_comments = RichText(
         title=_(u"Budget comments"),
-        description=_(u"Write here comments you have about budget"),
+        description=_(u"Write here comments you have about budget."),
         required=False,
         default_mime_type='text/html',
         output_mime_type='text/html',
@@ -251,7 +259,7 @@ class YearVocabulary(object):
 
     def __call__(self, context):
         """"""
-        years = range(2013, 2030)
+        years = range(2009, 2030)
         terms = []
         for year in years:
             terms.append(SimpleTerm(year, year, year, ))

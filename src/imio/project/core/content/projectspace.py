@@ -30,11 +30,19 @@ def DataGridFieldWithListingTableFactory(field, request):
     return FieldWidget(field, widget)
 
 
-def _validateKeyNotUsed(context, value, stored_value, attribute_using_keys, portal_types=[]):
+def _validateKeyNotUsed(context,
+                        value,
+                        stored_value,
+                        attribute_using_keys,
+                        sub_attribute_using_key=None,
+                        portal_types=[]):
     """
       Check if a key was removed in the given p_value regarding p_stored_value on context.
       If a key was removed, check that no given p_portal_types is using it.
-      It suppose that given p_value is a list of dicts with 'key' and 'label' as existing keys."""
+      It suppose that given p_value is a list of dicts with 'key' and 'label' as existing keys.
+      Given p_attribute_using_keys is the name of the attribute of sub objects using this key.
+      Given p_sub_attribute_using_key is in the case of a datagridfield using this vocabulary,
+      it is the name of the column using the vocabulary..."""
     # we only go further if a key was actually removed
     # so compare stored values to new given values
     storedKeys = [stored['key'] for stored in stored_value]
@@ -60,6 +68,14 @@ def _validateKeyNotUsed(context, value, stored_value, attribute_using_keys, port
             used_value = (used_value, )
         if not used_value:
             used_value = ()
+        # if we use a datagridfield, we have to get the relevant column
+        if sub_attribute_using_key:
+            # it means that we use a datagridfield and that data is stored
+            # in a dict contained in the list...
+            tmpres = []
+            for line in used_value:
+                tmpres.append(line[sub_attribute_using_key])
+            used_value = tuple(tmpres)
         intersectionValues = set(used_value).intersection(removedKeys)
         if intersectionValues:
             wrong_removed_key = intersectionValues.pop()
@@ -83,6 +99,7 @@ class RemovedValueIsNotUsedByCategoriesFieldValidator(validator.SimpleFieldValid
                             value,
                             stored_value,
                             'categories',
+                            None,
                             [])
 
 
@@ -96,6 +113,7 @@ class RemovedValueIsNotUsedByPriorityFieldValidator(validator.SimpleFieldValidat
                             value,
                             stored_value,
                             'priority',
+                            None,
                             [])
 
 
@@ -108,6 +126,9 @@ class RemovedValueIsNotUsedByBudgetTypesFieldValidator(validator.SimpleFieldVali
         _validateKeyNotUsed(self.context,
                             value,
                             stored_value,
+                            # we use a datagridfield, we need to provide field using
+                            # value and column name of the datagridfield...
+                            'budget',
                             'budget_type',
                             [])
 
