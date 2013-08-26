@@ -1,0 +1,9 @@
+/* imio.project.core stylesheet */
+
+/* align int/float column in a datagridfield on the right */
+table.listing span.float-field, table.listing span.int-field {
+    float: right;
+}
+table.datagridwidget-table-view input.float-field, table.datagridwidget-table-view input.int-field {
+    text-align: right;
+}
