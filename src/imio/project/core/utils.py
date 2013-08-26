@@ -45,6 +45,10 @@ def getProjectSpace(context):
     """
       Return the projectspace object, context is an element in a projectspace
     """
+    # sometimes, for inline validation for example, context is not the object but a MyFormWrapper...
+    if context.__module__ == 'Products.Five.metaclass':
+        # the real context object is stored in 'context' of the MyFormWrapper...
+        context = context.context
     parent = context
     while not parent.portal_type == 'projectspace':
         parent = parent.aq_inner.aq_parent
