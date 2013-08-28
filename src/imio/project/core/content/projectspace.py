@@ -94,6 +94,9 @@ class RemovedValueIsNotUsedByCategoriesFieldValidator(validator.SimpleFieldValid
         # while removing a value from a defined vocabulary, check that
         # it is not used anywhere...
         super(validator.SimpleFieldValidator, self).validate(value)
+        # in the creation process, the validator is called but it is not necessary
+        if not self.context.portal_type == 'projectspace':
+            return
         stored_value = getattr(self.context, self.field.getName())
         _validateKeyNotUsed(self.context,
                             value,
@@ -108,6 +111,9 @@ class RemovedValueIsNotUsedByPriorityFieldValidator(validator.SimpleFieldValidat
         # while removing a value from a defined vocabulary, check that
         # it is not used anywhere...
         super(validator.SimpleFieldValidator, self).validate(value)
+        # in the creation process, the validator is called but it is not necessary
+        if not self.context.portal_type == 'projectspace':
+            return
         stored_value = getattr(self.context, self.field.getName())
         _validateKeyNotUsed(self.context,
                             value,
@@ -122,6 +128,9 @@ class RemovedValueIsNotUsedByBudgetTypesFieldValidator(validator.SimpleFieldVali
         # while removing a value from a defined vocabulary, check that
         # it is not used anywhere...
         super(validator.SimpleFieldValidator, self).validate(value)
+        # in the creation process, the validator is called but it is not necessary
+        if not self.context.portal_type == 'projectspace':
+            return
         stored_value = getattr(self.context, self.field.getName())
         _validateKeyNotUsed(self.context,
                             value,

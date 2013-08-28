@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
+from plone.dexterity.interfaces import IDexterityContent
 
 
 def getVocabularyTermsForOrganization(context, organization_id='services'):
@@ -45,9 +46,9 @@ def getProjectSpace(context):
     """
       Return the projectspace object, context is an element in a projectspace
     """
-    # sometimes, for inline validation for example, context is not the object but a MyFormWrapper...
-    if context.__module__ == 'Products.Five.metaclass':
-        # the real context object is stored in 'context' of the MyFormWrapper...
+    # sometimes, for inline validation for example or addView, context is not the object
+    # but a Form of different kind, the real object is the form.context
+    if not IDexterityContent.providedBy(context):
         context = context.context
     parent = context
     while not parent.portal_type == 'projectspace':
