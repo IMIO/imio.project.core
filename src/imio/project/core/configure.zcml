@@ -32,4 +32,15 @@
         name="schema_policy_project"
     />
 
+    <subscriber for=".content.project.IProject
+                     zope.app.container.interfaces.IObjectAddedEvent"
+                handler=".events.onAddProject"/>
+    <subscriber for=".content.project.IProject
+                     zope.lifecycleevent.IObjectModifiedEvent"
+                handler=".events.onModifyProject"/>
+
+    <subscriber for=".content.project.IProject
+                     zope.app.container.interfaces.IObjectRemovedEvent"
+                handler=".events.onRemoveProject"/>
+
 </configure>
