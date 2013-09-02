@@ -1,0 +1,16 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="imio.project.pst">
+
+    <!-- Override the dexterity container default view -->
+    <browser:page
+        for="plone.dexterity.interfaces.IDexterityContainer"
+        name="view"
+        class="plone.dexterity.browser.view.DefaultView"
+        template="browser/imio_container.pt"
+        permission="zope2.View"
+        />
+
+</configure>

@@ -10,4 +10,14 @@
       directory="static"
       />
 
+    <!-- The view rendering the budget infos of children -->
+    <browser:page
+        for="plone.dexterity.interfaces.IDexterityContainer"
+        name="imio-folder-listing"
+        class="imio.project.core.browser.views.ContainerFolderListingView"
+        template="imio_folder_listing.pt"
+        permission="zope2.View"
+        />
+
+
 </configure>
