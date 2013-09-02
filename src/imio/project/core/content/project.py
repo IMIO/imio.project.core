@@ -2,6 +2,9 @@ import datetime
 
 from zope import schema
 from zope.component.hooks import getSite
+import zope.interface
+from z3c.form import interfaces
+
 from zope.interface import implements
 from zope.interface import Interface
 from zope.schema.interfaces import IVocabularyFactory
@@ -13,13 +16,22 @@ from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.formwidget.datetime.z3cform.widget import DateFieldWidget
 from plone.supermodel import model
+from z3c.form.widget import FieldWidget
 
-from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
+from collective.z3cform.datagridfield import DictRow, DataGridFieldFactory
 from collective.z3cform.rolefield.field import LocalRolesToPrincipals
 
 from imio.project.core import _
+from imio.project.core.browser.widgets import BudgetInfosDataGridField
 from imio.project.core.utils import getVocabularyTermsForOrganization
 from imio.project.core.utils import getProjectSpace
+
+
+@zope.interface.implementer(interfaces.IFieldWidget)
+def BudgetInfosDataGridFieldFactory(field, request):
+    """IFieldWidget factory for DataGridField using the 'BudgetInfosDataGridField' widget."""
+    widget = BudgetInfosDataGridField(request)
+    return FieldWidget(field, widget)
 
 
 def default_year():
@@ -89,7 +101,7 @@ class IProject(model.Schema):
                            schema=IBudgetSchema,
                            required=False),
     )
-    directives.widget('budget', DataGridFieldFactory, display_table_css_class='listing')
+    directives.widget('budget', BudgetInfosDataGridFieldFactory, display_table_css_class='listing')
 
     budget_comments = RichText(
         title=_(u"Budget comments"),
