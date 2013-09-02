@@ -6,7 +6,6 @@ from zope.interface import implements
 from zope.interface import Interface
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
-from z3c.form.widget import FieldWidget
 
 from plone.app.textfield import RichText
 from plone.autoform import directives
@@ -15,21 +14,12 @@ from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.formwidget.datetime.z3cform.widget import DateFieldWidget
 from plone.supermodel import model
 
-from collective.z3cform.datagridfield import DataGridField, DictRow
+from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
 from collective.z3cform.rolefield.field import LocalRolesToPrincipals
 
 from imio.project.core import _
 from imio.project.core.utils import getVocabularyTermsForOrganization
 from imio.project.core.utils import getProjectSpace
-
-
-def DataGridFieldWithListingTableFactory(field, request):
-    """IFieldWidget factory for DataGridField using the 'listing' class for the main table."""
-    widget = DataGridField(request)
-    # temporary fallback until display_table_css_class attribute is in collective.z3cform.datagridfield
-    if hasattr(widget, 'display_table_css_class'):
-        widget.display_table_css_class = 'listing'
-    return FieldWidget(field, widget)
 
 
 def default_year():
@@ -99,7 +89,7 @@ class IProject(model.Schema):
                            schema=IBudgetSchema,
                            required=False),
     )
-    directives.widget(budget=DataGridFieldWithListingTableFactory)
+    directives.widget('budget', DataGridFieldFactory, display_table_css_class='listing')
 
     budget_comments = RichText(
         title=_(u"Budget comments"),
@@ -146,7 +136,7 @@ class IProject(model.Schema):
                            schema=IResultIndicatorSchema,
                            required=False),
     )
-    directives.widget(result_indicator=DataGridFieldWithListingTableFactory)
+    directives.widget('result_indicator', DataGridFieldFactory, display_table_css_class='listing')
 
     planned_begin_date = schema.Date(
         title=_(u'Planned begin date'),
