@@ -34,14 +34,6 @@
         <tal:content replace="structure imio_folder_listing" />
     </tal:block>
 
-    <fieldset id="folder-listing">
-        <legend i18n:translate="" i18n:domain="imio.project.pst">Annexes</legend>
-        <tal:block define="listing_macro context/folder_listing/macros/listing;
-                           contentFilter python: {'portal_type': 'File'};">
-            <metal:use_macro use-macro="listing_macro" />
-        </tal:block>
-    </fieldset>
-
   </metal:content-core>
 </metal:main>
 
