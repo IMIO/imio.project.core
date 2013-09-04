@@ -11,11 +11,10 @@
     <tal:block replace="structure view/original_template" />
 </fieldset>
 
-<fieldset>
+<fieldset tal:define="results view/prepareBudgetInfosForDisplay;"
+          tal:condition="results">
   <legend i18n:translate="budgetinfos_legend_global_data">Data taken from budget infos encoded in sub-element</legend>
-  <table class='listing nosort budgetinfos_table'
-         tal:define="results view/prepareBudgetInfosForDisplay;"
-         tal:condition="results">
+  <table class='listing nosort budgetinfos_table'>
     <tal:defines define="years python: results[0];
                            budget_types python: results[1];
                            res python: results[2];
