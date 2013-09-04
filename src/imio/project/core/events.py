@@ -34,7 +34,11 @@ def _updateParentsBudgetInfos(obj):
         parent_annotations = IAnnotations(parent)
         if not CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in parent_annotations:
             parent_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY] = {}
-        parent_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].update(formattedBudgetInfos)
+        # warning, we need to pass by an intermediate value then assign it using dict()
+        # as new annotations, or annotations are lost upon Zope restart...
+        new_annotations = parent_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY]
+        new_annotations.update(formattedBudgetInfos)
+        parent_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY] = dict(new_annotations)
         parent = parent.aq_inner.aq_parent
 
 

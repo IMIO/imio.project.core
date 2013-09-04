@@ -7,3 +7,11 @@ table.listing span.float-field, table.listing span.int-field {
 table.datagridwidget-table-view input.float-field, table.datagridwidget-table-view input.int-field {
     text-align: right;
 }
+
+/* align numbers in budget infos table */
+.budgetinfos_global_total, .budgetinfos_result, .budgetinfos_table TFOOT TD {
+    text-align: right;
+}
+.budgetinfos_table TFOOT {
+    font-weight: bold;
+}

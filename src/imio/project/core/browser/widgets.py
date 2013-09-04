@@ -2,6 +2,8 @@
 
 from zope.annotation import IAnnotations
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
+from zope.component import queryUtility
+from zope.schema.interfaces import IVocabularyFactory
 
 from collective.z3cform.datagridfield.datagridfield import DataGridField
 
@@ -26,24 +28,25 @@ class BudgetInfosDataGridField(DataGridField):
 
     def prepareBudgetInfosForDisplay(self,
                                      only_used_years=False,
-                                     only_used_budget_types=True,
+                                     only_used_budget_types=False,
                                      fixed_years=[2013, 2014, 2015, 2016, 2017, 2018]):
         """
           Compute budget infos so it can be easily displayed by 'budgetinfos_datagridfield_display.pt'
           We need totals by budget_type and year to display something like :
           [budget_type/years][Global][2010][2011][2012][2013][2014][2015][2016]
-          [budget_type_1    ][      ][   0][    ][    ][    ][    ][    ][    ]
-          [budget_type_2    ][      ][   0][    ][    ][    ][    ][    ][    ]
-          [budget_type_3    ][      ][   0][    ][    ][    ][    ][    ][    ]
-          [budget_type_4    ][      ][   0][    ][    ][    ][    ][    ][    ]
-          [budget_type_5    ][      ][   0][    ][    ][    ][    ][    ][    ]
-          [budget_type_6    ][      ][   0][    ][    ][    ][    ][    ][    ]
-          [budget_type_7    ][      ][   1][    ][    ][    ][    ][    ][    ]
-          [TOTAL            ][      ][   1][    ][    ][    ][    ][    ][    ]
+          [budget_type_1    ][     5][   0][   0][   5][   -][   -][   -][   -]
+          [budget_type_2    ][     5][   0][   0][   5][   -][   -][   -][   -]
+          [budget_type_3    ][     5][   0][   0][   5][   -][   -][   -][   -]
+          [budget_type_4    ][     5][   0][   0][   5][   -][   -][   -][   -]
+          [budget_type_5    ][     5][   0][   0][   5][   -][   -][   -][   -]
+          [budget_type_6    ][     7][   0][   2][   5][   -][   -][   -][   -]
+          [budget_type_7    ][     8][   1][   2][   5][   -][   -][   -][   -]
+          [TOTAL            ][    40][   1][   4][  35][   -][   -][   -][   -]
 
           We will return 5 values :
           - list of years sorted (years)
-          - list of budget_types sorted (budget_types)
+          - budget_types sorted (budget_types) : {'budget_type_id1': 'Budget type 1 title',
+                                                  'budget_type_id2': 'Budget type 2 title',}
           - total_by_year : {2010: 125,
                              2011: 258,}
           -total_by_budget_type : {'budget_type1': 258,
@@ -66,9 +69,12 @@ class BudgetInfosDataGridField(DataGridField):
         annotations = IAnnotations(self.context)
         if not CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in annotations:
             return {}
+        # get budget_types vocabulary so we can have a value to display as saved data is the key
+        factory = queryUtility(IVocabularyFactory, u'imio.project.core.content.project.budget_type_vocabulary')
+        budgetTypesVocab = factory(self.context)
         res = {}
         years = only_used_years and [] or fixed_years
-        budget_types = []
+        budget_types = only_used_budget_types and {} or budgetTypesVocab.by_value
         total_by_year = {}
         total_by_budget_type = {}
         for datagridfieldrecord in annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].itervalues():
@@ -81,7 +87,7 @@ class BudgetInfosDataGridField(DataGridField):
                     years.append(year)
                 # manage used budget_types
                 if only_used_budget_types and not budget_type in budget_types:
-                    budget_types.append(budget_type)
+                    budget_types[budget_type] = budgetTypesVocab.getTerm(budget_type)
                 # manage total by year/budget_type
                 if not year in res:
                     res[year] = {}
@@ -107,4 +113,14 @@ class BudgetInfosDataGridField(DataGridField):
             for budget_type in budget_types:
                 if not budget_type in line:
                     line[budget_type] = '-'
-        return years, budget_types, res, total_by_year, total_by_budget_type
+        # make sure we have each total for each budget_type in total_by_budget_type
+        for budget_type in budget_types:
+            if not budget_type in total_by_budget_type:
+                total_by_budget_type[budget_type] = '-'
+        # compute super total, meaning total of total_by_years
+        # (that is the same than total of total_by_budget_types)
+        super_total = 0
+        for total in total_by_year.values():
+            super_total = super_total + total
+
+        return years, budget_types, res, total_by_year, total_by_budget_type, super_total

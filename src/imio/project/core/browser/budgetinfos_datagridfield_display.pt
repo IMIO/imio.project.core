@@ -2,19 +2,21 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      tal:omit-tag="">
+      tal:omit-tag=""
+      i18n:domain="imio.project.core">
 
-<table class='listing nosort' tal:define="results view/prepareBudgetInfosForDisplay;"
+<table class='listing nosort budgetinfos_table' tal:define="results view/prepareBudgetInfosForDisplay;"
                               tal:condition="results">
   <tal:defines define="years python: results[0];
                        budget_types python: results[1];
                        res python: results[2];
                        total_by_year python: results[3];
-                       total_by_budget_type python: results[4];">
+                       total_by_budget_type python: results[4];
+                       super_total python: results[5];">
       <thead>
       <tr>
         <th></th>
-        <th>Global</th>
+        <th i18n:translate="budgetinfos_label_global">Global</th>
         <tal:loop_years repeat='year years'>
           <th tal:content='year'></th>
         </tal:loop_years>
@@ -22,21 +24,21 @@
       </thead>
       <tbody>
         <tr tal:repeat="budget_type budget_types">
-          <td tal:content='budget_type'>
+          <td class="budgetinfos_budget_type" tal:content='python: budget_types[budget_type].title'>
           </td>
-          <td tal:content="python: total_by_budget_type[budget_type]">
+          <td class="budgetinfos_global_total" tal:content="python: total_by_budget_type[budget_type]">
           </td>
           <tal:loop_by_year repeat="year years">
-            <td tal:content="python: res[year][budget_type]">
+            <td class="budgetinfos_result" tal:content="python: res[year][budget_type]">
             </td>
           </tal:loop_by_year>
         </tr>
       </tbody>
       <tfoot>
         <tr>
-          <td></td>
-          <td></td>
-          <td tal:repeat="year years" tal:content="python: year in total_by_year and total_by_year[year] or '-'"></td>
+          <td class="budgetinfos_totals_label" i18n:translate="budgetinfos_label_totals">Totals</td>
+          <td class="budgetinfos_totals_super_total" tal:content="super_total"></td>
+          <td class="budgetinfos_totals" tal:repeat="year years" tal:content="python: year in total_by_year and total_by_year[year] or '-'"></td>
         </tr>
       </tfoot>
   </tal:defines>
