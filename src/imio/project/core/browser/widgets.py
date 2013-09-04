@@ -19,12 +19,13 @@ class BudgetInfosDataGridField(DataGridField):
           our own rendered template under.
         """
         # render original template
-        original_template = DataGridField.render(self)
+        template = DataGridField.render(self)
         # render our own template we will display just under original one
-        budgetinfos_template = u''
         if self.mode == 'display':
-            budgetinfos_template = ViewPageTemplateFile('budgetinfos_datagridfield_display.pt')(self)
-        return original_template + budgetinfos_template
+            # we will display the originally rendered template in our template, so set it on self
+            self.original_template = template
+            template = ViewPageTemplateFile('budgetinfos_datagridfield_display.pt')(self)
+        return template
 
     def prepareBudgetInfosForDisplay(self,
                                      only_used_years=False,

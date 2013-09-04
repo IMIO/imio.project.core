@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-09-04 08:57+0000\n"
+"POT-Creation-Date: 2013-09-04 09:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -205,11 +205,21 @@ msgid "Year"
 msgstr "Année"
 
 #. Default: "Global"
-#: ./browser/budgetinfos_datagridfield_display.pt:19
+#: ./browser/budgetinfos_datagridfield_display.pt:28
 msgid "budgetinfos_label_global"
 msgstr "Global"
 
 #. Default: "Totals"
-#: ./browser/budgetinfos_datagridfield_display.pt:39
+#: ./browser/budgetinfos_datagridfield_display.pt:45
 msgid "budgetinfos_label_totals"
 msgstr "Totaux"
+
+#. Default: "Data taken from budget infos encoded in sub-element"
+#: ./browser/budgetinfos_datagridfield_display.pt:15
+msgid "budgetinfos_legend_global_data"
+msgstr "Informations budgétaires collectées sur les sous-éléments"
+
+#. Default: "Locally encoded data"
+#: ./browser/budgetinfos_datagridfield_display.pt:10
+msgid "budgetinfos_legend_local_data"
+msgstr "Informations budgétaires encodées sur l'élément courant"
