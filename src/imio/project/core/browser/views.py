@@ -2,7 +2,7 @@
 from zope.component import getMultiAdapter
 from Products.Five import BrowserView
 
-from imio.project.pst.interfaces import IListContainedDexterityObjectsForDisplay
+from imio.project.core.interfaces import IListContainedDexterityObjectsForDisplay
 
 
 class ContainerFolderListingView(BrowserView):
@@ -21,4 +21,3 @@ class ContainerFolderListingView(BrowserView):
           If p_portal_types is specified, only return elements having the required portal_type
         """
         return IListContainedDexterityObjectsForDisplay(self.context).listContainedObjects(portal_types)
-
