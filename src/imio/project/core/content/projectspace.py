@@ -5,29 +5,17 @@ from zope.interface import Interface
 from zope.interface import Invalid
 
 from z3c.form import validator
-from z3c.form.widget import FieldWidget
 
 from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.supermodel import model
 
-from collective.z3cform.datagridfield import DataGridField, DictRow
+from collective.z3cform.datagridfield import DictRow, DataGridFieldFactory
 
 from Products.CMFCore.utils import getToolByName
 
 from imio.project.core import _
-
-
-def DataGridFieldWithListingTableFactory(field, request):
-    """
-        IFieldWidget factory for DataGridField using the 'listing' class for the main table.
-    """
-    widget = DataGridField(request)
-    # temporary fallback until display_table_css_class attribute is in collective.z3cform.datagridfield
-    if hasattr(widget, 'display_table_css_class'):
-        widget.display_table_css_class = 'listing'
-    return FieldWidget(field, widget)
 
 
 def _validateKeyNotUsed(context,
@@ -151,6 +139,7 @@ class IVocabularySchema(Interface):
         required=True,)
     key = schema.ASCIILine(
         title=_("Key"),
+
         required=True,)
 
 
@@ -167,7 +156,7 @@ class IProjectSpace(model.Schema):
                            schema=IVocabularySchema,
                            required=False),
     )
-    directives.widget(categories=DataGridFieldWithListingTableFactory)
+    directives.widget('categories', DataGridFieldFactory, display_table_css_class='listing')
 
     priority = schema.List(
         title=_(u'Priority values'),
@@ -178,7 +167,7 @@ class IProjectSpace(model.Schema):
                            schema=IVocabularySchema,
                            required=False),
     )
-    directives.widget(priority=DataGridFieldWithListingTableFactory)
+    directives.widget('priority', DataGridFieldFactory, display_table_css_class='listing')
 
     budget_types = schema.List(
         title=_(u'Budget types values'),
@@ -189,7 +178,7 @@ class IProjectSpace(model.Schema):
                            schema=IVocabularySchema,
                            required=False),
     )
-    directives.widget(budget_types=DataGridFieldWithListingTableFactory)
+    directives.widget('budget_types', DataGridFieldFactory, display_table_css_class='listing')
 
 validator.WidgetValidatorDiscriminators(RemovedValueIsNotUsedByCategoriesFieldValidator,
                                         field=IProjectSpace['categories'])
