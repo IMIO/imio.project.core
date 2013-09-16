@@ -115,7 +115,7 @@ class IProject(model.Schema):
     manager = LocalRolesToPrincipals(
         title=_(u"Manager"),
         description=_(u"Choose principals that will manage this project."),
-        roles_to_assign=('Editor',),
+        roles_to_assign=('Editor', 'Reviewer', ),
         value_type=schema.Choice(
             vocabulary='imio.project.core.content.project.manager_vocabulary'
         ),
