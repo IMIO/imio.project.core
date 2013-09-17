@@ -7,6 +7,7 @@ from Products.CMFCore.utils import getToolByName
 from plone.batching import Batch
 
 from imio.project.core.interfaces import IListContainedDexterityObjectsForDisplay
+from imio.project.core.utils import getProjectSpace
 
 
 class ContainerFolderListingView(BrowserView):
@@ -19,12 +20,16 @@ class ContainerFolderListingView(BrowserView):
         portal_state = getMultiAdapter((self.context, self.request), name=u'plone_portal_state')
         self.portal = portal_state.portal()
 
-    def listRenderedContainedElements(self, portal_types=(), widgets_to_render=(), b_size=30, b_start=0):
+    def listRenderedContainedElements(self, portal_types=(), widgets_to_render=(), b_size=0, b_start=0):
         """
           Get the contained elements, rendered for display.
           If p_portal_types is specified, only return elements having the required portal_type.
           If p_widgets_to_render is specified, only render given fields/widgets.
         """
+        if not b_size:
+            # take the batch size defined on the projectspace
+            projectspace = getProjectSpace(self.context)
+            b_size = projectspace.batch_size
         result = IListContainedDexterityObjectsForDisplay(self.context).listContainedObjects(portal_types,
                                                                                              widgets_to_render,
                                                                                              b_start=b_start,

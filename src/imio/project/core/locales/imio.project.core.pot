@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-09-17 12:57+0000\n"
+"POT-Creation-Date: 2013-09-17 14:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,10 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
+#: ./content/projectspace.py:183
+msgid "Batch size"
+msgstr ""
+
 #: ./content/project.py:96
 msgid "Budget"
 msgstr ""
@@ -29,7 +33,7 @@ msgstr ""
 msgid "Budget comments"
 msgstr ""
 
-#: ./content/projectspace.py:173
+#: ./content/projectspace.py:172
 msgid "Budget types values"
 msgstr ""
 
@@ -37,7 +41,7 @@ msgstr ""
 msgid "Budget_type"
 msgstr ""
 
-#: ./content/projectspace.py:151
+#: ./content/projectspace.py:150
 msgid "Categories values"
 msgstr ""
 
@@ -89,11 +93,15 @@ msgstr ""
 msgid "Effective end date"
 msgstr ""
 
+#: ./content/projectspace.py:184
+msgid "Enter an integer value to define the batch size to use in listings. A correct batch size (default is 20) is recommended for performances reasons."
+msgstr ""
+
 #: ./content/project.py:97
 msgid "Enter budget details.  If you have comments about budget, use the field here above."
 msgstr ""
 
-#: ./content/projectspace.py:152
+#: ./content/projectspace.py:151
 msgid "Enter one different value by row. Label is the displayed value. Key is the stored value: in lowercase, without space."
 msgstr ""
 
@@ -158,7 +166,7 @@ msgstr ""
 msgid "Priority"
 msgstr ""
 
-#: ./content/projectspace.py:162
+#: ./content/projectspace.py:161
 msgid "Priority values"
 msgstr ""
 

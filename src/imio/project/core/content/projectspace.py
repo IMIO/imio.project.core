@@ -139,7 +139,6 @@ class IVocabularySchema(Interface):
         required=True,)
     key = schema.ASCIILine(
         title=_("Key"),
-
         required=True,)
 
 
@@ -179,6 +178,14 @@ class IProjectSpace(model.Schema):
                            required=False),
     )
     directives.widget('budget_types', DataGridFieldFactory, display_table_css_class='listing')
+
+    batch_size = schema.Int(
+        title=_(u'Batch size'),
+        description=_(u"Enter an integer value to define the batch size to use in listings. "
+                      "A correct batch size (default is 20) is recommended for performances reasons."),
+        required=True,
+        default=20,
+    )
 
 validator.WidgetValidatorDiscriminators(RemovedValueIsNotUsedByCategoriesFieldValidator,
                                         field=IProjectSpace['categories'])

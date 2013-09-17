@@ -12,7 +12,7 @@ class ListContainedDexterityObjectsForDisplayAdapter(object):
     def __init__(self, context):
         self.context = context
 
-    def listContainedObjects(self, portal_types=(), widgets_to_render=(), b_start=0, b_size=30):
+    def listContainedObjects(self, portal_types=(), widgets_to_render=(), b_start=0, b_size=20):
         """ Return a list of renderable objects.
             If p_portal_types is given, filter on portal_type in the catalog query.
             If p_widgets_to_render is given, only render given fields/widgets."""

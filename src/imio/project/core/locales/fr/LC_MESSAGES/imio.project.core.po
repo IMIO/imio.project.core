@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-09-17 12:57+0000\n"
+"POT-Creation-Date: 2013-09-17 14:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,10 @@ msgstr ""
 msgid "Amount"
 msgstr "Montant"
 
+#: ./content/projectspace.py:183
+msgid "Batch size"
+msgstr "Nombre d'éléments par page dans les listings"
+
 #: ./content/project.py:96
 msgid "Budget"
 msgstr "Financement/Budget"
@@ -27,7 +31,7 @@ msgstr "Financement/Budget"
 msgid "Budget comments"
 msgstr "Commentaires sur le financement/budget"
 
-#: ./content/projectspace.py:173
+#: ./content/projectspace.py:172
 msgid "Budget types values"
 msgstr "Types de budget possibles"
 
@@ -35,7 +39,7 @@ msgstr "Types de budget possibles"
 msgid "Budget_type"
 msgstr "Type de budget"
 
-#: ./content/projectspace.py:151
+#: ./content/projectspace.py:150
 msgid "Categories values"
 msgstr "Catégories possibles"
 
@@ -87,11 +91,15 @@ msgstr "Date de début effective"
 msgid "Effective end date"
 msgstr "Date de fin effective"
 
+#: ./content/projectspace.py:184
+msgid "Enter an integer value to define the batch size to use in listings. A correct batch size (default is 20) is recommended for performances reasons."
+msgstr "Entrez une valeur pour définir la nombre d'élément par page à afficher dans les listings.  Une valeur correcte (par défaut : 20) est recommandée pour des raisons de performances."
+
 #: ./content/project.py:97
 msgid "Enter budget details.  If you have comments about budget, use the field here above."
 msgstr "Entrez les détails concernant le budget.  Si vous avez un commentaire à ajouter, utilisez la zone 'Commentaires sur le financement/budget' ci-dessous."
 
-#: ./content/projectspace.py:152
+#: ./content/projectspace.py:151
 msgid "Enter one different value by row. Label is the displayed value. Key is the stored value: in lowercase, without space."
 msgstr "Entrer une valeur différente par ligne. Le libellé est la valeur affichée. La clé est la valeur stockée: en minuscule, sans espace, sans accent."
 
@@ -156,7 +164,7 @@ msgstr "Constat préalable"
 msgid "Priority"
 msgstr "Priorité"
 
-#: ./content/projectspace.py:162
+#: ./content/projectspace.py:161
 msgid "Priority values"
 msgstr "Priorités possibles"
 

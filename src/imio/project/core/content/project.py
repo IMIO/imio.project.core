@@ -75,9 +75,7 @@ class IBudgetSchema(Interface):
 
 
 class IProject(model.Schema):
-    """
-        Project schema, field ordering
-    """
+    """Project schema, field ordering."""
     # use 'categories' field name  even if mono-valued for now, because 'category' is reserved
     categories = schema.Choice(
         title=_(u'Category'),
@@ -101,7 +99,7 @@ class IProject(model.Schema):
                            schema=IBudgetSchema,
                            required=False),
     )
-    directives.widget('budget', BudgetInfosDataGridFieldFactory, display_table_css_class='listing')
+    directives.widget('budget', BudgetInfosDataGridFieldFactory, display_table_css_class='listing nosort')
 
     budget_comments = RichText(
         title=_(u"Budget comments"),
@@ -148,7 +146,7 @@ class IProject(model.Schema):
                            schema=IResultIndicatorSchema,
                            required=False),
     )
-    directives.widget('result_indicator', DataGridFieldFactory, display_table_css_class='listing')
+    directives.widget('result_indicator', DataGridFieldFactory, display_table_css_class='listing nosort')
 
     planned_begin_date = schema.Date(
         title=_(u'Planned begin date'),

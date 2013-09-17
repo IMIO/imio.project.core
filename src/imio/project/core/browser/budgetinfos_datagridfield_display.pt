@@ -14,7 +14,7 @@
 <fieldset tal:define="results view/prepareBudgetInfosForDisplay;"
           tal:condition="results">
   <legend i18n:translate="budgetinfos_legend_global_data">Data taken from budget infos encoded in sub-element</legend>
-  <table class="listing nosort budgetinfos_table">
+  <table class="listing budgetinfos_table">
     <tal:defines define="years python: results[0];
                            budget_types python: results[1];
                            res python: results[2];
@@ -23,10 +23,10 @@
                            super_total python: results[5];">
       <thead>
         <tr>
-          <th></th>
-          <th i18n:translate="budgetinfos_label_global">Global</th>
+          <th class="nosort"></th>
+          <th class="nosort" i18n:translate="budgetinfos_label_global">Global</th>
           <tal:loop_years repeat="year years">
-            <th tal:content="year"></th>
+            <th class="nosort" tal:content="year"></th>
           </tal:loop_years>
         </tr>
       </thead>

@@ -30,7 +30,6 @@ $(document).ready(function(){
         var page = decodeURI((RegExp("b_start\:int" + '=' + '(.+?)(&|$)').exec(link)||[,null])[1]);
         replaceListingTable({ "b_start\:int": page });
     });
-
 });
 
 })(jQuery);
