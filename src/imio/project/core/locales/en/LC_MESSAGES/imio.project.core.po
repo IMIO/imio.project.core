@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-09-04 09:19+0000\n"
+"POT-Creation-Date: 2013-09-17 12:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgstr "Budget"
 msgid "Budget comments"
 msgstr ""
 
-#: ./content/projectspace.py:184
+#: ./content/projectspace.py:173
 msgid "Budget types values"
 msgstr ""
 
@@ -35,7 +35,7 @@ msgstr ""
 msgid "Budget_type"
 msgstr ""
 
-#: ./content/projectspace.py:162
+#: ./content/projectspace.py:151
 msgid "Categories values"
 msgstr "Categories values"
 
@@ -71,6 +71,14 @@ msgstr "Choose principals that will manage this project."
 msgid "Comments"
 msgstr "Comments"
 
+#: ./browser/imio_folder_listing_table.pt:12
+msgid "Creator"
+msgstr ""
+
+#: ./browser/imio_folder_listing_table.pt:10
+msgid "Description"
+msgstr ""
+
 #: ./content/project.py:162
 msgid "Effective begin date"
 msgstr "Effective begin date"
@@ -83,7 +91,7 @@ msgstr "Effective end date"
 msgid "Enter budget details.  If you have comments about budget, use the field here above."
 msgstr ""
 
-#: ./content/projectspace.py:163
+#: ./content/projectspace.py:152
 msgid "Enter one different value by row. Label is the displayed value. Key is the stored value: in lowercase, without space."
 msgstr "Enter one different value by row. Label is the displayed value. Key is the stored value: in lowercase, without space."
 
@@ -115,12 +123,12 @@ msgstr "Expected value"
 msgid "Extra concerned people"
 msgstr "Extra concerned people"
 
-#: ./content/projectspace.py:153
+#: ./content/projectspace.py:141
 msgid "Key"
 msgstr "Key"
 
 #: ./content/project.py:47
-#: ./content/projectspace.py:150
+#: ./content/projectspace.py:138
 msgid "Label"
 msgstr "Label"
 
@@ -148,7 +156,7 @@ msgstr ""
 msgid "Priority"
 msgstr "Priority"
 
-#: ./content/projectspace.py:173
+#: ./content/projectspace.py:162
 msgid "Priority values"
 msgstr "Priority values"
 
@@ -180,9 +188,17 @@ msgstr "Result indicator"
 msgid "Specify here concerned people that do not have access to the application, this will just be informational."
 msgstr "Specify here concerned people that do not have access to the application, this will just be informational."
 
-#: ./content/projectspace.py:85
+#: ./browser/imio_folder_listing_table.pt:11
+msgid "State"
+msgstr ""
+
+#: ./content/projectspace.py:73
 msgid "The key '${removed_key}' can not be removed because it is currently used (for example by '${used_by_url}')."
 msgstr "The key '${removed_key}' can not be removed because it is currently used (for example by '${used_by_url}')."
+
+#: ./browser/imio_folder_listing_table.pt:9
+msgid "Title"
+msgstr ""
 
 #: ./content/project.py:203
 msgid "Various comments"
@@ -205,22 +221,27 @@ msgid "Year"
 msgstr ""
 
 #. Default: "Global"
-#: ./browser/budgetinfos_datagridfield_display.pt:28
+#: ./browser/budgetinfos_datagridfield_display.pt:27
 msgid "budgetinfos_label_global"
 msgstr ""
 
 #. Default: "Totals"
-#: ./browser/budgetinfos_datagridfield_display.pt:45
+#: ./browser/budgetinfos_datagridfield_display.pt:44
 msgid "budgetinfos_label_totals"
 msgstr ""
 
 #. Default: "Data taken from budget infos encoded in sub-element"
-#: ./browser/budgetinfos_datagridfield_display.pt:15
+#: ./browser/budgetinfos_datagridfield_display.pt:16
 msgid "budgetinfos_legend_global_data"
 msgstr ""
 
 #. Default: "Locally encoded data"
 #: ./browser/budgetinfos_datagridfield_display.pt:10
 msgid "budgetinfos_legend_local_data"
+msgstr ""
+
+#. Default: "Contents"
+#: ./browser/imio_folder_listing.pt:9
+msgid "imio_legend_folder_listing"
 msgstr ""
 

@@ -1,6 +1,17 @@
-<fieldset id="folder-listing">
-    <legend i18n:translate="" i18n:domain="plone">Contents</legend>
-        <tal:block define="listing_macro context/folder_listing/macros/listing;">
-            <metal:use_macro use-macro="listing_macro" />
+<metal:folder_listing define-macro="folder_listing" i18n:domain="imio.project.core">
+
+    <script type="text/javascript"
+            tal:define="portal_url context/@@plone_portal_state/portal_url;"
+            tal:attributes="src string:${portal_url}/++resource++imio.project.core/listings.js">
+    </script>
+
+    <fieldset id="pst-folder-listing">
+        <legend i18n:translate="imio_legend_folder_listing">Contents</legend>
+
+        <tal:block define="imio_folder_listing_table context/@@imio-folder-listing-table/index;">
+            <tal:content replace="structure imio_folder_listing_table" />
         </tal:block>
-</fieldset>
+
+    </fieldset>
+
+</metal:folder_listing>
