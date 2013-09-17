@@ -1,0 +1,17 @@
+#
+# taken into account by: svn propset svn:ignore -F svn.ignore .
+#
+.installed.cfg
+bin
+develop-eggs
+downloads
+eggs
+fake-eggs
+include
+lib
+logrotate.conf
+parts
+python-eggs
+src
+versions-picked.cfg
+*.mo
