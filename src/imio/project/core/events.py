@@ -25,7 +25,7 @@ def _updateParentsBudgetInfos(obj):
     # we take the budget infos saved on obj annotation
     obj_annotations = IAnnotations(obj)
     if CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in obj_annotations:
-        formattedBudgetInfos = obj_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY]
+        formattedBudgetInfos = dict(obj_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY])
     # add self in budgetInfos
     formattedBudgetInfos[objUID] = obj.budget
 
