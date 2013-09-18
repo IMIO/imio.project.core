@@ -13,6 +13,7 @@ from plone.app.testing import TEST_USER_NAME
 from plone.dexterity.utils import createContentInContainer
 
 import imio.project.core
+from imio.project.core.content.project import default_year
 
 
 PROJECT_TESTING_PROFILE = PloneWithPackageLayer(
@@ -72,16 +73,34 @@ class FunctionalTestCase(unittest2.TestCase):
              'key': 'priority-3'},
         ]
         params['priority'] = priority
+        # datagridfield budget_types
+        budget_types = [
+            {'label': u"Budget type 1",
+             'key': 'budget-type-1'},
+            {'label': u"Budget type 2",
+             'key': 'budget-type-2'},
+            {'label': u"Budget type 3",
+             'key': 'budget-type-3'},
+        ]
+        params['budget_types'] = budget_types
         projectspace = createContentInContainer(self.portal, 'projectspace', **params)
         projects = [
             {'id': u"project1",
              'title': u"Project 1",
              'categories': u"category-1",
-             'priority': u"priority-1", },
+             'priority': u"priority-1",
+             'budget': [{'budget_type': 'budget-type-1',
+                         'year': default_year() + 1,
+                         'amount': 500.0, }
+                        ]},
             {'id': u"project2",
              'title': u"Project 2",
              'categories': u"category-2",
-             'priority': u"priority-3", },
+             'priority': u"priority-3",
+             'budget': [{'budget_type': 'budget-type-2',
+                         'year': default_year(),
+                         'amount': 125.0, }
+                        ]},
         ]
         for project in projects:
             createContentInContainer(projectspace, 'project', **project)

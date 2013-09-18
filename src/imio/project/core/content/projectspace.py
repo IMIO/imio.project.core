@@ -17,6 +17,9 @@ from Products.CMFCore.utils import getToolByName
 
 from imio.project.core import _
 
+ERROR_VALUE_REMOVED_IS_IN_USE = "The key '${removed_key}' can not be removed because it is currently " \
+                                "used (for example by '${used_by_url}')."
+
 
 def _validateKeyNotUsed(context,
                         value,
@@ -67,14 +70,9 @@ def _validateKeyNotUsed(context,
         intersectionValues = set(used_value).intersection(removedKeys)
         if intersectionValues:
             wrong_removed_key = intersectionValues.pop()
-            defaultMsg = u"The key '%s' that was removed is used by some elements " \
-                         u"(like for example '%s') and can not be removed!" % \
-                         (wrong_removed_key, obj.absolute_url())
-            raise Invalid(_(u"The key '${removed_key}' can not be removed because it is "
-                            u"currently used (for example by '${used_by_url}').",
+            raise Invalid(_(ERROR_VALUE_REMOVED_IS_IN_USE,
                           mapping={'removed_key': wrong_removed_key,
-                                   'used_by_url': obj.absolute_url(), },
-                          default=defaultMsg))
+                                   'used_by_url': obj.absolute_url(), }))
 
 
 class RemovedValueIsNotUsedByCategoriesFieldValidator(validator.SimpleFieldValidator):
