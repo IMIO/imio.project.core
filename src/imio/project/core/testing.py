@@ -85,7 +85,7 @@ class FunctionalTestCase(unittest2.TestCase):
         params['budget_types'] = budget_types
         projectspace = createContentInContainer(self.portal, 'projectspace', **params)
         projects = [
-            {'id': u"project1",
+            {'id': u"project-1",
              'title': u"Project 1",
              'categories': u"category-1",
              'priority': u"priority-1",
@@ -93,7 +93,7 @@ class FunctionalTestCase(unittest2.TestCase):
                          'year': default_year() + 1,
                          'amount': 500.0, }
                         ]},
-            {'id': u"project2",
+            {'id': u"project-2",
              'title': u"Project 2",
              'categories': u"category-2",
              'priority': u"priority-3",
