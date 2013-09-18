@@ -14,4 +14,5 @@ table.datagridwidget-table-view input.float-field, table.datagridwidget-table-vi
 }
 .budgetinfos_table TFOOT {
     font-weight: bold;
+    border-top: 1px solid grey;
 }
