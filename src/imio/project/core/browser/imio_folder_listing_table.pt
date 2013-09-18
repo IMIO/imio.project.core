@@ -17,7 +17,7 @@
         <td><a href="#" class="#"
                tal:content="obj/title"
                tal:attributes="href obj/absolute_url;
-                               class string:contenttype-${obj/portal_type};">Object title</a></td>
+                               class string:contenttype-${obj/portal_type} state-${obj/@@plone_context_state/workflow_state};">Object title</a></td>
         <td tal:content="obj/Description">Object description</td>
         <td tal:content="obj/@@plone_context_state/workflow_state" i18n:translate="" i18n:domain="plone">State</td>
         <td tal:content="python: view.author(obj.Creator())">Creator</td>
