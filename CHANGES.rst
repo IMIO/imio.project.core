@@ -10,6 +10,5 @@ Changelog
 
 0.1 (2013-08-01)
 ----------------
-
 - Initial release.
   [s.geulette@imio.be]
