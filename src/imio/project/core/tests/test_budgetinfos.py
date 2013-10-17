@@ -34,6 +34,8 @@ class TestBudgetField(FunctionalTestCase):
         self.failIf(CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in projectspaceAnnotations)
         # as the project1 does not have any children, it does not have the annotations neither
         project1 = self.portal.projectspace['project-1']
+        # we change initial state
+        self.pw.doActionFor(project1, "set_to_be_scheduled")
         project1Annotations = IAnnotations(project1)
         self.failIf(CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in project1Annotations)
         # now add a child to project1 with some valuable budget data
@@ -45,9 +47,12 @@ class TestBudgetField(FunctionalTestCase):
                              ],
                   }
         subproject1 = createContentInContainer(project1, 'project', **params)
-        # subproject1 does not have the annotation but his parent should
+        # subproject1 does not have the annotation but his parent should, except for initial state
         subproject1Annotations = IAnnotations(subproject1)
         self.failIf(CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in subproject1Annotations)
+        self.failIf(CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in project1Annotations)
+        # we change initial state
+        self.pw.doActionFor(subproject1, "set_to_be_scheduled")
         self.failUnless(CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in project1Annotations)
         self.assertEquals(project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY],
                           {subproject1.UID(): subproject1.budget, })
@@ -66,6 +71,9 @@ class TestBudgetField(FunctionalTestCase):
         # but his direct parent subproject1 should have now relevant budget data and the
         # super parent project1 should have budget data of every sub projects, so budget data
         # of subSubproject1 and of subproject1
+        self.failIf(CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in subproject1Annotations)
+        # we change initial state
+        self.pw.doActionFor(subSubproject1, "set_to_be_scheduled")
         self.failUnless(CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in subproject1Annotations)
         # subproject1 contains budget data of subSubproject1
         self.assertEquals(subproject1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY],
@@ -84,6 +92,8 @@ class TestBudgetField(FunctionalTestCase):
                              ],
                   }
         subSubproject2 = createContentInContainer(subproject1, 'project', **params)
+        # we change initial state
+        self.pw.doActionFor(subSubproject2, "set_to_be_scheduled")
         # check that brother is not touched and subSubproject2 neither
         subSubproject2Annotations = IAnnotations(subSubproject2)
         self.failIf(CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in subSubproject1Annotations)
@@ -159,7 +169,45 @@ class TestBudgetField(FunctionalTestCase):
                              ],
                   }
         subproject2 = createContentInContainer(project1, 'project', **params)
+        # we change initial state
+        self.pw.doActionFor(subproject2, "set_to_be_scheduled")
         subproject2Annotations = IAnnotations(subproject2)
         self.assertEquals(project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY],
                           {subproject2.UID(): subproject2.budget, })
         self.failIf(CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in subproject2Annotations)
+
+    def test_ParentsAreCorrectlyUpdatedOnTransition(self):
+        """Test that when changing state on sub-projects, parent projects are
+           correctly updated regarding budget annotations."""
+        # first create some projects and sub-projects using the _createProjectsAndTestAnnotationsEvolution
+        # this method returns several elements, so for PEP8 convenience, we store it in returns then dispatch...
+        returns = self._createProjectsAndTestAnnotationsEvolution()
+        project1 = returns[0]
+        subproject1 = returns[1]
+        subSubproject1 = returns[2]
+        subSubproject2 = returns[3]
+        project1Annotations = returns[4]
+        subproject1Annotations = returns[5]
+        # verifying content
+        self.assertEquals(len(project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 3)
+        self.assertEquals(len(subproject1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 2)
+        # we transit to another state: => no change
+        self.pw.doActionFor(subSubproject1, "begin")
+        self.assertEquals(len(project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 3)
+        self.assertEquals(len(subproject1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 2)
+        # we transit to previous state: => no change
+        self.pw.doActionFor(subSubproject1, "back_to_be_scheduled")
+        self.assertEquals(len(project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 3)
+        self.assertEquals(len(subproject1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 2)
+        # we transit to initial state: => subprojet must be removed
+        self.pw.doActionFor(subSubproject1, "back_to_created")
+        self.assertEquals(len(project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 2)
+        self.assertEquals(len(subproject1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 1)
+        self.assertNotIn(subSubproject1.UID(), project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys())
+        self.assertNotIn(subSubproject1.UID(), subproject1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys())
+        # we transit to initial state: => subprojet must be removed
+        self.pw.doActionFor(subSubproject1, "set_to_be_scheduled")
+        self.assertEquals(len(project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 3)
+        self.assertEquals(len(subproject1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 2)
+        self.assertIn(subSubproject1.UID(), project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys())
+        self.assertIn(subSubproject1.UID(), subproject1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys())

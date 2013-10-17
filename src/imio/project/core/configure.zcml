@@ -38,7 +38,9 @@
     <subscriber for=".content.project.IProject
                      zope.lifecycleevent.IObjectModifiedEvent"
                 handler=".events.onModifyProject"/>
-
+    <subscriber for=".content.project.IProject
+                     Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+                handler=".events.onTransitionProject"/>
     <subscriber for=".content.project.IProject
                      zope.app.container.interfaces.IObjectRemovedEvent"
                 handler=".events.onRemoveProject"/>

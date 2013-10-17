@@ -42,24 +42,9 @@ def _updateParentsBudgetInfos(obj):
         parent = parent.aq_inner.aq_parent
 
 
-def onAddProject(obj, event):
+def _cleanParentsBudgetInfos(obj):
     """
-      Handler when a project is added
-    """
-    # Update budget infos on every parents
-    _updateParentsBudgetInfos(obj)
-
-
-def onModifyProject(obj, event):
-    """
-      Handler when a project is modified
-    """
-    # Update budget infos on every parents
-    _updateParentsBudgetInfos(obj)
-
-
-def onRemoveProject(obj, event):
-    """
+      Update budget infos on every parents, cleaning sub objects info
     """
     objUID = obj.UID()
     parent = obj.aq_inner.aq_parent
@@ -70,3 +55,50 @@ def onRemoveProject(obj, event):
         if objUID in parent_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY]:
             del parent_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY][objUID]
         parent = parent.aq_inner.aq_parent
+
+
+def onAddProject(obj, event):
+    """
+      Handler when a project is added
+    """
+    # Update budget infos on every parents
+    pw = obj.portal_workflow
+    workflows = pw.getWorkflowsFor(obj)
+    if not workflows or workflows[0].initial_state != pw.getInfoFor(obj, 'review_state'):
+        _updateParentsBudgetInfos(obj)
+
+
+def onModifyProject(obj, event):
+    """
+      Handler when a project is modified
+    """
+    # Update budget infos on every parents
+    pw = obj.portal_workflow
+    workflows = pw.getWorkflowsFor(obj)
+    if not workflows or workflows[0].initial_state != pw.getInfoFor(obj, 'review_state'):
+        _updateParentsBudgetInfos(obj)
+
+
+def onTransitionProject(obj, event):
+    """
+      Handler when a transition is done
+    """
+    pw = obj.portal_workflow
+    workflows = pw.getWorkflowsFor(obj)
+    #import ipdb; ipdb.set_trace()
+    # Update budget infos on parents
+    if event.old_state.title == workflows[0].initial_state and event.new_state.title != workflows[0].initial_state:
+        _updateParentsBudgetInfos(obj)
+    elif event.new_state.title == workflows[0].initial_state and event.old_state.title != workflows[0].initial_state:
+        _cleanParentsBudgetInfos(obj)
+
+
+def onRemoveProject(obj, event):
+    """
+    """
+    pw = obj.portal_workflow
+    workflows = pw.getWorkflowsFor(obj)
+    # if the object is on the initial state, the parents doesn't contain any information on it
+    if workflows and workflows[0].initial_state == pw.getInfoFor(obj, 'review_state'):
+        return
+    _cleanParentsBudgetInfos(obj)

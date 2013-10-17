@@ -48,6 +48,7 @@ class FunctionalTestCase(unittest2.TestCase):
     def setUp(self):
         super(FunctionalTestCase, self).setUp()
         self.portal = self.layer['portal']
+        self.pw = self.portal.portal_workflow
         # login as Manager and add a projectspace and 2 projects into it
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         login(self.portal, TEST_USER_NAME)
