@@ -85,7 +85,6 @@ def onTransitionProject(obj, event):
     """
     pw = obj.portal_workflow
     workflows = pw.getWorkflowsFor(obj)
-    #import ipdb; ipdb.set_trace()
     # Update budget infos on parents
     if event.old_state.title == workflows[0].initial_state and event.new_state.title != workflows[0].initial_state:
         _updateParentsBudgetInfos(obj)
