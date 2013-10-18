@@ -176,6 +176,24 @@ class TestBudgetField(FunctionalTestCase):
                           {subproject2.UID(): subproject2.budget, })
         self.failIf(CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in subproject2Annotations)
 
+        # Test on delete subproject without parent annotation
+        project2 = self.portal.projectspace['project-2']
+        project2Annotations = IAnnotations(project2)
+        # we change initial state
+        self.pw.doActionFor(project2, "set_to_be_scheduled")
+        self.failIf(CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in project2Annotations)
+        # adding a subproject leaving it at initial state
+        params = {'title': 'Subproject 2-1',
+                  'priority': 'priority-2',
+                  'budget': [{'budget_type': 'budget-type-2',
+                              'year': default_year(),
+                              'amount': 4555.0, }
+                             ],
+                  }
+        subproject21 = createContentInContainer(project2, 'project', **params)
+        self.failIf(CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in project2Annotations)
+        project2.manage_delObjects(ids=[subproject21.id, ])
+
     def test_ParentsAreCorrectlyUpdatedOnTransition(self):
         """Test that when changing state on sub-projects, parent projects are
            correctly updated regarding budget annotations."""
