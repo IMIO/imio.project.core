@@ -43,3 +43,16 @@ def update_budget_infos(self):
             _cleanParentsBudgetInfos(obj)
             out.append("Removed info from parents")
     return "\n".join(out)
+
+
+def print_budget_infos(self):
+    """
+        print budget infos
+    """
+    out=[]
+    context_path = '/'.join(self.getPhysicalPath())
+    # First we clean the annotation
+    brains = self.portal_catalog(portal_type=['operationalobjective', 'strategicobjective', ], path=context_path, sort_on='path')
+    for brain in brains:
+        trace_obj(out, brain.getObject())
+    return "\n".join(out)
