@@ -188,6 +188,9 @@ msgstr "Espace de projets"
 msgid "Reached value"
 msgstr "Valeur déjà atteinte"
 
+msgid "Reference number"
+msgstr "Numéro de rérérence"
+
 #: ./content/project.py:143
 msgid "Result indicator"
 msgstr "Indicateur de résultat"

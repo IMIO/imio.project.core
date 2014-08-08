@@ -198,6 +198,9 @@ msgstr ""
 msgid "Specify here concerned people that do not have access to the application, this will just be informational."
 msgstr ""
 
+msgid "Reference number"
+msgstr ""
+
 #: ./browser/imio_folder_listing_table.pt:11
 msgid "State"
 msgstr ""
