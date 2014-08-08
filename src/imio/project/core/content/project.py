@@ -76,6 +76,13 @@ class IBudgetSchema(Interface):
 
 class IProject(model.Schema):
     """Project schema, field ordering."""
+    reference_number = schema.Int(
+        title=_(u"Reference number"),
+        description=_(u"Unique identification"),
+        required=False,
+        default=0,
+    )
+
     # use 'categories' field name  even if mono-valued for now, because 'category' is reserved
     categories = schema.Choice(
         title=_(u'Category'),
@@ -210,6 +217,8 @@ class Project(Container):
     """ """
     implements(IProject)
     __ac_local_roles_block__ = False
+    def Title(self):
+        return str(self.reference_number) + '.  ' + self.title
 
 
 class CategoriesVocabulary(object):
