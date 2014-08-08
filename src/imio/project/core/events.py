@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from zope.annotation import IAnnotations
 from imio.project.core.config import CHILDREN_BUDGET_INFOS_ANNOTATION_KEY
+from imio.project.core.utils import getProjectSpace
 
+from plone import api
+
+from zope.annotation import IAnnotations
 
 def _updateParentsBudgetInfos(obj):
     """
@@ -41,7 +44,6 @@ def _updateParentsBudgetInfos(obj):
         parent_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY] = dict(new_annotations)
         parent = parent.aq_inner.aq_parent
 
-
 def _cleanParentsBudgetInfos(obj):
     """
       Update budget infos on every parents, cleaning sub objects info
@@ -56,7 +58,6 @@ def _cleanParentsBudgetInfos(obj):
             del parent_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY][objUID]
         parent = parent.aq_inner.aq_parent
 
-
 def onAddProject(obj, event):
     """
       Handler when a project is added
@@ -66,7 +67,12 @@ def onAddProject(obj, event):
     workflows = pw.getWorkflowsFor(obj)
     if not workflows or workflows[0].initial_state != pw.getInfoFor(obj, 'review_state'):
         _updateParentsBudgetInfos(obj)
-
+    catalog = api.portal.get_tool('portal_catalog')
+    projectspace = getProjectSpace(obj)
+    path = '/'.join(projectspace.getPhysicalPath())
+    brains = catalog(path={'query': path, 'depth': 99}, sort_on='reference_number', sort_order='reverse')
+    obj.reference_number = brains[0].getObject().reference_number + 1
+    obj.reindexObject()
 
 def onModifyProject(obj, event):
     """
