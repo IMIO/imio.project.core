@@ -144,6 +144,13 @@ class IProjectSpace(model.Schema):
     """
         Project schema, field ordering
     """
+    last_reference_number = schema.Int(
+        title=_(u"Last reference number"),
+        description=_(u""),
+        required=False,
+        default=0,
+    )
+
     categories = schema.List(
         title=_(u'Categories values'),
         description=_(u"Enter one different value by row. Label is the displayed value. Key is the stored value:"
