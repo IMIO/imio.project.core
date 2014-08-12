@@ -68,13 +68,11 @@ def onAddProject(obj, event):
     if not workflows or workflows[0].initial_state != pw.getInfoFor(obj, 'review_state'):
         _updateParentsBudgetInfos(obj)
     # compute reference number
-    catalog = api.portal.get_tool('portal_catalog')
-    if catalog.indexes().__contains__('reference_number'):
-        projectspace = getProjectSpace(obj)
-        path = '/'.join(projectspace.getPhysicalPath())
-        brains = catalog(path={'query': path, 'depth': 99}, sort_on='reference_number', sort_order='reverse')
-        obj.reference_number = brains[0].getObject().reference_number + 1
-        obj.reindexObject()
+    projectspace = getProjectSpace(obj)
+    projectspace.last_reference_number += 1
+    obj.reference_number = projectspace.last_reference_number
+    obj.reindexObject()
+
 
 def onModifyProject(obj, event):
     """
