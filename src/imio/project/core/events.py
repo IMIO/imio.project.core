@@ -71,7 +71,7 @@ def onAddProject(obj, event):
     projectspace = getProjectSpace(obj)
     projectspace.last_reference_number += 1
     obj.reference_number = projectspace.last_reference_number
-    obj.reindexObject()
+    obj.reindexObject(['reference_number'])
 
 
 def onModifyProject(obj, event):
