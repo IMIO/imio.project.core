@@ -140,6 +140,9 @@ msgstr "Clé"
 msgid "Label"
 msgstr "Libellé"
 
+msgid "Last reference number"
+msgstr "Dernier numéro de reference"
+
 #: ./content/project.py:116
 msgid "Manager"
 msgstr "Gestionnaire"
@@ -189,7 +192,7 @@ msgid "Reached value"
 msgstr "Valeur déjà atteinte"
 
 msgid "Reference number"
-msgstr "Numéro de rérérence"
+msgstr "Numéro de référence"
 
 #: ./content/project.py:143
 msgid "Result indicator"
