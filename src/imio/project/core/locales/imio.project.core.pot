@@ -142,9 +142,6 @@ msgstr ""
 msgid "Label"
 msgstr ""
 
-msgid "Last reference number"
-msgstr ""
-
 #: ./content/project.py:116
 msgid "Manager"
 msgstr ""
