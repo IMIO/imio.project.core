@@ -20,6 +20,7 @@ from z3c.form.widget import FieldWidget
 
 from collective.z3cform.datagridfield import DictRow, DataGridFieldFactory
 from collective.z3cform.rolefield.field import LocalRolesToPrincipals
+from collective.contact.plonegroup.browser.settings import selectedOrganizationsPloneGroupsVocabulary
 
 from imio.project.core import _
 from imio.project.core.browser.widgets import BudgetInfosDataGridField
@@ -277,12 +278,12 @@ class YearVocabulary(object):
 
 class ManagerVocabulary(object):
     """
+        Create a vocabulary from the selected organization groups
     """
     implements(IVocabularyFactory)
 
     def __call__(self, context):
-        """"""
-        return getVocabularyTermsForOrganization(context)
+        return selectedOrganizationsPloneGroupsVocabulary(functions=['actioneditor'], group_title=False)
 
 
 class VisibleForVocabulary(object):
