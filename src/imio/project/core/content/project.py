@@ -219,7 +219,7 @@ class Project(Container):
     implements(IProject)
     __ac_local_roles_block__ = False
     def Title(self):
-        return '%03d - %s'% (self.reference_number, self.title.encode('utf8'))
+        return '%s (REF.%s)'% (self.title.encode('utf8'), self.reference_number)
 
 
 class CategoriesVocabulary(object):
