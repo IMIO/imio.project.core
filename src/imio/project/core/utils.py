@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
+from Products.ATContentTypes.interfaces.interfaces import IATContentType
 from plone.dexterity.interfaces import IDexterityContent
 
 
@@ -60,7 +61,9 @@ def getProjectSpace(context):
     """
     # sometimes, for inline validation for example or addView, context is not the object
     # but a Form of different kind, the real object is the form.context
-    if not IDexterityContent.providedBy(context):
+    is_content_type = IDexterityContent.providedBy(context) or \
+        IATContentType.providedBy(context)
+    if not is_content_type:
         context = context.context
     parent = context
     while not parent.portal_type == 'projectspace':
