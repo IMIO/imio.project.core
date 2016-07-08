@@ -19,8 +19,8 @@ from plone.supermodel import model
 from z3c.form.widget import FieldWidget
 
 from collective.z3cform.datagridfield import DictRow, DataGridFieldFactory
-from collective.z3cform.rolefield.field import LocalRolesToPrincipals
 from collective.contact.plonegroup.browser.settings import selectedOrganizationsPloneGroupsVocabulary
+from dexterity.localrolesfield.field import LocalRolesField
 
 from imio.project.core import _
 from imio.project.core.browser.widgets import BudgetInfosDataGridField
@@ -118,21 +118,19 @@ class IProject(model.Schema):
         allowed_mime_types=('text/html',),
     )
 
-    manager = LocalRolesToPrincipals(
+    manager = LocalRolesField(
         title=_(u"Manager"),
         description=_(u"Choose principals that will manage this project."),
-        roles_to_assign=('Editor', 'Reviewer', ),
         value_type=schema.Choice(
             vocabulary='imio.project.core.content.project.manager_vocabulary'
         ),
         required=True,
     )
 
-    visible_for = LocalRolesToPrincipals(
+    visible_for = LocalRolesField(
         title=_(u"Visible for"),
         description=_(u"Choose principals that can see this project."),
         required=False,
-        roles_to_assign=('Reader',),
         value_type=schema.Choice(
             vocabulary='imio.project.core.content.project.visible_for_vocabulary'
         ),

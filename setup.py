@@ -45,7 +45,7 @@ setup(
         'collective.contact.core',
         'collective.contact.plonegroup',
         'collective.z3cform.datagridfield',
-        'collective.z3cform.rolefield',
+        'dexterity.localrolesfield',
         'plone.app.dexterity',
         'plone.principalsource',
         'plone.formwidget.datetime',

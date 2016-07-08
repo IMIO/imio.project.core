@@ -13,7 +13,7 @@
     <include package="collective.contact.core" />
     <include package="collective.contact.plonegroup" />
     <include package="collective.z3cform.datagridfield" />
-    <include package="collective.z3cform.rolefield" />
+    <include package="dexterity.localrolesfield" />
     <include package="plone.principalsource" />
     <include package="plone.formwidget.datetime" />
     <include package=".browser" />
