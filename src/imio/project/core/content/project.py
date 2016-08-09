@@ -19,7 +19,7 @@ from plone.supermodel import model
 from z3c.form.widget import FieldWidget
 
 from collective.z3cform.datagridfield import DictRow, DataGridFieldFactory
-from collective.contact.plonegroup.browser.settings import selectedOrganizationsPloneGroupsVocabulary
+from collective.contact.plonegroup.browser.settings import selectedOrganizationsVocabulary
 from dexterity.localrolesfield.field import LocalRolesField
 
 from imio.project.core import _
@@ -281,7 +281,7 @@ class ManagerVocabulary(object):
     implements(IVocabularyFactory)
 
     def __call__(self, context):
-        return selectedOrganizationsPloneGroupsVocabulary(functions=['actioneditor'], group_title=False)
+        return selectedOrganizationsVocabulary()
 
 
 class VisibleForVocabulary(object):
