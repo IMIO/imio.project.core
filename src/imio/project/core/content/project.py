@@ -158,7 +158,7 @@ class IProject(model.Schema):
         title=_(u'Planned begin date'),
         description=_(u"Enter the planned begin date."),
         required=False,
-        defaultFactory=datetime.date.today,
+#        defaultFactory=datetime.date.today,
     )
     directives.widget(planned_begin_date=DateFieldWidget)
 
@@ -166,7 +166,7 @@ class IProject(model.Schema):
         title=_(u'Effective begin date'),
         description=_(u"Enter the effective begin date."),
         required=False,
-        defaultFactory=datetime.date.today,
+#        defaultFactory=datetime.date.today,
     )
     directives.widget(effective_begin_date=DateFieldWidget)
 
@@ -174,7 +174,7 @@ class IProject(model.Schema):
         title=_(u'Planned end date'),
         description=_(u"Enter the planned end date."),
         required=False,
-        defaultFactory=datetime.date.today,
+#        defaultFactory=datetime.date.today,
     )
     directives.widget(planned_end_date=DateFieldWidget)
 
@@ -182,7 +182,7 @@ class IProject(model.Schema):
         title=_(u'Effective end date'),
         description=_(u"Enter the effective end date."),
         required=False,
-        defaultFactory=datetime.date.today,
+#        defaultFactory=datetime.date.today,
     )
     directives.widget(effective_end_date=DateFieldWidget)
 
