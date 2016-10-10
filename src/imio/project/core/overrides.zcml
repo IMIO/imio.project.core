@@ -5,12 +5,14 @@
     i18n_domain="imio.project.pst">
 
     <!-- Override the dexterity container default view -->
-    <browser:page
-        for="plone.dexterity.interfaces.IDexterityContainer"
-        name="view"
-        class="plone.dexterity.browser.view.DefaultView"
-        template="browser/imio_container.pt"
-        permission="zope2.View"
-        />
+    <configure package="imio.helpers">
+        <browser:page
+            for="plone.dexterity.interfaces.IDexterityContainer"
+            name="view"
+            class="plone.dexterity.browser.view.DefaultView"
+            template="browser/container.pt"
+            permission="zope2.View"
+            />
+    </configure>
 
 </configure>
