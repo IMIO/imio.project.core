@@ -50,10 +50,4 @@
                      zope.app.container.interfaces.IObjectRemovedEvent"
                 handler=".events.onRemoveProject"/>
 
-    <adapter
-        factory=".adapters.ListContainedDexterityObjectsForDisplayAdapter"
-        provides="imio.project.core.interfaces.IListContainedDexterityObjectsForDisplay"
-        for="plone.dexterity.interfaces.IDexterityContainer"
-    />
-
 </configure>
