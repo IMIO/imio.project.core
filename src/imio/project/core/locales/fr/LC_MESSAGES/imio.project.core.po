@@ -138,7 +138,7 @@ msgstr "Libellé"
 
 #: ./content/projectspace.py:148
 msgid "Last reference number"
-msgstr "Dernier numéro de reference"
+msgstr "Dernier numéro de référence"
 
 #: ./content/project.py:122
 msgid "Manager"
