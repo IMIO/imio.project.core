@@ -19,7 +19,7 @@ long_description = (
 
 setup(
     name='imio.project.core',
-    version='0.3dev0',
+    version='1.0',
     description="Project management",
     long_description=long_description,
     # Get more from http://pypi.python.org/pypi?%3Aaction=list_classifiers

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.4 (unreleased)
+1.0 (2016-12-08)
 ----------------
 - Replace collective.z3cform.rolefield by dexterity.localrolesfield
   [cmessiant]
