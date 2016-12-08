@@ -1,7 +1,24 @@
 Changelog
 =========
 
-0.2 (unreleased)
+0.4 (unreleased)
+----------------
+- Replace collective.z3cform.rolefield by dexterity.localrolesfield
+  [cmessiant]
+- Some fixes
+  [cmessiant]
+- Removed default dates
+  [sgeulette]
+- Use now imio.helpers container view
+  [sgeulette]
+- Some cleaning
+  [sgeulette]
+
+0.3 (2014-12-11)
+----------------
+-
+
+0.2 (2013-11-19)
 ----------------
 - Turned budget rich text field into a DataGridField + rich text field for budget comments
 - Optimized RemovedValueIsNotUsedByXXXFieldValidator to work with DataGridFields
