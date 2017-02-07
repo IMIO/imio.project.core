@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from plone import api
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 from Products.ATContentTypes.interfaces.interfaces import IATContentType
+from plone.app.dexterity.interfaces import ITypeSchemaContext
 from plone.dexterity.interfaces import IDexterityContent
 
 
@@ -59,6 +61,9 @@ def getProjectSpace(context):
     """
       Return the projectspace object, context is an element in a projectspace
     """
+    # when editing dexterity fields in configuration
+    if ITypeSchemaContext.providedBy(context):
+        return api.content.find(portal_type='projectspace')[0].getObject()
     # sometimes, for inline validation for example or addView, context is not the object
     # but a Form of different kind, the real object is the form.context
     is_content_type = IDexterityContent.providedBy(context) or \
