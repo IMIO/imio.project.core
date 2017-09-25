@@ -163,7 +163,7 @@ class IProjectSpace(model.Schema):
                            schema=IVocabularySchema,
                            required=False),
     )
-    directives.widget('categories', DataGridFieldFactory, display_table_css_class='listing')
+    directives.widget('categories', DataGridFieldFactory, display_table_css_class='listing', allow_reorder=True)
 
     priority = schema.List(
         title=_(u'Priority values'),
@@ -174,7 +174,7 @@ class IProjectSpace(model.Schema):
                            schema=IVocabularySchema,
                            required=False),
     )
-    directives.widget('priority', DataGridFieldFactory, display_table_css_class='listing')
+    directives.widget('priority', DataGridFieldFactory, display_table_css_class='listing', allow_reorder=True)
 
     budget_types = schema.List(
         title=_(u'Budget types values'),
@@ -185,7 +185,7 @@ class IProjectSpace(model.Schema):
                            schema=IVocabularySchema,
                            required=False),
     )
-    directives.widget('budget_types', DataGridFieldFactory, display_table_css_class='listing')
+    directives.widget('budget_types', DataGridFieldFactory, display_table_css_class='listing', allow_reorder=True)
 
 validator.WidgetValidatorDiscriminators(RemovedValueIsNotUsedByCategoriesFieldValidator,
                                         field=IProjectSpace['categories'])
