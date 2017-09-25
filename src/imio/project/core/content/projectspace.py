@@ -14,6 +14,7 @@ from plone.supermodel import model
 from collective.z3cform.datagridfield import DictRow, DataGridFieldFactory
 
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import base_hasattr
 
 from imio.project.core import _
 
@@ -52,21 +53,23 @@ def _validateKeyNotUsed(context,
         if brain.portal_type == context.portal_type:
             continue
         obj = brain.getObject()
+        if not base_hasattr(obj, attribute_using_keys):
+            continue
         used_value = getattr(obj, attribute_using_keys, ())
         # we need a tuple so 'set' here under works...
         # this is because we want this method to be a bit generic...
         if isinstance(used_value, unicode):
             used_value = (used_value, )
-        if not used_value:
-            used_value = ()
         # if we use a datagridfield, we have to get the relevant column
         if sub_attribute_using_key:
             # it means that we use a datagridfield and that data is stored
             # in a dict contained in the list...
             tmpres = []
-            for line in used_value:
+            for line in used_value or ():
                 tmpres.append(line[sub_attribute_using_key])
             used_value = tuple(tmpres)
+        if not used_value:
+            continue
         intersectionValues = set(used_value).intersection(removedKeys)
         if intersectionValues:
             wrong_removed_key = intersectionValues.pop()
