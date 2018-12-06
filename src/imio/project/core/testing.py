@@ -13,7 +13,6 @@ from plone.app.testing import TEST_USER_NAME
 from plone.dexterity.utils import createContentInContainer
 
 import imio.project.core
-from imio.project.core.content.project import default_year
 
 
 PROJECT_TESTING_PROFILE = PloneWithPackageLayer(
@@ -84,6 +83,7 @@ class FunctionalTestCase(unittest2.TestCase):
              'key': 'budget-type-3'},
         ]
         params['budget_types'] = budget_types
+        params['budget_years'] = [2013, 2014, 2015, 2016, 2017, 2018]
         projectspace = createContentInContainer(self.portal, 'projectspace', **params)
         projects = [
             {'id': u"project-1",
@@ -91,7 +91,7 @@ class FunctionalTestCase(unittest2.TestCase):
              'categories': u"category-1",
              'priority': u"priority-1",
              'budget': [{'budget_type': 'budget-type-1',
-                         'year': default_year() + 1,
+                         'year': 2018,
                          'amount': 500.0, }
                         ]},
             {'id': u"project-2",
@@ -99,7 +99,7 @@ class FunctionalTestCase(unittest2.TestCase):
              'categories': u"category-2",
              'priority': u"priority-3",
              'budget': [{'budget_type': 'budget-type-2',
-                         'year': default_year(),
+                         'year': 2017,
                          'amount': 125.0, }
                         ]},
         ]

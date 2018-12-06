@@ -1,31 +1,31 @@
-import datetime
-
-from zope import schema
-from zope.component.hooks import getSite
-import zope.interface
-from z3c.form import interfaces
-
-from zope.interface import implements
-from zope.interface import Interface
-from zope.schema.interfaces import IVocabularyFactory
-from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
-
+from collective.contact.plonegroup.browser.settings import selectedOrganizationsVocabulary
+from collective.z3cform.datagridfield import DataGridFieldFactory
+from collective.z3cform.datagridfield import DictRow
+from dexterity.localrolesfield.field import LocalRolesField
+from imio.project.core import _
+from imio.project.core.browser.widgets import BudgetInfosDataGridField
+from imio.project.core.utils import getProjectSpace
+from imio.project.core.utils import getVocabularyTermsForOrganization
 from plone.app.textfield import RichText
 from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.formwidget.datetime.z3cform.widget import DateFieldWidget
 from plone.supermodel import model
+from z3c.form import interfaces
 from z3c.form.widget import FieldWidget
+from zope import schema
+from zope.component.hooks import getSite
+from zope.interface import implements
+from zope.interface import Interface
+from zope.interface import provider
+from zope.schema.interfaces import IContextAwareDefaultFactory
+from zope.schema.interfaces import IVocabularyFactory
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
 
-from collective.z3cform.datagridfield import DictRow, DataGridFieldFactory
-from collective.contact.plonegroup.browser.settings import selectedOrganizationsVocabulary
-from dexterity.localrolesfield.field import LocalRolesField
-
-from imio.project.core import _
-from imio.project.core.browser.widgets import BudgetInfosDataGridField
-from imio.project.core.utils import getVocabularyTermsForOrganization
-from imio.project.core.utils import getProjectSpace
+import datetime
+import zope.interface
 
 
 @zope.interface.implementer(interfaces.IFieldWidget)
@@ -35,11 +35,23 @@ def BudgetInfosDataGridFieldFactory(field, request):
     return FieldWidget(field, widget)
 
 
-def default_year():
+@provider(IContextAwareDefaultFactory)
+def default_year(context):
     """
       defaultFactory for the field IBudgetSchema.year
     """
-    return datetime.date.today().year
+    portal = getSite()
+    context = portal.REQUEST['PUBLISHED'].context
+    years = getProjectSpace(context).budget_years or []
+    year = datetime.date.today().year
+    if year in years:
+        return year
+    elif year + 1 in years:
+        return year + 1
+    elif years:
+        return years[-1]
+    else:
+        return None
 
 
 class IResultIndicatorSchema(Interface):
@@ -267,11 +279,10 @@ class YearVocabulary(object):
 
     def __call__(self, context):
         """"""
-        years = range(2009, 2030)
-        terms = []
-        for year in years:
-            terms.append(SimpleTerm(year, year, year, ))
-        return SimpleVocabulary(terms)
+        portal = getSite()
+        current_obj = portal.REQUEST['PUBLISHED'].context
+        years = getProjectSpace(current_obj).budget_years or []
+        return SimpleVocabulary([SimpleTerm(y) for y in years])
 
 
 class ManagerVocabulary(object):
