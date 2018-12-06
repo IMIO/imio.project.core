@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from collective.z3cform.datagridfield.datagridfield import DataGridField
+from imio.project.core.config import CHILDREN_BUDGET_INFOS_ANNOTATION_KEY
+from imio.project.core.utils import getProjectSpace
 from zope.annotation import IAnnotations
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
 from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
-
-from collective.z3cform.datagridfield.datagridfield import DataGridField
-
-from imio.project.core.config import CHILDREN_BUDGET_INFOS_ANNOTATION_KEY
 
 
 class BudgetInfosDataGridField(DataGridField):
@@ -29,8 +28,7 @@ class BudgetInfosDataGridField(DataGridField):
 
     def prepareBudgetInfosForDisplay(self,
                                      only_used_years=False,
-                                     only_used_budget_types=False,
-                                     fixed_years=[2013, 2014, 2015, 2016, 2017, 2018]):
+                                     only_used_budget_types=False):
         """
           Compute budget infos so it can be easily displayed by 'budgetinfos_datagridfield_display.pt'
           We need totals by budget_type and year to display something like :
@@ -65,7 +63,6 @@ class BudgetInfosDataGridField(DataGridField):
           If p_only_used_years is True, we will return only years that were
           used not a fixed list of years, same if p_only_used_budget_types is True,
           we will only return used budget_types, not every existing one.
-          If p_only_used_years is False, we will use p_fixed_years value.
         """
         annotations = IAnnotations(self.context)
         if not CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in annotations:
@@ -73,6 +70,7 @@ class BudgetInfosDataGridField(DataGridField):
         # get budget_types vocabulary so we can have a value to display as saved data is the key
         factory = queryUtility(IVocabularyFactory, u'imio.project.core.content.project.budget_type_vocabulary')
         budgetTypesVocab = factory(self.context)
+        fixed_years = [str(y) for y in getProjectSpace(self.context).budget_years or []]
         res = {}
         years = only_used_years and [] or fixed_years
         budget_types = only_used_budget_types and {} or budgetTypesVocab.by_value

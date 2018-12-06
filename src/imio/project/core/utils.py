@@ -61,7 +61,7 @@ def getProjectSpace(context):
     """
       Return the projectspace object, context is an element in a projectspace
     """
-    # when editing dexterity fields in configuration
+    # when editing dexterity fields in configuration, like on operationalobjective
     if ITypeSchemaContext.providedBy(context):
         return api.content.find(portal_type='projectspace')[0].getObject()
     # sometimes, for inline validation for example or addView, context is not the object

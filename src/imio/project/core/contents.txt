@@ -1,0 +1,40 @@
+├── browser
+│   ├── budgetinfos_datagridfield_display.pt
+│   ├── configure.zcml
+│   ├── static
+│   │   ├── imio_project_core.css
+│   │   ├── imio_project_core.js
+│   │   ├── listings.js
+│   │   └── project_icon.png
+│   └── widgets.py : widget budget
+├── config.py
+├── configure.zcml : profiles, subscribers, schema
+├── content
+│   ├── configure.zcml : vocabularies
+│   ├── project.py : schema, vocabularies
+│   └── projectspace.py : schema, validators
+├── events.py : parents budget store in annotation
+├── interfaces.py
+├── locales
+├── model
+├── overrides.zcml : dexterity container view override
+├── profiles
+│   ├── default
+│   │   ├── browserlayer.xml
+│   │   ├── cssregistry.xml
+│   │   ├── imioprojectcore_marker.txt
+│   │   ├── import_steps.xml
+│   │   ├── jsregistry.xml
+│   │   ├── metadata.xml
+│   │   ├── types
+│   │   │   ├── projectspace.xml
+│   │   │   └── project.xml
+│   │   ├── types.xml
+│   │   ├── workflows
+│   │   │   └── project_workflow
+│   │   │       └── definition.xml
+│   │   └── workflows.xml
+│   └── testing
+│       └── metadata.xml
+├── setuphandlers.py :add contacts
+└── utils.py : get organizations, get projectspace

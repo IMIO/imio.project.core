@@ -1,22 +1,21 @@
-from zope.component import provideAdapter
-from zope import schema
-from zope.interface import implements
-from zope.interface import Interface
-from zope.interface import Invalid
-
-from z3c.form import validator
-
+from collective.z3cform.datagridfield import DataGridFieldFactory
+from collective.z3cform.datagridfield import DictRow
+from imio.project.core import _
 from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.supermodel import model
-
-from collective.z3cform.datagridfield import DictRow, DataGridFieldFactory
-
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import base_hasattr
-
-from imio.project.core import _
+from z3c.form import validator
+from z3c.form.browser.select import SelectFieldWidget
+from zope import schema
+from zope.component import provideAdapter
+from zope.interface import implements
+from zope.interface import Interface
+from zope.interface import Invalid
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
 
 ERROR_VALUE_REMOVED_IS_IN_USE = "The key '${removed_key}' can not be removed because it is currently " \
                                 "used (for example by '${used_by_url}')."
@@ -143,6 +142,9 @@ class IVocabularySchema(Interface):
         required=True,)
 
 
+possible_years = SimpleVocabulary([SimpleTerm(y) for y in range(2013, 2030)])
+
+
 class IProjectSpace(model.Schema):
     """
         Project schema, field ordering
@@ -186,6 +188,15 @@ class IProjectSpace(model.Schema):
                            required=False),
     )
     directives.widget('budget_types', DataGridFieldFactory, display_table_css_class='listing', allow_reorder=True)
+
+    budget_years = schema.List(
+        title=_(u'Budget concerned years'),
+        description=_(u"Select all years concerned by budget."),
+        required=True,
+        value_type=schema.Choice(vocabulary=possible_years)
+    )
+    directives.widget('budget_years', SelectFieldWidget, multiple='multiple', size=6)
+
 
 validator.WidgetValidatorDiscriminators(RemovedValueIsNotUsedByCategoriesFieldValidator,
                                         field=IProjectSpace['categories'])

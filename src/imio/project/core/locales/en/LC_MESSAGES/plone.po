@@ -62,4 +62,3 @@ msgstr ""
 #: profiles/default/workflows/project_workflow/definition.xml
 msgid "to_be_scheduled"
 msgstr ""
-

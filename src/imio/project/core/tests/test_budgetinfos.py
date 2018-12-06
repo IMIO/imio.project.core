@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 """Test the project.budgetInfos field behaviour."""
 
+from imio.project.core.config import CHILDREN_BUDGET_INFOS_ANNOTATION_KEY
+from imio.project.core.testing import FunctionalTestCase
+from plone.dexterity.utils import createContentInContainer
 from zope.annotation import IAnnotations
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
-from plone.dexterity.utils import createContentInContainer
-
-from imio.project.core.testing import FunctionalTestCase
-from imio.project.core.config import CHILDREN_BUDGET_INFOS_ANNOTATION_KEY
-from imio.project.core.content.project import default_year
 
 
 class TestBudgetField(FunctionalTestCase):
@@ -42,7 +40,7 @@ class TestBudgetField(FunctionalTestCase):
         params = {'title': 'Subproject 1',
                   'priority': 'priority-1',
                   'budget': [{'budget_type': 'budget-type-1',
-                              'year': default_year() + 1,
+                              'year': 2018,
                               'amount': 500.0, }
                              ],
                   }
@@ -60,7 +58,7 @@ class TestBudgetField(FunctionalTestCase):
         params = {'title': 'Sub-subproject 1',
                   'priority': 'priority-2',
                   'budget': [{'budget_type': 'budget-type-2',
-                              'year': default_year(),
+                              'year': 2017,
                               'amount': 255.0, }
                              ],
                   }
@@ -87,7 +85,7 @@ class TestBudgetField(FunctionalTestCase):
         params = {'title': 'Sub-subproject 2',
                   'priority': 'priority-1',
                   'budget': [{'budget_type': 'budget-type-2',
-                              'year': default_year(),
+                              'year': 2017,
                               'amount': 155.0, }
                              ],
                   }
@@ -164,7 +162,7 @@ class TestBudgetField(FunctionalTestCase):
         params = {'title': 'Subproject 2',
                   'priority': 'priority-2',
                   'budget': [{'budget_type': 'budget-type-2',
-                              'year': default_year(),
+                              'year': 2017,
                               'amount': 4555.0, }
                              ],
                   }
@@ -186,7 +184,7 @@ class TestBudgetField(FunctionalTestCase):
         params = {'title': 'Subproject 2-1',
                   'priority': 'priority-2',
                   'budget': [{'budget_type': 'budget-type-2',
-                              'year': default_year(),
+                              'year': 2017,
                               'amount': 4555.0, }
                              ],
                   }
