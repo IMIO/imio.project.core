@@ -3,9 +3,9 @@
 from imio.project.core.config import CHILDREN_BUDGET_INFOS_ANNOTATION_KEY
 from imio.project.core.utils import getProjectSpace
 
-from plone import api
 
 from zope.annotation import IAnnotations
+
 
 def _updateParentsBudgetInfos(obj):
     """
@@ -44,6 +44,7 @@ def _updateParentsBudgetInfos(obj):
         parent_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY] = dict(new_annotations)
         parent = parent.aq_inner.aq_parent
 
+
 def _cleanParentsBudgetInfos(obj):
     """
       Update budget infos on every parents, cleaning sub objects info
@@ -57,6 +58,7 @@ def _cleanParentsBudgetInfos(obj):
         if objUID in parent_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY]:
             del parent_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY][objUID]
         parent = parent.aq_inner.aq_parent
+
 
 def onAddProject(obj, event):
     """

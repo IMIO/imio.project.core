@@ -78,7 +78,7 @@ class BudgetInfosDataGridField(DataGridField):
         total_by_budget_type = {}
         for datagridfieldrecord in annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].itervalues():
             for line in datagridfieldrecord:
-                year = line['year']
+                year = str(line['year'])
                 budget_type = line['budget_type']
                 amount = line['amount']
                 # manage used years
