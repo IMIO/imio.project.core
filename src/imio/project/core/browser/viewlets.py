@@ -10,7 +10,7 @@ class AnnexesListViewlet(base.ViewletBase):
     """
     """
 
-    def listAnnexes(self):
+    def annexes_list(self):
         portal_catalog = api.portal.get_tool('portal_catalog')
         folder_path = '/'.join(self.context.getPhysicalPath())
         annexes = portal_catalog(
