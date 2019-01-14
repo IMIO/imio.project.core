@@ -1,0 +1,10 @@
+<div>
+    <ul tal:repeat="annexe view/listAnnexes">
+      <li>
+          <a href="#"
+             tal:attributes="href python: annexe[1]"
+             tal:content="python:annexe[0]">
+          </a>
+      </li>
+  </ul>
+</div>
