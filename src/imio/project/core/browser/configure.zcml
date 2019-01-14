@@ -21,4 +21,14 @@
         permission="zope2.View"
     />
 
+    <browser:viewlet
+        name="imio.project.core.list_annexes"
+        for="imio.project.core.content.projectspace.IProjectSpace"
+        class="imio.project.core.browser.viewlets.AnnexesListViewlet"
+        template="annexes_listing.pt"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+        layer="imio.project.pst.interfaces.IImioProjectPSTLayer"
+        permission="zope2.View"
+    />
+
 </configure>
