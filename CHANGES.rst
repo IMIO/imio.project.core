@@ -4,8 +4,10 @@ Changelog
 1.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Added budget possible years on projectspace.
+  [sgeulette]
+- Added viewlet for annexes
+  [fngaha]
 
 1.0 (2016-12-08)
 ----------------
