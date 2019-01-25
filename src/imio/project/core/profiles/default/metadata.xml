@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>0.3dev0</version>
+  <version>1.1</version>
   <dependencies>
     <dependency>profile-collective.contact.core:default</dependency>
     <dependency>profile-collective.contact.plonegroup:default</dependency>
