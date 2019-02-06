@@ -16,3 +16,15 @@ table.datagridwidget-table-view input.float-field, table.datagridwidget-table-vi
     font-weight: bold;
     border-top: 1px solid grey;
 }
+
+/* collapsible */
+dl#container-collapsible.collapsedBlockCollapsible dt.collapsibleHeader {
+    position: inherit;
+    border-color: #496A93;
+}
+dl#container-collapsible.collapsedBlockCollapsible {
+    border-style: solid;
+    border-width: thin;
+    border-color: #e7e7e7;
+    height: auto;
+}
