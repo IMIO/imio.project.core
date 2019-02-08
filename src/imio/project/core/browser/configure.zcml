@@ -39,6 +39,13 @@
             template="browser/container.pt"
             permission="zope2.View"
             />
+        <browser:page
+            for="imio.project.core.content.project.IProject"
+            name="view"
+            class="imio.helpers.browser.views.ContainerView"
+            template="browser/container.pt"
+            permission="zope2.View"
+            />
     </configure>
 
 </configure>
