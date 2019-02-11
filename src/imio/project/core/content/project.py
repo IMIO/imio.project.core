@@ -137,6 +137,7 @@ class IProject(model.Schema):
             vocabulary='imio.project.core.content.project.manager_vocabulary'
         ),
         required=True,
+        min_length=1,
     )
 
     visible_for = LocalRolesField(
