@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from plone import api
-from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
-from Products.ATContentTypes.interfaces.interfaces import IATContentType
 from plone.app.dexterity.interfaces import ITypeSchemaContext
 from plone.dexterity.interfaces import IDexterityContent
+from Products.ATContentTypes.interfaces.interfaces import IATContentType
+from zope.component.hooks import getSite
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
 
 
 def getVocabularyTermsForOrganization(context, organization_id='services'):
@@ -37,22 +39,14 @@ def getVocabularyTermsForOrganization(context, organization_id='services'):
                                   portal_type="organization",
                                   sort_on="getObjPositionInParent")
         if not services_brains:
-            terms.append(
-                    SimpleTerm(
-                        dep.getId().decode('utf8'),
-                        token=brain.id.decode('utf8'),
-                        title=dep.Title().decode('utf8')
-                        )
-                    )
+            terms.append(SimpleTerm(dep.getId().decode('utf8'),
+                                    token=brain.id.decode('utf8'),
+                                    title=dep.Title().decode('utf8')))
         for service_brain in services_brains:
-            comb = "%s - %s" % (
-                    dep.Title().decode('utf8'),
-                    service_brain.Title.decode('utf8')
-                    )
-            termId = "%s-%s" % (
-                    brain.id.decode('utf8'),
-                    service_brain.id.decode('utf8')
-                    )
+            comb = "%s - %s" % (dep.Title().decode('utf8'),
+                                service_brain.Title.decode('utf8'))
+            termId = "%s-%s" % (brain.id.decode('utf8'),
+                                service_brain.id.decode('utf8'))
             terms.append(SimpleTerm(termId, token=termId, title=comb))
     return SimpleVocabulary(terms)
 
@@ -61,15 +55,21 @@ def getProjectSpace(context):
     """
       Return the projectspace object, context is an element in a projectspace
     """
-    # when editing dexterity fields in configuration, like on operationalobjective
-    if ITypeSchemaContext.providedBy(context):
-        return api.content.find(portal_type='projectspace')[0].getObject()
-    # sometimes, for inline validation for example or addView, context is not the object
+    # MUST BE ANALYZED BECAUSE it's called many time at view or edit
+    # if context is None, we have to find it in request
+    if context is None:
+        portal = getSite()
+        if hasattr(portal.REQUEST['PUBLISHED'], 'context'):
+            context = portal.REQUEST['PUBLISHED'].context
+        else:
+            context = portal.REQUEST['PARENTS'][0]
+    # sometimes, for inline validation for example on addView, context is not the object
     # but a Form of different kind, the real object is the form.context
-    is_content_type = IDexterityContent.providedBy(context) or \
-        IATContentType.providedBy(context)
-    if not is_content_type:
+    elif not IDexterityContent.providedBy(context):
         context = context.context
+    # when editing dexterity fields in configuration, like on operationalobjective
+    elif ITypeSchemaContext.providedBy(context):
+        return api.content.find(portal_type='projectspace')[0].getObject()
     parent = context
     while not parent.portal_type == 'projectspace':
         parent = parent.aq_inner.aq_parent
