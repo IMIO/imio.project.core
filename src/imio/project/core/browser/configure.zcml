@@ -31,4 +31,21 @@
         permission="zope2.View"
     />
 
+    <configure package="imio.helpers">
+        <browser:page
+            for="imio.project.core.content.projectspace.IProjectSpace"
+            name="view"
+            class="imio.project.core.browser.views.PSTContainerView"
+            template="browser/container.pt"
+            permission="zope2.View"
+            />
+        <browser:page
+            for="imio.project.core.content.project.IProject"
+            name="view"
+            class="imio.helpers.browser.views.ContainerView"
+            template="browser/container.pt"
+            permission="zope2.View"
+            />
+    </configure>
+
 </configure>

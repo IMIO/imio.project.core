@@ -15,7 +15,6 @@ from plone.supermodel import model
 from z3c.form import interfaces
 from z3c.form.widget import FieldWidget
 from zope import schema
-from zope.component.hooks import getSite
 from zope.interface import implements
 from zope.interface import Interface
 from zope.interface import provider
@@ -40,9 +39,7 @@ def default_year(context):
     """
       defaultFactory for the field IBudgetSchema.year
     """
-    portal = getSite()
-    context = portal.REQUEST['PUBLISHED'].context
-    years = getProjectSpace(context).budget_years or []
+    years = getProjectSpace(None).budget_years or []
     year = datetime.date.today().year
     if year in years:
         return year
@@ -137,6 +134,7 @@ class IProject(model.Schema):
             vocabulary='imio.project.core.content.project.manager_vocabulary'
         ),
         required=True,
+        min_length=1,
     )
 
     visible_for = LocalRolesField(
@@ -228,8 +226,9 @@ class Project(Container):
     """ """
     implements(IProject)
     __ac_local_roles_block__ = False
+
     def Title(self):
-        return '%s (REF.%s)'% (self.title.encode('utf8'), self.reference_number)
+        return '%s (REF.%s)' % (self.title.encode('utf8'), self.reference_number)
 
 
 class CategoriesVocabulary(object):
@@ -263,10 +262,7 @@ class BudgetTypeVocabulary(object):
 
     def __call__(self, context):
         """"""
-        # here the context is not relevant as we are "out of nowhere"
-        portal = getSite()
-        current_obj = portal.REQUEST['PUBLISHED'].context
-        projectspace = getProjectSpace(current_obj)
+        projectspace = getProjectSpace(None)
         terms = []
         budget_types = projectspace.budget_types
         for budget_type in budget_types:
@@ -279,9 +275,7 @@ class YearVocabulary(object):
 
     def __call__(self, context):
         """"""
-        portal = getSite()
-        current_obj = portal.REQUEST['PUBLISHED'].context
-        years = getProjectSpace(current_obj).budget_years or []
+        years = getProjectSpace(None).budget_years or []
         return SimpleVocabulary([SimpleTerm(y) for y in years])
 
 
