@@ -62,7 +62,7 @@ def getProjectSpace(context):
             context = portal.REQUEST['PARENTS'][0]
     # sometimes, for inline validation for example on addView, context is not the object
     # but a Form of different kind, the real object is the form.context
-    elif not IDexterityContent.providedBy(context):
+    if not IDexterityContent.providedBy(context):
         context = context.context
     # when editing dexterity fields in configuration, like on operationalobjective
     elif ITypeSchemaContext.providedBy(context):
