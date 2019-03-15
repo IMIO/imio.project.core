@@ -14,6 +14,8 @@ Changelog
   [sgeulette]
 - Added viewlet for annexes
   [fngaha]
+- Do not consider deactivated contact in vocabularies
+  [sgeulette]
 
 1.0 (2016-12-08)
 ----------------
