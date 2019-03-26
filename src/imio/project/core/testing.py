@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
 """Base module for unittesting."""
 
-import unittest2
-from plone.app.testing import PloneWithPackageLayer
+from collective.contact.plonegroup.config import PLONEGROUP_ORG
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import login
+from plone.app.testing import PloneWithPackageLayer
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
-
 from plone.dexterity.utils import createContentInContainer
+from zope.event import notify
+from zope.lifecycleevent import ObjectCreatedEvent
 
 import imio.project.core
+import unittest2
 
 
 PROJECT_TESTING_PROFILE = PloneWithPackageLayer(
@@ -84,7 +86,7 @@ class FunctionalTestCase(unittest2.TestCase):
         ]
         params['budget_types'] = budget_types
         params['budget_years'] = [2013, 2014, 2015, 2016, 2017, 2018]
-        projectspace = createContentInContainer(self.portal, 'projectspace', **params)
+        self.ps = createContentInContainer(self.portal, 'projectspace', **params)
         projects = [
             {'id': u"project-1",
              'title': u"Project 1",
@@ -104,4 +106,30 @@ class FunctionalTestCase(unittest2.TestCase):
                         ]},
         ]
         for project in projects:
-            createContentInContainer(projectspace, 'project', **project)
+            createContentInContainer(self.ps, 'project', **project)
+        self.p1, self.p2 = self.ps['project-1'], self.ps['project-2']
+
+        # creating directory
+        self.org = createContentInContainer(self.portal['contacts'], 'organization',
+                                            **{'id': PLONEGROUP_ORG, 'title': u"Mon organisation",
+                                               'organization_type': u'commune'})
+        notify(ObjectCreatedEvent(self.org))
+        # Departments and services creation
+        sublevels = [
+            (u'Echevins',
+             (u'1er échevin', u'2ème échevin', u'3ème échevin')),
+            (u'Services',
+             (u'ADL', (u'Direction gén', (u'Secrétariat Communal', u'Service Informatique')),
+              (u'Direction financière', (u'Taxes', u'Recettes')), u'Service du Personnel')),
+        ]
+
+        for (department, services) in sublevels:
+            dep = createContentInContainer(self.org, 'organization', title=department)
+            for service in services:
+                if isinstance(service, tuple):
+                    (parent, children) = service
+                    obj = createContentInContainer(dep, 'organization', title=parent)
+                    for child in children:
+                        createContentInContainer(obj, 'organization', title=child)
+                else:
+                    createContentInContainer(dep, 'organization', title=service)

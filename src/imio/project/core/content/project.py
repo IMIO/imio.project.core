@@ -296,7 +296,7 @@ class VisibleForVocabulary(object):
 
     def __call__(self, context):
         """"""
-        return getVocabularyTermsForOrganization(context)
+        return getVocabularyTermsForOrganization(context, states='active')
 
 
 class ProjectSchemaPolicy(DexteritySchemaPolicy):
