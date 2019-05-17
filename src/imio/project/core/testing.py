@@ -14,7 +14,7 @@ from zope.event import notify
 from zope.lifecycleevent import ObjectCreatedEvent
 
 import imio.project.core
-import unittest2
+import unittest
 
 
 PROJECT_TESTING_PROFILE = PloneWithPackageLayer(
@@ -31,7 +31,7 @@ PROJECT_TEST_PROFILE_FUNCTIONAL = FunctionalTesting(
     bases=(PROJECT_TESTING_PROFILE,), name="PROJECT_TESTING_PROFILE_FUNCTIONAL")
 
 
-class IntegrationTestCase(unittest2.TestCase):
+class IntegrationTestCase(unittest.TestCase):
     """Base class for integration tests."""
 
     layer = PROJECT_TESTING_PROFILE_INTEGRATION
@@ -41,7 +41,7 @@ class IntegrationTestCase(unittest2.TestCase):
         self.portal = self.layer['portal']
 
 
-class FunctionalTestCase(unittest2.TestCase):
+class FunctionalTestCase(unittest.TestCase):
     """Base class for functional tests."""
 
     layer = PROJECT_TEST_PROFILE_FUNCTIONAL
