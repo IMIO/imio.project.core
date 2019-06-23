@@ -4,8 +4,12 @@ Changelog
 1.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Use collapsible view.
+  [sgeulette]
+- Changed list requirement validator
+  [sgeulette]
+- Do not consider deactivated contact in vocabularies
+  [sgeulette]
 
 1.1 (2019-01-15)
 ----------------
