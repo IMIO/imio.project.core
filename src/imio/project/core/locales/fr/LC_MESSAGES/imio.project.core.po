@@ -48,16 +48,16 @@ msgid "Categories values"
 msgstr "Catégories possibles"
 
 #: ./content/project.py:101
-msgid "Category"
-msgstr "Catégorie"
+msgid "Categories"
+msgstr "Catégories"
 
 #: ./content/project.py:75
 msgid "Choose a budget type."
 msgstr "Choisissez un type de budget."
 
 #: ./content/project.py:102
-msgid "Choose a category."
-msgstr "Sélectionner une catégorie"
+msgid "Choose categories."
+msgstr "Sélectionner des catégories"
 
 #: ./content/project.py:109
 msgid "Choose a priority."
