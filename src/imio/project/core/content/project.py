@@ -94,11 +94,11 @@ class IProject(model.Schema):
     )
 
     # use 'categories' field name  even if mono-valued for now, because 'category' is reserved
-    categories = schema.Choice(
-        title=_(u'Category'),
-        description=_(u"Choose a category."),
+    categories = schema.List(
+        title=_(u'Categories'),
+        description=_(u"Choose categories."),
         required=False,
-        vocabulary=u'imio.project.core.content.project.categories_vocabulary',
+        value_type=schema.Choice(source='imio.project.core.content.project.categories_vocabulary'),
     )
 
     priority = schema.Choice(

@@ -47,7 +47,7 @@ msgid "Categories values"
 msgstr ""
 
 #: ./content/project.py:101
-msgid "Category"
+msgid "Categories"
 msgstr ""
 
 #: ./content/project.py:75
@@ -55,7 +55,7 @@ msgid "Choose a budget type."
 msgstr ""
 
 #: ./content/project.py:102
-msgid "Choose a category."
+msgid "Choose categories."
 msgstr ""
 
 #: ./content/project.py:109
