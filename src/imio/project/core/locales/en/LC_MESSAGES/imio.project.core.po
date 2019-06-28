@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-01-14 13:17+0000\n"
+"POT-Creation-Date: 2019-06-28 10:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Domain: imio.project.core\n"
 "X-is-fallback-for: en-au en-ca en-gb en-us\n"
 
-#: ./content/project.py:85
+#: ./content/project.py:82
 msgid "Amount"
 msgstr ""
 
@@ -23,11 +23,11 @@ msgstr ""
 msgid "Annexes"
 msgstr ""
 
-#: ./content/project.py:114
+#: ./content/project.py:111
 msgid "Budget"
 msgstr "Budget"
 
-#: ./content/project.py:125
+#: ./content/project.py:122
 msgid "Budget comments"
 msgstr ""
 
@@ -39,55 +39,55 @@ msgstr ""
 msgid "Budget types values"
 msgstr ""
 
-#: ./content/project.py:74
+#: ./content/project.py:71
 msgid "Budget_type"
+msgstr ""
+
+#: ./content/project.py:98
+msgid "Categories"
 msgstr ""
 
 #: ./content/projectspace.py:160
 msgid "Categories values"
 msgstr "Categories values"
 
-#: ./content/project.py:101
-msgid "Categories"
-msgstr ""
-
-#: ./content/project.py:75
+#: ./content/project.py:72
 msgid "Choose a budget type."
 msgstr ""
 
-#: ./content/project.py:102
-msgid "Choose categories."
-msgstr ""
-
-#: ./content/project.py:109
+#: ./content/project.py:106
 msgid "Choose a priority."
 msgstr "Choose a priority."
 
-#: ./content/project.py:80
+#: ./content/project.py:77
 msgid "Choose a year."
 msgstr ""
 
-#: ./content/project.py:144
+#: ./content/project.py:99
+msgid "Choose categories."
+msgstr ""
+
+#: ./content/project.py:142
 msgid "Choose principals that can see this project."
 msgstr "Choose principals that can see this project."
 
-#: ./content/project.py:135
+#: ./content/project.py:132
 msgid "Choose principals that will manage this project."
 msgstr "Choose principals that will manage this project."
 
-#: ./content/project.py:218
+#: ./content/project.py:216
 msgid "Comments"
 msgstr "Comments"
 
-#: ./content/project.py:178
+#: ./content/project.py:176
 msgid "Effective begin date"
 msgstr "Effective begin date"
 
-#: ./content/project.py:194
+#: ./content/project.py:192
 msgid "Effective end date"
 msgstr "Effective end date"
 
-#: ./content/project.py:115
+#: ./content/project.py:112
 msgid "Enter budget details.  If you have comments about budget, use the field here above."
 msgstr ""
 
@@ -95,31 +95,31 @@ msgstr ""
 msgid "Enter one different value by row. Label is the displayed value. Key is the stored value: in lowercase, without space."
 msgstr "Enter one different value by row. Label is the displayed value. Key is the stored value: in lowercase, without space."
 
-#: ./content/project.py:160
+#: ./content/project.py:158
 msgid "Enter one indicator by row. Value is a number. Label must precise the signification of this number."
 msgstr "Enter one indicator by row. Value is a number. Label must precise the signification of this number."
 
-#: ./content/project.py:179
+#: ./content/project.py:177
 msgid "Enter the effective begin date."
 msgstr "Enter the effective begin date."
 
-#: ./content/project.py:195
+#: ./content/project.py:193
 msgid "Enter the effective end date."
 msgstr "Enter the effective end date."
 
-#: ./content/project.py:171
+#: ./content/project.py:169
 msgid "Enter the planned begin date."
 msgstr "Enter the planned begin date."
 
-#: ./content/project.py:187
+#: ./content/project.py:185
 msgid "Enter the planned end date."
 msgstr "Enter the planned end date."
 
-#: ./content/project.py:63
+#: ./content/project.py:60
 msgid "Expected value"
 msgstr "Expected value"
 
-#: ./content/project.py:152
+#: ./content/project.py:150
 msgid "Extra concerned people"
 msgstr "Extra concerned people"
 
@@ -131,7 +131,7 @@ msgstr ""
 msgid "Key"
 msgstr "Key"
 
-#: ./content/project.py:60
+#: ./content/project.py:57
 #: ./content/projectspace.py:138
 msgid "Label"
 msgstr "Label"
@@ -140,27 +140,27 @@ msgstr "Label"
 msgid "Last reference number"
 msgstr ""
 
-#: ./content/project.py:134
+#: ./content/project.py:131
 msgid "Manager"
 msgstr "Manager"
 
-#: ./content/project.py:209
+#: ./content/project.py:207
 msgid "Observation"
 msgstr ""
 
-#: ./content/project.py:170
+#: ./content/project.py:168
 msgid "Planned begin date"
 msgstr "Planned begin date"
 
-#: ./content/project.py:186
+#: ./content/project.py:184
 msgid "Planned end date"
 msgstr "Planned end date"
 
-#: ./content/project.py:210
+#: ./content/project.py:208
 msgid "Prior determination"
 msgstr ""
 
-#: ./content/project.py:108
+#: ./content/project.py:105
 msgid "Priority"
 msgstr "Priority"
 
@@ -168,11 +168,11 @@ msgstr "Priority"
 msgid "Priority values"
 msgstr "Priority values"
 
-#: ./content/project.py:202
+#: ./content/project.py:200
 msgid "Progress"
 msgstr "Progress"
 
-#: ./content/project.py:203
+#: ./content/project.py:201
 msgid "Progress estimation in %."
 msgstr "Progress estimation in %."
 
@@ -184,15 +184,15 @@ msgstr "Project"
 msgid "Project space"
 msgstr "Project space"
 
-#: ./content/project.py:66
+#: ./content/project.py:63
 msgid "Reached value"
 msgstr "Reached value"
 
-#: ./content/project.py:93
+#: ./content/project.py:90
 msgid "Reference number"
 msgstr ""
 
-#: ./content/project.py:159
+#: ./content/project.py:157
 msgid "Result indicator"
 msgstr "Result indicator"
 
@@ -200,7 +200,7 @@ msgstr "Result indicator"
 msgid "Select all years concerned by budget."
 msgstr ""
 
-#: ./content/project.py:153
+#: ./content/project.py:151
 msgid "Specify here concerned people that do not have access to the application, this will just be informational."
 msgstr "Specify here concerned people that do not have access to the application, this will just be informational."
 
@@ -212,15 +212,23 @@ msgstr ""
 msgid "The key '${removed_key}' can not be removed because it is currently used (for example by '${used_by_url}')."
 msgstr "The key '${removed_key}' can not be removed because it is currently used (for example by '${used_by_url}')."
 
-#: ./content/project.py:94
+#: ./content/project.py:91
 msgid "Unique identification"
 msgstr ""
 
-#: ./content/project.py:219
+#: ./content/projectspace.py:201
+msgid "Use reference number"
+msgstr ""
+
+#: ./content/projectspace.py:202
+msgid "Used in Title, documents, etc."
+msgstr ""
+
+#: ./content/project.py:217
 msgid "Various comments"
 msgstr "Various comments"
 
-#: ./content/project.py:143
+#: ./content/project.py:141
 msgid "Visible for"
 msgstr "Visible for"
 
@@ -228,11 +236,11 @@ msgstr "Visible for"
 msgid "Will contain projects sharing same configuration values"
 msgstr "Will contain projects sharing same configuration values"
 
-#: ./content/project.py:126
+#: ./content/project.py:123
 msgid "Write here comments you have about budget."
 msgstr ""
 
-#: ./content/project.py:79
+#: ./content/project.py:76
 msgid "Year"
 msgstr ""
 

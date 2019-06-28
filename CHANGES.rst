@@ -16,6 +16,8 @@ Changelog
   [sgeulette]
 - Do not consider deactivated contact in vocabularies
   [sgeulette]
+- Can hide reference number
+  [sgeulette]
 
 1.1 (2019-01-15)
 ----------------
