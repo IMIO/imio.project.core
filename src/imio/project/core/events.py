@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from imio.project.core.config import CHILDREN_BUDGET_INFOS_ANNOTATION_KEY
+from imio.project.core.content.project import IProject
 from imio.project.core.utils import getProjectSpace
-
-
+from plone import api
 from zope.annotation import IAnnotations
 
 
@@ -109,3 +109,16 @@ def onRemoveProject(obj, event):
     if workflows and workflows[0].initial_state == pw.getInfoFor(obj, 'review_state'):
         return
     _cleanParentsBudgetInfos(obj)
+
+
+def onModifyProjectSpace(obj, event):
+    """
+      Handler when a projectspace is modified
+    """
+    if not event.descriptions:
+        return
+    for desc in event.descriptions:
+        if 'use_ref_number' in desc.attributes:
+            pc = api.portal.get_tool('portal_catalog')
+            for brain in pc(object_provides=IProject.__identifier__):
+                brain.getObject().reindexObject(['Title', 'sortable_title'])

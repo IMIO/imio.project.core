@@ -228,7 +228,10 @@ class Project(Container):
     __ac_local_roles_block__ = False
 
     def Title(self):
-        return '%s (REF.%s)' % (self.title.encode('utf8'), self.reference_number)
+        if getattr(getProjectSpace(self), 'use_ref_number', True):
+            return '%s (REF.%s)' % (self.title.encode('utf8'), self.reference_number)
+        else:
+            return self.title.encode('utf8')
 
 
 class CategoriesVocabulary(object):

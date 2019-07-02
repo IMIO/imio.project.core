@@ -197,6 +197,11 @@ class IProjectSpace(model.Schema):
     )
     directives.widget('budget_years', SelectFieldWidget, multiple='multiple', size=6)
 
+    use_ref_number = schema.Bool(
+        title=_(u'Use reference number'),
+        description=_(u'Used in Title, documents, etc.'),
+        default=True,
+    )
 
 validator.WidgetValidatorDiscriminators(RemovedValueIsNotUsedByCategoriesFieldValidator,
                                         field=IProjectSpace['categories'])
