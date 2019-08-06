@@ -3,4 +3,5 @@
  <property name="title">Controls the available content types in your portal</property>
  <object name="projectspace" meta_type="Dexterity FTI"/>
  <object name="project" meta_type="Dexterity FTI"/>
+ <object name="action_link" meta_type="Dexterity FTI"/>
 </object>
