@@ -33,9 +33,4 @@
       name="imio.project.core.content.project.visible_for_vocabulary"
     />
 
-    <adapter
-    name="Title"
-    factory=".action_link.Title"
-    />
-
 </configure>
