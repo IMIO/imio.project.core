@@ -29,8 +29,9 @@ def _updateParentsBudgetInfos(obj):
     obj_annotations = IAnnotations(obj)
     if CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in obj_annotations:
         formattedBudgetInfos = dict(obj_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY])
-    # add self in budgetInfos
-    formattedBudgetInfos[objUID] = obj.budget
+    # add self in budgetInfos if not empty
+    if obj.budget:
+        formattedBudgetInfos[objUID] = obj.budget
 
     parent = obj.aq_inner.aq_parent
     while not parent.portal_type == 'projectspace':
