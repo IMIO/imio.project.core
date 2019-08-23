@@ -12,6 +12,8 @@ Adding act: onAddProject on act, onModifyProject on oo
 Transition act: onTransitionProject on act
 Move act: onMovedProject on act, onModifyProject on oo1, onModifyProject on oo2
 Move oo: onMovedProject on act, onMovedProject on oo, onModifyProject on os1, onModifyProject on os2
+Copy act: onAddProject on act2, onModifyProject on oo
+Copy oo: onAddProject on act2, onAddProject on 002, onModifyProject on os
 """
 
 

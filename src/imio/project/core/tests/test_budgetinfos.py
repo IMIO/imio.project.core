@@ -122,7 +122,6 @@ class TestBudgetField(FunctionalTestCase):
         """Test that when removing sub-projects, parent projects are
            correctly updated regarding budget annotations."""
         # first create some projects and sub-projects using the _createProjectsAndTestAnnotationsEvolution
-        # this method returns several elements, so for PEP8 convenience, we store it in returns then dispatch...
         (project1, subproject1, subSubproject1, subSubproject2, project1Annotations, subproject1Annotations,
          subSubproject1Annotations, subSubproject2Annotations) = self._createProjectsAndTestAnnotationsEvolution()
         # now we have project1 that contains subproject and that contains 2
@@ -188,7 +187,6 @@ class TestBudgetField(FunctionalTestCase):
         """Test that when changing state on sub-projects, parent projects are
            correctly updated regarding budget annotations."""
         # first create some projects and sub-projects using the _createProjectsAndTestAnnotationsEvolution
-        # this method returns several elements, so for PEP8 convenience, we store it in returns then dispatch...
         (project1, subproject1, subSubproject1, subSubproject2, project1Annotations, subproject1Annotations,
          subSubproject1Annotations, subSubproject2Annotations) = self._createProjectsAndTestAnnotationsEvolution()
         # verifying content
@@ -224,7 +222,6 @@ class TestBudgetField(FunctionalTestCase):
 
     def test_ParentsAreCorrectlyUpdatedOnMove(self):
         # first create some projects and sub-projects using the _createProjectsAndTestAnnotationsEvolution
-        # this method returns several elements, so for PEP8 convenience, we store it in returns then dispatch...
         (project1, subproject1, subSubproject1, subSubproject2, project1Annotations, subproject1Annotations,
          subSubproject1Annotations, subSubproject2Annotations) = self._createProjectsAndTestAnnotationsEvolution()
         project2 = self.portal.projectspace['project-2']
@@ -255,3 +252,43 @@ class TestBudgetField(FunctionalTestCase):
         self.assertEquals(len(subproject1Annotations[CBIAK].keys()), 1)
         self.assertEquals(len(project2Annotations[CBIAK].keys()), 3)
         self.assertEquals(len(subproject2Annotations[CBIAK].keys()), 1)
+
+    def test_ParentsAreCorrectlyUpdatedOnCopy(self):
+        # first create some projects and sub-projects using the _createProjectsAndTestAnnotationsEvolution
+        (project1, subproject1, subSubproject1, subSubproject2, project1Annotations, subproject1Annotations,
+         subSubproject1Annotations, subSubproject2Annotations) = self._createProjectsAndTestAnnotationsEvolution()
+        project2 = self.portal.projectspace['project-2']
+        project2Annotations = IAnnotations(project2)
+        # we change initial state
+        self.pw.doActionFor(project2, "set_to_be_scheduled")
+        params = {'title': 'Subproject 2',
+                  'priority': 'priority-2',
+                  }
+        subproject2 = createContentInContainer(project2, 'project', **params)
+        # we change initial state
+        self.pw.doActionFor(subproject2, "set_to_be_scheduled")
+        subproject2Annotations = IAnnotations(subproject2)
+        # verifying content
+        self.assertEquals(len(project1Annotations[CBIAK].keys()), 3)
+        self.assertEquals(len(subproject1Annotations[CBIAK].keys()), 2)
+        self.assertDictEqual(project2Annotations.get(CBIAK, {}), {})
+        self.assertDictEqual(subproject2Annotations.get(CBIAK, {}), {})
+        # we copy last level
+        api.content.copy(subSubproject2, subproject2)
+        self.assertEquals(len(project1Annotations[CBIAK].keys()), 3)
+        self.assertEquals(len(subproject1Annotations[CBIAK].keys()), 2)
+        self.assertDictEqual(project2Annotations.get(CBIAK, {}), {})  # nothing because initial state
+        self.assertDictEqual(subproject2Annotations.get(CBIAK, {}), {})
+        # we copy intermediate level
+        api.content.copy(subproject1, project2)
+        self.assertEquals(len(project1Annotations[CBIAK].keys()), 3)
+        self.assertEquals(len(subproject1Annotations[CBIAK].keys()), 2)
+        self.assertDictEqual(project2Annotations.get(CBIAK, {}), {})  # nothing because initial state
+        self.assertDictEqual(subproject2Annotations.get(CBIAK, {}), {})
+        # we change state
+        self.pw.doActionFor(subproject2[subSubproject2.id], "set_to_be_scheduled")
+        self.pw.doActionFor(project2[subproject1.id], "set_to_be_scheduled")
+        copiedSubproject1Annotations = IAnnotations(project2[subproject1.id])
+        self.assertEquals(len(copiedSubproject1Annotations[CBIAK].keys()), 2)
+        self.assertEquals(len(subproject2Annotations[CBIAK].keys()), 1)
+        self.assertEquals(len(project2Annotations[CBIAK].keys()), 4)
