@@ -8,6 +8,8 @@ Changelog
   Don't set children budget at all on initial state.
   Removed all sub children on initial state.
   [sgeulette]
+- Managed move event to update children budget annotation
+  [sgeulette]
 
 1.2 (2019-06-23)
 ----------------

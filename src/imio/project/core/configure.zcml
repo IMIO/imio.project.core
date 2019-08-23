@@ -49,6 +49,9 @@
     <subscriber for=".content.project.IProject
                      zope.app.container.interfaces.IObjectRemovedEvent"
                 handler=".events.onRemoveProject"/>
+    <subscriber for=".content.project.IProject
+                     zope.lifecycleevent.IObjectMovedEvent"
+                handler=".events.onMoveProject"/>
     <subscriber for=".content.projectspace.IProjectSpace
                      zope.lifecycleevent.IObjectModifiedEvent"
                 handler=".events.onModifyProjectSpace"/>

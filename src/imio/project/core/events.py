@@ -10,6 +10,8 @@ from zope.annotation import IAnnotations
 Removing act: onRemoveProject on act, onModifyProject on oo
 Adding act: onAddProject on act, onModifyProject on oo
 Transition act: onTransitionProject on act
+Move act: onMovedProject on act, onModifyProject on oo1, onModifyProject on oo2
+Move oo: onMovedProject on act, onMovedProject on oo, onModifyProject on os1, onModifyProject on os2
 """
 
 
@@ -58,16 +60,19 @@ def _updateParentsBudgetInfos(obj):
         parent = parent.aq_inner.aq_parent
 
 
-def _cleanParentsBudgetInfos(obj):
+def _cleanParentsBudgetInfos(obj, parent=None):
     """
-      Update budget infos on every parents, cleaning sub objects info
+      Update budget infos on every parents, cleaning sub objects info.
+      When p_parent, it's a move. We don't modify obj but work on old parent
     """
     uids = [obj.UID()]
     obj_annotations = IAnnotations(obj)
     if CBIAK in obj_annotations:
         uids.extend(obj_annotations[CBIAK].keys())
-        obj_annotations[CBIAK] = {}
-    parent = obj.aq_inner.aq_parent
+        if parent is None:
+            obj_annotations[CBIAK] = {}
+    if parent is None:
+        parent = obj.aq_inner.aq_parent
     while not parent.portal_type == 'projectspace':
         parent_annotations = IAnnotations(parent)
         if CBIAK in parent_annotations:
@@ -111,6 +116,9 @@ def onTransitionProject(obj, event):
     """
       Handler when a transition is done
     """
+    # we pass creation, already managed by add event
+    if event.transition is None:
+        return
     pw = obj.portal_workflow
     workflows = pw.getWorkflowsFor(obj)
     # Update budget infos on parents
@@ -122,8 +130,25 @@ def onTransitionProject(obj, event):
 
 def onRemoveProject(obj, event):
     """
+        When a project is removed
     """
     _cleanParentsBudgetInfos(obj)
+
+
+def onMoveProject(obj, event):
+    """
+      Handler when a project is moved.
+    """
+    # obj is the moved object
+    # we pass creation, already managed by add event
+    if event.oldParent is None or event.oldParent == event.newParent:
+        return
+    pw = obj.portal_workflow
+    workflows = pw.getWorkflowsFor(obj)
+    # Update budget infos on old and new parents
+    if not workflows or workflows[0].initial_state != pw.getInfoFor(obj, 'review_state'):
+        _cleanParentsBudgetInfos(obj, parent=event.oldParent)
+        _updateParentsBudgetInfos(obj)
 
 
 def onModifyProjectSpace(obj, event):
