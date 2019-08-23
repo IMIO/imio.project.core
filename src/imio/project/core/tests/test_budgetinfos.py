@@ -106,7 +106,7 @@ class TestBudgetField(FunctionalTestCase):
                            subSubproject1.UID(): subSubproject1.budget,
                            subSubproject2.UID(): subSubproject2.budget, })
         # if we edit subSubproject2 budget, parents are correctly updated
-        subSubproject2.budget = subSubproject2.budget[0]['amount'] + 50
+        subSubproject2.budget[0]['amount'] += 50
         notify(ObjectModifiedEvent(subSubproject2))
         # and project1 has now budget data of his 3 children
         self.assertEquals(project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY],
@@ -122,17 +122,8 @@ class TestBudgetField(FunctionalTestCase):
            correctly updated regarding budget annotations."""
         # first create some projects and sub-projects using the _createProjectsAndTestAnnotationsEvolution
         # this method returns several elements, so for PEP8 convenience, we store it in returns then dispatch...
-        returns = self._createProjectsAndTestAnnotationsEvolution()
-        project1 = returns[0]
-        subproject1 = returns[1]
-        subSubproject1 = returns[2]
-        subSubproject2 = returns[3]
-        project1Annotations = returns[4]
-        subproject1Annotations = returns[5]
-        subSubproject1Annotations = returns[6]
-        subSubproject2Annotations = returns[7]
-        project1 = self.portal.projectspace['project-1']
-        project1Annotations = IAnnotations(project1)
+        (project1, subproject1, subSubproject1, subSubproject2, project1Annotations, subproject1Annotations,
+         subSubproject1Annotations, subSubproject2Annotations) = self._createProjectsAndTestAnnotationsEvolution()
         # now we have project1 that contains subproject and that contains 2
         # elements, subSubproject1 and subSubproject2, relevant annotations are correct
         # double check state, just to be sure...
@@ -156,7 +147,7 @@ class TestBudgetField(FunctionalTestCase):
         # if we remove subproject1, as subSubproject2 is also removed, annotations on
         # project1 will be empty regarding budget data of children...
         project1.manage_delObjects(ids=['subproject-1', ])
-        self.assertEquals(subproject1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY], {})
+        self.assertEquals(project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY], {})
         # test that the fact that the annotation key is still present
         # is not a problem when adding a new subproject
         params = {'title': 'Subproject 2',
@@ -197,13 +188,8 @@ class TestBudgetField(FunctionalTestCase):
            correctly updated regarding budget annotations."""
         # first create some projects and sub-projects using the _createProjectsAndTestAnnotationsEvolution
         # this method returns several elements, so for PEP8 convenience, we store it in returns then dispatch...
-        returns = self._createProjectsAndTestAnnotationsEvolution()
-        project1 = returns[0]
-        subproject1 = returns[1]
-        subSubproject1 = returns[2]
-        subSubproject2 = returns[3]
-        project1Annotations = returns[4]
-        subproject1Annotations = returns[5]
+        (project1, subproject1, subSubproject1, subSubproject2, project1Annotations, subproject1Annotations,
+         subSubproject1Annotations, subSubproject2Annotations) = self._createProjectsAndTestAnnotationsEvolution()
         # verifying content
         self.assertEquals(len(project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 3)
         self.assertEquals(len(subproject1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 2)
@@ -221,9 +207,16 @@ class TestBudgetField(FunctionalTestCase):
         self.assertEquals(len(subproject1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 1)
         self.assertNotIn(subSubproject1.UID(), project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys())
         self.assertNotIn(subSubproject1.UID(), subproject1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys())
-        # we transit to initial state: => subprojet must be removed
+        # we transit intermediate element to initial state
+        # all subelements must be suppressed on parents
+        self.pw.doActionFor(subproject1, "back_to_created")
+        self.assertEquals(len(project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 0)
+        self.assertEquals(len(subproject1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 0)
+        # we set all to created
+        # if a parent is on the initial state, we don't add budget
+        self.pw.doActionFor(project1, "back_to_created")
+        self.pw.doActionFor(subSubproject2, "back_to_created")
+        self.assertDictEqual(project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY], {})
+        self.assertDictEqual(subproject1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY], {})
         self.pw.doActionFor(subSubproject1, "set_to_be_scheduled")
-        self.assertEquals(len(project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 3)
-        self.assertEquals(len(subproject1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 2)
-        self.assertIn(subSubproject1.UID(), project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys())
-        self.assertIn(subSubproject1.UID(), subproject1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys())
+        self.assertEquals(len(project1Annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY].keys()), 0)

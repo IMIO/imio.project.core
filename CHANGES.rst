@@ -4,8 +4,10 @@ Changelog
 1.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Corrected persistency bug in annotation when removing item.
+  Don't set children budget at all on initial state.
+  Removed all sub children on initial state.
+  [sgeulette]
 
 1.2 (2019-06-23)
 ----------------
