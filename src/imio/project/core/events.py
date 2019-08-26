@@ -1,15 +1,26 @@
 # -*- coding: utf-8 -*-
 
-from imio.project.core.config import CHILDREN_BUDGET_INFOS_ANNOTATION_KEY
+from imio.project.core.config import CHILDREN_BUDGET_INFOS_ANNOTATION_KEY as CBIAK
 from imio.project.core.content.project import IProject
 from imio.project.core.utils import getProjectSpace
 from plone import api
 from zope.annotation import IAnnotations
 
+"""
+Removing act: onRemoveProject on act, onModifyProject on oo
+Adding act: onAddProject on act, onModifyProject on oo
+Transition act: onTransitionProject on act
+Move act: onMovedProject on act, onModifyProject on oo1, onModifyProject on oo2
+Move oo: onMovedProject on act, onMovedProject on oo, onModifyProject on os1, onModifyProject on os2
+Copy act: onAddProject on act2, onModifyProject on oo
+Copy oo: onAddProject on act2, onAddProject on 002, onModifyProject on os
+"""
+
 
 def _updateParentsBudgetInfos(obj):
     """
-      Update budget infos on every parents, going up until the parent is the projectspace
+      Update budget infos on every parents, going up until the parent is the projectspace.
+      Exception made if the parent is on initial state
     """
     # formatBudgetInfos : take current obj budget infos and budget infos defined on children
     # that have been saved in current object annotations with key CHILDREN_BUDGET_INFOS_ANNOTATION_KEY
@@ -24,40 +35,55 @@ def _updateParentsBudgetInfos(obj):
     # }
 
     formattedBudgetInfos = {}
+    pw = obj.portal_workflow
     objUID = obj.UID()
     # we take the budget infos saved on obj annotation
     obj_annotations = IAnnotations(obj)
-    if CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in obj_annotations:
-        formattedBudgetInfos = dict(obj_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY])
+    if CBIAK in obj_annotations:
+        formattedBudgetInfos = dict(obj_annotations[CBIAK])
     # add self in budgetInfos if not empty
     if obj.budget:
         formattedBudgetInfos[objUID] = obj.budget
 
     parent = obj.aq_inner.aq_parent
     while not parent.portal_type == 'projectspace':
+        workflows = pw.getWorkflowsFor(parent)
+        # if parent state is initial_state, we don't set children budget
+        if workflows and workflows[0].initial_state == pw.getInfoFor(parent, 'review_state'):
+            break
         parent_annotations = IAnnotations(parent)
-        if not CHILDREN_BUDGET_INFOS_ANNOTATION_KEY in parent_annotations:
-            parent_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY] = {}
+        if not CBIAK in parent_annotations:
+            parent_annotations[CBIAK] = {}
         # warning, we need to pass by an intermediate value then assign it using dict()
         # as new annotations, or annotations are lost upon Zope restart...
-        new_annotations = parent_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY]
+        new_annotations = parent_annotations[CBIAK]
         new_annotations.update(formattedBudgetInfos)
-        parent_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY] = dict(new_annotations)
+        parent_annotations[CBIAK] = dict(new_annotations)
         parent = parent.aq_inner.aq_parent
 
 
-def _cleanParentsBudgetInfos(obj):
+def _cleanParentsBudgetInfos(obj, parent=None):
     """
-      Update budget infos on every parents, cleaning sub objects info
+      Update budget infos on every parents, cleaning sub objects info.
+      When p_parent, it's a move. We don't modify obj but work on old parent
     """
-    objUID = obj.UID()
-    parent = obj.aq_inner.aq_parent
+    uids = [obj.UID()]
+    obj_annotations = IAnnotations(obj)
+    if CBIAK in obj_annotations:
+        uids.extend(obj_annotations[CBIAK].keys())
+        if parent is None:
+            obj_annotations[CBIAK] = {}
+    if parent is None:
+        parent = obj.aq_inner.aq_parent
     while not parent.portal_type == 'projectspace':
         parent_annotations = IAnnotations(parent)
-        # here we are sure that parent has an annotation with key CHILDREN_BUDGET_INFOS_ANNOTATION_KEY
-        # and that it has a key with given p_obj UID, but as remove event is called several times, we need to check...
-        if objUID in parent_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY]:
-            del parent_annotations[CHILDREN_BUDGET_INFOS_ANNOTATION_KEY][objUID]
+        if CBIAK in parent_annotations:
+            # we remove all contained uids from annotation (needed when the state is backed to initial state)
+            for uid in uids:
+                if uid in parent_annotations[CBIAK]:
+                    del parent_annotations[CBIAK][uid]
+            # We have to set new dict to be persisted in annotation
+            parent_annotations[CBIAK] = dict(parent_annotations[CBIAK])
         parent = parent.aq_inner.aq_parent
 
 
@@ -92,6 +118,9 @@ def onTransitionProject(obj, event):
     """
       Handler when a transition is done
     """
+    # we pass creation, already managed by add event
+    if event.transition is None:
+        return
     pw = obj.portal_workflow
     workflows = pw.getWorkflowsFor(obj)
     # Update budget infos on parents
@@ -103,13 +132,25 @@ def onTransitionProject(obj, event):
 
 def onRemoveProject(obj, event):
     """
+        When a project is removed
     """
+    _cleanParentsBudgetInfos(obj)
+
+
+def onMoveProject(obj, event):
+    """
+      Handler when a project is moved.
+    """
+    # obj is the moved object
+    # we pass creation, already managed by add event
+    if event.oldParent is None or event.oldParent == event.newParent:
+        return
     pw = obj.portal_workflow
     workflows = pw.getWorkflowsFor(obj)
-    # if the object is on the initial state, the parents doesn't contain any information on it
-    if workflows and workflows[0].initial_state == pw.getInfoFor(obj, 'review_state'):
-        return
-    _cleanParentsBudgetInfos(obj)
+    # Update budget infos on old and new parents
+    if not workflows or workflows[0].initial_state != pw.getInfoFor(obj, 'review_state'):
+        _cleanParentsBudgetInfos(obj, parent=event.oldParent)
+        _updateParentsBudgetInfos(obj)
 
 
 def onModifyProjectSpace(obj, event):

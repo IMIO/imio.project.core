@@ -12,6 +12,12 @@ Changelog
   [sgeulette]
 - Can hide reference number
   [sgeulette]
+- Corrected persistency bug in annotation when removing item.
+  Don't set children budget at all on initial state.
+  Removed all sub children on initial state.
+  [sgeulette]
+- Managed move event to update children budget annotation
+  [sgeulette]
 
 1.1 (2019-01-15)
 ----------------
