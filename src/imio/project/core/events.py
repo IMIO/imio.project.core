@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from OFS.Application import Application
 from imio.project.core.config import CHILDREN_BUDGET_INFOS_ANNOTATION_KEY as CBIAK
 from imio.project.core.content.project import IProject
 from imio.project.core.utils import getProjectSpace
@@ -75,6 +76,8 @@ def _cleanParentsBudgetInfos(obj, parent=None):
             obj_annotations[CBIAK] = {}
     if parent is None:
         parent = obj.aq_inner.aq_parent
+    if isinstance(parent, Application):
+        return  # This can happen when we try to remove a plone object
     while not parent.portal_type == 'projectspace':
         parent_annotations = IAnnotations(parent)
         if CBIAK in parent_annotations:
@@ -85,6 +88,7 @@ def _cleanParentsBudgetInfos(obj, parent=None):
             # We have to set new dict to be persisted in annotation
             parent_annotations[CBIAK] = dict(parent_annotations[CBIAK])
         parent = parent.aq_inner.aq_parent
+        print(parent)
 
 
 def onAddProject(obj, event):
