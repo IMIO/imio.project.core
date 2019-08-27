@@ -88,7 +88,6 @@ def _cleanParentsBudgetInfos(obj, parent=None):
             # We have to set new dict to be persisted in annotation
             parent_annotations[CBIAK] = dict(parent_annotations[CBIAK])
         parent = parent.aq_inner.aq_parent
-        print(parent)
 
 
 def onAddProject(obj, event):
