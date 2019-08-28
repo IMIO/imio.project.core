@@ -63,6 +63,12 @@ class IResultIndicatorSchema(Interface):
         title=_("Reached value"),
         required=True,
         default=0,)
+    year = schema.Choice(
+        title=_(u'Year'),
+        description=_(u"Choose a year."),
+        vocabulary=u'imio.project.core.content.project.year_vocabulary',
+        defaultFactory=default_year,
+    )
 
 
 class IBudgetSchema(Interface):
