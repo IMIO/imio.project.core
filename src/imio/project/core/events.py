@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from OFS.Application import Application
+from imio.helpers.cache import cleanRamCacheFor
 from imio.project.core.config import CHILDREN_BUDGET_INFOS_ANNOTATION_KEY as CBIAK
 from imio.project.core.content.project import IProject
 from imio.project.core.utils import getProjectSpace
@@ -167,3 +168,4 @@ def onModifyProjectSpace(obj, event):
             pc = api.portal.get_tool('portal_catalog')
             for brain in pc(object_provides=IProject.__identifier__):
                 brain.getObject().reindexObject(['Title', 'sortable_title'])
+            cleanRamCacheFor('imio.prettylink.adapters.getLink')
