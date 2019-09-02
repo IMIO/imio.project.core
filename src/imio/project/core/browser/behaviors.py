@@ -43,7 +43,7 @@ class IAnalyticBudget(model.Schema):
     """Budget field"""
 
     analytic_budget = schema.List(
-        title=_(u"Analytic Budget"),
+        title=_(u"Analytic budget"),
         required=False,
         value_type=DictRow(
             title=_("Analytic budget"), schema=IAnalyticBudgetSchema, required=False

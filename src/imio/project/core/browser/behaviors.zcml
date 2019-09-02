@@ -7,7 +7,7 @@
 
     <plone:behavior
         title="behavior.AnalyticBudget"
-        description="Behavior with budget fields"
+        description="Behavior with analytic budget fields"
         provides=".behaviors.IAnalyticBudget"
         factory=".behaviors.AnalyticBudget"
         marker=".behaviors.IAnalyticBudget"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-06-28 10:50+0000\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,259 +15,286 @@ msgstr ""
 "Domain: imio.project.core\n"
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
-#: ./content/project.py:82
+#: ../browser/behaviors.py:33
+#: ../content/project.py:88
 msgid "Amount"
 msgstr "Montant"
 
-#: ./browser/annexes_listing.pt:3
+#: ../browser/behaviors.py:46
+msgid "Analytic budget"
+msgstr "Budget analytique"
+
+#: ../browser/annexes_listing.pt:3
 msgid "Annexes"
 msgstr "Annexes"
 
-#: ./content/project.py:111
+#: ../browser/behaviors.zcml:14
+msgid "Behavior with analytic budget fields"
+msgstr "Behavior avec les champs de budget analytique"
+
+#: ../content/project.py:117
 msgid "Budget"
 msgstr "Financement/Budget"
 
-#: ./content/project.py:122
+#: ../content/project.py:128
 msgid "Budget comments"
 msgstr "Commentaires sur le financement/budget"
 
-#: ./content/projectspace.py:193
+#: ../content/projectspace.py:193
 msgid "Budget concerned years"
 msgstr "Années budget"
 
-#: ./content/projectspace.py:182
+#: ../content/projectspace.py:182
 msgid "Budget types values"
 msgstr "Types de budget possibles"
 
-#: ./content/project.py:71
+#: ../content/project.py:77
 msgid "Budget_type"
 msgstr "Type de budget"
 
-#: ./content/project.py:98
+#: ../content/project.py:104
 msgid "Categories"
 msgstr "Catégories"
 
-#: ./content/projectspace.py:160
+#: ../content/projectspace.py:160
 msgid "Categories values"
 msgstr "Catégories possibles"
 
-#: ./content/project.py:72
+#: ../content/project.py:78
 msgid "Choose a budget type."
 msgstr "Choisissez un type de budget."
 
-#: ./content/project.py:106
+#: ../content/project.py:112
 msgid "Choose a priority."
 msgstr "Choisir la priorité"
 
-#: ./content/project.py:77
+#: ../browser/behaviors.py:23
+#: ../content/project.py:68
 msgid "Choose a year."
 msgstr "Choisissez une année."
 
-#: ./content/project.py:99
+#: ../browser/behaviors.py:30
+msgid "Choose an economic group."
+msgstr "Choisissez un groupe économique"
+
+#: ../content/project.py:105
 msgid "Choose categories."
 msgstr "Sélectionner des catégories"
 
-#: ./content/project.py:142
+#: ../content/project.py:148
 msgid "Choose principals that can see this project."
 msgstr "Sélectionner les utilisateurs qui pourront visualiser le projet."
 
-#: ./content/project.py:132
+#: ../content/project.py:138
 msgid "Choose principals that will manage this project."
 msgstr "Sélectionner les utilisateurs qui vont gérer le projet."
 
-#: ./content/project.py:216
+#: ../browser/behaviors.py:35
+msgid "Comment"
+msgstr "Commentaire"
+
+#: ../content/project.py:222
 msgid "Comments"
 msgstr "Commentaires"
 
-#: ./content/project.py:176
+#: ../browser/behaviors.py:29
+msgid "Economic Group"
+msgstr "Groupe économique"
+
+#: ../content/project.py:182
 msgid "Effective begin date"
 msgstr "Date de début effective"
 
-#: ./content/project.py:192
+#: ../content/project.py:198
 msgid "Effective end date"
 msgstr "Date de fin effective"
 
-#: ./content/project.py:112
+#: ../content/project.py:118
 msgid "Enter budget details.  If you have comments about budget, use the field here above."
 msgstr "Entrez les détails concernant le budget.  Si vous avez un commentaire à ajouter, utilisez la zone 'Commentaires sur le financement/budget' ci-dessous."
 
-#: ./content/projectspace.py:161
+#: ../content/projectspace.py:161
 msgid "Enter one different value by row. Label is the displayed value. Key is the stored value: in lowercase, without space."
 msgstr "Entrer une valeur différente par ligne. Le libellé est la valeur affichée. La clé est la valeur stockée: en minuscule, sans espace, sans accent."
 
-#: ./content/project.py:158
+#: ../content/project.py:164
 msgid "Enter one indicator by row. Value is a number. Label must precise the signification of this number."
 msgstr "Entrer un indicateur par ligne. La valeur est un nombre. Le libellé doit préciser la signification de ce nombre."
 
-#: ./content/project.py:177
+#: ../content/project.py:183
 msgid "Enter the effective begin date."
 msgstr "Définir la date de début effective."
 
-#: ./content/project.py:193
+#: ../content/project.py:199
 msgid "Enter the effective end date."
 msgstr "Définir la date de fin effective."
 
-#: ./content/project.py:169
+#: ../content/project.py:175
 msgid "Enter the planned begin date."
 msgstr "Définir la date de début prévue."
 
-#: ./content/project.py:185
+#: ../content/project.py:191
 msgid "Enter the planned end date."
 msgstr "Définir la date d'échéance."
 
-#: ./content/project.py:60
+#: ../content/project.py:60
 msgid "Expected value"
 msgstr "Valeur à atteindre"
 
-#: ./content/project.py:150
+#: ../content/project.py:156
 msgid "Extra concerned people"
 msgstr "Partenaires externes"
 
-#: ./configure.zcml:28
+#: ../configure.zcml:28
 msgid "Installs the imio.project.core add-on."
 msgstr "Installs the imio.project.core add-on."
 
-#: ./content/projectspace.py:141
+#: ../content/projectspace.py:141
 msgid "Key"
 msgstr "Clé"
 
-#: ./content/project.py:57
-#: ./content/projectspace.py:138
+#: ../content/project.py:57
+#: ../content/projectspace.py:138
 msgid "Label"
 msgstr "Libellé"
 
-#: ./content/projectspace.py:153
+#: ../content/projectspace.py:153
 msgid "Last reference number"
 msgstr "Dernier numéro de référence"
 
-#: ./content/project.py:131
+#: ../content/project.py:137
 msgid "Manager"
 msgstr "Gestionnaire"
 
-#: ./content/project.py:207
+#: ../content/project.py:213
 msgid "Observation"
 msgstr "Constat"
 
-#: ./content/project.py:168
+#: ../content/project.py:174
 msgid "Planned begin date"
 msgstr "Date de début prévue"
 
-#: ./content/project.py:184
+#: ../content/project.py:190
 msgid "Planned end date"
 msgstr "Échéance"
 
-#: ./content/project.py:208
+#: ../content/project.py:214
 msgid "Prior determination"
 msgstr "Constat préalable"
 
-#: ./content/project.py:105
+#: ../content/project.py:111
 msgid "Priority"
 msgstr "Priorité"
 
-#: ./content/projectspace.py:171
+#: ../content/projectspace.py:171
 msgid "Priority values"
 msgstr "Priorités possibles"
 
-#: ./content/project.py:200
+#: ../content/project.py:206
 msgid "Progress"
 msgstr "Progression"
 
-#: ./content/project.py:201
+#: ../content/project.py:207
 msgid "Progress estimation in %."
 msgstr "Entrer la progression en %."
 
-#: ./profiles/default/types/project.xml
+#: ../profiles/default/types/project.xml
 msgid "Project"
 msgstr "Projet"
 
-#: ./profiles/default/types/projectspace.xml
+#: ../profiles/default/types/projectspace.xml
 msgid "Project space"
 msgstr "Espace de projets"
 
-#: ./content/project.py:63
+#: ../content/project.py:63
 msgid "Reached value"
 msgstr "Valeur déjà atteinte"
 
-#: ./content/project.py:90
+#: ../content/project.py:96
 msgid "Reference number"
 msgstr "Numéro de référence"
 
-#: ./content/project.py:157
+#: ../content/project.py:163
 msgid "Result indicator"
 msgstr "Indicateur de résultat"
 
-#: ./content/projectspace.py:194
+#: ../content/projectspace.py:194
 msgid "Select all years concerned by budget."
 msgstr "Sélectionner toutes les années concernées par le budget."
 
-#: ./content/project.py:151
+#: ../content/project.py:157
 msgid "Specify here concerned people that do not have access to the application, this will just be informational."
 msgstr "Spécifier les partenaires externes impliqués dans le projet."
 
-#: ./testing.zcml:17
+#: ../testing.zcml:17
 msgid "Steps to ease tests of imio.project.core"
 msgstr "Steps to ease tests of imio.project.core"
 
-#: ./content/projectspace.py:73
-msgid "The key '${removed_key}' can not be removed because it is currently used (for example by '${used_by_url}')."
-msgstr "La clé '${removed_key}' ne peut être supprimée car elle est utilisée (par exemple : '${used_by_url}')."
-
-#: ./content/project.py:91
+#: ../content/project.py:97
 msgid "Unique identification"
 msgstr "Numéro de référence unique"
 
-#: ./content/projectspace.py:201
+#: ../content/projectspace.py:201
 msgid "Use reference number"
 msgstr "Utiliser le numéro de référence"
 
-#: ./content/projectspace.py:202
+#: ../content/projectspace.py:202
 msgid "Used in Title, documents, etc."
 msgstr "Utilisé dans le titre, les documents, etc."
 
-#: ./content/project.py:217
+#: ../content/project.py:223
 msgid "Various comments"
 msgstr "Commentaires divers"
 
-#: ./content/project.py:141
+#: ../content/project.py:147
 msgid "Visible for"
 msgstr "Visible pour"
 
-#: ./profiles/default/types/projectspace.xml
+#: ../profiles/default/types/projectspace.xml
 msgid "Will contain projects sharing same configuration values"
 msgstr "Espace pour des projets partageant la même configuration"
 
-#: ./content/project.py:123
+#: ../browser/behaviors.py:36
+msgid "Write a comment about this budget line."
+msgstr "Ecrivez un commentaire sur cette ligne budgétaire."
+
+#: ../content/project.py:129
 msgid "Write here comments you have about budget."
 msgstr "Encodez ici vos commentaires concernant le budget."
 
-#: ./content/project.py:76
+#: ../browser/behaviors.py:22
+#: ../content/project.py:67
 msgid "Year"
 msgstr "Année"
 
+#: ../browser/behaviors.zcml:14
+msgid "behavior.AnalyticBudget"
+msgstr "behavior.AnalyticBudget"
+
 #. Default: "Global"
-#: ./browser/budgetinfos_datagridfield_display.pt:27
+#: ../browser/budgetinfos_datagridfield_display.pt:27
 msgid "budgetinfos_label_global"
 msgstr "Global"
 
 #. Default: "Totals"
-#: ./browser/budgetinfos_datagridfield_display.pt:44
+#: ../browser/budgetinfos_datagridfield_display.pt:44
 msgid "budgetinfos_label_totals"
 msgstr "Totaux"
 
 #. Default: "Data taken from budget infos encoded in sub-element"
-#: ./browser/budgetinfos_datagridfield_display.pt:16
+#: ../browser/budgetinfos_datagridfield_display.pt:16
 msgid "budgetinfos_legend_global_data"
 msgstr "Informations budgétaires collectées sur les sous-éléments"
 
 #. Default: "Locally encoded data"
-#: ./browser/budgetinfos_datagridfield_display.pt:10
+#: ../browser/budgetinfos_datagridfield_display.pt:10
 msgid "budgetinfos_legend_local_data"
 msgstr "Informations budgétaires encodées sur l'élément courant"
 
-#: ./configure.zcml:28
+#: ../configure.zcml:28
 msgid "imio.project.core"
 msgstr "imio.project.core"
 
-#: ./testing.zcml:17
+#: ../testing.zcml:17
 msgid "imio.project.core tests"
 msgstr "imio.project.core tests"
