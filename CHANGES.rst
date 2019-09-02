@@ -4,6 +4,9 @@ Changelog
 1.3 (unreleased)
 ----------------
 
+- Add budget.behavior
+  [vpiret]
+
 - Corrected persistency bug in annotation when removing item.
   Don't set children budget at all on initial state.
   Removed all sub children on initial state.

@@ -1,0 +1,16 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="imio.project.core">
+
+    <include package="plone.behavior" file="meta.zcml" />
+
+    <plone:behavior
+        title="behavior.budget"
+        description="Behavior with budget fields"
+        provides=".behaviors.IBudget"
+        factory=".behaviors.Budget"
+        marker=".behaviors.IBudgetMarker"
+        />
+
+</configure>

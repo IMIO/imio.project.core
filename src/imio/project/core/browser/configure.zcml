@@ -5,6 +5,8 @@
     xmlns:z3c="http://namespaces.zope.org/z3c"
     i18n_domain="imio.project.core">
 
+    <include package="imio.project.core.browser" file="behaviors.zcml" />
+
     <!-- Publish static files -->
     <browser:resourceDirectory
       name="imio.project.core"
