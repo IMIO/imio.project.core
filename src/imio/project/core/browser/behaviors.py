@@ -53,6 +53,19 @@ class IAnalyticBudget(model.Schema):
         "analytic_budget", DataGridField, display_table_css_class="listing nosort"
     )
 
+    projection = schema.List(
+        title=_(u"Projection"),
+        required=False,
+        value_type=DictRow(
+            title=_("Projection"), schema=IAnalyticBudgetSchema, required=False
+        ),
+    )
+    directives.widget(
+        "projection",
+        DataGridField,
+        display_table_css_class="listing nosort",
+    )
+
 
 @implementer(IAnalyticBudget)
 @adapter(IDexterityContent)
