@@ -56,7 +56,10 @@ def getProjectSpace(context):
     # if context is None, we have to find it in request
     if context is None:
         portal = getSite()
-        if hasattr(portal.REQUEST['PUBLISHED'], 'context'):
+        if 'PUBLISHED' not in portal.REQUEST:
+            # This happen in rare situation (e.g. contentree widget search)
+            context = portal.REQUEST['PARENTS'][-1]
+        elif hasattr(portal.REQUEST['PUBLISHED'], 'context'):
             context = portal.REQUEST['PUBLISHED'].context
         else:
             context = portal.REQUEST['PARENTS'][0]
