@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from collective.z3cform.datagridfield import DictRow
+from collective.z3cform.datagridfield.datagridfield import DataGridField
 from imio.project.core import _
+from imio.project.core.content.project import default_year
 from plone.autoform import directives
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
 from plone.supermodel import model
 from zope import schema
 from zope.component import adapter
-from zope.interface import implementer
 from zope.interface import Interface
+from zope.interface import implementer
 from zope.interface import provider
-from collective.z3cform.datagridfield.datagridfield import DataGridField
-from imio.project.core.content.project import default_year
 
 
 class IAnalyticBudgetSchema(Interface):
@@ -25,9 +25,9 @@ class IAnalyticBudgetSchema(Interface):
         required=True,
         defaultFactory=default_year,
     )
-    economic_group = schema.TextLine(
-        title=_(u"Economic Group"),
-        description=_(u"Choose an economic group."),
+    article = schema.TextLine(
+        title=_(u"Budget Article"),
+        description=_(u"Define the budget article."),
         required=True,
     )
     amount = schema.Float(title=_("Amount"), required=True, default=0.0)
@@ -50,9 +50,7 @@ class IAnalyticBudget(model.Schema):
         ),
     )
     directives.widget(
-        "analytic_budget",
-        DataGridField,
-        display_table_css_class="listing nosort",
+        "analytic_budget", DataGridField, display_table_css_class="listing nosort"
     )
 
 
