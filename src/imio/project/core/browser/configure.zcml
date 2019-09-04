@@ -33,6 +33,14 @@
         permission="zope2.View"
     />
 
+    <browser:page
+        name="export_as_xml"
+        for="imio.project.core.content.projectspace.IProjectSpace"
+        class="imio.project.core.browser.views.PSTExportAsXML"
+        template="export_as_xml.pt"
+        permission="cmf.ModifyPortalContent"
+    />
+
     <configure package="imio.helpers">
         <browser:page
             for="imio.project.core.content.projectspace.IProjectSpace"

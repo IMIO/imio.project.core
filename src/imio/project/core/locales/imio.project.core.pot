@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-09-02 11:28+0000\n"
+"POT-Creation-Date: 2019-09-04 08:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,10 @@ msgstr ""
 
 #: ../content/projectspace.py:154
 msgid ""
+msgstr ""
+
+#: ../content/projectspace.py:208
+msgid "5-character code statistically representing the town"
 msgstr ""
 
 #: ../browser/behaviors.py:33
@@ -40,6 +44,10 @@ msgstr ""
 
 #: ../content/project.py:117
 msgid "Budget"
+msgstr ""
+
+#: ../browser/behaviors.py:29
+msgid "Budget Article"
 msgstr ""
 
 #: ../content/project.py:128
@@ -79,10 +87,6 @@ msgstr ""
 msgid "Choose a year."
 msgstr ""
 
-#: ../browser/behaviors.py:30
-msgid "Choose an economic group."
-msgstr ""
-
 #: ../content/project.py:105
 msgid "Choose categories."
 msgstr ""
@@ -103,8 +107,12 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: ../browser/behaviors.py:29
-msgid "Economic Group"
+#: ../content/projectspace.py:213
+msgid "Current fiscal year"
+msgstr ""
+
+#: ../browser/behaviors.py:30
+msgid "Define the budget article."
 msgstr ""
 
 #: ../content/project.py:182
@@ -149,6 +157,10 @@ msgstr ""
 
 #: ../content/project.py:156
 msgid "Extra concerned people"
+msgstr ""
+
+#: ../content/projectspace.py:207
+msgid "INS Code"
 msgstr ""
 
 #: ../configure.zcml:28
@@ -210,6 +222,10 @@ msgstr ""
 
 #: ../profiles/default/types/projectspace.xml
 msgid "Project space"
+msgstr ""
+
+#: ../browser/behaviors.py:57
+msgid "Projection"
 msgstr ""
 
 #: ../content/project.py:63

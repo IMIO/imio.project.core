@@ -203,6 +203,19 @@ class IProjectSpace(model.Schema):
         default=True,
     )
 
+    INS_code = schema.TextLine(
+        title=_(u'INS Code'),
+        description=_(u'5-character code statistically representing the town'),
+        required=False,
+    )
+
+    current_fiscal_year = schema.Int(
+        title=_(u'Current fiscal year'),
+        description=_(u''),
+        required=False,
+    )
+
+
 validator.WidgetValidatorDiscriminators(RemovedValueIsNotUsedByCategoriesFieldValidator,
                                         field=IProjectSpace['categories'])
 provideAdapter(RemovedValueIsNotUsedByCategoriesFieldValidator)

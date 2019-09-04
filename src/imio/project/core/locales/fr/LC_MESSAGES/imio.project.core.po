@@ -15,6 +15,10 @@ msgstr ""
 "Domain: imio.project.core\n"
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
+#: ../content/projectspace.py:208
+msgid "5-character code statistically representing the town"
+msgstr "Code à 5 caractères représentant statistiquement la commune"
+
 #: ../browser/behaviors.py:33
 #: ../content/project.py:88
 msgid "Amount"
@@ -35,6 +39,10 @@ msgstr "Behavior avec les champs de budget analytique"
 #: ../content/project.py:117
 msgid "Budget"
 msgstr "Financement/Budget"
+
+#: ../browser/behaviors.py:29
+msgid "Budget Article"
+msgstr "Article du budget"
 
 #: ../content/project.py:128
 msgid "Budget comments"
@@ -73,10 +81,6 @@ msgstr "Choisir la priorité"
 msgid "Choose a year."
 msgstr "Choisissez une année."
 
-#: ../browser/behaviors.py:30
-msgid "Choose an economic group."
-msgstr "Choisissez un groupe économique"
-
 #: ../content/project.py:105
 msgid "Choose categories."
 msgstr "Sélectionner des catégories"
@@ -97,9 +101,13 @@ msgstr "Commentaire"
 msgid "Comments"
 msgstr "Commentaires"
 
-#: ../browser/behaviors.py:29
-msgid "Economic Group"
-msgstr "Groupe économique"
+#: ../content/projectspace.py:213
+msgid "Current fiscal year"
+msgstr "Exercice en cours"
+
+#: ../browser/behaviors.py:30
+msgid "Define the budget article."
+msgstr ""
 
 #: ../content/project.py:182
 msgid "Effective begin date"
@@ -144,6 +152,10 @@ msgstr "Valeur à atteindre"
 #: ../content/project.py:156
 msgid "Extra concerned people"
 msgstr "Partenaires externes"
+
+#: ../content/projectspace.py:207
+msgid "INS Code"
+msgstr "Code INS"
 
 #: ../configure.zcml:28
 msgid "Installs the imio.project.core add-on."
@@ -205,6 +217,10 @@ msgstr "Projet"
 #: ../profiles/default/types/projectspace.xml
 msgid "Project space"
 msgstr "Espace de projets"
+
+#: ../browser/behaviors.py:57
+msgid "Projection"
+msgstr ""
 
 #: ../content/project.py:63
 msgid "Reached value"

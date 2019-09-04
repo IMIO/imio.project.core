@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot
+        xmlns:tal="http://xml.zope.org/namespaces/tal"
+        xmlns:metal="http://xml.zope.org/namespaces/metal">
+    <Identifiants tal:define="identifiants view/identifiants">
+        <Id tal:content="identifiants/identifiant_id"/>
+        <TypeAdmin>AC</TypeAdmin>
+        <INS tal:content="identifiants/INS"/>
+        <Type>PST</Type>
+        <Exercice tal:content="identifiants/exercice"/>
+        <Version>201805V1</Version>
+        <Generateur>PST</Generateur>
+    </Identifiants>
+    <PST>
+        <DescriptionPST>
+            <IdPST tal:content="context/UID" />
+            <Libelle tal:content="context/title" />
+            <ExerciceDebut tal:content="python:min(context.budget_years)" />
+            <ExerciceFin tal:content="python:max(context.budget_years)" />
+        </DescriptionPST>
+        <Volets>
+            <Volet ElementId="neant"
+                     tal:attributes="Exercice python:view.exercice(context)" >
+                <Libelle>NEANT</Libelle>
+                <Description>
+                    <Mode>TEXTE</Mode>
+                    <Valeur/>
+                </Description>
+                <Statut>NON_COMMENCE</Statut>
+                <TauxAvancement>0</TauxAvancement>
+                <RemarqueStatut>
+                    <Mode>TEXTE</Mode>
+                    <Valeur/>
+                </RemarqueStatut>
+                <ETP>0</ETP>
+                <Plans/>
+                <Partenaires/>
+                <ObjectifStrategiques>
+                    <ObjectifStrategique
+                             tal:repeat="os view/strategic_objectives"
+                             tal:attributes="ElementId os/UID;
+                            Exercice python:view.exercice(os)">
+                        <Libelle tal:content="python:view.libelle(os)"/>
+                        <Description>
+                            <Mode>TEXTE</Mode>
+                            <Valeur tal:content="os/description"/>
+                        </Description>
+                        <Statut tal:content="python:view.status(os)"/>
+                        <TauxAvancement>0</TauxAvancement>
+                        <RemarqueStatut>
+                            <Mode>TEXTE</Mode>
+                            <Valeur/>
+                        </RemarqueStatut>
+                        <ETP>0</ETP>
+                        <Plans/>
+                        <Partenaires/>
+                        <ObjectifsOperationnels>
+                            <ObjectifOperationnel tal:repeat="oo python:view.operational_objectives(os)"
+                                     tal:attributes="ElementId oo/UID;
+                                    Exercice python:view.exercice(oo)">
+                                <Libelle tal:content="python:view.libelle(oo)"/>
+                                <Description>
+                                    <Mode>TEXTE</Mode>
+                                    <Valeur tal:content="oo/description"/>
+                                </Description>
+                                <Statut tal:content="python:view.status(oo)"/>
+                                <Responsable tal:define="responsable python:view.responsable(oo)"
+                                         tal:condition="responsable">
+                                    <Civilite>MONSIEUR</Civilite>
+                                    <Nom tal:content="responsable"/>
+                                    <Prenom/>
+                                    <Tel/>
+                                    <eMail/>
+                                </Responsable>
+                                <Mandataire tal:define="mandataire python:view.mandataire(oo)"
+                                         tal:condition="mandataire">
+                                    <Civilite>MONSIEUR</Civilite>
+                                    <Nom tal:content="mandataire"/>
+                                    <Prenom/>
+                                    <Tel/>
+                                    <eMail/>
+                                </Mandataire>
+                                <Departement tal:content="python:view.departement(oo)"/>
+                                <TauxAvancement>0</TauxAvancement>
+                                <RemarqueStatut>
+                                    <Mode>TEXTE</Mode>
+                                    <Valeur/>
+                                </RemarqueStatut>
+                                <ETP>0</ETP>
+                                <Plans/>
+                                <Partenaires/>
+                                <Actions>
+                                    <Action tal:repeat="action python:view.actions_and_subactions(oo)"
+                                             tal:attributes="ElementId action/UID;
+                                            Exercice python:view.exercice(action)">
+                                        <Libelle tal:content="python:view.libelle(action)"/>
+                                        <DateDebut tal:define="begin_date python:view.action_begin_date(action)"
+                                                 tal:condition="begin_date"
+                                                 tal:content="begin_date"/>
+                                        <DateFin tal:define="end_date python:view.action_end_date(action)"
+                                                 tal:condition="end_date"
+                                                 tal:content="end_date"/>
+                                        <Description>
+                                            <Mode>TEXTE</Mode>
+                                            <Valeur tal:content="action/description"/>
+                                        </Description>
+                                        <Statut>NON_COMMENCE</Statut>
+                                        <Mandataire tal:define="mandataire python:view.mandataire(action, oo)"
+                                                 tal:condition="mandataire">
+                                            <Civilite>MONSIEUR</Civilite>
+                                            <Nom tal:content="mandataire"/>
+                                            <Prenom/>
+                                            <Tel/>
+                                            <eMail/>
+                                        </Mandataire>
+                                        <Departement tal:content="python:view.departement(action)"/>
+                                        <TauxAvancement>0</TauxAvancement>
+                                        <RemarqueStatut>
+                                            <Mode>TEXTE</Mode>
+                                            <Valeur/>
+                                        </RemarqueStatut>
+                                        <ETP>0</ETP>
+                                        <Plans/>
+                                        <Partenaires/>
+                                    </Action>
+                                </Actions>
+                            </ObjectifOperationnel>
+                        </ObjectifsOperationnels>
+                    </ObjectifStrategique>
+                </ObjectifStrategiques>
+            </Volet>
+        </Volets>
+    </PST>
+</dataroot>
