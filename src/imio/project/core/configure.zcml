@@ -56,4 +56,9 @@
                      zope.lifecycleevent.IObjectModifiedEvent"
                 handler=".events.onModifyProjectSpace"/>
 
+    <utility
+      component=".vocabularies.PlanComptableCommunalVocabulary"
+      name="imio.project.core.PCCVocabulary"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      />
 </configure>

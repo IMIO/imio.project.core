@@ -38,6 +38,30 @@ class IAnalyticBudgetSchema(Interface):
     )
 
 
+class IProjectionSchema(Interface):
+    """Schema used for the datagrid field 'analytic_budget' of IProject"""
+
+    year = schema.Choice(
+        title=_(u"Year"),
+        description=_(u"Choose a year."),
+        vocabulary=u"imio.project.core.content.project.year_vocabulary",
+        required=True,
+        defaultFactory=default_year,
+    )
+    article = schema.Choice(
+        title=_(u"Budget Article"),
+        description=_(u"Define the budget article."),
+        vocabulary=u"imio.project.core.PCCVocabulary",
+        required=True,
+    )
+    amount = schema.Float(title=_("Amount"), required=True, default=0.0)
+    comment = schema.TextLine(
+        title=_(u"Comment"),
+        description=_(u"Write a comment about this budget line."),
+        required=False,
+    )
+
+
 @provider(IFormFieldProvider)
 class IAnalyticBudget(model.Schema):
     """Budget field"""
@@ -57,7 +81,7 @@ class IAnalyticBudget(model.Schema):
         title=_(u"Projection"),
         required=False,
         value_type=DictRow(
-            title=_("Projection"), schema=IAnalyticBudgetSchema, required=False
+            title=_("Projection"), schema=IProjectionSchema, required=False
         ),
     )
     directives.widget(
