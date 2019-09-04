@@ -3,6 +3,8 @@
 from Products.Five.browser import BrowserView
 from datetime import datetime
 from imio.helpers.browser.views import ContainerView
+from lxml import etree
+from os.path import dirname
 from plone import api
 from zope.schema.interfaces import IVocabularyFactory
 
@@ -18,8 +20,16 @@ class PSTExportAsXML(BrowserView):
 
     def __call__(self, *args, **kwargs):
 
-        self.request.RESPONSE.setHeader("Content-type", "text/xml")
-        return self.index()
+        raw_xml = self.index()
+        parsed_xml = etree.fromstring(raw_xml.encode("utf8"))
+
+        schema_file_path = dirname(__file__) + '/../model/schema_import_ecomptes_201805V1.xsd'
+        schema_root = etree.parse(open(schema_file_path, 'rb'))
+        schema = etree.XMLSchema(schema_root)
+
+        if schema.validate(parsed_xml):
+            self.request.RESPONSE.setHeader("Content-type", "text/xml")
+            return raw_xml
 
     @property
     def identifiants(self):

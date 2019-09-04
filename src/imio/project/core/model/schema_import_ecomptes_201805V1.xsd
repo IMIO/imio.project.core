@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:complexType name="PersonneInfo">
+		<xs:sequence>
+			<xs:element name="Civilite" minOccurs="1" maxOccurs="1">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="MONSIEUR"/>
+						<xs:enumeration value="MADAME"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Nom" minOccurs="1" maxOccurs="1">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Prenom" minOccurs="1" maxOccurs="1">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Tel" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="15"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="eMail" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="255"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="DescriptionInfo">
+		<xs:sequence>
+			<xs:element name="Mode" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="TEXTE"/>
+						<xs:enumeration value="HTML"/>
+						<xs:enumeration value="RTF"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name ="Valeur">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:whiteSpace value="preserve"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+
+	</xs:complexType>
+
+
+	<xs:complexType name="ElementBaseInfo">
+		<xs:sequence>
+			<xs:element name="Libelle" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="255"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DateDebut" type="xs:date" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DateFin" type="xs:date" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Description" type="DescriptionInfo" />
+
+			<xs:element name="Statut" >
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="ANNULE_ABANDONNE">
+							<xs:annotation>
+								<xs:documentation>l'élement est abandonné définitivement </xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="NON_COMMENCE">
+							<xs:annotation>
+								<xs:documentation>l'élement n'a pas débuté</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="EN_COURS">
+							<xs:annotation>
+								<xs:documentation>l'élement à débuté, on travaille actulement sur le projet</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="EN_ATTENTE">
+							<xs:annotation>
+								<xs:documentation>l'élement est en attente d'un évènement ou d'une action actérieure</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="PROBLEME">
+							<xs:annotation>
+								<xs:documentation>l'élement rencontre un problème et est momentanément suspendu</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="TERMINE">
+							<xs:annotation>
+								<xs:documentation>l'élement est terminé et à abouti</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Responsable" type="PersonneInfo" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Mandataire" type="PersonneInfo" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Departement" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="TauxAvancement" >
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:minInclusive value="0" />
+						<xs:maxInclusive value="100" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="RemarqueStatut" type="DescriptionInfo" />
+      <xs:element name="ETP">
+        <xs:simpleType>
+          <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Plans">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Plan" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Partenaires">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Partenaire" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+		</xs:sequence>
+		<xs:attribute name="ElementId" type="xs:string" use="required" />
+		<xs:attribute name="Exercice" type="xs:integer" use="required" />
+	</xs:complexType>
+
+  <xs:complexType name="VoletInfo">
+    <xs:complexContent>
+      <xs:extension base="ElementBaseInfo">
+        <xs:sequence>
+          <xs:element name ="ObjectifStrategiques" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="ObjectifStrategique" type="ObjStrategiqueInfo"  minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ObjStrategiqueInfo">
+		<xs:complexContent>
+			<xs:extension base="ElementBaseInfo">
+				<xs:sequence>
+					<xs:element name ="ObjectifsOperationnels" minOccurs="0" maxOccurs="1">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="ObjectifOperationnel" type="ObjOperationnelInfo"  minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ObjOperationnelInfo">
+		<xs:complexContent>
+			<xs:extension base="ElementBaseInfo">
+				<xs:sequence>
+					<xs:element name ="Actions" minOccurs="0" maxOccurs="1">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Action" type="ElementBaseInfo" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+
+	<xs:element name="dataroot">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Identifiants">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Id" type="xs:string" />
+							<xs:element name="TypeAdmin" default="AC">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="AC"/>
+                    <xs:enumeration value="CPAS"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="INS" type="xs:integer" />
+							<xs:element name="Type" >
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="PST"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Exercice" type="xs:integer" />
+							<xs:element name="Version" >
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="201805V1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Generateur">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="50"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<xs:element name="PST">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DescriptionPST">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="IdPST"  >
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:maxLength value="40"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Libelle">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:maxLength value="255"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ExerciceDebut" type="xs:integer" />
+										<xs:element name="ExerciceFin" type="xs:integer" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Volets">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Volet" type="VoletInfo" minOccurs="1" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>
