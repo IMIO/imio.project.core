@@ -6,6 +6,7 @@ from imio.helpers.browser.views import ContainerView
 from lxml import etree
 from os.path import dirname
 from plone import api
+from z3c.form.interfaces import HIDDEN_MODE
 from zope.schema.interfaces import IVocabularyFactory
 
 
@@ -14,6 +15,23 @@ class PSTContainerView(ContainerView):
 
     collapse_all_fields = True
     collapse_all_fields_onload = True
+
+
+class PSTProjectContainerView(ContainerView):
+    """ """
+
+    def updateWidgets(self, prefix=None):
+        super(ContainerView, self).updateWidgets(prefix)
+
+        # hide empty budget fields
+        for field_id, widget_id in (
+            ('projection', 'IAnalyticBudget.projection'),
+            ('analytic_budget', 'IAnalyticBudget.analytic_budget'),
+            ('budget', 'budget'),
+            ('budget_comments', 'budget_comments'),
+        ):
+            if not getattr(self.context, field_id, None):
+                self.widgets[widget_id].mode = HIDDEN_MODE
 
 
 class PSTExportAsXML(BrowserView):

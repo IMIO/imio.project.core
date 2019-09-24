@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-09-04 08:48+0000\n"
+"POT-Creation-Date: 2019-09-24 11:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
-#: ../browser/behaviors.py:46
+#: ../browser/behaviors.py:70
 msgid "Analytic budget"
 msgstr ""
 
@@ -159,6 +159,10 @@ msgstr ""
 msgid "Extra concerned people"
 msgstr ""
 
+#: ../browser/container.pt:15
+msgid "Fields"
+msgstr ""
+
 #: ../content/projectspace.py:207
 msgid "INS Code"
 msgstr ""
@@ -224,7 +228,7 @@ msgstr ""
 msgid "Project space"
 msgstr ""
 
-#: ../browser/behaviors.py:57
+#: ../browser/behaviors.py:81
 msgid "Projection"
 msgstr ""
 

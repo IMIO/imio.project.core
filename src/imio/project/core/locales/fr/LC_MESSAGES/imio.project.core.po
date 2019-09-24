@@ -24,7 +24,7 @@ msgstr "Code à 5 caractères représentant statistiquement la commune"
 msgid "Amount"
 msgstr "Montant"
 
-#: ../browser/behaviors.py:46
+#: ../browser/behaviors.py:70
 msgid "Analytic budget"
 msgstr "Budget analytique"
 
@@ -153,6 +153,10 @@ msgstr "Valeur à atteindre"
 msgid "Extra concerned people"
 msgstr "Partenaires externes"
 
+#: ../browser/container.pt:15
+msgid "Fields"
+msgstr "Champs"
+
 #: ../content/projectspace.py:207
 msgid "INS Code"
 msgstr "Code INS"
@@ -218,7 +222,7 @@ msgstr "Projet"
 msgid "Project space"
 msgstr "Espace de projets"
 
-#: ../browser/behaviors.py:57
+#: ../browser/behaviors.py:81
 msgid "Projection"
 msgstr ""
 

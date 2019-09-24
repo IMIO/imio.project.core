@@ -24,7 +24,7 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
-#: ../browser/behaviors.py:46
+#: ../browser/behaviors.py:70
 msgid "Analytic budget"
 msgstr ""
 
@@ -153,6 +153,10 @@ msgstr "Expected value"
 msgid "Extra concerned people"
 msgstr "Extra concerned people"
 
+#: ../browser/container.pt:15
+msgid "Fields"
+msgstr ""
+
 #: ../content/projectspace.py:207
 msgid "INS Code"
 msgstr ""
@@ -218,7 +222,7 @@ msgstr "Project"
 msgid "Project space"
 msgstr "Project space"
 
-#: ../browser/behaviors.py:57
+#: ../browser/behaviors.py:81
 msgid "Projection"
 msgstr ""
 
