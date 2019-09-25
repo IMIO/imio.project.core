@@ -161,7 +161,7 @@ msgstr "Champs"
 msgid "INS Code"
 msgstr "Code INS"
 
-#: ../configure.zcml:28
+#: ../configure.zcml:29
 msgid "Installs the imio.project.core add-on."
 msgstr "Installs the imio.project.core add-on."
 
@@ -177,6 +177,10 @@ msgstr "Libellé"
 #: ../content/projectspace.py:153
 msgid "Last reference number"
 msgstr "Dernier numéro de référence"
+
+#: ../profiles/default/registry.xml
+msgid "Lasting objectives"
+msgstr "Objectifs durables"
 
 #: ../content/project.py:137
 msgid "Manager"
@@ -311,7 +315,7 @@ msgstr "Informations budgétaires collectées sur les sous-éléments"
 msgid "budgetinfos_legend_local_data"
 msgstr "Informations budgétaires encodées sur l'élément courant"
 
-#: ../configure.zcml:28
+#: ../configure.zcml:29
 msgid "imio.project.core"
 msgstr "imio.project.core"
 

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility
 from zope.schema.vocabulary import SimpleVocabulary
 
 dict_plan_comptable_communal = {
@@ -1499,3 +1501,15 @@ class PlanComptableCommunalVocabularyFactory(object):
 
 
 PlanComptableCommunalVocabulary = PlanComptableCommunalVocabularyFactory()
+
+
+class LastingObjectiveVocabularyFactory(object):
+
+    def __call__(self, context):
+        registry = getUtility(IRegistry)
+        key_labels = sorted(registry.get('imio.project.core.lasting_objectives').items())
+        terms = [{key: labels['title']} for key, labels in key_labels]
+        return dict_list_2_vocabulary(terms)
+
+
+LastingObjectiveVocabulary = LastingObjectiveVocabularyFactory()

@@ -18,6 +18,7 @@
     <include package="plone.formwidget.datetime" />
     <include package=".browser" />
     <include package=".content" />
+    <include package=".widgets" />
 
     <genericsetup:registerProfile
         name="default"
@@ -61,4 +62,11 @@
       name="imio.project.core.PCCVocabulary"
       provides="zope.schema.interfaces.IVocabularyFactory"
       />
+
+    <utility
+      component=".vocabularies.LastingObjectiveVocabulary"
+      name="imio.project.core.LastingObjectiveVocabulary"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      />
+
 </configure>

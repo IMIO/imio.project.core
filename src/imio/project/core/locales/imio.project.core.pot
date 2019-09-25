@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-09-24 11:14+0000\n"
+"POT-Creation-Date: 2019-09-25 10:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -167,7 +167,7 @@ msgstr ""
 msgid "INS Code"
 msgstr ""
 
-#: ../configure.zcml:28
+#: ../configure.zcml:29
 msgid "Installs the imio.project.core add-on."
 msgstr ""
 
@@ -182,6 +182,10 @@ msgstr ""
 
 #: ../content/projectspace.py:153
 msgid "Last reference number"
+msgstr ""
+
+#: ../profiles/default/registry.xml
+msgid "Lasting objectives"
 msgstr ""
 
 #: ../content/project.py:137
@@ -317,7 +321,7 @@ msgstr ""
 msgid "budgetinfos_legend_local_data"
 msgstr ""
 
-#: ../configure.zcml:28
+#: ../configure.zcml:29
 msgid "imio.project.core"
 msgstr ""
 

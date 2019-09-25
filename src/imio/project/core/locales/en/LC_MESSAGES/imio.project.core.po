@@ -161,7 +161,7 @@ msgstr ""
 msgid "INS Code"
 msgstr ""
 
-#: ../configure.zcml:28
+#: ../configure.zcml:29
 msgid "Installs the imio.project.core add-on."
 msgstr ""
 
@@ -176,6 +176,10 @@ msgstr "Label"
 
 #: ../content/projectspace.py:153
 msgid "Last reference number"
+msgstr ""
+
+#: ../profiles/default/registry.xml
+msgid "Lasting objectives"
 msgstr ""
 
 #: ../content/project.py:137
@@ -311,7 +315,7 @@ msgstr ""
 msgid "budgetinfos_legend_local_data"
 msgstr ""
 
-#: ../configure.zcml:28
+#: ../configure.zcml:29
 msgid "imio.project.core"
 msgstr ""
 
