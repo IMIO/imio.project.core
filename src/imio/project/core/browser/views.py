@@ -30,7 +30,7 @@ class PSTProjectContainerView(ContainerView):
             ('budget', 'budget'),
             ('budget_comments', 'budget_comments'),
         ):
-            if not getattr(self.context, field_id, None):
+            if widget_id in self.widgets and not getattr(self.context, field_id, None):
                 self.widgets[widget_id].mode = HIDDEN_MODE
 
 
