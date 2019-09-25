@@ -1507,7 +1507,7 @@ class LastingObjectiveVocabularyFactory(object):
 
     def __call__(self, context):
         registry = getUtility(IRegistry)
-        key_labels = sorted(registry.get('imio.project.core.lasting_objectives').items())
+        key_labels = sorted(registry.get('imio.project.core.lasting_objectives', {}).items())
         terms = [{key: labels['title']} for key, labels in key_labels]
         return dict_list_2_vocabulary(terms)
 
