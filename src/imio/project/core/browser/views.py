@@ -38,16 +38,16 @@ class PSTExportAsXML(BrowserView):
 
     def __call__(self, *args, **kwargs):
 
-        raw_xml = self.index()
-        parsed_xml = etree.fromstring(raw_xml.encode("utf8"))
-
         schema_file_path = dirname(__file__) + '/../model/schema_import_ecomptes_201805V1.xsd'
         schema_root = etree.parse(open(schema_file_path, 'rb'))
         schema = etree.XMLSchema(schema_root)
+        parser = etree.XMLParser(schema=schema)
 
-        if schema.validate(parsed_xml):
-            self.request.RESPONSE.setHeader("Content-type", "text/xml")
-            return raw_xml
+        raw_xml = self.index()
+        parsed_xml = etree.fromstring(raw_xml.encode("utf8"), parser)  # if invalid, raises XMLSyntaxError
+
+        self.request.RESPONSE.setHeader("Content-type", "text/xml")
+        return raw_xml
 
     @property
     def identifiants(self):
