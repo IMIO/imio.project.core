@@ -65,7 +65,7 @@ class IResultIndicatorSchema(Interface):
         default=0,)
     year = schema.Choice(
         title=_(u'Year'),
-        description=_(u"Choose a year."),
+        # description=_(u"Choose a year."),
         vocabulary=u'imio.project.core.content.project.year_vocabulary',
         defaultFactory=default_year,
     )
@@ -75,12 +75,12 @@ class IBudgetSchema(Interface):
     """Schema used for the datagrid field 'budget' of IProject."""
     budget_type = schema.Choice(
         title=_(u'Budget_type'),
-        description=_(u"Choose a budget type."),
+        # description=_(u"Choose a budget type."),
         vocabulary=u'imio.project.core.content.project.budget_type_vocabulary',
     )
     year = schema.Choice(
         title=_(u'Year'),
-        description=_(u"Choose a year."),
+        # description=_(u"Choose a year."),
         vocabulary=u'imio.project.core.content.project.year_vocabulary',
         defaultFactory=default_year,
     )
@@ -94,7 +94,7 @@ class IProject(model.Schema):
     """Project schema, field ordering."""
     reference_number = schema.Int(
         title=_(u"Reference number"),
-        description=_(u"Unique identification"),
+        # description=_(u"Unique identification"),
         required=False,
         default=0,
     )
@@ -102,21 +102,21 @@ class IProject(model.Schema):
     # use 'categories' field name  even if mono-valued for now, because 'category' is reserved
     categories = schema.List(
         title=_(u'Categories'),
-        description=_(u"Choose categories."),
+        # description=_(u"Choose categories."),
         required=False,
         value_type=schema.Choice(source='imio.project.core.content.project.categories_vocabulary'),
     )
 
     priority = schema.Choice(
         title=_(u'Priority'),
-        description=_(u"Choose a priority."),
+        # description=_(u"Choose a priority."),
         vocabulary=u'imio.project.core.content.project.priority_vocabulary',
     )
 
     budget = schema.List(
         title=_(u'Budget'),
-        description=_(u"Enter budget details.  If you have comments about budget, "
-                      "use the field here above."),
+        # description=_(u"Enter budget details.  If you have comments about budget, "
+        #               "use the field here above."),
         required=False,
         value_type=DictRow(title=_("Budget"),
                            schema=IBudgetSchema,
@@ -126,7 +126,7 @@ class IProject(model.Schema):
 
     budget_comments = RichText(
         title=_(u"Budget comments"),
-        description=_(u"Write here comments you have about budget."),
+        # description=_(u"Write here comments you have about budget."),
         required=False,
         default_mime_type='text/html',
         output_mime_type='text/html',
@@ -135,7 +135,7 @@ class IProject(model.Schema):
 
     manager = LocalRolesField(
         title=_(u"Manager"),
-        description=_(u"Choose principals that will manage this project."),
+        # description=_(u"Choose principals that will manage this project."),
         value_type=schema.Choice(
             vocabulary='imio.project.core.content.project.manager_vocabulary'
         ),
@@ -145,7 +145,7 @@ class IProject(model.Schema):
 
     visible_for = LocalRolesField(
         title=_(u"Visible for"),
-        description=_(u"Choose principals that can see this project."),
+        # description=_(u"Choose principals that can see this project."),
         required=False,
         value_type=schema.Choice(
             vocabulary='imio.project.core.content.project.visible_for_vocabulary'
@@ -154,8 +154,8 @@ class IProject(model.Schema):
 
     extra_concerned_people = schema.Text(
         title=_(u"Extra concerned people"),
-        description=_(u"Specify here concerned people that do not have access "
-                      "to the application, this will just be informational."),
+        # description=_(u"Specify here concerned people that do not have access "
+        #               "to the application, this will just be informational."),
         required=False,
     )
 
@@ -172,7 +172,7 @@ class IProject(model.Schema):
 
     planned_begin_date = schema.Date(
         title=_(u'Planned begin date'),
-        description=_(u"Enter the planned begin date."),
+        # description=_(u"Enter the planned begin date."),
         required=False,
 #        defaultFactory=datetime.date.today,
     )
@@ -180,7 +180,7 @@ class IProject(model.Schema):
 
     effective_begin_date = schema.Date(
         title=_(u'Effective begin date'),
-        description=_(u"Enter the effective begin date."),
+        # description=_(u"Enter the effective begin date."),
         required=False,
 #        defaultFactory=datetime.date.today,
     )
@@ -188,7 +188,7 @@ class IProject(model.Schema):
 
     planned_end_date = schema.Date(
         title=_(u'Planned end date'),
-        description=_(u"Enter the planned end date."),
+        # description=_(u"Enter the planned end date."),
         required=False,
 #        defaultFactory=datetime.date.today,
     )
@@ -196,7 +196,7 @@ class IProject(model.Schema):
 
     effective_end_date = schema.Date(
         title=_(u'Effective end date'),
-        description=_(u"Enter the effective end date."),
+        # description=_(u"Enter the effective end date."),
         required=False,
 #        defaultFactory=datetime.date.today,
     )
@@ -220,7 +220,7 @@ class IProject(model.Schema):
 
     comments = RichText(
         title=_(u"Comments"),
-        description=_(u"Various comments"),
+        # description=_(u"Various comments"),
         required=False,
         default_mime_type='text/html',
         output_mime_type='text/html',

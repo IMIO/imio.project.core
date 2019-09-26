@@ -151,7 +151,7 @@ class IProjectSpace(model.Schema):
     """
     last_reference_number = schema.Int(
         title=_(u"Last reference number"),
-        description=_(u""),
+        # description=_(u""),
         required=False,
         default=0,
     )
@@ -191,7 +191,7 @@ class IProjectSpace(model.Schema):
 
     budget_years = schema.List(
         title=_(u'Budget concerned years'),
-        description=_(u"Select all years concerned by budget."),
+        # description=_(u"Select all years concerned by budget."),
         required=True,
         value_type=schema.Choice(vocabulary=possible_years)
     )
@@ -205,13 +205,13 @@ class IProjectSpace(model.Schema):
 
     INS_code = schema.TextLine(
         title=_(u'INS Code'),
-        description=_(u'5-character code statistically representing the town'),
+        # description=_(u'5-character code statistically representing the town'),
         required=False,
     )
 
     current_fiscal_year = schema.Int(
         title=_(u'Current fiscal year'),
-        description=_(u''),
+        # description=_(u''),
         required=False,
     )
 
