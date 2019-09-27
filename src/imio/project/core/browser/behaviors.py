@@ -13,6 +13,7 @@ from zope.component import adapter
 from zope.interface import Interface
 from zope.interface import implementer
 from zope.interface import provider
+from plone.autoform import directives as form
 
 
 class IAnalyticBudgetSchema(Interface):
@@ -90,6 +91,9 @@ class IAnalyticBudget(model.Schema):
         DataGridField,
         display_table_css_class="listing nosort",
     )
+
+    form.order_before(projection='budget')
+    form.order_before(analytic_budget='budget')
 
 
 @implementer(IAnalyticBudget)
