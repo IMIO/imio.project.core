@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-09-25 10:48+0000\n"
+"POT-Creation-Date: 2019-09-27 13:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,12 +25,16 @@ msgstr ""
 msgid "5-character code statistically representing the town"
 msgstr ""
 
-#: ../browser/behaviors.py:33
+#: ../browser/controlpanel.py:17
+msgid "Allow the encoding of the analytical budget ?"
+msgstr ""
+
+#: ../browser/behaviors.py:34
 #: ../content/project.py:88
 msgid "Amount"
 msgstr ""
 
-#: ../browser/behaviors.py:70
+#: ../browser/behaviors.py:71
 msgid "Analytic budget"
 msgstr ""
 
@@ -46,7 +50,7 @@ msgstr ""
 msgid "Budget"
 msgstr ""
 
-#: ../browser/behaviors.py:29
+#: ../browser/behaviors.py:30
 msgid "Budget Article"
 msgstr ""
 
@@ -111,7 +115,7 @@ msgstr ""
 msgid "Current fiscal year"
 msgstr ""
 
-#: ../browser/behaviors.py:30
+#: ../browser/behaviors.py:31
 msgid "Define the budget article."
 msgstr ""
 
@@ -196,6 +200,11 @@ msgstr ""
 msgid "Observation"
 msgstr ""
 
+#: ../browser/controlpanel.py:26
+#: ../profiles/default/controlpanel.xml
+msgid "PST settings"
+msgstr ""
+
 #: ../content/project.py:174
 msgid "Planned begin date"
 msgstr ""
@@ -232,7 +241,7 @@ msgstr ""
 msgid "Project space"
 msgstr ""
 
-#: ../browser/behaviors.py:81
+#: ../browser/behaviors.py:83
 msgid "Projection"
 msgstr ""
 
@@ -284,7 +293,7 @@ msgstr ""
 msgid "Will contain projects sharing same configuration values"
 msgstr ""
 
-#: ../browser/behaviors.py:36
+#: ../browser/behaviors.py:37
 msgid "Write a comment about this budget line."
 msgstr ""
 
