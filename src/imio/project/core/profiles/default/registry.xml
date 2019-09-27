@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <registry xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
+  <records interface="imio.project.core.browser.controlpanel.ISettings" />
+
   <!--Lasting objectives values-->
   <record name="imio.project.core.lasting_objectives" i18n:domain="imio.project.core">
     <field type="plone.registry.field.Dict">
@@ -18,4 +20,6 @@
       <!--</element>-->
     </value>
   </record>
+
+
 </registry>

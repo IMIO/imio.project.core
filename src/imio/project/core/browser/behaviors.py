@@ -69,6 +69,7 @@ class IAnalyticBudget(model.Schema):
     analytic_budget = schema.List(
         title=_(u"Analytic budget"),
         required=False,
+        readonly=True,
         value_type=DictRow(
             title=_("Analytic budget"), schema=IAnalyticBudgetSchema, required=False
         ),
