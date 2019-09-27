@@ -23,7 +23,7 @@ class SettingsEditForm(RegistryEditForm):
 
     form.extends(RegistryEditForm)
     schema = ISettings
-    label = _(u"Gites settings")
+    label = _(u"PST settings")
 
 
 SettingsView = layout.wrap_form(SettingsEditForm, ControlPanelFormWrapper)
