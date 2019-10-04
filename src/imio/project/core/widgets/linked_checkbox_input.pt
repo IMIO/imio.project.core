@@ -73,6 +73,7 @@
   <label for=""
          tal:attributes="for item/id">
     <a class="label"
+       target="_blank"
        tal:content="item/label"
        tal:attributes="href item/url">Label</a>
   </label>

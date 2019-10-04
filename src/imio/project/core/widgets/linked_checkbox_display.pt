@@ -19,8 +19,9 @@
                       onkeyup view/onkeyup">
     <tal:block repeat="value view/displayValue">
         <a class="selected-option"
+           target="_blank"
            tal:content="value/term"
-           tal:attributes="href value/url"/>
-        <tal:block condition="not:repeat/value/end">, </tal:block>
+           tal:attributes="href value/url"
+        /><tal:block condition="not:repeat/value/end">, </tal:block>
     </tal:block></span>
 </html>
