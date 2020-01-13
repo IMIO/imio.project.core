@@ -104,7 +104,7 @@
                                             <Mode>TEXTE</Mode>
                                             <Valeur tal:content="action/description"/>
                                         </Description>
-                                        <Statut>NON_COMMENCE</Statut>
+                                        <Statut tal:content="python:view.status(action)"/>
                                         <Mandataire tal:define="mandataire python:view.mandataire(action, oo)"
                                                  tal:condition="mandataire">
                                             <Civilite>MONSIEUR</Civilite>

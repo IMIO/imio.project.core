@@ -41,6 +41,13 @@
         permission="cmf.ModifyPortalContent"
     />
 
+    <browser:page
+        name="import_from_ecomptes"
+        for="imio.project.core.content.projectspace.IProjectSpace"
+        class="imio.project.core.browser.views.PSTImportFromEcomptes"
+        permission="cmf.ModifyPortalContent"
+    />
+
     <configure package="imio.helpers">
         <browser:page
             for="imio.project.core.content.projectspace.IProjectSpace"

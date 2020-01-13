@@ -1,12 +1,21 @@
 # -*- coding: utf-8 -*-
 
-from Products.Five.browser import BrowserView
 from datetime import datetime
-from imio.helpers.browser.views import ContainerView
-from lxml import etree
 from os.path import dirname
+
+from Products.Five.browser import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
+from imio.helpers.browser.views import ContainerView
+from imio.project.core import _
+from lxml import etree
+from lxml.etree import XMLSyntaxError
 from plone import api
+from plone.supermodel import model
+from z3c.form import button
+from z3c.form.field import Fields
+from z3c.form.form import Form
 from z3c.form.interfaces import HIDDEN_MODE
+from zope import schema
 from zope.schema.interfaces import IVocabularyFactory
 
 
@@ -177,3 +186,75 @@ class PSTExportAsXML(BrowserView):
                 element.reference_number,
                 element.title.encode('utf8'),
             )
+
+
+class IPSTImportFromEcomptesSchema(model.Schema):
+
+    ecomptes_xml = schema.Bytes(
+        title=_(u"XML document exported from eComptes"),
+        description=u'',
+        required=True,
+    )
+
+
+class PSTImportFromEcomptes(Form):
+    label = _(u"Import data from eComptes")
+    fields = Fields(IPSTImportFromEcomptesSchema)
+    ignoreContext = True
+
+    def parse_xml(self, data):
+        schema_file_path = dirname(__file__) + '/../model/PST_eComptes_Export_201805V1.xsd'
+        schema_root = etree.parse(open(schema_file_path, 'rb'))
+        schema = etree.XMLSchema(schema_root)
+        parser = etree.XMLParser(schema=schema)
+
+        raw_xml = data.get('ecomptes_xml')
+        parsed_xml = etree.fromstring(raw_xml, parser)  # if invalid, raises XMLSyntaxError
+        return parsed_xml
+
+    def update_pst(self, ecomptes_xml):
+        all_articles_xml = ecomptes_xml.findall('.//Articles')
+
+        for articles_xml in all_articles_xml:
+            element_xml = articles_xml.getparent()
+            uid = element_xml.get('ElementId')
+            element_dx = api.content.get(UID=uid)
+
+            if element_dx:
+                element_dx_articles = []
+
+                for article_xml in articles_xml:
+                    year = int(article_xml.xpath("Exercice/text()")[0])
+                    article = u'{0} - {1}'.format(
+                        article_xml.xpath("CodeArticle/text()")[0],
+                        article_xml.xpath("Libelle/text()")[0],
+                    )
+                    amount = float(article_xml.xpath("Montant/text()")[0])
+                    element_dx_articles.append({
+                        'year': year,
+                        'article': article,
+                        'amount': amount,
+                        'comment': u'',
+                    })
+
+                element_dx.analytic_budget = element_dx_articles
+
+    @button.buttonAndHandler(_(u'Import'), name='import')
+    def handleApply(self, action):
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+        else:
+            try:
+                parsed_xml = self.parse_xml(data)
+            except XMLSyntaxError:
+                IStatusMessage(self.request).addStatusMessage(
+                    _(u'The imported document is not recognized as a valid eComptes export.'),
+                    'error',
+                )
+            else:
+                self.update_pst(parsed_xml)
+                IStatusMessage(self.request).addStatusMessage(
+                    _(u'The XML document has been successfully imported.'),
+                    'info',
+                )

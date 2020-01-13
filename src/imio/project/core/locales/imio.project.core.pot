@@ -171,6 +171,14 @@ msgstr ""
 msgid "INS Code"
 msgstr ""
 
+#: ../browser/views.py:283
+msgid "Import"
+msgstr ""
+
+#: ../browser/views.py:242
+msgid "Import data from eComptes"
+msgstr ""
+
 #: ../configure.zcml:29
 msgid "Installs the imio.project.core add-on."
 msgstr ""
@@ -273,6 +281,14 @@ msgstr ""
 msgid "Unique identification"
 msgstr ""
 
+#: ../browser/views.py:299
+msgid "The XML document has been successfully imported."
+msgstr ""
+
+#: ../browser/views.py:293
+msgid "The imported document is not recognized as a valid eComptes export."
+msgstr ""
+
 #: ../content/projectspace.py:201
 msgid "Use reference number"
 msgstr ""
@@ -301,7 +317,11 @@ msgstr ""
 msgid "Write here comments you have about budget."
 msgstr ""
 
-#: ../browser/behaviors.py:22
+#: ../browser/views.py:235
+msgid "XML document exported from eComptes"
+msgstr ""
+
+#: ../browser/behaviors.py:23
 #: ../content/project.py:67
 msgid "Year"
 msgstr ""
