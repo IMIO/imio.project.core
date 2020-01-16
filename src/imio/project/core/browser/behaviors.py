@@ -75,9 +75,7 @@ class IAnalyticBudget(model.Schema):
             title=_("Analytic budget"), schema=IAnalyticBudgetSchema, required=False
         ),
     )
-    directives.widget(
-        "analytic_budget", DataGridField, display_table_css_class="listing nosort"
-    )
+    directives.widget("analytic_budget", DataGridField, display_table_css_class="listing nosort")
 
     projection = schema.List(
         title=_(u"Projection"),
@@ -86,11 +84,7 @@ class IAnalyticBudget(model.Schema):
             title=_("Projection"), schema=IProjectionSchema, required=False
         ),
     )
-    directives.widget(
-        "projection",
-        DataGridField,
-        display_table_css_class="listing nosort",
-    )
+    directives.widget("projection", DataGridField, display_table_css_class="listing nosort")
 
     form.order_before(projection='budget')
     form.order_before(analytic_budget='budget')

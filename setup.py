@@ -48,6 +48,7 @@ setup(
         'collective.z3cform.datagridfield',
         'dexterity.localrolesfield',
         'plone.app.dexterity',
+        'plone.app.lockingbehavior',
         'plone.principalsource',
         'plone.formwidget.datetime',
         'setuptools',
