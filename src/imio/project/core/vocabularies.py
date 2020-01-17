@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from plone.registry.interfaces import IRegistry
-from zope.component import getUtility
 from zope.schema.vocabulary import SimpleVocabulary
 
 dict_plan_comptable_communal = {
@@ -827,7 +825,8 @@ dict_plan_comptable_communal = {
     "489-01": ["Indemnités pour petits dommages des autres pouvoirs publics", "R", "O"],
     "490-01": ["Contributions pour les traitements de l'enseignement libre", "R", "O"],
     "510-54": [
-        "Indemnité unique de droits d'emphytéose et de superficie sur des biens immobilisés appartenant aux entreprises",
+        "Indemnité unique de droits d'emphytéose et de superficie sur des biens immobilisés appartenant "
+        "aux entreprises",
         "D",
         "E",
     ],
@@ -843,7 +842,8 @@ dict_plan_comptable_communal = {
     ],
     "514-51": ["Garanties accordées en espèces à plus d'un an", "D", "E"],
     "520-54": [
-        "Indemn. unique de droits d'emphyt. et de sup. sur biens immob. appart. aux ménages et institutions à leur service",
+        "Indemn. unique de droits d'emphyt. et de sup. sur biens immob. appart. aux ménages et institutions "
+        "à leur service",
         "D",
         "E",
     ],
@@ -873,13 +873,15 @@ dict_plan_comptable_communal = {
     ],
     "580-53": ["Dons et legs provenant des ménages", "R", "E"],
     "580-54": [
-        "Indemn. unique de droits d'emphyt. et de sup. sur biens immob. accordés aux ménages et institut. à leur service",
+        "Indemn. unique de droits d'emphyt. et de sup. sur biens immob. accordés aux ménages et institut. "
+        "à leur service",
         "R",
         "E",
     ],
     "606-51": ["Récupération des transferts de revenus au secteur public", "R", "E"],
     "610-54": [
-        "Indemnité unique de droits d'emphytéose ou de superficie sur des biens immobilisés appartenant à l'autorité sup.",
+        "Indemnité unique de droits d'emphytéose ou de superficie sur des biens immobilisés appartenant "
+        "à l'autorité sup.",
         "D",
         "E",
     ],
@@ -975,7 +977,8 @@ dict_plan_comptable_communal = {
     ],
     "669-51": ["Dédommagements en capital de l'autorité supérieure", "R", "E"],
     "669-54": [
-        "Indemnité unique de droits d'emphytéose ou de superficie de biens immobiliers accordés à l'autorité supérieure",
+        "Indemnité unique de droits d'emphytéose ou de superficie de biens immobiliers accordés "
+        "à l'autorité supérieure",
         "R",
         "E",
     ],
@@ -1501,15 +1504,3 @@ class PlanComptableCommunalVocabularyFactory(object):
 
 
 PlanComptableCommunalVocabulary = PlanComptableCommunalVocabularyFactory()
-
-
-class LastingObjectiveVocabularyFactory(object):
-
-    def __call__(self, context):
-        registry = getUtility(IRegistry)
-        key_labels = sorted(registry.get('imio.project.core.lasting_objectives', {}).items())
-        terms = [{key: labels['title']} for key, labels in key_labels]
-        return dict_list_2_vocabulary(terms)
-
-
-LastingObjectiveVocabulary = LastingObjectiveVocabularyFactory()

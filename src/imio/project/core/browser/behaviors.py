@@ -21,20 +21,20 @@ class IAnalyticBudgetSchema(Interface):
 
     year = schema.Choice(
         title=_(u"Year"),
-        description=_(u"Choose a year."),
+        # description=_(u"Choose a year."),
         vocabulary=u"imio.project.core.content.project.year_vocabulary",
         required=True,
         defaultFactory=default_year,
     )
     article = schema.TextLine(
         title=_(u"Budget Article"),
-        description=_(u"Define the budget article."),
+        # description=_(u"Define the budget article."),
         required=True,
     )
     amount = schema.Float(title=_("Amount"), required=True, default=0.0)
     comment = schema.TextLine(
         title=_(u"Comment"),
-        description=_(u"Write a comment about this budget line."),
+        # description=_(u"Write a comment about this budget line."),
         required=False,
     )
 
@@ -44,21 +44,21 @@ class IProjectionSchema(Interface):
 
     year = schema.Choice(
         title=_(u"Year"),
-        description=_(u"Choose a year."),
+        # description=_(u"Choose a year."),
         vocabulary=u"imio.project.core.content.project.year_vocabulary",
         required=True,
         defaultFactory=default_year,
     )
     article = schema.Choice(
         title=_(u"Budget Article"),
-        description=_(u"Define the budget article."),
+        # description=_(u"Define the budget article."),
         vocabulary=u"imio.project.core.PCCVocabulary",
         required=True,
     )
     amount = schema.Float(title=_("Amount"), required=True, default=0.0)
     comment = schema.TextLine(
         title=_(u"Comment"),
-        description=_(u"Write a comment about this budget line."),
+        # description=_(u"Write a comment about this budget line."),
         required=False,
     )
 
