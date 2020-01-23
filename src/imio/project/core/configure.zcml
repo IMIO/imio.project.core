@@ -12,6 +12,7 @@
     <include package="plone.app.dexterity" />
     <include package="collective.contact.core" />
     <include package="collective.contact.plonegroup" />
+    <include package="collective.z3cform.chosen" />
     <include package="collective.z3cform.datagridfield" />
     <include package="dexterity.localrolesfield" />
     <include package="plone.app.lockingbehavior"/>

@@ -1,4 +1,5 @@
 from collective.contact.plonegroup.browser.settings import selectedOrganizationsVocabulary
+from collective.z3cform.chosen.widget import AjaxChosenMultiFieldWidget
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
 from dexterity.localrolesfield.field import LocalRolesField
@@ -106,6 +107,7 @@ class IProject(model.Schema):
         required=False,
         value_type=schema.Choice(source='imio.project.core.content.project.categories_vocabulary'),
     )
+    directives.widget('categories', AjaxChosenMultiFieldWidget, populate_select=True)
 
     priority = schema.Choice(
         title=_(u'Priority'),
@@ -142,6 +144,7 @@ class IProject(model.Schema):
         required=True,
         min_length=1,
     )
+    directives.widget('manager', AjaxChosenMultiFieldWidget, populate_select=True)
 
     visible_for = LocalRolesField(
         title=_(u"Visible for"),
