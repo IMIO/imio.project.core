@@ -50,6 +50,7 @@ setup(
         'dexterity.localrolesfield',
         'plone.app.dexterity',
         'plone.app.lockingbehavior',
+        'plone.app.versioningbehavior',
         'plone.principalsource',
         'plone.formwidget.datetime',
         'setuptools',

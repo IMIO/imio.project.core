@@ -16,6 +16,7 @@
     <include package="collective.z3cform.datagridfield" />
     <include package="dexterity.localrolesfield" />
     <include package="plone.app.lockingbehavior"/>
+    <include package="plone.app.versioningbehavior" />
     <include package="plone.principalsource" />
     <include package="plone.formwidget.datetime" />
     <include package=".browser" />
