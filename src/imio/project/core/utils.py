@@ -10,7 +10,7 @@ from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
 
-def getVocabularyTermsForOrganization(context, organization_id='services', states=[]):
+def getVocabularyTermsForOrganization(context, organization_id='services', states=[], sort_on='getObjPositionInParent'):
     """
       Submethod called by vocabularies to get their content from a query
       in the organizations of the 'contacts' directory.
@@ -28,7 +28,7 @@ def getVocabularyTermsForOrganization(context, organization_id='services', state
     catalog = portal.portal_catalog
     crit = {'path': {"query": sub_path, 'depth': 10},
             'portal_type': "organization",
-            'sort_on': ['path', 'getObjPositionInParent']}
+            'sort_on': sort_on}
     if states:
         crit['review_state'] = states
     brains = catalog(**crit)
@@ -37,12 +37,12 @@ def getVocabularyTermsForOrganization(context, organization_id='services', state
         path = brain.getPath()[sub_path_len:]
         if not path:
             continue  # organization_id itself
-        value = safe_unicode(brain.id)
+        value = safe_unicode(brain.UID)
         title = safe_unicode(brain.Title)
         level = len(path.split('/'))
         levels[level] = {'id': value, 'title': title}
         if level > 1:
-            value = u'{}-{}'.format(levels[level-1]['id'], value)
+            #value = u'{}-{}'.format(levels[level-1]['id'], value)
             title = u'{} - {}'.format(levels[level-1]['title'], title)
         terms.append(SimpleTerm(value, token=value, title=title))
     return SimpleVocabulary(terms)
