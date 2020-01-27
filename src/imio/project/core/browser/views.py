@@ -11,6 +11,7 @@ from lxml import etree
 from lxml.etree import XMLSyntaxError
 from plone import api
 from plone.supermodel import model
+from Products.CMFPlone.utils import base_hasattr
 from z3c.form import button
 from z3c.form.field import Fields
 from z3c.form.form import Form
@@ -55,7 +56,10 @@ class PSTExportAsXML(BrowserView):
         raw_xml = self.index()
         parsed_xml = etree.fromstring(raw_xml.encode("utf8"), parser)  # if invalid, raises XMLSyntaxError
 
-        self.request.RESPONSE.setHeader("Content-type", "text/xml")
+        # self.request.RESPONSE.setHeader("Content-type", "text/xml")  # open in browser
+        now = datetime.now()
+        self.request.RESPONSE.setHeader('Content-Disposition', 'attachment;filename="export_iApst_pour_ecomptes_{}'
+                                        '.xml"'.format(now.strftime('%Y%m%d')))
         return raw_xml
 
     @property
@@ -88,14 +92,24 @@ class PSTExportAsXML(BrowserView):
 
     def actions_and_subactions(self, oo):
         brains = api.content.find(
-            oo,
-            object_provides=[
-                "imio.project.pst.content.action.IPSTAction",
-                "imio.project.pst.content.action.IPSTSubAction",
-            ],
+            oo, depth=1,
+            object_provides='imio.project.pst.content.action.IPSTAction',
             sort_on='getObjPositionInParent',
         )
-        return [brain.getObject() for brain in brains]
+        ret = []
+        for brain in brains:
+            obj = brain.getObject()
+            if base_hasattr(obj, '_link_portal_type'):
+                continue  # we escape action_link
+            ret.append(obj)
+            sub_brains = api.content.find(obj, depth=1, object_provides='imio.project.pst.content.action.IPSTSubAction',
+                                          sort_on='getObjPositionInParent')
+            for sub_brain in sub_brains:
+                subobj = brain.getObject()
+                if base_hasattr(subobj, '_link_portal_type'):
+                    continue  # we escape subaction_link
+                ret.append(subobj)
+        return ret
 
     def status(self, element):
         element_state = api.content.get_state(element)
