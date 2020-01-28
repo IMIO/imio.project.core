@@ -71,6 +71,6 @@ def getProjectSpace(context):
     if not IDexterityContent.providedBy(context):
         context = context.context
     parent = context
-    while not parent.portal_type == 'projectspace':
+    while not parent.portal_type in ('projectspace', 'Plone Site'):
         parent = parent.aq_inner.aq_parent
     return parent
