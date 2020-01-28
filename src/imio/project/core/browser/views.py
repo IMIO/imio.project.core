@@ -37,7 +37,7 @@ class PSTProjectContainerView(ContainerView):
         for field_id, widget_id in (
             ('projection', 'IAnalyticBudget.projection'),
             ('analytic_budget', 'IAnalyticBudget.analytic_budget'),
-            ('budget', 'budget'),
+#            ('budget', 'budget'),
             ('budget_comments', 'budget_comments'),
         ):
             if widget_id in self.widgets and not getattr(self.context, field_id, None):
