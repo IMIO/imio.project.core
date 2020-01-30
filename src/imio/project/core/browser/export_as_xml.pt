@@ -114,7 +114,7 @@
                                             <eMail/>
                                         </Mandataire>
                                         <Departement tal:content="python:view.departement(action)"/>
-                                        <TauxAvancement tal:content="action/progress"/>
+                                        <TauxAvancement tal:content="python:view.progress(action)"/>
                                         <RemarqueStatut>
                                             <Mode>TEXTE</Mode>
                                             <Valeur/>

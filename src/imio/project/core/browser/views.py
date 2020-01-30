@@ -201,6 +201,13 @@ class PSTExportAsXML(BrowserView):
                 element.title.encode('utf8'),
             )
 
+    def progress(self, action):
+        try:
+            prog = int(action.progress or 0)
+        except ValueError:
+            return 0
+        return prog
+
 
 class IPSTImportFromEcomptesSchema(model.Schema):
 
