@@ -10,38 +10,74 @@ from imio.project.core import _
 from lxml import etree
 from lxml.etree import XMLSyntaxError
 from plone import api
+from plone.dexterity.browser.add import DefaultAddForm
+from plone.dexterity.browser.add import DefaultAddView
+from plone.dexterity.browser.edit import DefaultEditForm
 from plone.supermodel import model
+from plone.z3cform.fieldsets.utils import add
+from plone.z3cform.fieldsets.utils import remove
 from Products.CMFPlone.utils import base_hasattr
 from z3c.form import button
 from z3c.form.field import Fields
 from z3c.form.form import Form
-from z3c.form.interfaces import HIDDEN_MODE
 from zope import schema
 from zope.schema.interfaces import IVocabularyFactory
 
 
-class PSTContainerView(ContainerView):
+class PSContainerView(ContainerView):
     """ """
 
     collapse_all_fields = True
     collapse_all_fields_onload = True
 
 
-class PSTProjectContainerView(ContainerView):
-    """ """
+def manage_fields(the_form, portal_type):
+    """
+        Remove and reorder fields
+    """
+    ordered = api.portal.get_registry_record('imio.project.settings.{}_fields'.format(portal_type), default=[]) or []
+    # order kept fields
+    for field_name in reversed(ordered):
+        field = remove(the_form, field_name)
+        if field is not None:
+            add(the_form, field, index=0)
+    # remove all other fields
+    for group in [the_form] + the_form.groups:
+        for field_name in group.fields:
+            if field_name not in ordered:
+                group.fields = group.fields.omit(field_name)
 
-    def updateWidgets(self, prefix=None):
-        super(ContainerView, self).updateWidgets(prefix)
 
-        # hide empty budget fields
-        for field_id, widget_id in (
-            ('projection', 'IAnalyticBudget.projection'),
-            ('analytic_budget', 'IAnalyticBudget.analytic_budget'),
-#            ('budget', 'budget'),
-            ('budget_comments', 'budget_comments'),
-        ):
-            if widget_id in self.widgets and not getattr(self.context, field_id, None):
-                self.widgets[widget_id].mode = HIDDEN_MODE
+class ProjectContainerView(ContainerView):
+    """ View form redefinition to customize fields. """
+
+    def updateFieldsFromSchemata(self):
+        super(ProjectContainerView, self).updateFieldsFromSchemata()
+        manage_fields(self, self.context.portal_type)
+
+
+class ProjectContainerEdit(DefaultEditForm):
+    """
+        Edit form redefinition to customize fields.
+    """
+
+    def updateFields(self):
+        super(ProjectContainerEdit, self).updateFields()
+        manage_fields(self, self.context.portal_type)
+
+
+class ProjectAddForm(DefaultAddForm):
+
+    portal_type = 'project'
+
+    def updateFields(self):
+        super(ProjectAddForm, self).updateFields()
+        manage_fields(self, self.portal_type)
+
+
+class ProjectContainerAdd(DefaultAddView):
+
+    form = ProjectAddForm
 
 
 class PSTExportAsXML(BrowserView):

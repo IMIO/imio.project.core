@@ -17,9 +17,11 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 def get_pt_fields_voc(pt, excluded):
     terms = []
+    print pt
     for name, field in get_schema_fields(type_name=pt, prefix=True):
         if name in excluded:
             continue
+        print name
         terms.append(SimpleTerm(name, title=_tr(field.title)))
     return SimpleVocabulary(terms)
 
