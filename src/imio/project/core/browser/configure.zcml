@@ -66,4 +66,12 @@
         permission="zope2.View"
         />
 
+    <browser:page
+      name="project-settings"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      permission="cmf.ManagePortal"
+      class=".controlpanel.SettingsView"
+      layer="imio.project.core.interfaces.IImioProjectLayer"
+      />
+
 </configure>

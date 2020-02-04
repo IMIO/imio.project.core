@@ -3,6 +3,17 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     i18n:domain="imio.project.core">
 
-    <configlet action_id="imio.project.core.settings" remove="true" />
+    <configlet
+        title="Project settings"
+        action_id="imio.project.core.settings"
+        appId="ProjectSettings"
+        category="Products"
+        condition_expr=""
+        icon_expr=""
+        url_expr="string:${portal_url}/@@project-settings"
+        visible="True"
+        i18n:attributes="title">
+            <permission>Manage Site</permission>
+    </configlet>
 
 </object>

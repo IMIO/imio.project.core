@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-01-17 09:58+0000\n"
+"POT-Creation-Date: 2020-02-04 11:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,12 +15,12 @@ msgstr ""
 "Domain: imio.project.core\n"
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
-#: ./browser/controlpanel.py:17
-msgid "Allow the encoding of the analytical budget ?"
-msgstr "Autoriser l'encodage du budget analytique ?"
+#: ./browser/controlpanel.py:42
+msgid "${type} fields display"
+msgstr "Affichage et ordre des champs du type ${type}"
 
 #: ./browser/behaviors.py:34
-#: ./content/project.py:88
+#: ./content/project.py:89
 msgid "Amount"
 msgstr "Montant"
 
@@ -36,7 +36,7 @@ msgstr "Annexes"
 msgid "Behavior with analytic budget fields"
 msgstr "Behavior avec les champs de budget analytique"
 
-#: ./content/project.py:117
+#: ./content/project.py:119
 msgid "Budget"
 msgstr "Financement/Budget"
 
@@ -44,7 +44,7 @@ msgstr "Financement/Budget"
 msgid "Budget Article"
 msgstr "Article du budget"
 
-#: ./content/project.py:128
+#: ./content/project.py:130
 msgid "Budget comments"
 msgstr "Commentaires sur le financement/budget"
 
@@ -56,11 +56,11 @@ msgstr "Années budget"
 msgid "Budget types values"
 msgstr "Types de budget possibles"
 
-#: ./content/project.py:77
+#: ./content/project.py:78
 msgid "Budget_type"
 msgstr "Type de budget"
 
-#: ./content/project.py:104
+#: ./content/project.py:105
 msgid "Categories"
 msgstr "Catégories"
 
@@ -72,7 +72,7 @@ msgstr "Catégories possibles"
 msgid "Comment"
 msgstr "Commentaire"
 
-#: ./content/project.py:222
+#: ./content/project.py:225
 msgid "Comments"
 msgstr "Commentaires"
 
@@ -80,11 +80,11 @@ msgstr "Commentaires"
 msgid "Current fiscal year"
 msgstr "Exercice en cours"
 
-#: ./content/project.py:182
+#: ./content/project.py:185
 msgid "Effective begin date"
 msgstr "Date de début effective"
 
-#: ./content/project.py:198
+#: ./content/project.py:201
 msgid "Effective end date"
 msgstr "Date de fin effective"
 
@@ -92,15 +92,15 @@ msgstr "Date de fin effective"
 msgid "Enter one different value by row. Label is the displayed value. Key is the stored value: in lowercase, without space."
 msgstr "Entrer une valeur différente par ligne. Le libellé est la valeur affichée. La clé est la valeur stockée: en minuscule, sans espace, sans accent."
 
-#: ./content/project.py:164
+#: ./content/project.py:167
 msgid "Enter one indicator by row. Value is a number. Label must precise the signification of this number."
 msgstr "Entrer un indicateur par ligne. La valeur est un nombre. Le libellé doit préciser la signification de ce nombre."
 
-#: ./content/project.py:60
+#: ./content/project.py:61
 msgid "Expected value"
 msgstr "Valeur à atteindre"
 
-#: ./content/project.py:156
+#: ./content/project.py:159
 msgid "Extra concerned people"
 msgstr "Partenaires externes"
 
@@ -112,15 +112,15 @@ msgstr "Champs"
 msgid "INS Code"
 msgstr "Code INS"
 
-#: ./browser/views.py:242
+#: ./browser/views.py:263
 msgid "Import"
 msgstr "Importer"
 
-#: ./browser/views.py:201
+#: ./browser/views.py:222
 msgid "Import data from eComptes"
 msgstr "Importer les données depuis eComptes"
 
-#: ./configure.zcml:29
+#: ./configure.zcml:31
 msgid "Installs the imio.project.core add-on."
 msgstr "Installs the imio.project.core add-on."
 
@@ -128,7 +128,7 @@ msgstr "Installs the imio.project.core add-on."
 msgid "Key"
 msgstr "Clé"
 
-#: ./content/project.py:57
+#: ./content/project.py:58
 #: ./content/projectspace.py:138
 msgid "Label"
 msgstr "Libellé"
@@ -137,32 +137,27 @@ msgstr "Libellé"
 msgid "Last reference number"
 msgstr "Dernier numéro de référence"
 
-#: ./content/project.py:137
+#: ./content/project.py:139
 msgid "Manager"
 msgstr "Gestionnaire"
 
-#: ./content/project.py:213
+#: ./content/project.py:216
 msgid "Observation"
 msgstr "Constat"
 
-#: ./browser/controlpanel.py:26
-#: ./profiles/default/controlpanel.xml
-msgid "PST settings"
-msgstr "Configuration du PST"
-
-#: ./content/project.py:174
+#: ./content/project.py:177
 msgid "Planned begin date"
 msgstr "Date de début prévue"
 
-#: ./content/project.py:190
+#: ./content/project.py:193
 msgid "Planned end date"
 msgstr "Échéance"
 
-#: ./content/project.py:214
+#: ./content/project.py:217
 msgid "Prior determination"
 msgstr "Constat préalable"
 
-#: ./content/project.py:111
+#: ./content/project.py:113
 msgid "Priority"
 msgstr "Priorité"
 
@@ -170,17 +165,23 @@ msgstr "Priorité"
 msgid "Priority values"
 msgstr "Priorités possibles"
 
-#: ./content/project.py:206
+#: ./content/project.py:209
 msgid "Progress"
 msgstr "Progression"
 
-#: ./content/project.py:207
+#: ./content/project.py:210
 msgid "Progress estimation in %."
 msgstr "Entrer la progression en %."
 
+#: ./browser/controlpanel.py:42
 #: ./profiles/default/types/project.xml
 msgid "Project"
 msgstr "Projet"
+
+#: ./browser/controlpanel.py:54
+#: ./profiles/default/controlpanel.xml
+msgid "Project settings"
+msgstr "Gestion de projet"
 
 #: ./profiles/default/types/projectspace.xml
 msgid "Project space"
@@ -190,15 +191,15 @@ msgstr "Espace de projets"
 msgid "Projection"
 msgstr "Projections"
 
-#: ./content/project.py:63
+#: ./content/project.py:64
 msgid "Reached value"
 msgstr "Valeur déjà atteinte"
 
-#: ./content/project.py:96
+#: ./content/project.py:97
 msgid "Reference number"
 msgstr "Numéro de référence"
 
-#: ./content/project.py:163
+#: ./content/project.py:166
 msgid "Result indicator"
 msgstr "Indicateur de résultat"
 
@@ -206,11 +207,11 @@ msgstr "Indicateur de résultat"
 msgid "Steps to ease tests of imio.project.core"
 msgstr "Steps to ease tests of imio.project.core"
 
-#: ./browser/views.py:258
+#: ./browser/views.py:279
 msgid "The XML document has been successfully imported."
 msgstr "Le document XML a été importé avec succès."
 
-#: ./browser/views.py:252
+#: ./browser/views.py:273
 msgid "The imported document is not recognized as a valid eComptes export."
 msgstr "Le document soumis n'est pas reconnu comme un export eComptes valide."
 
@@ -227,7 +228,7 @@ msgstr "Utiliser le numéro de référence"
 msgid "Used in Title, documents, etc."
 msgstr "Utilisé dans le titre, les documents, etc."
 
-#: ./content/project.py:147
+#: ./content/project.py:150
 msgid "Visible for"
 msgstr "Visible pour"
 
@@ -235,12 +236,12 @@ msgstr "Visible pour"
 msgid "Will contain projects sharing same configuration values"
 msgstr "Espace pour des projets partageant la même configuration"
 
-#: ./browser/views.py:194
+#: ./browser/views.py:215
 msgid "XML document exported from eComptes"
 msgstr "Document XML exporté d'eComptes"
 
 #: ./browser/behaviors.py:23
-#: ./content/project.py:67
+#: ./content/project.py:68
 msgid "Year"
 msgstr "Année"
 
@@ -268,7 +269,7 @@ msgstr "Informations budgétaires collectées sur les sous-éléments"
 msgid "budgetinfos_legend_local_data"
 msgstr "Informations budgétaires encodées sur l'élément courant"
 
-#: ./configure.zcml:29
+#: ./configure.zcml:31
 msgid "imio.project.core"
 msgstr "imio.project.core"
 
