@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <registry xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
-  <records interface="imio.project.core.browser.controlpanel.ISettings" />
+  <record name="imio.project.core.browser.controlpanel.ISettings.allow_the_encoding_of_the_analytical_budget" remove="true" />
 
 </registry>

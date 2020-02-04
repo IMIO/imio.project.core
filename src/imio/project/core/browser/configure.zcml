@@ -66,12 +66,4 @@
         permission="zope2.View"
         />
 
-    <browser:page
-      name="pst-settings"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      permission="cmf.ManagePortal"
-      class=".controlpanel.SettingsView"
-      layer="imio.project.pst.interfaces.IImioProjectPSTLayer"
-      />
-
 </configure>
