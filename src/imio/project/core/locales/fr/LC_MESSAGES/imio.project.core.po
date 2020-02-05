@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-02-04 11:06+0000\n"
+"POT-Creation-Date: 2020-02-05 09:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Domain: imio.project.core\n"
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
-#: ./browser/controlpanel.py:42
+#: ./browser/controlpanel.py:77
 msgid "${type} fields display"
 msgstr "Affichage et ordre des champs du type ${type}"
 
@@ -104,19 +104,15 @@ msgstr "Valeur à atteindre"
 msgid "Extra concerned people"
 msgstr "Partenaires externes"
 
-#: ./browser/container.pt:15
-msgid "Fields"
-msgstr "Champs"
-
 #: ./content/projectspace.py:207
 msgid "INS Code"
 msgstr "Code INS"
 
-#: ./browser/views.py:263
+#: ./browser/views.py:299
 msgid "Import"
 msgstr "Importer"
 
-#: ./browser/views.py:222
+#: ./browser/views.py:258
 msgid "Import data from eComptes"
 msgstr "Importer les données depuis eComptes"
 
@@ -140,6 +136,10 @@ msgstr "Dernier numéro de référence"
 #: ./content/project.py:139
 msgid "Manager"
 msgstr "Gestionnaire"
+
+#: ./browser/controlpanel.py:58
+msgid "Missing mandatory fields: ${msg}"
+msgstr "Des champs obligatoires sont manquants: ${msg}"
 
 #: ./content/project.py:216
 msgid "Observation"
@@ -173,12 +173,12 @@ msgstr "Progression"
 msgid "Progress estimation in %."
 msgstr "Entrer la progression en %."
 
-#: ./browser/controlpanel.py:42
+#: ./browser/controlpanel.py:77
 #: ./profiles/default/types/project.xml
 msgid "Project"
 msgstr "Projet"
 
-#: ./browser/controlpanel.py:54
+#: ./browser/controlpanel.py:94
 #: ./profiles/default/controlpanel.xml
 msgid "Project settings"
 msgstr "Gestion de projet"
@@ -190,6 +190,10 @@ msgstr "Espace de projets"
 #: ./browser/behaviors.py:81
 msgid "Projection"
 msgstr "Projections"
+
+#: ./browser/controlpanel.py:78
+msgid "Put fields on the right to display it. Fields with asterisk are mandatory !"
+msgstr "Placer les champs à droite pour les afficher. Les champs avec astérique sont obligatoires !"
 
 #: ./content/project.py:64
 msgid "Reached value"
@@ -207,11 +211,11 @@ msgstr "Indicateur de résultat"
 msgid "Steps to ease tests of imio.project.core"
 msgstr "Steps to ease tests of imio.project.core"
 
-#: ./browser/views.py:279
+#: ./browser/views.py:315
 msgid "The XML document has been successfully imported."
 msgstr "Le document XML a été importé avec succès."
 
-#: ./browser/views.py:273
+#: ./browser/views.py:309
 msgid "The imported document is not recognized as a valid eComptes export."
 msgstr "Le document soumis n'est pas reconnu comme un export eComptes valide."
 
@@ -236,7 +240,7 @@ msgstr "Visible pour"
 msgid "Will contain projects sharing same configuration values"
 msgstr "Espace pour des projets partageant la même configuration"
 
-#: ./browser/views.py:215
+#: ./browser/views.py:251
 msgid "XML document exported from eComptes"
 msgstr "Document XML exporté d'eComptes"
 
@@ -269,6 +273,10 @@ msgstr "Informations budgétaires collectées sur les sous-éléments"
 msgid "budgetinfos_legend_local_data"
 msgstr "Informations budgétaires encodées sur l'élément courant"
 
+#: ./browser/controlpanel.py:55
+msgid "for '${type}' type => ${fields}. "
+msgstr "pour le type '${type}' => ${fields}. "
+
 #: ./configure.zcml:31
 msgid "imio.project.core"
 msgstr "imio.project.core"
@@ -276,3 +284,7 @@ msgstr "imio.project.core"
 #: ./testing.zcml:17
 msgid "imio.project.core tests"
 msgstr "imio.project.core tests"
+
+#: ./browser/controlpanel.py:55
+msgid "project"
+msgstr "Projet"

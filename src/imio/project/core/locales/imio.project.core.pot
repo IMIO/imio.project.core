@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-02-04 11:06+0000\n"
+"POT-Creation-Date: 2020-02-05 09:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: imio.project.core\n"
 
-#: ./browser/controlpanel.py:42
+#: ./browser/controlpanel.py:77
 msgid "${type} fields display"
 msgstr ""
 
@@ -106,19 +106,15 @@ msgstr ""
 msgid "Extra concerned people"
 msgstr ""
 
-#: ./browser/container.pt:15
-msgid "Fields"
-msgstr ""
-
 #: ./content/projectspace.py:207
 msgid "INS Code"
 msgstr ""
 
-#: ./browser/views.py:263
+#: ./browser/views.py:299
 msgid "Import"
 msgstr ""
 
-#: ./browser/views.py:222
+#: ./browser/views.py:258
 msgid "Import data from eComptes"
 msgstr ""
 
@@ -141,6 +137,10 @@ msgstr ""
 
 #: ./content/project.py:139
 msgid "Manager"
+msgstr ""
+
+#: ./browser/controlpanel.py:58
+msgid "Missing mandatory fields: ${msg}"
 msgstr ""
 
 #: ./content/project.py:216
@@ -175,12 +175,12 @@ msgstr ""
 msgid "Progress estimation in %."
 msgstr ""
 
-#: ./browser/controlpanel.py:42
+#: ./browser/controlpanel.py:77
 #: ./profiles/default/types/project.xml
 msgid "Project"
 msgstr ""
 
-#: ./browser/controlpanel.py:54
+#: ./browser/controlpanel.py:94
 #: ./profiles/default/controlpanel.xml
 msgid "Project settings"
 msgstr ""
@@ -191,6 +191,10 @@ msgstr ""
 
 #: ./browser/behaviors.py:81
 msgid "Projection"
+msgstr ""
+
+#: ./browser/controlpanel.py:78
+msgid "Put fields on the right to display it. Fields with asterisk are mandatory !"
 msgstr ""
 
 #: ./content/project.py:64
@@ -209,11 +213,11 @@ msgstr ""
 msgid "Steps to ease tests of imio.project.core"
 msgstr ""
 
-#: ./browser/views.py:279
+#: ./browser/views.py:315
 msgid "The XML document has been successfully imported."
 msgstr ""
 
-#: ./browser/views.py:273
+#: ./browser/views.py:309
 msgid "The imported document is not recognized as a valid eComptes export."
 msgstr ""
 
@@ -238,7 +242,7 @@ msgstr ""
 msgid "Will contain projects sharing same configuration values"
 msgstr ""
 
-#: ./browser/views.py:215
+#: ./browser/views.py:251
 msgid "XML document exported from eComptes"
 msgstr ""
 
@@ -271,10 +275,18 @@ msgstr ""
 msgid "budgetinfos_legend_local_data"
 msgstr ""
 
+#: ./browser/controlpanel.py:55
+msgid "for '${type}' type => ${fields}. "
+msgstr ""
+
 #: ./configure.zcml:31
 msgid "imio.project.core"
 msgstr ""
 
 #: ./testing.zcml:17
 msgid "imio.project.core tests"
+msgstr ""
+
+#: ./browser/controlpanel.py:55
+msgid "project"
 msgstr ""

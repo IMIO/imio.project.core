@@ -3,3 +3,11 @@
 #: ./content/projectspace.py:73
 msgid "The key '${removed_key}' can not be removed because it is currently used (for example by '${used_by_url}')."
 msgstr ""
+
+#: ./browser/controlpanel.py:55
+msgid "for '${type}' type => ${fields}. "
+msgstr ""
+
+#: ./browser/controlpanel.py:55
+msgid "project"
+msgstr ""
