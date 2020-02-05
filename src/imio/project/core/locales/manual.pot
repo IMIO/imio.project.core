@@ -5,6 +5,10 @@ msgid "The key '${removed_key}' can not be removed because it is currently used 
 msgstr ""
 
 #: ./browser/controlpanel.py:55
+msgid "'${fld}' at position ${i}"
+msgstr ""
+
+#: ./browser/controlpanel.py:55
 msgid "for '${type}' type => ${fields}. "
 msgstr ""
 

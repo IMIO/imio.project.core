@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-02-05 09:54+0000\n"
+"POT-Creation-Date: 2020-02-05 13:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,9 +15,13 @@ msgstr ""
 "Domain: imio.project.core\n"
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
-#: ./browser/controlpanel.py:77
+#: ./browser/controlpanel.py:98
 msgid "${type} fields display"
 msgstr "Affichage et ordre des champs du type ${type}"
+
+#: ./browser/controlpanel.py:55
+msgid "'${fld}' at position ${i}"
+msgstr "'${fld}' à la position ${i}"
 
 #: ./browser/behaviors.py:34
 #: ./content/project.py:89
@@ -137,7 +141,7 @@ msgstr "Dernier numéro de référence"
 msgid "Manager"
 msgstr "Gestionnaire"
 
-#: ./browser/controlpanel.py:58
+#: ./browser/controlpanel.py:59
 msgid "Missing mandatory fields: ${msg}"
 msgstr "Des champs obligatoires sont manquants: ${msg}"
 
@@ -173,12 +177,12 @@ msgstr "Progression"
 msgid "Progress estimation in %."
 msgstr "Entrer la progression en %."
 
-#: ./browser/controlpanel.py:77
+#: ./browser/controlpanel.py:98
 #: ./profiles/default/types/project.xml
 msgid "Project"
 msgstr "Projet"
 
-#: ./browser/controlpanel.py:94
+#: ./browser/controlpanel.py:116
 #: ./profiles/default/controlpanel.xml
 msgid "Project settings"
 msgstr "Gestion de projet"
@@ -191,7 +195,7 @@ msgstr "Espace de projets"
 msgid "Projection"
 msgstr "Projections"
 
-#: ./browser/controlpanel.py:78
+#: ./browser/controlpanel.py:99
 msgid "Put fields on the right to display it. Fields with asterisk are mandatory !"
 msgstr "Placer les champs à droite pour les afficher. Les champs avec astérique sont obligatoires !"
 
@@ -206,6 +210,10 @@ msgstr "Numéro de référence"
 #: ./content/project.py:166
 msgid "Result indicator"
 msgstr "Indicateur de résultat"
+
+#: ./browser/controlpanel.py:79
+msgid "Some fields have to be at a specific position: ${msg}"
+msgstr "Certains champs doivent être à une position précise: ${msg}"
 
 #: ./testing.zcml:17
 msgid "Steps to ease tests of imio.project.core"
