@@ -31,12 +31,15 @@ def get_pt_fields_voc(pt, excluded, constraints={}):
     """
     terms = []
     mandatory = constraints.get('mandatory', {})
+    if pt not in constraints.setdefault('titles', {}):
+        constraints['titles'][pt] = {}
     print "=> "+pt
     for name, field in get_schema_fields(type_name=pt, prefix=True):
         if name in excluded:
             continue
         print name
         title = _tr(field.title)
+        constraints['titles'][pt][name] = title
         if name in mandatory.get(pt, []):
             title = u'{} *'.format(title)
         terms.append(SimpleTerm(name, title=title))
@@ -53,13 +56,13 @@ def mandatory_check(data, constraints):
         for mand in mandatory[pt]:
             if not mand in dic[fld]:
                 if pt not in missing:
-                    missing[fld] = []
-                missing[fld].append(mand)
+                    missing[pt] = []
+                missing[pt].append(mand)
     msg = u''
-    for fld in missing:
-        data._Data_schema___[fld].value_type.vocabularyName  # voc to get translated fields
-        msg += _tr(u"for '${type}' type => ${fields}. ", mapping={'type': _tr(fld[:-7]),
-                                                                  'fields': ', '.join(missing[fld])})
+    for pt in missing:
+        fields = [u"'{}'".format(constraints['titles'][pt][fld]) for fld in missing[pt]]
+        msg += _tr(u"for '${type}' type => ${fields}. ", mapping={'type': _tr(pt),
+                                                                  'fields': ', '.join(fields)})
     if msg:
         raise Invalid(_(u'Missing mandatory fields: ${msg}', mapping={'msg': msg}))
 
@@ -73,13 +76,14 @@ def position_check(data, constraints):
         pt_fld = '{}_fields'.format(pt)
         for (fld, i) in indexes[pt]:
             if dic[pt_fld].index(fld) + 1 != i:
-                if pt_fld not in errors:
-                    errors[pt_fld] = []
-                errors[pt_fld].append((fld, i))
+                if pt not in errors:
+                    errors[pt] = []
+                errors[pt].append((fld, i))
     msg = u''
-    for pt_fld in errors:
-        fields = [_tr(u"'${fld}' at position ${i}", mapping={'fld': fld, 'i': i}) for (fld, i) in errors[pt_fld]]
-        msg += _tr(u"for '${type}' type => ${fields}. ", mapping={'type': _tr(pt_fld[:-7]),
+    for pt in errors:
+        fields = [_tr(u"'${fld}' at position ${i}",
+                      mapping={'fld': constraints['titles'][pt][fld], 'i': i}) for (fld, i) in errors[pt]]
+        msg += _tr(u"for '${type}' type => ${fields}. ", mapping={'type': _tr(pt),
                                                                   'fields': ', '.join(fields)})
     if msg:
         raise Invalid(_(u'Some fields have to be at a specific position: ${msg}', mapping={'msg': msg}))
