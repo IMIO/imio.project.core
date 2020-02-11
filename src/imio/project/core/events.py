@@ -2,10 +2,12 @@
 
 from OFS.Application import Application
 from imio.helpers.cache import cleanRamCacheFor
+from imio.project.core.browser.controlpanel import field_constraints
 from imio.project.core.config import CHILDREN_BUDGET_INFOS_ANNOTATION_KEY as CBIAK
 from imio.project.core.content.project import IProject
 from imio.project.core.utils import getProjectSpace
 from plone import api
+from plone.registry.interfaces import IRecordModifiedEvent
 from zope.annotation import IAnnotations
 
 """
@@ -172,3 +174,35 @@ def onModifyProjectSpace(obj, event):
             for brain in pc(object_provides=IProject.__identifier__):
                 brain.getObject().reindexObject(['Title', 'sortable_title'])
             cleanRamCacheFor('imio.prettylink.adapters.getLink')
+
+
+def empty_fields(event, dic):
+    if event.oldValue is None:
+        return  # site creation: nothing to do
+    pt = event.record.fieldName[:-7]
+    if pt not in dic:
+        return  # nothing to do
+    ovs, nvs = set(event.oldValue), set(event.newValue)
+    removed = ovs - nvs
+    es = set(dic[pt])  # set of configured fields to empty
+    to_empty = es.intersection(removed)
+    if not to_empty:
+        return
+    to_empty = [fld.split('.')[-1] for fld in to_empty]
+    for brain in api.content.find(portal_type=pt):
+        obj = brain.getObject()
+        changed = False
+        for fld in to_empty:
+            if getattr(obj, fld, False):
+                setattr(obj, fld, None)
+                changed = True
+        if changed:
+            obj.reindexObject()
+
+
+def registry_changed(event):
+    """ Handler when the registry is changed """
+    if IRecordModifiedEvent.providedBy(event):
+        if event.record.interfaceName == 'imio.project.pst.browser.controlpanel.IImioPSTSettings':
+            empty = field_constraints.get('empty', {})
+            empty_fields(event, empty)

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-02-05 13:16+0000\n"
+"POT-Creation-Date: 2020-02-10 14:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: imio.project.core\n"
 
-#: ./browser/controlpanel.py:98
+#: ./browser/controlpanel.py:131
 msgid "${type} fields display"
 msgstr ""
 
@@ -143,7 +143,7 @@ msgstr ""
 msgid "Manager"
 msgstr ""
 
-#: ./browser/controlpanel.py:59
+#: ./browser/controlpanel.py:73
 msgid "Missing mandatory fields: ${msg}"
 msgstr ""
 
@@ -179,12 +179,12 @@ msgstr ""
 msgid "Progress estimation in %."
 msgstr ""
 
-#: ./browser/controlpanel.py:98
+#: ./browser/controlpanel.py:131
 #: ./profiles/default/types/project.xml
 msgid "Project"
 msgstr ""
 
-#: ./browser/controlpanel.py:116
+#: ./browser/controlpanel.py:149
 #: ./profiles/default/controlpanel.xml
 msgid "Project settings"
 msgstr ""
@@ -197,8 +197,8 @@ msgstr ""
 msgid "Projection"
 msgstr ""
 
-#: ./browser/controlpanel.py:99
-msgid "Put fields on the right to display it. Fields with asterisk are mandatory !"
+#: ./browser/controlpanel.py:132
+msgid "Put fields on the right to display it. Flags are : ..."
 msgstr ""
 
 #: ./content/project.py:64
@@ -213,7 +213,7 @@ msgstr ""
 msgid "Result indicator"
 msgstr ""
 
-#: ./browser/controlpanel.py:79
+#: ./browser/controlpanel.py:95
 msgid "Some fields have to be at a specific position: ${msg}"
 msgstr ""
 

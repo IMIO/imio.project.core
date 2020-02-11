@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-02-05 13:16+0000\n"
+"POT-Creation-Date: 2020-02-10 14:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Domain: imio.project.core\n"
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
-#: ./browser/controlpanel.py:98
+#: ./browser/controlpanel.py:131
 msgid "${type} fields display"
 msgstr "Affichage et ordre des champs du type ${type}"
 
@@ -141,7 +141,7 @@ msgstr "Dernier numéro de référence"
 msgid "Manager"
 msgstr "Gestionnaire"
 
-#: ./browser/controlpanel.py:59
+#: ./browser/controlpanel.py:73
 msgid "Missing mandatory fields: ${msg}"
 msgstr "Des champs obligatoires sont manquants: ${msg}"
 
@@ -177,12 +177,12 @@ msgstr "Progression"
 msgid "Progress estimation in %."
 msgstr "Entrer la progression en %."
 
-#: ./browser/controlpanel.py:98
+#: ./browser/controlpanel.py:131
 #: ./profiles/default/types/project.xml
 msgid "Project"
 msgstr "Projet"
 
-#: ./browser/controlpanel.py:116
+#: ./browser/controlpanel.py:149
 #: ./profiles/default/controlpanel.xml
 msgid "Project settings"
 msgstr "Gestion de projet"
@@ -195,9 +195,9 @@ msgstr "Espace de projets"
 msgid "Projection"
 msgstr "Projections"
 
-#: ./browser/controlpanel.py:99
-msgid "Put fields on the right to display it. Fields with asterisk are mandatory !"
-msgstr "Placer les champs à droite pour les afficher. Les champs avec astérique sont obligatoires !"
+#: ./browser/controlpanel.py:132
+msgid "Put fields on the right to display it. Flags are : ..."
+msgstr "Placer les champs à droite pour les afficher. Les indicateurs après le nom du champ signifient : <ul><li>* = obligatoire ! </li><li>nombre = position obligatoire ! </li><li>- = si retiré, le contenu du champ va être supprimé !</li></ul>"
 
 #: ./content/project.py:64
 msgid "Reached value"
@@ -211,7 +211,7 @@ msgstr "Numéro de référence"
 msgid "Result indicator"
 msgstr "Indicateur de résultat"
 
-#: ./browser/controlpanel.py:79
+#: ./browser/controlpanel.py:95
 msgid "Some fields have to be at a specific position: ${msg}"
 msgstr "Certains champs doivent être à une position précise: ${msg}"
 

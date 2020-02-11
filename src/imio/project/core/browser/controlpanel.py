@@ -21,6 +21,7 @@ field_constraints = {
     'titles': {},
     'mandatory': {'project': ['IDublinCore.title', 'IDublinCore.description']},
     'indexes': {'project': [('IDublinCore.title', 1), ('IDublinCore.description', 2)]},
+    'empty': {'project': ['IDublinCore.description']},
 }
 
 
@@ -30,7 +31,9 @@ def get_pt_fields_voc(pt, excluded, constraints={}):
         Mandatory ones are suffixed with asterisk.
     """
     terms = []
-    mandatory = constraints.get('mandatory', {})
+    mandatory = constraints.get('mandatory', {}).get(pt, [])
+    positions = {fld: pos for fld, pos in constraints.get('indexes', {}).get(pt, [])}
+    empty = constraints.get('empty', {}).get(pt, [])
     if pt not in constraints.setdefault('titles', {}):
         constraints['titles'][pt] = {}
     for name, field in get_schema_fields(type_name=pt, prefix=True):
@@ -38,8 +41,12 @@ def get_pt_fields_voc(pt, excluded, constraints={}):
             continue
         title = _tr(field.title)
         constraints['titles'][pt][name] = title
-        if name in mandatory.get(pt, []):
+        if name in mandatory:
             title = u'{} *'.format(title)
+        if name in positions:
+            title = u'{} {}'.format(title, positions[name])
+        if name in empty:
+            title = u'{} -'.format(title)
         terms.append(SimpleTerm(name, title=title))
     return SimpleVocabulary(terms)
 
@@ -50,9 +57,9 @@ def mandatory_check(data, constraints):
     mandatory = constraints.get('mandatory', {})
     missing = {}
     for pt in mandatory:
-        fld = '{}_fields'.format(pt)
+        pt_fld = '{}_fields'.format(pt)
         for mand in mandatory[pt]:
-            if not mand in dic[fld]:
+            if not mand in dic[pt_fld]:
                 if pt not in missing:
                     missing[pt] = []
                 missing[pt].append(mand)
@@ -104,7 +111,7 @@ class IImioProjectSettings(Interface):
 
     project_fields = schema.List(
         title=_(u"${type} fields display", mapping={'type': _('Project')}),
-        description=_(u'Put fields on the right to display it. Fields with asterisk are mandatory !'),
+        description=_(u'Put fields on the right to display it. Flags are : ...'),
         value_type=schema.Choice(vocabulary=u'imio.project.core.ProjectFieldsVocabulary'),
 #        value_type=schema.Choice(source=IMFields),  # a source is not managed by registry !!
     )
