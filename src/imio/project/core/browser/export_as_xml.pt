@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataroot
         xmlns:tal="http://xml.zope.org/namespaces/tal"
-        xmlns:metal="http://xml.zope.org/namespaces/metal">
-    <Identifiants tal:define="identifiants view/identifiants">
+        xmlns:metal="http://xml.zope.org/namespaces/metal"
+        tal:define="identifiants view/identifiants">
+    <Identifiants>
         <Id tal:content="identifiants/identifiant_id"/>
         <TypeAdmin>AC</TypeAdmin>
         <INS tal:content="identifiants/INS"/>
@@ -20,7 +21,7 @@
         </DescriptionPST>
         <Volets>
             <Volet ElementId="neant"
-                     tal:attributes="Exercice python:view.exercice(context)" >
+                     tal:attributes="Exercice identifiants/exercice" >
                 <Libelle>NEANT</Libelle>
                 <Description>
                     <Mode>TEXTE</Mode>
@@ -39,7 +40,7 @@
                     <ObjectifStrategique
                              tal:repeat="os view/strategic_objectives"
                              tal:attributes="ElementId os/UID;
-                            Exercice python:view.exercice(os)">
+                                             Exercice identifiants/exercice;">
                         <Libelle tal:content="python:view.libelle(os)"/>
                         <Description>
                             <Mode>TEXTE</Mode>
@@ -57,7 +58,7 @@
                         <ObjectifsOperationnels>
                             <ObjectifOperationnel tal:repeat="oo python:view.operational_objectives(os)"
                                      tal:attributes="ElementId oo/UID;
-                                    Exercice python:view.exercice(oo)">
+                                                     Exercice identifiants/exercice">
                                 <Libelle tal:content="python:view.libelle(oo)"/>
                                 <Description>
                                     <Mode>TEXTE</Mode>
@@ -92,7 +93,7 @@
                                 <Actions>
                                     <Action tal:repeat="action python:view.actions_and_subactions(oo)"
                                              tal:attributes="ElementId action/UID;
-                                            Exercice python:view.exercice(action)">
+                                                             Exercice identifiants/exercice;">
                                         <Libelle tal:content="python:view.libelle(action)"/>
                                         <DateDebut tal:define="begin_date python:view.action_begin_date(action)"
                                                  tal:condition="begin_date"
