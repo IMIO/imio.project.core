@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-02-10 14:30+0000\n"
+"POT-Creation-Date: 2020-02-18 14:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: imio.project.core\n"
 
-#: ./browser/controlpanel.py:131
+#: ./browser/controlpanel.py:113
 msgid "${type} fields display"
 msgstr ""
 
@@ -25,12 +25,12 @@ msgstr ""
 msgid "'${fld}' at position ${i}"
 msgstr ""
 
-#: ./browser/behaviors.py:34
+#: ./browser/behaviors.py:47
 #: ./content/project.py:89
 msgid "Amount"
 msgstr ""
 
-#: ./browser/behaviors.py:71
+#: ./browser/behaviors.py:84
 msgid "Analytic budget"
 msgstr ""
 
@@ -46,8 +46,20 @@ msgstr ""
 msgid "Budget"
 msgstr ""
 
-#: ./browser/behaviors.py:30
+#: ./browser/behaviors.py:38
 msgid "Budget Article"
+msgstr ""
+
+#: ./browser/behaviors.py:30
+msgid "Budget Service"
+msgstr ""
+
+#: ./browser/behaviors.py:43
+msgid "Budget Title"
+msgstr ""
+
+#: ./browser/behaviors.py:34
+msgid "Budget Type"
 msgstr ""
 
 #: ./content/project.py:130
@@ -74,7 +86,7 @@ msgstr ""
 msgid "Categories values"
 msgstr ""
 
-#: ./browser/behaviors.py:36
+#: ./browser/behaviors.py:73
 msgid "Comment"
 msgstr ""
 
@@ -114,7 +126,7 @@ msgstr ""
 msgid "INS Code"
 msgstr ""
 
-#: ./browser/views.py:299
+#: ./browser/views.py:301
 msgid "Import"
 msgstr ""
 
@@ -143,7 +155,7 @@ msgstr ""
 msgid "Manager"
 msgstr ""
 
-#: ./browser/controlpanel.py:73
+#: ./browser/controlpanel.py:72
 msgid "Missing mandatory fields: ${msg}"
 msgstr ""
 
@@ -179,12 +191,12 @@ msgstr ""
 msgid "Progress estimation in %."
 msgstr ""
 
-#: ./browser/controlpanel.py:131
+#: ./browser/controlpanel.py:113
 #: ./profiles/default/types/project.xml
 msgid "Project"
 msgstr ""
 
-#: ./browser/controlpanel.py:149
+#: ./browser/controlpanel.py:131
 #: ./profiles/default/controlpanel.xml
 msgid "Project settings"
 msgstr ""
@@ -193,11 +205,11 @@ msgstr ""
 msgid "Project space"
 msgstr ""
 
-#: ./browser/behaviors.py:81
+#: ./browser/behaviors.py:94
 msgid "Projection"
 msgstr ""
 
-#: ./browser/controlpanel.py:132
+#: ./browser/controlpanel.py:114
 msgid "Put fields on the right to display it. Flags are : ..."
 msgstr ""
 
@@ -213,7 +225,7 @@ msgstr ""
 msgid "Result indicator"
 msgstr ""
 
-#: ./browser/controlpanel.py:95
+#: ./browser/controlpanel.py:94
 msgid "Some fields have to be at a specific position: ${msg}"
 msgstr ""
 
@@ -221,11 +233,11 @@ msgstr ""
 msgid "Steps to ease tests of imio.project.core"
 msgstr ""
 
-#: ./browser/views.py:315
+#: ./browser/views.py:317
 msgid "The XML document has been successfully imported."
 msgstr ""
 
-#: ./browser/views.py:309
+#: ./browser/views.py:311
 msgid "The imported document is not recognized as a valid eComptes export."
 msgstr ""
 

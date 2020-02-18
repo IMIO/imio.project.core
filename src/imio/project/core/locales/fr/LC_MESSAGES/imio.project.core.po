@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-02-10 14:30+0000\n"
+"POT-Creation-Date: 2020-02-18 14:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Domain: imio.project.core\n"
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
-#: ./browser/controlpanel.py:131
+#: ./browser/controlpanel.py:113
 msgid "${type} fields display"
 msgstr "Affichage et ordre des champs du type ${type}"
 
@@ -23,12 +23,12 @@ msgstr "Affichage et ordre des champs du type ${type}"
 msgid "'${fld}' at position ${i}"
 msgstr "'${fld}' à la position ${i}"
 
-#: ./browser/behaviors.py:34
+#: ./browser/behaviors.py:47
 #: ./content/project.py:89
 msgid "Amount"
 msgstr "Montant"
 
-#: ./browser/behaviors.py:71
+#: ./browser/behaviors.py:84
 msgid "Analytic budget"
 msgstr "Budget analytique"
 
@@ -44,9 +44,21 @@ msgstr "Behavior avec les champs de budget analytique"
 msgid "Budget"
 msgstr "Financement/Budget"
 
-#: ./browser/behaviors.py:30
+#: ./browser/behaviors.py:38
 msgid "Budget Article"
 msgstr "Article du budget"
+
+#: ./browser/behaviors.py:30
+msgid "Budget Service"
+msgstr "Service"
+
+#: ./browser/behaviors.py:43
+msgid "Budget Title"
+msgstr "Intitulé"
+
+#: ./browser/behaviors.py:34
+msgid "Budget Type"
+msgstr "Type"
 
 #: ./content/project.py:130
 msgid "Budget comments"
@@ -72,7 +84,7 @@ msgstr "Catégories"
 msgid "Categories values"
 msgstr "Catégories possibles"
 
-#: ./browser/behaviors.py:36
+#: ./browser/behaviors.py:73
 msgid "Comment"
 msgstr "Commentaire"
 
@@ -112,7 +124,7 @@ msgstr "Partenaires externes"
 msgid "INS Code"
 msgstr "Code INS"
 
-#: ./browser/views.py:299
+#: ./browser/views.py:301
 msgid "Import"
 msgstr "Importer"
 
@@ -141,7 +153,7 @@ msgstr "Dernier numéro de référence"
 msgid "Manager"
 msgstr "Gestionnaire"
 
-#: ./browser/controlpanel.py:73
+#: ./browser/controlpanel.py:72
 msgid "Missing mandatory fields: ${msg}"
 msgstr "Des champs obligatoires sont manquants: ${msg}"
 
@@ -177,12 +189,12 @@ msgstr "Progression"
 msgid "Progress estimation in %."
 msgstr "Entrer la progression en %."
 
-#: ./browser/controlpanel.py:131
+#: ./browser/controlpanel.py:113
 #: ./profiles/default/types/project.xml
 msgid "Project"
 msgstr "Projet"
 
-#: ./browser/controlpanel.py:149
+#: ./browser/controlpanel.py:131
 #: ./profiles/default/controlpanel.xml
 msgid "Project settings"
 msgstr "Gestion de projet"
@@ -191,11 +203,11 @@ msgstr "Gestion de projet"
 msgid "Project space"
 msgstr "Espace de projets"
 
-#: ./browser/behaviors.py:81
+#: ./browser/behaviors.py:94
 msgid "Projection"
 msgstr "Projections"
 
-#: ./browser/controlpanel.py:132
+#: ./browser/controlpanel.py:114
 msgid "Put fields on the right to display it. Flags are : ..."
 msgstr "Placer les champs à droite pour les afficher. Les indicateurs après le nom du champ signifient : <ul><li>* = obligatoire ! </li><li>nombre = position obligatoire ! </li><li>- = si retiré, le contenu du champ va être supprimé !</li></ul>"
 
@@ -211,7 +223,7 @@ msgstr "Numéro de référence"
 msgid "Result indicator"
 msgstr "Indicateur de résultat"
 
-#: ./browser/controlpanel.py:95
+#: ./browser/controlpanel.py:94
 msgid "Some fields have to be at a specific position: ${msg}"
 msgstr "Certains champs doivent être à une position précise: ${msg}"
 
@@ -219,11 +231,11 @@ msgstr "Certains champs doivent être à une position précise: ${msg}"
 msgid "Steps to ease tests of imio.project.core"
 msgstr "Steps to ease tests of imio.project.core"
 
-#: ./browser/views.py:315
+#: ./browser/views.py:317
 msgid "The XML document has been successfully imported."
 msgstr "Le document XML a été importé avec succès."
 
-#: ./browser/views.py:309
+#: ./browser/views.py:311
 msgid "The imported document is not recognized as a valid eComptes export."
 msgstr "Le document soumis n'est pas reconnu comme un export eComptes valide."
 
