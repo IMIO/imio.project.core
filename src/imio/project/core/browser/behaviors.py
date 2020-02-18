@@ -26,17 +26,25 @@ class IAnalyticBudgetSchema(Interface):
         required=True,
         defaultFactory=default_year,
     )
+    service = schema.TextLine(
+        title=_(u"Budget Service"),
+        required=True,
+    )
+    btype = schema.TextLine(
+        title=_(u"Budget Type"),
+        required=True,
+    )
     article = schema.TextLine(
         title=_(u"Budget Article"),
         # description=_(u"Define the budget article."),
         required=True,
     )
     amount = schema.Float(title=_("Amount"), required=True, default=0.0)
-    comment = schema.TextLine(
-        title=_(u"Comment"),
-        # description=_(u"Write a comment about this budget line."),
-        required=False,
-    )
+    # comment = schema.TextLine(
+    #     title=_(u"Comment"),
+    #     # description=_(u"Write a comment about this budget line."),
+    #     required=False,
+    # )
 
 
 class IProjectionSchema(Interface):

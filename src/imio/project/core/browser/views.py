@@ -264,24 +264,25 @@ class PSTImportFromEcomptes(Form):
         schema_root = etree.parse(open(schema_file_path, 'rb'))
         schema = etree.XMLSchema(schema_root)
         parser = etree.XMLParser(schema=schema)
-
         raw_xml = data.get('ecomptes_xml')
         parsed_xml = etree.fromstring(raw_xml, parser)  # if invalid, raises XMLSyntaxError
         return parsed_xml
 
     def update_pst(self, ecomptes_xml):
         all_articles_xml = ecomptes_xml.findall('.//Articles')
-
         for articles_xml in all_articles_xml:
+            if not articles_xml.getchildren():
+                continue
             element_xml = articles_xml.getparent()
             uid = element_xml.get('ElementId')
             element_dx = api.content.get(UID=uid)
 
             if element_dx:
                 element_dx_articles = []
-
                 for article_xml in articles_xml:
                     year = int(article_xml.xpath("Exercice/text()")[0])
+                    service = article_xml.xpath("Service/text()")[0]
+                    btype = article_xml.xpath("Type/text()")[0]
                     article = u'{0} - {1}'.format(
                         article_xml.xpath("CodeArticle/text()")[0],
                         article_xml.xpath("Libelle/text()")[0],
@@ -289,9 +290,11 @@ class PSTImportFromEcomptes(Form):
                     amount = float(article_xml.xpath("Montant/text()")[0])
                     element_dx_articles.append({
                         'year': year,
+                        'service': service,
+                        'btype': btype,
                         'article': article,
                         'amount': amount,
-                        'comment': u'',
+                        # 'comment': u'',  Removed from schema
                     })
 
                 element_dx.analytic_budget = element_dx_articles
