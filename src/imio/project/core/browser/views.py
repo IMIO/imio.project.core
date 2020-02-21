@@ -284,7 +284,7 @@ class PSTImportFromEcomptes(Form):
                     service = str(article_xml.xpath("Service/text()")[0])
                     btype = str(article_xml.xpath("Type/text()")[0])
                     article = str(article_xml.xpath("CodeArticle/text()")[0])
-                    title = str(article_xml.xpath("Libelle/text()")[0])
+                    title = article_xml.xpath("Libelle/text()")[0].encode('utf8').decode('utf8')
                     amount = float(article_xml.xpath("Montant/text()")[0])
                     element_dx_articles.append({
                         'year': year,
