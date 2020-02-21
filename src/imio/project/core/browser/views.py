@@ -281,9 +281,10 @@ class PSTImportFromEcomptes(Form):
                 element_dx_articles = []
                 for article_xml in articles_xml:
                     year = int(article_xml.xpath("Exercice/text()")[0])
-                    service = str(article_xml.xpath("Service/text()")[0])
-                    btype = str(article_xml.xpath("Type/text()")[0])
-                    article = str(article_xml.xpath("CodeArticle/text()")[0])
+                    # elementtree must be encoded and decoded to get unicode and not object
+                    service = article_xml.xpath("Service/text()")[0].encode('utf8').decode('utf8')
+                    btype = article_xml.xpath("Type/text()")[0].encode('utf8').decode('utf8')
+                    article = article_xml.xpath("CodeArticle/text()")[0].encode('utf8').decode('utf8')
                     title = article_xml.xpath("Libelle/text()")[0].encode('utf8').decode('utf8')
                     amount = float(article_xml.xpath("Montant/text()")[0])
                     element_dx_articles.append({
