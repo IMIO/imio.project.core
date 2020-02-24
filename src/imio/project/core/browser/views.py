@@ -296,8 +296,37 @@ class PSTImportFromEcomptes(Form):
                         'amount': amount,
                         # 'comment': u'',  Removed from schema
                     })
-
                 element_dx.analytic_budget = element_dx_articles
+
+        all_projections_xml = ecomptes_xml.findall('.//Projections')
+        for projections_xml in all_projections_xml:
+            if not projections_xml.getchildren():
+                continue
+            element_xml = projections_xml.getparent()
+            uid = element_xml.get('ElementId')
+            element_dx = api.content.get(UID=uid)
+
+            if element_dx:
+                projections = []
+                for projection_xml in projections_xml:
+                    # elementtree must be encoded and decoded to get unicode and not object
+                    service = projection_xml.xpath("Service/text()")[0].encode('utf8').decode('utf8')
+                    btype = projection_xml.xpath("Type/text()")[0].encode('utf8').decode('utf8')
+                    group = projection_xml.xpath("GroupeEco/text()")[0].encode('utf8').decode('utf8')
+                    title = projection_xml.xpath("Libelle/text()")[0].encode('utf8').decode('utf8')
+                    exercices_xml = projection_xml.find('.//Exercices')
+                    for exercice_xml in exercices_xml or []:
+                        year = int(exercice_xml.get('Valeur'))
+                        amount = float(exercice_xml.xpath("Montant/text()")[0])
+                        projections.append({
+                            'service': service,
+                            'btype': btype,
+                            'group': group,
+                            'title': title,
+                            'year': year,
+                            'amount': amount,
+                        })
+                element_dx.projection = projections
 
     @button.buttonAndHandler(_(u'Import'), name='import')
     def handleApply(self, action):

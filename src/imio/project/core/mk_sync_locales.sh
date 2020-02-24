@@ -26,8 +26,8 @@ i18ndude rebuild-pot --pot locales/$CATALOGNAME.pot --create $CATALOGNAME .
 #merging new messages
 i18ndude merge --pot locales/$CATALOGNAME.pot --merge locales/manual.pot 2>/dev/null
 
-if [ `svn diff locales/$CATALOGNAME.pot |grep "^\+[^+]" |wc -l` -le "1" ]; then
-    svn revert locales/$CATALOGNAME.pot
+if [ `git diff locales/$CATALOGNAME.pot |grep "^\+[^+]" |wc -l` -le "1" ]; then
+    git co locales/$CATALOGNAME.pot
 fi
 
 if ! test -f locales/plone.pot || [ "$1" == "rebuild-plone" ]; then

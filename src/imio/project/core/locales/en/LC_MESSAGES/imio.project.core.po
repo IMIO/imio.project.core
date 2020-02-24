@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-02-18 14:46+0000\n"
+"POT-Creation-Date: 2020-02-24 14:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
-#: ./browser/behaviors.py:84
+#: ./browser/behaviors.py:102
 msgid "Analytic budget"
 msgstr ""
 
@@ -46,6 +46,10 @@ msgstr "Budget"
 
 #: ./browser/behaviors.py:38
 msgid "Budget Article"
+msgstr ""
+
+#: ./browser/behaviors.py:67
+msgid "Budget Group"
 msgstr ""
 
 #: ./browser/behaviors.py:30
@@ -84,10 +88,6 @@ msgstr ""
 msgid "Categories values"
 msgstr "Categories values"
 
-#: ./browser/behaviors.py:73
-msgid "Comment"
-msgstr ""
-
 #: ./content/project.py:225
 msgid "Comments"
 msgstr "Comments"
@@ -124,7 +124,7 @@ msgstr "Extra concerned people"
 msgid "INS Code"
 msgstr ""
 
-#: ./browser/views.py:301
+#: ./browser/views.py:331
 msgid "Import"
 msgstr ""
 
@@ -203,7 +203,7 @@ msgstr ""
 msgid "Project space"
 msgstr "Project space"
 
-#: ./browser/behaviors.py:94
+#: ./browser/behaviors.py:112
 msgid "Projection"
 msgstr ""
 
@@ -231,11 +231,11 @@ msgstr ""
 msgid "Steps to ease tests of imio.project.core"
 msgstr ""
 
-#: ./browser/views.py:317
+#: ./browser/views.py:347
 msgid "The XML document has been successfully imported."
 msgstr ""
 
-#: ./browser/views.py:311
+#: ./browser/views.py:341
 msgid "The imported document is not recognized as a valid eComptes export."
 msgstr ""
 
