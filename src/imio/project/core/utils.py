@@ -10,7 +10,7 @@ from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
 
-def getVocabularyTermsForOrganization(context, organization_id='services', states=[], sort_on='getObjPositionInParent'):
+def getVocabularyTermsForOrganization(context, organization_id='services', states=[], sort_on='path'):
     """
       Submethod called by vocabularies to get their content from a query
       in the organizations of the 'contacts' directory.
