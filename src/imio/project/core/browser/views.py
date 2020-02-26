@@ -31,7 +31,7 @@ class PSContainerView(ContainerView):
     collapse_all_fields_onload = True
 
 
-def manage_fields(the_form, portal_type):
+def manage_fields(the_form, portal_type, mode):
     """
         Remove and reorder fields
     """
@@ -45,6 +45,9 @@ def manage_fields(the_form, portal_type):
     for group in [the_form] + the_form.groups:
         for field_name in group.fields:
             if field_name not in ordered:
+                # we remove reference_number in view mode. It is needed in edit or add to manage it automatically.
+                if field_name == 'reference_number' and mode != 'view':
+                    continue
                 group.fields = group.fields.omit(field_name)
 
 
@@ -53,7 +56,7 @@ class ProjectContainerView(ContainerView):
 
     def updateFieldsFromSchemata(self):
         super(ProjectContainerView, self).updateFieldsFromSchemata()
-        manage_fields(self, self.context.portal_type)
+        manage_fields(self, self.context.portal_type, 'view')
 
 
 class ProjectContainerEdit(DefaultEditForm):
@@ -63,7 +66,7 @@ class ProjectContainerEdit(DefaultEditForm):
 
     def updateFields(self):
         super(ProjectContainerEdit, self).updateFields()
-        manage_fields(self, self.context.portal_type)
+        manage_fields(self, self.context.portal_type, 'edit')
 
 
 class ProjectAddForm(DefaultAddForm):
@@ -72,7 +75,7 @@ class ProjectAddForm(DefaultAddForm):
 
     def updateFields(self):
         super(ProjectAddForm, self).updateFields()
-        manage_fields(self, self.portal_type)
+        manage_fields(self, self.portal_type, 'add')
 
 
 class ProjectContainerAdd(DefaultAddView):
