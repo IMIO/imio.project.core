@@ -214,7 +214,7 @@ class IProject(model.Schema):
 
     observation = RichText(
         title=_(u"Observation"),
-        description=_(u"Prior determination"),
+        # description=_(u"Prior determination"),
         required=False,
         default_mime_type='text/html',
         output_mime_type='text/html',
