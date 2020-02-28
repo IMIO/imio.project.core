@@ -8,6 +8,7 @@ from imio.project.core.content.project import IProject
 from imio.project.core.utils import getProjectSpace
 from plone import api
 from plone.registry.interfaces import IRecordModifiedEvent
+from Products.CMFPlone.utils import base_hasattr
 from zope.annotation import IAnnotations
 
 """
@@ -103,10 +104,11 @@ def onAddProject(obj, event):
     if not workflows or workflows[0].initial_state != pw.getInfoFor(obj, 'review_state'):
         _updateParentsBudgetInfos(obj)
     # compute reference number
-    projectspace = getProjectSpace(obj)
-    projectspace.last_reference_number += 1
-    obj.reference_number = projectspace.last_reference_number
-    obj.reindexObject(['reference_number'])
+    if not base_hasattr(obj, 'symbolic_link'):
+        projectspace = getProjectSpace(obj)
+        projectspace.last_reference_number += 1
+        obj.reference_number = projectspace.last_reference_number
+        obj.reindexObject(['reference_number'])
 
 
 def onModifyProject(obj, event):
