@@ -205,8 +205,16 @@ class PSTExportAsXML(BrowserView):
         )
 
         if element.manager:
-            term_id = element.manager[0]
-            return factory(element).getTerm(term_id).title
+            voc = factory(element)
+            for term_id in element.manager:
+                if term_id in voc:
+                    return voc.getTerm(term_id).title
+                else:
+                    tit = ''
+                    brains = self.context.portal_catalog(UID=term_id)
+                    if brains:
+                        tit = brains[0].get_full_title
+                    logger.warning(u"{}: manager org not found uid='{}', tit='{}'".format(element, term_id, tit))
         else:
             return None
 
