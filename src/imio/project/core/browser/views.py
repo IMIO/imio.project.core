@@ -21,7 +21,12 @@ from z3c.form import button
 from z3c.form.field import Fields
 from z3c.form.form import Form
 from zope import schema
+from zope.component import getMultiAdapter
 from zope.schema.interfaces import IVocabularyFactory
+
+import logging
+
+logger = logging.getLogger('imio.project.core: views')
 
 
 class PSContainerView(ContainerView):
@@ -84,6 +89,10 @@ class ProjectContainerAdd(DefaultAddView):
 
 
 class PSTExportAsXML(BrowserView):
+
+    def __init__(self, context, request):
+        super(PSTExportAsXML, self).__init__(context, request)
+        self.ploneview = getMultiAdapter((context, request), name='plone')
 
     def __call__(self, *args, **kwargs):
 
@@ -218,27 +227,27 @@ class PSTExportAsXML(BrowserView):
 
     def libelle(self, element):
         if element.portal_type == 'strategicobjective':
-            return 'OS.{0} - {1}'.format(
+            return self.ploneview.cropText('OS.{0} - {1}'.format(
                 element.reference_number,
                 element.title.encode('utf8'),
-            )
+            ), 252)
         elif element.portal_type == 'operationalobjective':
-            return 'OO.{0} - {1}'.format(
+            return self.ploneview.cropText('OO.{0} - {1}'.format(
                 element.reference_number,
                 element.title.encode('utf8'),
-            )
+            ), 252)
         elif element.portal_type == 'pstaction':
-            return 'A.{0} - {1}'.format(
+            return self.ploneview.cropText('A.{0} - {1}'.format(
                 element.reference_number,
                 element.title.encode('utf8'),
-            )
+            ), 252)
         elif element.portal_type == 'pstsubaction':
             action = element.__parent__
-            return 'A.{0} - SA.{1} - {2}'.format(
+            return self.ploneview.cropText('A.{0} - SA.{1} - {2}'.format(
                 action.reference_number,
                 element.reference_number,
                 element.title.encode('utf8'),
-            )
+            ), 252)
 
     def progress(self, action):
         try:
