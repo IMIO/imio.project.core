@@ -30,6 +30,8 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
+    <adapter name="Description" factory=".adapters.description_index" />
+
     <utility
         factory=".content.projectspace.ProjectSpaceSchemaPolicy"
         name="schema_policy_projectspace"
