@@ -1,3 +1,4 @@
+from collective import dexteritytextindexer
 from collective.contact.plonegroup.browser.settings import selectedOrganizationsVocabulary
 from collective.z3cform.chosen.widget import AjaxChosenMultiFieldWidget
 from collective.z3cform.datagridfield import DataGridFieldFactory
@@ -7,6 +8,7 @@ from imio.project.core import _
 from imio.project.core.browser.widgets import BudgetInfosDataGridField
 from imio.project.core.utils import getProjectSpace
 from imio.project.core.utils import getVocabularyTermsForOrganization
+from plone.app.dexterity import PloneMessageFactory as _PMF
 from plone.app.textfield import RichText
 from plone.autoform import directives
 from plone.dexterity.content import Container
@@ -93,6 +95,15 @@ class IBudgetSchema(Interface):
 
 class IProject(model.Schema):
     """Project schema, field ordering."""
+
+    dexteritytextindexer.searchable('description_rich')
+    description_rich = RichText(
+        title=_PMF(u'label_description', default=u'Summary'),
+        required=False,
+        default_mime_type='text/html',
+        output_mime_type='text/x-html-safe',
+    )
+
     reference_number = schema.Int(
         title=_(u"Reference number"),
         # description=_(u"Unique identification"),

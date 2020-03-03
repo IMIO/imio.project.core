@@ -19,9 +19,9 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 field_constraints = {
     'titles': {},
-    'mandatory': {'project': ['IDublinCore.title', 'IDublinCore.description']},
-    'indexes': {'project': [('IDublinCore.title', 1), ('IDublinCore.description', 2)]},
-    'empty': {'project': ['IDublinCore.description']},
+    'mandatory': {'project': ['IDublinCore.title']},
+    'indexes': {'project': [('IDublinCore.title', 1)]},
+    'empty': {'project': []},
 }
 
 
@@ -99,10 +99,10 @@ class ProjectFieldsVocabulary(object):
 
     def __call__(self, context):
         return get_pt_fields_voc('project',
-                                 ['IDublinCore.contributors', 'IDublinCore.creators', 'IDublinCore.effective',
-                                  'IDublinCore.expires', 'IDublinCore.language', 'IDublinCore.rights',
-                                  'IDublinCore.subjects', 'INameFromTitle.title', 'IVersionable.changeNote',
-                                  'notes'],
+                                 ['IDublinCore.description', 'IDublinCore.contributors', 'IDublinCore.creators',
+                                  'IDublinCore.effective', 'IDublinCore.expires', 'IDublinCore.language',
+                                  'IDublinCore.rights', 'IDublinCore.subjects', 'INameFromTitle.title',
+                                  'IVersionable.changeNote', 'notes'],
                                  field_constraints)
 
 

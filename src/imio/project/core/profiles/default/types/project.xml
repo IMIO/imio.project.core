@@ -24,6 +24,7 @@
  <property name="schema_policy">schema_policy_project</property>
  <property name="klass">imio.project.core.content.project.Project</property>
  <property name="behaviors">
+  <element value="collective.dexteritytextindexer.behavior.IDexterityTextIndexer" />
   <element value="plone.app.dexterity.behaviors.metadata.IDublinCore"/>
   <element value="plone.app.content.interfaces.INameFromTitle" />
   <element value="plone.app.lockingbehavior.behaviors.ILocking" />
