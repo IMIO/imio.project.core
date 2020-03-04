@@ -6,6 +6,7 @@ from collective.z3cform.datagridfield import DictRow
 from dexterity.localrolesfield.field import LocalRolesField
 from imio.project.core import _
 from imio.project.core.browser.widgets import BudgetInfosDataGridField
+from imio.project.core.content.projectspace import IProjectSpace
 from imio.project.core.utils import getProjectSpace
 from imio.project.core.utils import getVocabularyTermsForOrganization
 from plone.app.dexterity import PloneMessageFactory as _PMF
@@ -52,6 +53,19 @@ def default_year(context):
         return years[-1]
     else:
         return None
+
+
+@provider(IContextAwareDefaultFactory)
+def default_categories(context):
+    """
+      defaultFactory for the field categories.
+      It's called when categories is None or missing ?, in view or edit mode.
+    """
+    if IProjectSpace.providedBy(context):
+        return []
+    elif IProject.providedBy(context) and context.categories:
+        return context.categories
+    return []
 
 
 class IResultIndicatorSchema(Interface):
@@ -111,12 +125,12 @@ class IProject(model.Schema):
         default=0,
     )
 
-    # use 'categories' field name  even if mono-valued for now, because 'category' is reserved
     categories = schema.List(
         title=_(u'Categories'),
         # description=_(u"Choose categories."),
         required=False,
         value_type=schema.Choice(source='imio.project.core.content.project.categories_vocabulary'),
+        defaultFactory=default_categories,
     )
     directives.widget('categories', AjaxChosenMultiFieldWidget, populate_select=True)
 
