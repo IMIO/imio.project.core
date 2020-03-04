@@ -3,6 +3,7 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="imio.project.core">
 
+  <includeDependencies package="." />
   <include file="configure.zcml" />
   <include package="collective.contact.core" />
   <include package="collective.contact.plonegroup" />
