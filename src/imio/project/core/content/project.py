@@ -118,6 +118,7 @@ class IProject(model.Schema):
         output_mime_type='text/x-html-safe',
     )
 
+    dexteritytextindexer.searchable('reference_number')
     reference_number = schema.Int(
         title=_(u"Reference number"),
         # description=_(u"Unique identification"),
