@@ -4,6 +4,11 @@ Changelog
 1.3 (unreleased)
 ----------------
 
+- To be continued ...
+
+1.3 (2020-03-05)
+----------------
+
 - Add budget.behavior
   [vpiret]
 - Corrected persistency bug in annotation when removing item.
