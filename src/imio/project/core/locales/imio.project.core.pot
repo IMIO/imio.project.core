@@ -271,7 +271,37 @@ msgstr ""
 msgid "Year"
 msgstr ""
 
-#: ./browser/behaviors.zcml:14
+#. Default: "Expenses"
+#: ../browser/analytic_budget_datagridfield_display.pt:23
+msgid "analytic_budget_label_expenses"
+msgstr ""
+
+#. Default: "Revenues"
+#: ../browser/analytic_budget_datagridfield_display.pt:22
+msgid "analytic_budget_label_revenues"
+msgstr ""
+
+#. Default: "Total"
+#: ../browser/analytic_budget_datagridfield_display.pt:24
+msgid "analytic_budget_label_total"
+msgstr ""
+
+#. Default: "Year"
+#: ../browser/analytic_budget_datagridfield_display.pt:21
+msgid "analytic_budget_label_year"
+msgstr ""
+
+#. Default: "Data taken from analytic budgets encoded in sub-element"
+#: ../browser/analytic_budget_datagridfield_display.pt:16
+msgid "analytic_budget_legend_global_data"
+msgstr ""
+
+#. Default: "Locally encoded data"
+#: ../browser/analytic_budget_datagridfield_display.pt:10
+msgid "analytic_budget_legend_local_data"
+msgstr ""
+
+#: ../browser/behaviors.zcml:14
 msgid "behavior.AnalyticBudget"
 msgstr ""
 
@@ -307,6 +337,32 @@ msgstr ""
 msgid "imio.project.core tests"
 msgstr ""
 
-#: ./browser/controlpanel.py:55
-msgid "project"
+#. Default: "R/D"
+#: ../browser/projection_datagridfield_display.pt:15
+msgid "projection_label_btype"
+msgstr ""
+
+#. Default: "Eco group"
+#: ../browser/projection_datagridfield_display.pt:16
+msgid "projection_label_group"
+msgstr ""
+
+#. Default: "Service"
+#: ../browser/projection_datagridfield_display.pt:14
+msgid "projection_label_service"
+msgstr ""
+
+#. Default: "Title"
+#: ../browser/projection_datagridfield_display.pt:17
+msgid "projection_label_title"
+msgstr ""
+
+#. Default: "Data taken from budget infos encoded in sub-element"
+#: ../browser/projection_datagridfield_display.pt:41
+msgid "projection_legend_global_data"
+msgstr ""
+
+#. Default: "Locally encoded data"
+#: ../browser/projection_datagridfield_display.pt:9
+msgid "projection_legend_local_data"
 msgstr ""

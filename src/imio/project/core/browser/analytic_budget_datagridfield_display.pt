@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      tal:omit-tag=""
+      i18n:domain="imio.project.core">
+
+<tal:comment replace="nothing">Render original template, this will render DataGridField data</tal:comment>
+<fieldset>
+  <legend i18n:translate="analytic_budget_legend_local_data">Locally encoded data</legend>
+    <tal:block replace="structure view/original_template" />
+</fieldset>
+
+<fieldset tal:define="results view/prepareAnalyticBudgetForDisplay;"
+          tal:condition="results">
+  <legend i18n:translate="analytic_budget_legend_global_data">Data taken from analytic budgets encoded in sub-element</legend>
+  <table class="listing analytic_budget_table">
+    <tal:defines define="years python: results">
+      <thead>
+        <tr>
+          <th class="nosort" i18n:translate="analytic_budget_label_year">Year</th>
+          <th class="nosort" i18n:translate="analytic_budget_label_revenues">Revenues</th>
+          <th class="nosort" i18n:translate="analytic_budget_label_expenses">Expenses</th>
+          <th class="nosort" i18n:translate="analytic_budget_label_total">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr tal:repeat="year python:sorted(years.keys())">
+          <tal:defines tal:define="line python:years[year]">
+          <td class="analytic_budget_year" tal:content="year">Year</td>
+          <td class="analytic_budget_revenues" tal:content="line/revenues">Revenues</td>
+          <td class="analytic_budget_expenses" tal:content="line/expenses">Expenses</td>
+          <td class="analytic_budget_total" tal:content="line/total">Total</td>
+          </tal:defines>
+        </tr>
+      </tbody>
+    </tal:defines>
+  </table>
+</fieldset>
+</html>

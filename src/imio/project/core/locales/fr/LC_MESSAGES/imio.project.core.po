@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-02-24 14:16+0000\n"
+"POT-Creation-Date: 2020-03-11 09:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -269,6 +269,36 @@ msgstr "Document XML exporté d'eComptes"
 msgid "Year"
 msgstr "Année"
 
+#. Default: "Expenses"
+#: ./browser/analytic_budget_datagridfield_display.pt:23
+msgid "analytic_budget_label_expenses"
+msgstr "Dépenses"
+
+#. Default: "Revenues"
+#: ./browser/analytic_budget_datagridfield_display.pt:22
+msgid "analytic_budget_label_revenues"
+msgstr "Recettes"
+
+#. Default: "Total"
+#: ./browser/analytic_budget_datagridfield_display.pt:24
+msgid "analytic_budget_label_total"
+msgstr "Total"
+
+#. Default: "Year"
+#: ./browser/analytic_budget_datagridfield_display.pt:21
+msgid "analytic_budget_label_year"
+msgstr "Année"
+
+#. Default: "Data taken from analytic budgets encoded in sub-element"
+#: ./browser/analytic_budget_datagridfield_display.pt:16
+msgid "analytic_budget_legend_global_data"
+msgstr "Budgets analytiques collectés sur les sous-éléments"
+
+#. Default: "Locally encoded data"
+#: ./browser/analytic_budget_datagridfield_display.pt:10
+msgid "analytic_budget_legend_local_data"
+msgstr "Budgets analytiques encodés sur l'élément courant"
+
 #: ./browser/behaviors.zcml:14
 msgid "behavior.AnalyticBudget"
 msgstr "behavior.AnalyticBudget"
@@ -305,6 +335,32 @@ msgstr "imio.project.core"
 msgid "imio.project.core tests"
 msgstr "imio.project.core tests"
 
-#: ./browser/controlpanel.py:55
-msgid "project"
-msgstr "Projet"
+#. Default: "R/D"
+#: ./browser/projection_datagridfield_display.pt:15
+msgid "projection_label_btype"
+msgstr "R/D"
+
+#. Default: "Eco group"
+#: ./browser/projection_datagridfield_display.pt:16
+msgid "projection_label_group"
+msgstr "Groupe éco"
+
+#. Default: "Service"
+#: ./browser/projection_datagridfield_display.pt:14
+msgid "projection_label_service"
+msgstr "Service"
+
+#. Default: "Title"
+#: ./browser/projection_datagridfield_display.pt:17
+msgid "projection_label_title"
+msgstr "Intitulé"
+
+#. Default: "Data taken from budget infos encoded in sub-element"
+#: ./browser/projection_datagridfield_display.pt:41
+msgid "projection_legend_global_data"
+msgstr "Projections collectées sur les sous-éléments"
+
+#. Default: "Locally encoded data"
+#: ./browser/projection_datagridfield_display.pt:9
+msgid "projection_legend_local_data"
+msgstr "Projections encodées sur l'élément courant"
