@@ -36,9 +36,9 @@
                 <ETP>0</ETP>
                 <Plans/>
                 <Partenaires/>
-                <ObjectifStrategiques>
+                <ObjectifStrategiques tal:define="oss view/strategic_objectives" tal:condition="python: len(oss)">
                     <ObjectifStrategique
-                             tal:repeat="os view/strategic_objectives"
+                             tal:repeat="os oss"
                              tal:attributes="ElementId os/UID;
                                              Exercice identifiants/exercice;">
                         <Libelle tal:content="python:view.libelle(os)"/>
@@ -55,8 +55,9 @@
                         <ETP>0</ETP>
                         <Plans/>
                         <Partenaires/>
-                        <ObjectifsOperationnels>
-                            <ObjectifOperationnel tal:repeat="oo python:view.operational_objectives(os)"
+                        <ObjectifsOperationnels tal:define="oos python:view.operational_objectives(os)"
+                                                tal:condition="python: len(oos)">
+                            <ObjectifOperationnel tal:repeat="oo oos"
                                      tal:attributes="ElementId oo/UID;
                                                      Exercice identifiants/exercice">
                                 <Libelle tal:content="python:view.libelle(oo)"/>
@@ -90,8 +91,9 @@
                                 <ETP>0</ETP>
                                 <Plans/>
                                 <Partenaires/>
-                                <Actions>
-                                    <Action tal:repeat="action python:view.actions_and_subactions(oo)"
+                                <Actions tal:define="actions python:view.actions_and_subactions(oo)"
+                                         tal:condition="python: len(actions)">
+                                    <Action tal:repeat="action actions"
                                              tal:attributes="ElementId action/UID;
                                                              Exercice identifiants/exercice;">
                                         <Libelle tal:content="python:view.libelle(action)"/>
