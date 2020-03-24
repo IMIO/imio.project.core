@@ -21,6 +21,7 @@
     <include package="plone.formwidget.datetime" />
     <include package=".browser" />
     <include package=".content" />
+    <include package=".migrations" />
 
     <genericsetup:registerProfile
         name="default"

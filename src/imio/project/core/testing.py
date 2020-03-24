@@ -56,7 +56,7 @@ class FunctionalTestCase(unittest.TestCase):
         params = {'id': u"projectspace",
                   'title': u"projectspace"}
         # datagridfield categories
-        categories = [
+        categories_values = [
             {'label': u"Category 1",
              'key': 'category-1'},
             {'label': u"Category 2",
@@ -64,9 +64,9 @@ class FunctionalTestCase(unittest.TestCase):
             {'label': u"Category 3",
              'key': 'category-3'},
         ]
-        params['categories'] = categories
+        params['categories_values'] = categories_values
         # datagridfield priority
-        priority = [
+        priority_values = [
             {'label': u"Priority 1",
              'key': 'priority-1'},
             {'label': u"Priority 2",
@@ -74,7 +74,7 @@ class FunctionalTestCase(unittest.TestCase):
             {'label': u"Priority 3",
              'key': 'priority-3'},
         ]
-        params['priority'] = priority
+        params['priority_values'] = priority_values
         # datagridfield budget_types
         budget_types = [
             {'label': u"Budget type 1",
@@ -90,7 +90,7 @@ class FunctionalTestCase(unittest.TestCase):
         projects = [
             {'id': u"project-1",
              'title': u"Project 1",
-             'categories': u"category-1",
+             'categories': u"category-1",  # not list here to keep common test working
              'priority': u"priority-1",
              'budget': [{'budget_type': 'budget-type-1',
                          'year': 2018,
@@ -98,7 +98,7 @@ class FunctionalTestCase(unittest.TestCase):
                         ]},
             {'id': u"project-2",
              'title': u"Project 2",
-             'categories': u"category-2",
+             'categories': u"category-2",  # not list here to keep common test working
              'priority': u"priority-3",
              'budget': [{'budget_type': 'budget-type-2',
                          'year': 2017,
