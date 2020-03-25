@@ -186,9 +186,12 @@ def onMoveProject(obj, event):
     # we pass creation, already managed by add event
     if event.oldParent is None or event.oldParent == event.newParent:
         return
-    # bypass if we are removing the Plone Site
-    if event.object.portal_type == 'Plone Site':
+    # we pass deletion, already managed by remove event
+    if event.newParent is None and event.newName is None:
         return
+    # bypass if we are removing the Plone Site => no more necessary ?
+#    if event.object.portal_type == 'Plone Site':
+#        return
     pw = obj.portal_workflow
     workflows = pw.getWorkflowsFor(obj)
     # Update field data on old and new parents

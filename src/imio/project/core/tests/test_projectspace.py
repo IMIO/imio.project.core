@@ -21,11 +21,11 @@ class TestProjectSpace(FunctionalTestCase):
         """Test the RemovedValueIsNotUsedByCategoriesFieldValidator validator that
            validates that removed keys in the ProjectSpace.categories attribute actually managing
            a vocabulary are not used by already created elements and can be removed safely."""
-        stored_value = list(self.portal.projectspace.categories)
+        stored_value = list(self.portal.projectspace.categories_values)
         categories_validator = RemovedValueIsNotUsedByCategoriesFieldValidator(self.portal.projectspace,
                                                                                None,
                                                                                None,
-                                                                               IProjectSpace['categories'],
+                                                                               IProjectSpace['categories_values'],
                                                                                None)
         self._checkValidateKeyNotUsed(stored_value, categories_validator, 'categories', 'Category', None)
 
@@ -34,11 +34,11 @@ class TestProjectSpace(FunctionalTestCase):
            validates that removed keys in the ProjectSpace.priority attribute actually managing
            a vocabulary are not used by already created elements and can be removed safely."""
         # check the priority validator
-        stored_value = list(self.portal.projectspace.priority)
+        stored_value = list(self.portal.projectspace.priority_values)
         priority_validator = RemovedValueIsNotUsedByPriorityFieldValidator(self.portal.projectspace,
                                                                            None,
                                                                            None,
-                                                                           IProjectSpace['priority'],
+                                                                           IProjectSpace['priority_values'],
                                                                            None)
         self._checkValidateKeyNotUsed(stored_value, priority_validator, 'priority', 'Priority', None)
 

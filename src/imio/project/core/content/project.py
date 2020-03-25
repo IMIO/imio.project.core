@@ -16,6 +16,7 @@ from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.formwidget.datetime.z3cform.widget import DateFieldWidget
 from plone.supermodel import model
+from Products.CMFPlone.utils import base_hasattr
 from z3c.form import interfaces
 from z3c.form.widget import FieldWidget
 from zope import schema
@@ -63,7 +64,7 @@ def default_categories(context):
     """
     if IProjectSpace.providedBy(context):
         return []
-    elif IProject.providedBy(context) and context.categories:
+    elif IProject.providedBy(context) and base_hasattr(context, 'categories') and context.categories:
         return context.categories
     return []
 
@@ -276,8 +277,7 @@ class CategoriesVocabulary(object):
         """"""
         projectspace = getProjectSpace(context)
         terms = []
-        categories = projectspace.categories
-        for category in categories:
+        for category in projectspace.categories_values:
             terms.append(SimpleTerm(category['key'], category['key'], category['label'], ))
         return SimpleVocabulary(terms)
 
@@ -289,8 +289,7 @@ class PriorityVocabulary(object):
         """"""
         projectspace = getProjectSpace(context)
         terms = []
-        priorities = projectspace.priority
-        for priority in priorities:
+        for priority in projectspace.priority_values:
             terms.append(SimpleTerm(priority['key'], priority['key'], priority['label'], ))
         return SimpleVocabulary(terms)
 

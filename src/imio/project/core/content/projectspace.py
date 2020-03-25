@@ -156,7 +156,7 @@ class IProjectSpace(model.Schema):
         default=0,
     )
 
-    categories = schema.List(
+    categories_values = schema.List(
         title=_(u'Categories values'),
         description=_(u"Enter one different value by row. Label is the displayed value. Key is the stored value:"
                       " in lowercase, without space."),
@@ -165,9 +165,9 @@ class IProjectSpace(model.Schema):
                            schema=IVocabularySchema,
                            required=False),
     )
-    directives.widget('categories', DataGridFieldFactory, display_table_css_class='listing', allow_reorder=True)
+    directives.widget('categories_values', DataGridFieldFactory, display_table_css_class='listing', allow_reorder=True)
 
-    priority = schema.List(
+    priority_values = schema.List(
         title=_(u'Priority values'),
         description=_(u"Enter one different value by row. Label is the displayed value. Key is the stored value:"
                       " in lowercase, without space."),
@@ -176,7 +176,7 @@ class IProjectSpace(model.Schema):
                            schema=IVocabularySchema,
                            required=False),
     )
-    directives.widget('priority', DataGridFieldFactory, display_table_css_class='listing', allow_reorder=True)
+    directives.widget('priority_values', DataGridFieldFactory, display_table_css_class='listing', allow_reorder=True)
 
     budget_types = schema.List(
         title=_(u'Budget types values'),
@@ -217,11 +217,11 @@ class IProjectSpace(model.Schema):
 
 
 validator.WidgetValidatorDiscriminators(RemovedValueIsNotUsedByCategoriesFieldValidator,
-                                        field=IProjectSpace['categories'])
+                                        field=IProjectSpace['categories_values'])
 provideAdapter(RemovedValueIsNotUsedByCategoriesFieldValidator)
 
 validator.WidgetValidatorDiscriminators(RemovedValueIsNotUsedByPriorityFieldValidator,
-                                        field=IProjectSpace['priority'])
+                                        field=IProjectSpace['priority_values'])
 provideAdapter(RemovedValueIsNotUsedByPriorityFieldValidator)
 
 validator.WidgetValidatorDiscriminators(RemovedValueIsNotUsedByBudgetTypesFieldValidator,
