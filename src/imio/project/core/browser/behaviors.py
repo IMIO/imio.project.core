@@ -53,7 +53,7 @@ class IAnalyticBudgetSchema(Interface):
 
 
 class IProjectionSchema(Interface):
-    """Schema used for the datagrid field 'analytic_budget' of IProject"""
+    """Schema used for the datagrid field 'projection' of IProject"""
 
     service = schema.TextLine(
         title=_(u"Budget Service"),
