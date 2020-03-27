@@ -6,6 +6,7 @@ from imio.project.core.config import CHILDREN_ANALYTIC_BUDGETS_ANNOTATION_KEY
 from imio.project.core.config import CHILDREN_BUDGET_INFOS_ANNOTATION_KEY
 from imio.project.core.config import CHILDREN_PROJECTIONS_ANNOTATION_KEY
 from imio.project.core.utils import getProjectSpace
+from Products.CMFPlone.utils import base_hasattr
 from zope.annotation import IAnnotations
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
 from zope.component import queryUtility
@@ -150,10 +151,11 @@ class AnalyticBudgetDataGridField(DataGridField):
         if CHILDREN_ANALYTIC_BUDGETS_ANNOTATION_KEY not in annotations:
             return {}
 
-        fixed_years = [str(y) for y in getProjectSpace(self.context).budget_years or []]
         res = {}
-        for year in fixed_years:
-            res.setdefault(year, {'revenues': 0.0, 'expenses': 0.0})
+# no need to have all years. Articles are defined only for the current year.
+#        fixed_years = [str(y) for y in getProjectSpace(self.context).budget_years or []]
+#        for year in fixed_years:
+#            res.setdefault(year, {'revenues': 0.0, 'expenses': 0.0})
 
         for datagridfieldrecord in annotations[CHILDREN_ANALYTIC_BUDGETS_ANNOTATION_KEY].itervalues():
             for line in datagridfieldrecord:
@@ -198,10 +200,12 @@ class ProjectionDataGridField(DataGridField):
         return [str(y) for y in getProjectSpace(self.context).budget_years or []]
 
     def prepareProjectionForSingleDisplay(self):
+        if not base_hasattr(self.context, 'projection') or not self.context.projection:
+            return {}
+
         ProjectionLine = namedtuple('ProjectionLine', ['service', 'btype', 'group', 'title'])
         fixed_years = self.budget_years
         res = {}
-
         for line in self.context.projection:
             service = line['service']
             btype = line['btype']
@@ -215,7 +219,6 @@ class ProjectionDataGridField(DataGridField):
             amounts[year] = amount
 
         return res
-
 
     def prepareProjectionForMultipleDisplay(self):
         annotations = IAnnotations(self.context)
