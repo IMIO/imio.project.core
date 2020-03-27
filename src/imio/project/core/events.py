@@ -3,9 +3,7 @@
 from OFS.Application import Application
 from imio.helpers.cache import cleanRamCacheFor
 from imio.project.core.browser.controlpanel import field_constraints
-from imio.project.core.config import CHILDREN_ANALYTIC_BUDGETS_ANNOTATION_KEY as CABAK
-from imio.project.core.config import CHILDREN_BUDGET_INFOS_ANNOTATION_KEY as CBIAK
-from imio.project.core.config import CHILDREN_PROJECTIONS_ANNOTATION_KEY as CPAK
+from imio.project.core.config import SUMMARIZED_FIELDS
 from imio.project.core.content.project import IProject
 from imio.project.core.utils import getProjectSpace
 from plone import api
@@ -22,12 +20,6 @@ Move oo: onMovedProject on act, onMovedProject on oo, onModifyProject on os1, on
 Copy act: onAddProject on act2, onModifyProject on oo
 Copy oo: onAddProject on act2, onAddProject on 002, onModifyProject on os
 """
-
-summarized_fields = {
-    'budget': CBIAK,
-    'analytic_budget': CABAK,
-    'projection': CPAK,
-}
 
 
 def _updateSummarizedFields(obj, fields=None):
@@ -51,7 +43,7 @@ def _updateSummarizedFields(obj, fields=None):
 
     # retro-compatible with migration to 0.2
     if not fields:
-        fields = summarized_fields
+        fields = SUMMARIZED_FIELDS
 
     pw = obj.portal_workflow
     obj_uid = obj.UID()
@@ -96,7 +88,7 @@ def _cleanParentsFields(obj, parent=None):
     obj_annotations = IAnnotations(obj)
     uids_to_remove = {}
 
-    for field_id, annotation_key in summarized_fields.items():
+    for field_id, annotation_key in SUMMARIZED_FIELDS.items():
         uids_to_remove_for_field = [obj.UID()]
         if annotation_key in obj_annotations:
             # remove obj's children too
@@ -114,7 +106,7 @@ def _cleanParentsFields(obj, parent=None):
     while not parent.portal_type == 'projectspace':
         parent_annotations = IAnnotations(parent)
 
-        for field_id, annotation_key in summarized_fields.items():
+        for field_id, annotation_key in SUMMARIZED_FIELDS.items():
             if annotation_key in parent_annotations:
                 # we remove all contained uids from annotation (needed when the state is backed to initial state)
                 for uid in uids_to_remove[field_id]:
