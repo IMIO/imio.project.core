@@ -53,7 +53,9 @@
                             <Valeur/>
                         </RemarqueStatut>
                         <ETP>0</ETP>
-                        <Plans/>
+                        <Plans tal:define="plans python:view.plans(os)">
+                            <Plan tal:repeat="plan plans" tal:content="plan"></Plan>
+                        </Plans>
                         <Partenaires/>
                         <ObjectifsOperationnels tal:define="oos python:view.operational_objectives(os)"
                                                 tal:condition="python: len(oos)">
@@ -89,7 +91,9 @@
                                     <Valeur/>
                                 </RemarqueStatut>
                                 <ETP>0</ETP>
-                                <Plans/>
+                                <Plans tal:define="plans python:view.plans(oo)" tal:condition="python: len(plans)">
+                                    <Plan tal:repeat="plan plans" tal:content="plan"></Plan>
+                                </Plans>
                                 <Partenaires/>
                                 <Actions tal:define="actions python:view.actions_and_subactions(oo)"
                                          tal:condition="python: len(actions)">
@@ -123,7 +127,9 @@
                                             <Valeur/>
                                         </RemarqueStatut>
                                         <ETP>0</ETP>
-                                        <Plans/>
+                                        <Plans tal:define="plans python:view.plans(action)" tal:condition="python: len(plans)">
+                                            <Plan tal:repeat="plan plans" tal:content="plan"></Plan>
+                                        </Plans>
                                         <Partenaires/>
                                     </Action>
                                 </Actions>

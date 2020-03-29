@@ -264,6 +264,10 @@ class PSTExportAsXML(BrowserView):
             return 0
         return prog
 
+    def plans(self, element):
+        helper = element.unrestrictedTraverse('@@document_generation_helper_view')
+        return helper.display_voc('plan').split(',')
+
 
 class IPSTImportFromEcomptesSchema(model.Schema):
 
