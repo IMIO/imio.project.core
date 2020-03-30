@@ -137,6 +137,7 @@ class IImioProjectSettings(Interface):
     project_budget_states = schema.List(
         title=_(u"${type} budget globalization states", mapping={'type': _('Project')}),
         description=_(u'Put states on the right for which you want to globalize budget fields.'),
+        required=False,
         value_type=schema.Choice(vocabulary=u'imio.project.core.ProjectStatesVocabulary'),
     )
 
