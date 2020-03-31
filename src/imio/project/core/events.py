@@ -235,5 +235,31 @@ def registry_changed(event):
     """ Handler when the registry is changed """
     if IRecordModifiedEvent.providedBy(event):
         if event.record.interfaceName == 'imio.project.pst.browser.controlpanel.IImioPSTSettings':
+            # empty some fields if necessary
             empty = field_constraints.get('empty', {})
             empty_fields(event, empty)
+            # we redo budget globalization if states change
+            catalog = api.portal.get_tool('portal_catalog')
+            if event.record.fieldName.endswith('_budget_states'):
+                # first remove all
+                brains = catalog.searchResults(object_provides=IProject.__identifier__, sort_on='path',
+                                               sort_order='reverse')
+                for brain in brains:
+                    obj = brain.getObject()
+                    changed = False
+                    obj_annotations = IAnnotations(obj)
+                    for fld, AK in SUMMARIZED_FIELDS.items():
+                        if AK in obj_annotations:
+                            changed = True
+                            del obj_annotations[AK]
+                    if changed:
+                        print "%s changed" % obj
+                        obj.reindexObject()
+                # globalize again
+                brains = catalog.searchResults(object_provides=IProject.__identifier__, sort_on='path',
+                                               sort_order='reverse')
+                pw = api.portal.get_tool('portal_workflow')
+                for brain in brains:
+                    obj = brain.getObject()
+                    if pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
+                        _updateSummarizedFields(obj)

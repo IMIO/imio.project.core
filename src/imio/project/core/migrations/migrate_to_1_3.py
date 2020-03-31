@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from imio.migrator.migrator import Migrator
+from imio.project.core.browser.controlpanel import get_budget_states
 from imio.project.core.config import SUMMARIZED_FIELDS
 from imio.project.core.content.project import IProject
 from imio.project.core.content.projectspace import IProjectSpace
@@ -37,14 +38,20 @@ class Migrate_To_1_3(Migrator):
         for brain in brains:
             obj = brain.getObject()
             obj_annotations = IAnnotations(obj)
+            changed = False
             for fld, AK in SUMMARIZED_FIELDS.items():
                 if AK in obj_annotations:
+                    changed = True
                     del obj_annotations[AK]
-            obj.reindexObject()
+            if changed:
+                obj.reindexObject()
 
         brains = catalog.searchResults(object_provides=IProject.__identifier__, sort_on='path', sort_order='reverse')
+        pw = api.portal.get_tool('portal_workflow')
         for brain in brains:
-            _updateSummarizedFields(brain.getObject())
+            obj = brain.getObject()
+            if pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
+                _updateSummarizedFields(obj)
 
         # Display duration
         self.finish()
