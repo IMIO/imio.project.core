@@ -86,6 +86,16 @@ class FunctionalTestCase(unittest.TestCase):
         ]
         params['budget_types'] = budget_types
         params['budget_years'] = [2013, 2014, 2015, 2016, 2017, 2018]
+        # datagridfield plan
+        plan_values = [
+            {'label': u"Plan 1",
+             'key': 'plan-1'},
+            {'label': u"Plan 2",
+             'key': 'plan-2'},
+            {'label': u"Plan 3",
+             'key': 'plan-3'},
+        ]
+        params['plan_values'] = plan_values
         self.ps = createContentInContainer(self.portal, 'projectspace', **params)
         projects = [
             {'id': u"project-1",
@@ -95,7 +105,8 @@ class FunctionalTestCase(unittest.TestCase):
              'budget': [{'budget_type': 'budget-type-1',
                          'year': 2018,
                          'amount': 500.0, }
-                        ]},
+                        ],
+             'plan': plan_values[0]},            # not list here to keep common test working
             {'id': u"project-2",
              'title': u"Project 2",
              'categories': u"category-2",  # not list here to keep common test working
