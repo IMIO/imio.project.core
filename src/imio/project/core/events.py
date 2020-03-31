@@ -3,6 +3,7 @@
 from OFS.Application import Application
 from imio.helpers.cache import cleanRamCacheFor
 from imio.project.core.browser.controlpanel import field_constraints
+from imio.project.core.browser.controlpanel import get_budget_states
 from imio.project.core.config import SUMMARIZED_FIELDS
 from imio.project.core.content.project import IProject
 from imio.project.core.utils import getProjectSpace
@@ -126,7 +127,7 @@ def onAddProject(obj, event):
     # Update field data on every parents
     pw = obj.portal_workflow
     workflows = pw.getWorkflowsFor(obj)
-    if not workflows or workflows[0].initial_state != pw.getInfoFor(obj, 'review_state'):
+    if not workflows or pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
         _updateSummarizedFields(obj)
     # compute reference number
     if not base_hasattr(obj, 'symbolic_link'):
@@ -143,7 +144,7 @@ def onModifyProject(obj, event):
     # Update field data on every parents
     pw = obj.portal_workflow
     workflows = pw.getWorkflowsFor(obj)
-    if not workflows or workflows[0].initial_state != pw.getInfoFor(obj, 'review_state'):
+    if not workflows or pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
         _updateSummarizedFields(obj)
 
 
@@ -154,12 +155,12 @@ def onTransitionProject(obj, event):
     # we pass creation, already managed by add event
     if event.transition is None:
         return
-    pw = obj.portal_workflow
-    workflows = pw.getWorkflowsFor(obj)
+    old_in = event.old_state.id in get_budget_states(obj.portal_type)
+    new_in = event.new_state.id in get_budget_states(obj.portal_type)
     # Update field data on parents
-    if event.old_state.title == workflows[0].initial_state and event.new_state.title != workflows[0].initial_state:
+    if not old_in and new_in:
         _updateSummarizedFields(obj)
-    elif event.new_state.title == workflows[0].initial_state and event.old_state.title != workflows[0].initial_state:
+    elif old_in and not new_in:
         _cleanParentsFields(obj)
 
 
@@ -187,7 +188,7 @@ def onMoveProject(obj, event):
     pw = obj.portal_workflow
     workflows = pw.getWorkflowsFor(obj)
     # Update field data on old and new parents
-    if not workflows or workflows[0].initial_state != pw.getInfoFor(obj, 'review_state'):
+    if not workflows or pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
         _cleanParentsFields(obj, parent=event.oldParent)
         _updateSummarizedFields(obj)
 

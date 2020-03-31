@@ -96,6 +96,11 @@ def position_check(data, constraints):
         raise Invalid(_(u'Some fields have to be at a specific position: ${msg}', mapping={'msg': msg}))
 
 
+def get_budget_states(portal_type):
+    return api.portal.get_registry_record('imio.project.settings.{}_budget_states'.format(portal_type),
+                                          default=[]) or []
+
+
 class ProjectFieldsVocabulary(object):
     implements(IVocabularyFactory)
 
