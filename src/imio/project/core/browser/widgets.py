@@ -225,10 +225,10 @@ class ProjectionDataGridField(DataGridField):
         if CHILDREN_PROJECTIONS_ANNOTATION_KEY not in annotations:
             return {}
 
-        fixed_years = self.budget_years
+        # fixed_years = self.budget_years
         res = {}
-        for year in fixed_years:
-            res.setdefault(year, {'revenues': 0.0, 'expenses': 0.0})
+        # for year in fixed_years:
+        #     res.setdefault(year, {'revenues': 0.0, 'expenses': 0.0})
 
         for datagridfieldrecord in annotations[CHILDREN_PROJECTIONS_ANNOTATION_KEY].itervalues():
             for line in datagridfieldrecord:
