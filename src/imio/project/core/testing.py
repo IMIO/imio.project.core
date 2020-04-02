@@ -88,12 +88,9 @@ class FunctionalTestCase(unittest.TestCase):
         params['budget_years'] = [2013, 2014, 2015, 2016, 2017, 2018]
         # datagridfield plan
         plan_values = [
-            {'label': u"Plan 1",
-             'key': 'plan-1'},
-            {'label': u"Plan 2",
-             'key': 'plan-2'},
-            {'label': u"Plan 3",
-             'key': 'plan-3'},
+            {'label': u"Plan 1", 'key': 'plan-1'},
+            {'label': u"Plan 2", 'key': 'plan-2'},
+            {'label': u"Plan 3", 'key': 'plan-3'},
         ]
         params['plan_values'] = plan_values
         self.ps = createContentInContainer(self.portal, 'projectspace', **params)

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Init and utils."""
 
+from imio.helpers.content import get_vocab as _voc
 from plone import api
 from zope.component import queryUtility
 from zope.i18n.interfaces import ITranslationDomain

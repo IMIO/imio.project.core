@@ -6,7 +6,7 @@ from os.path import dirname
 from Products.Five.browser import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
 from imio.helpers.browser.views import ContainerView
-from imio.project.core import _
+from imio.project.core import _, _voc
 from lxml import etree
 from lxml.etree import XMLSyntaxError
 from plone import api
@@ -172,10 +172,7 @@ class PSTExportAsXML(BrowserView):
         return ecompte_status.get(element_state)
 
     def responsable(self, element):
-        factory = api.portal.getUtility(
-            IVocabularyFactory,
-            name='imio.project.core.content.project.manager_vocabulary',
-        )
+        factory = _voc(element, 'imio.project.core.content.project.manager_vocabulary')
 
         if element.administrative_responsible:
             term_id = element.administrative_responsible[0]
@@ -184,10 +181,7 @@ class PSTExportAsXML(BrowserView):
             return None
 
     def mandataire(self, element, oo=None):
-        factory = api.portal.getUtility(
-            IVocabularyFactory,
-            name='imio.project.pst.content.operational.representative_responsible_vocabulary',
-        )
+        factory = _voc(element, 'imio.project.pst.content.operational.representative_responsible_vocabulary')
 
         if element.representative_responsible:
             term_id = element.representative_responsible[0]
@@ -199,10 +193,7 @@ class PSTExportAsXML(BrowserView):
             return None
 
     def departement(self, element):
-        factory = api.portal.getUtility(
-            IVocabularyFactory,
-            name='imio.project.core.content.project.manager_vocabulary',
-        )
+        factory = _voc(element, 'imio.project.core.content.project.manager_vocabulary')
 
         if element.manager:
             voc = factory(element)
@@ -265,8 +256,12 @@ class PSTExportAsXML(BrowserView):
         return prog
 
     def plans(self, element):
-        helper = element.unrestrictedTraverse('@@document_generation_helper_view')
-        return helper.display_voc('plan').split(',')
+        factory = _voc(element, 'imio.project.core.content.project.plan_vocabulary')
+
+        plans = []
+        for plan in element.plan:
+            plans.append(factory.getTerm(plan).title)
+        return plans
 
 
 class IPSTImportFromEcomptesSchema(model.Schema):
