@@ -21,6 +21,8 @@ class Migrate_To_1_3(Migrator):
         Migrator.__init__(self, context)
 
     def run(self):
+        self.runProfileSteps('imio.project.core', steps=['plone.app.registry'],
+                             run_dependencies=False)
         # moved categories ps attribute to renamed attribute
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog.searchResults(object_provides=IProjectSpace.__identifier__)
