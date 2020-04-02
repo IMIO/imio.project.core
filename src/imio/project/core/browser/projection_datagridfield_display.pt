@@ -59,12 +59,14 @@
           <td class="projection_expenses_amount" tal:content="python:years[year]['expenses']">D Amount</td>
         </tal:loop_years>
       </tr>
+    <tfoot>
       <tr>
-        <td class="projection_btype_total">TOTAL</td>
+        <td class="projection_btype_total">Total</td>
         <tal:loop_years repeat="year view/budget_years">
           <td class="projection_total_amount" tal:content="python:years[year]['total']">Total Amount</td>
         </tal:loop_years>
       </tr>
+    </tfoot>
     </tbody>
   </table>
 </fieldset>

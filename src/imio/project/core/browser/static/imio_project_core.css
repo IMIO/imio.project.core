@@ -12,7 +12,7 @@ table.datagridwidget-table-view input.float-field, table.datagridwidget-table-vi
 .budgetinfos_global_total, .budgetinfos_result, .budgetinfos_table TFOOT TD {
     text-align: right;
 }
-.budgetinfos_table TFOOT {
+.budgetinfos_table TFOOT, .projection_table TFOOT, td.analytic_budget_total {
     font-weight: bold;
     border-top: 1px solid grey;
 }

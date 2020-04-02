@@ -174,7 +174,7 @@ class AnalyticBudgetDataGridField(DataGridField):
 
         for amounts in res.values():
             margin = amounts['revenues'] - amounts['expenses']
-            amounts['total'] = '{:+.1f}'.format(margin) if margin else '-'
+            amounts['total'] = '{:+.2f}'.format(margin) if margin else '-'
             for key in ('revenues', 'expenses'):
                 if not amounts[key]:
                     amounts[key] = '-'
@@ -247,6 +247,6 @@ class ProjectionDataGridField(DataGridField):
 
         for amounts in res.values():
             margin = amounts['revenues'] - amounts['expenses']
-            amounts['total'] = '{:+.1f}'.format(margin) if margin else '0.0'
+            amounts['total'] = '{:+.2f}'.format(margin) if margin else '0.0'
 
         return res
