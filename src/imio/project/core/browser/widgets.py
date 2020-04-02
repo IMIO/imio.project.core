@@ -222,7 +222,9 @@ class ProjectionDataGridField(DataGridField):
             amounts = res.setdefault(projection_line, {y: 0.0 for y in fixed_years})
             amounts[year] = amount
 
-        return res
+        # functools.cmp_to_key() for python 3
+        return res, sorted(res.keys(), cmp=lambda x, y: cmp((y.service, y.btype, x.group),
+                                                            (x.service, x.btype, y.group)))
 
     def prepareProjectionForMultipleDisplay(self):
         annotations = IAnnotations(self.context)

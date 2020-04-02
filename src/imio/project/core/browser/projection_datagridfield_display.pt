@@ -5,7 +5,9 @@
       tal:omit-tag=""
       i18n:domain="imio.project.core">
 
-<fieldset tal:define="lines view/prepareProjectionForSingleDisplay;" tal:condition="lines">
+<fieldset tal:define="ret python: view.prepareProjectionForSingleDisplay();
+                      lines python: ret[0];"
+          tal:condition="lines">
   <legend i18n:translate="projection_legend_local_data">Locally encoded data</legend>
   <table class="listing projection_table">
     <thead>
@@ -20,7 +22,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr tal:repeat="line python:sorted(lines.keys())">
+      <tr tal:repeat="line python: ret[1]">
         <td class="projection_service" tal:content="line/service">Service</td>
         <td class="projection_btype" tal:content="line/btype">R/D</td>
         <td class="projection_group" tal:content="line/group">Eco group</td>

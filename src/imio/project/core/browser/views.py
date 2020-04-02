@@ -318,7 +318,11 @@ class PSTImportFromEcomptes(Form):
                         'amount': amount,
                         # 'comment': u'',  Removed from schema
                     })
-                element_dx.analytic_budget = element_dx_articles
+                element_dx.analytic_budget = sorted(element_dx_articles,
+                                                    cmp=lambda x, y: cmp((x['year'], y['service'], y['btype'],
+                                                                          x['article']),
+                                                                         (y['year'], x['service'], x['btype'],
+                                                                          y['article'])))
                 modifications[element_dx.absolute_url_path()] = element_dx
 
         all_projections_xml = ecomptes_xml.findall('.//Projections')
