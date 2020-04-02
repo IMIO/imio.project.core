@@ -3,8 +3,10 @@
 from collective.z3cform.datagridfield import DictRow
 from collective.z3cform.datagridfield.datagridfield import DataGridField
 from imio.project.core import _
+from imio.project.core.browser.widgets import AnalyticBudgetDataGridField
+from imio.project.core.browser.widgets import ProjectionDataGridField
 from imio.project.core.content.project import default_year
-from plone.autoform import directives
+from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
 from plone.supermodel import model
@@ -13,7 +15,22 @@ from zope.component import adapter
 from zope.interface import Interface
 from zope.interface import implementer
 from zope.interface import provider
-from plone.autoform import directives as form
+from z3c.form import interfaces
+from z3c.form.widget import FieldWidget
+
+
+@implementer(interfaces.IFieldWidget)
+def AnalyticBudgetDataGridFieldFactory(field, request):
+    """IFieldWidget factory for DataGridField using the 'AnalyticBudgetDataGridField' widget."""
+    widget = AnalyticBudgetDataGridField(request)
+    return FieldWidget(field, widget)
+
+
+@implementer(interfaces.IFieldWidget)
+def ProjectionDataGridFieldFactory(field, request):
+    """IFieldWidget factory for DataGridField using the 'ProjectionDataGridField' widget."""
+    widget = ProjectionDataGridField(request)
+    return FieldWidget(field, widget)
 
 
 class IAnalyticBudgetSchema(Interface):
@@ -106,7 +123,7 @@ class IAnalyticBudget(model.Schema):
             title=_("Analytic budget"), schema=IAnalyticBudgetSchema, required=False
         ),
     )
-    directives.widget("analytic_budget", DataGridField, display_table_css_class="listing nosort")
+    form.widget("analytic_budget", AnalyticBudgetDataGridFieldFactory, display_table_css_class="listing nosort")
 
     projection = schema.List(
         title=_(u"Projection"),
@@ -116,7 +133,7 @@ class IAnalyticBudget(model.Schema):
             title=_("Projection"), schema=IProjectionSchema, required=False
         ),
     )
-    directives.widget("projection", DataGridField, display_table_css_class="listing nosort")
+    form.widget("projection", ProjectionDataGridFieldFactory, display_table_css_class="listing nosort")
 
     form.order_before(projection='budget')
     form.order_before(analytic_budget='budget')

@@ -3,7 +3,8 @@
 from OFS.Application import Application
 from imio.helpers.cache import cleanRamCacheFor
 from imio.project.core.browser.controlpanel import field_constraints
-from imio.project.core.config import CHILDREN_BUDGET_INFOS_ANNOTATION_KEY as CBIAK
+from imio.project.core.browser.controlpanel import get_budget_states
+from imio.project.core.config import SUMMARIZED_FIELDS
 from imio.project.core.content.project import IProject
 from imio.project.core.utils import getProjectSpace
 from plone import api
@@ -22,11 +23,13 @@ Copy oo: onAddProject on act2, onAddProject on 002, onModifyProject on os
 """
 
 
-def _updateParentsBudgetInfos(obj):
+def _updateSummarizedFields(obj, fields=None):
     """
-      Update budget infos on every parents, going up until the parent is the projectspace.
+      Update each summarized field on every parents, going up until the parent is the projectspace.
       Exception made if the parent is on initial state
     """
+
+    # example for Budget Infos field:
     # formatBudgetInfos : take current obj budget infos and budget infos defined on children
     # that have been saved in current object annotations with key CHILDREN_BUDGET_INFOS_ANNOTATION_KEY
     # stored data will be something like :
@@ -39,58 +42,81 @@ def _updateParentsBudgetInfos(obj):
     #                                       {'amount': 125.0, 'budget_type': 'ville', 'year': 2013}]
     # }
 
-    formattedBudgetInfos = {}
+    # retro-compatible with migration to 0.2
+    if not fields:
+        fields = SUMMARIZED_FIELDS
+
     pw = obj.portal_workflow
-    objUID = obj.UID()
-    # we take the budget infos saved on obj annotation
+    obj_uid = obj.UID()
+    # we take the field data saved on obj annotation
     obj_annotations = IAnnotations(obj)
-    if CBIAK in obj_annotations:
-        formattedBudgetInfos = dict(obj_annotations[CBIAK])
-    # add self in budgetInfos if not empty
-    if obj.budget:
-        formattedBudgetInfos[objUID] = obj.budget
+    formatted_fields = {}
+    for field_id, annotation_key in fields.items():
+        formatted_field = {}
+        if annotation_key in obj_annotations:
+            formatted_field = dict(obj_annotations[annotation_key])
+        # add self in field if not empty
+        if getattr(obj, field_id, None):
+            formatted_field[obj_uid] = getattr(obj, field_id, None)
+        formatted_fields[field_id] = formatted_field
 
     parent = obj.aq_inner.aq_parent
     while not parent.portal_type == 'projectspace':
         workflows = pw.getWorkflowsFor(parent)
-        # if parent state is initial_state, we don't set children budget
+        # if parent state is initial_state, we don't set children field
         if workflows and workflows[0].initial_state == pw.getInfoFor(parent, 'review_state'):
             break
         parent_annotations = IAnnotations(parent)
-        if not CBIAK in parent_annotations:
-            parent_annotations[CBIAK] = {}
-        # warning, we need to pass by an intermediate value then assign it using dict()
-        # as new annotations, or annotations are lost upon Zope restart...
-        new_annotations = parent_annotations[CBIAK]
-        new_annotations.update(formattedBudgetInfos)
-        parent_annotations[CBIAK] = dict(new_annotations)
+
+        for field_id, annotation_key in fields.items():
+            if annotation_key not in parent_annotations:
+                parent_annotations[annotation_key] = {}
+            # warning, we need to pass by an intermediate value then assign it using dict()
+            # as new annotations, or annotations are lost upon Zope restart...
+            new_annotations = parent_annotations[annotation_key]
+            new_annotations.update(formatted_fields[field_id])
+            parent_annotations[annotation_key] = dict(new_annotations)
+
         parent = parent.aq_inner.aq_parent
 
 
-def _cleanParentsBudgetInfos(obj, parent=None):
+def _cleanParentsFields(obj, parent=None):
     """
-      Update budget infos on every parents, cleaning sub objects info.
+      Update field data on every parents, cleaning sub objects info.
       When p_parent, it's a move. We don't modify obj but work on old parent
     """
-    uids = [obj.UID()]
+    # uids_to_remove = [obj.UID()]
     obj_annotations = IAnnotations(obj)
-    if CBIAK in obj_annotations:
-        uids.extend(obj_annotations[CBIAK].keys())
-        if parent is None:
-            obj_annotations[CBIAK] = {}
+    uids_to_remove = {}
+
+    for field_id, annotation_key in SUMMARIZED_FIELDS.items():
+        uids_to_remove_for_field = [obj.UID()]
+        if annotation_key in obj_annotations:
+            # remove obj's children too
+            uids_to_remove_for_field.extend(obj_annotations[annotation_key].keys())
+            if parent is None:
+                obj_annotations[annotation_key] = {}
+        uids_to_remove[field_id] = uids_to_remove_for_field
+
     if parent is None:
         parent = obj.aq_inner.aq_parent
+
     if isinstance(parent, Application):
         return  # This can happen when we try to remove a plone object
+
     while not parent.portal_type == 'projectspace':
         parent_annotations = IAnnotations(parent)
-        if CBIAK in parent_annotations:
-            # we remove all contained uids from annotation (needed when the state is backed to initial state)
-            for uid in uids:
-                if uid in parent_annotations[CBIAK]:
-                    del parent_annotations[CBIAK][uid]
-            # We have to set new dict to be persisted in annotation
-            parent_annotations[CBIAK] = dict(parent_annotations[CBIAK])
+
+        for field_id, annotation_key in SUMMARIZED_FIELDS.items():
+            if annotation_key in parent_annotations:
+                # we remove all contained uids from annotation (needed when the state is backed to initial state)
+                for uid in uids_to_remove[field_id]:
+                    if uid in parent_annotations[annotation_key]:
+                        del parent_annotations[annotation_key][uid]
+
+                # We have to set new dict to be persisted in annotation
+                parent_annotations[annotation_key] = dict(parent_annotations[annotation_key])
+
         parent = parent.aq_inner.aq_parent
 
 
@@ -98,11 +124,11 @@ def onAddProject(obj, event):
     """
       Handler when a project is added
     """
-    # Update budget infos on every parents
+    # Update field data on every parents
     pw = obj.portal_workflow
     workflows = pw.getWorkflowsFor(obj)
-    if not workflows or workflows[0].initial_state != pw.getInfoFor(obj, 'review_state'):
-        _updateParentsBudgetInfos(obj)
+    if not workflows or pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
+        _updateSummarizedFields(obj)
     # compute reference number
     if not base_hasattr(obj, 'symbolic_link'):
         projectspace = getProjectSpace(obj)
@@ -115,11 +141,11 @@ def onModifyProject(obj, event):
     """
       Handler when a project is modified
     """
-    # Update budget infos on every parents
+    # Update field data on every parents
     pw = obj.portal_workflow
     workflows = pw.getWorkflowsFor(obj)
-    if not workflows or workflows[0].initial_state != pw.getInfoFor(obj, 'review_state'):
-        _updateParentsBudgetInfos(obj)
+    if not workflows or pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
+        _updateSummarizedFields(obj)
 
 
 def onTransitionProject(obj, event):
@@ -129,20 +155,20 @@ def onTransitionProject(obj, event):
     # we pass creation, already managed by add event
     if event.transition is None:
         return
-    pw = obj.portal_workflow
-    workflows = pw.getWorkflowsFor(obj)
-    # Update budget infos on parents
-    if event.old_state.title == workflows[0].initial_state and event.new_state.title != workflows[0].initial_state:
-        _updateParentsBudgetInfos(obj)
-    elif event.new_state.title == workflows[0].initial_state and event.old_state.title != workflows[0].initial_state:
-        _cleanParentsBudgetInfos(obj)
+    old_in = event.old_state.id in get_budget_states(obj.portal_type)
+    new_in = event.new_state.id in get_budget_states(obj.portal_type)
+    # Update field data on parents
+    if not old_in and new_in:
+        _updateSummarizedFields(obj)
+    elif old_in and not new_in:
+        _cleanParentsFields(obj)
 
 
 def onRemoveProject(obj, event):
     """
         When a project is removed
     """
-    _cleanParentsBudgetInfos(obj)
+    _cleanParentsFields(obj)
 
 
 def onMoveProject(obj, event):
@@ -161,10 +187,10 @@ def onMoveProject(obj, event):
 #        return
     pw = obj.portal_workflow
     workflows = pw.getWorkflowsFor(obj)
-    # Update budget infos on old and new parents
-    if not workflows or workflows[0].initial_state != pw.getInfoFor(obj, 'review_state'):
-        _cleanParentsBudgetInfos(obj, parent=event.oldParent)
-        _updateParentsBudgetInfos(obj)
+    # Update field data on old and new parents
+    if not workflows or pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
+        _cleanParentsFields(obj, parent=event.oldParent)
+        _updateSummarizedFields(obj)
 
 
 def onModifyProjectSpace(obj, event):
@@ -209,5 +235,31 @@ def registry_changed(event):
     """ Handler when the registry is changed """
     if IRecordModifiedEvent.providedBy(event):
         if event.record.interfaceName == 'imio.project.pst.browser.controlpanel.IImioPSTSettings':
+            # empty some fields if necessary
             empty = field_constraints.get('empty', {})
             empty_fields(event, empty)
+            # we redo budget globalization if states change
+            catalog = api.portal.get_tool('portal_catalog')
+            if event.record.fieldName.endswith('_budget_states'):
+                # first remove all
+                brains = catalog.searchResults(object_provides=IProject.__identifier__, sort_on='path',
+                                               sort_order='reverse')
+                for brain in brains:
+                    obj = brain.getObject()
+                    changed = False
+                    obj_annotations = IAnnotations(obj)
+                    for fld, AK in SUMMARIZED_FIELDS.items():
+                        if AK in obj_annotations:
+                            changed = True
+                            del obj_annotations[AK]
+                    if changed:
+                        print "%s changed" % obj
+                        obj.reindexObject()
+                # globalize again
+                brains = catalog.searchResults(object_provides=IProject.__identifier__, sort_on='path',
+                                               sort_order='reverse')
+                pw = api.portal.get_tool('portal_workflow')
+                for brain in brains:
+                    obj = brain.getObject()
+                    if pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
+                        _updateSummarizedFields(obj)

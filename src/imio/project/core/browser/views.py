@@ -22,6 +22,7 @@ from z3c.form.field import Fields
 from z3c.form.form import Form
 from zope import schema
 from zope.component import getMultiAdapter
+from zope.lifecycleevent import modified
 from zope.schema.interfaces import IVocabularyFactory
 
 import logging
@@ -289,6 +290,7 @@ class PSTImportFromEcomptes(Form):
         return parsed_xml
 
     def update_pst(self, ecomptes_xml):
+        modifications = {}
         all_articles_xml = ecomptes_xml.findall('.//Articles')
         for articles_xml in all_articles_xml:
             if not articles_xml.getchildren():
@@ -316,7 +318,12 @@ class PSTImportFromEcomptes(Form):
                         'amount': amount,
                         # 'comment': u'',  Removed from schema
                     })
-                element_dx.analytic_budget = element_dx_articles
+                element_dx.analytic_budget = sorted(element_dx_articles,
+                                                    cmp=lambda x, y: cmp((x['year'], y['service'], y['btype'],
+                                                                          x['article']),
+                                                                         (y['year'], x['service'], x['btype'],
+                                                                          y['article'])))
+                modifications[element_dx.absolute_url_path()] = element_dx
 
         all_projections_xml = ecomptes_xml.findall('.//Projections')
         for projections_xml in all_projections_xml:
@@ -347,6 +354,10 @@ class PSTImportFromEcomptes(Form):
                             'amount': amount,
                         })
                 element_dx.projection = projections
+                modifications[element_dx.absolute_url_path()] = element_dx
+
+        for path in reversed(modifications.keys()):
+            modified(modifications[path])
 
     @button.buttonAndHandler(_(u'Import'), name='import')
     def handleApply(self, action):

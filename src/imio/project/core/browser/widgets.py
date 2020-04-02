@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
+from collections import namedtuple
 
 from collective.z3cform.datagridfield.datagridfield import DataGridField
+from imio.project.core.config import CHILDREN_ANALYTIC_BUDGETS_ANNOTATION_KEY
 from imio.project.core.config import CHILDREN_BUDGET_INFOS_ANNOTATION_KEY
+from imio.project.core.config import CHILDREN_PROJECTIONS_ANNOTATION_KEY
 from imio.project.core.utils import getProjectSpace
+from Products.CMFPlone.utils import base_hasattr
 from zope.annotation import IAnnotations
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
 from zope.component import queryUtility
@@ -17,8 +21,10 @@ class BudgetInfosDataGridField(DataGridField):
           We override renderer so we can call original DataGridField renderer without customizing the template and add
           our own rendered template under.
         """
+        template = u''
         # render original template
-        template = DataGridField.render(self)
+        if self.mode != 'display' or (base_hasattr(self.context, 'budget') and self.context.budget):
+            template = DataGridField.render(self)
         # render our own template we will display just under original one
         if self.mode == 'display':
             # we will display the originally rendered template in our template, so set it on self
@@ -123,3 +129,126 @@ class BudgetInfosDataGridField(DataGridField):
             super_total = super_total + total
 
         return years, budget_types, res, total_by_year, total_by_budget_type, super_total
+
+
+class AnalyticBudgetDataGridField(DataGridField):
+    """Custom DataGridField widget used to display analytic budget infos"""
+
+    def render(self):
+        """
+          We override renderer so we can call original DataGridField renderer without customizing the template and add
+          our own rendered template under.
+        """
+        template = u''
+        # render original template
+        if self.mode != 'display' or (base_hasattr(self.context, 'analytic_budget') and self.context.analytic_budget):
+            template = DataGridField.render(self)
+        # render our own template we will display just under original one
+        if self.mode == 'display':
+            # we will display the originally rendered template in our template, so set it on self
+            self.original_template = template
+            template = ViewPageTemplateFile('analytic_budget_datagridfield_display.pt')(self)
+        return template
+
+    def prepareAnalyticBudgetForDisplay(self):
+        annotations = IAnnotations(self.context)
+        if CHILDREN_ANALYTIC_BUDGETS_ANNOTATION_KEY not in annotations:
+            return {}
+
+        res = {}
+# no need to have all years. Articles are defined only for the current year.
+#        fixed_years = [str(y) for y in getProjectSpace(self.context).budget_years or []]
+#        for year in fixed_years:
+#            res.setdefault(year, {'revenues': 0.0, 'expenses': 0.0})
+
+        for datagridfieldrecord in annotations[CHILDREN_ANALYTIC_BUDGETS_ANNOTATION_KEY].itervalues():
+            for line in datagridfieldrecord:
+                year = str(line['year'])
+                budget_type = line['btype'].lower()
+                amount = line['amount']
+                res_year = res.setdefault(year, {'revenues': 0.0, 'expenses': 0.0})
+                if 'r' in budget_type:
+                    res_year['revenues'] += amount
+                elif 'd' in budget_type:
+                    res_year['expenses'] += amount
+
+        for amounts in res.values():
+            margin = amounts['revenues'] - amounts['expenses']
+            amounts['total'] = '{:+.2f}'.format(margin) if margin else '-'
+            for key in ('revenues', 'expenses'):
+                if not amounts[key]:
+                    amounts[key] = '-'
+
+        return res
+
+
+class ProjectionDataGridField(DataGridField):
+    """Custom DataGridField widget used to display projections"""
+
+    def render(self):
+        """
+          We override renderer so we can call original DataGridField renderer without customizing the template and add
+          our own rendered template under.
+        """
+
+        # render our own template
+        if self.mode == 'display':
+            template = ViewPageTemplateFile('projection_datagridfield_display.pt')(self)
+        else:
+            # render original template
+            template = DataGridField.render(self)
+        return template
+
+    @property
+    def budget_years(self):
+        return [str(y) for y in getProjectSpace(self.context).budget_years or []]
+
+    def prepareProjectionForSingleDisplay(self):
+        if not base_hasattr(self.context, 'projection') or not self.context.projection:
+            return {}
+
+        ProjectionLine = namedtuple('ProjectionLine', ['service', 'btype', 'group', 'title'])
+        fixed_years = self.budget_years
+        res = {}
+        for line in self.context.projection:
+            service = line['service']
+            btype = line['btype']
+            group = line['group']
+            title = line['title']
+            year = str(line['year'])
+            amount = line['amount']
+
+            projection_line = ProjectionLine(service, btype, group, title)
+            amounts = res.setdefault(projection_line, {y: 0.0 for y in fixed_years})
+            amounts[year] = amount
+
+        # functools.cmp_to_key() for python 3
+        return res, sorted(res.keys(), cmp=lambda x, y: cmp((y.service, y.btype, x.group),
+                                                            (x.service, x.btype, y.group)))
+
+    def prepareProjectionForMultipleDisplay(self):
+        annotations = IAnnotations(self.context)
+        if CHILDREN_PROJECTIONS_ANNOTATION_KEY not in annotations:
+            return {}
+
+        # fixed_years = self.budget_years
+        res = {}
+        # for year in fixed_years:
+        #     res.setdefault(year, {'revenues': 0.0, 'expenses': 0.0})
+
+        for datagridfieldrecord in annotations[CHILDREN_PROJECTIONS_ANNOTATION_KEY].itervalues():
+            for line in datagridfieldrecord:
+                year = str(line['year'])
+                budget_type = line['btype'].lower()
+                amount = line['amount']
+                res_year = res.setdefault(year, {'revenues': 0.0, 'expenses': 0.0})
+                if 'r' in budget_type:
+                    res_year['revenues'] += amount
+                elif 'd' in budget_type:
+                    res_year['expenses'] += amount
+
+        for amounts in res.values():
+            margin = amounts['revenues'] - amounts['expenses']
+            amounts['total'] = '{:+.2f}'.format(margin) if margin else '0.0'
+
+        return res

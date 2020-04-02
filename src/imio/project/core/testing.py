@@ -2,6 +2,7 @@
 """Base module for unittesting."""
 
 from collective.contact.plonegroup.config import PLONEGROUP_ORG
+from plone import api
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import login
@@ -53,6 +54,9 @@ class FunctionalTestCase(unittest.TestCase):
         # login as Manager and add a projectspace and 2 projects into it
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         login(self.portal, TEST_USER_NAME)
+        # set registry config
+        api.portal.set_registry_record('imio.project.settings.project_budget_states',
+                                       ['to_be_scheduled', 'ongoing', 'terminated'])
         params = {'id': u"projectspace",
                   'title': u"projectspace"}
         # datagridfield categories

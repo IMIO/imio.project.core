@@ -81,4 +81,9 @@
         factory="imio.project.core.browser.controlpanel.ProjectFieldsVocabulary"
         />
 
+    <utility
+        name="imio.project.core.ProjectStatesVocabulary"
+        factory="imio.project.core.browser.controlpanel.ProjectStatesVocabulary"
+        />
+
 </configure>
