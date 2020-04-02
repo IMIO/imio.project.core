@@ -5,34 +5,32 @@
       tal:omit-tag=""
       i18n:domain="imio.project.core">
 
-<fieldset>
+<fieldset tal:define="lines view/prepareProjectionForSingleDisplay;" tal:condition="lines">
   <legend i18n:translate="projection_legend_local_data">Locally encoded data</legend>
   <table class="listing projection_table">
-    <tal:defines define="lines view/prepareProjectionForSingleDisplay;">
-      <thead>
-        <tr>
-          <th class="nosort" i18n:translate="projection_label_service">Service</th>
-          <th class="nosort" i18n:translate="projection_label_btype">R/D</th>
-          <th class="nosort" i18n:translate="projection_label_group">Eco group</th>
-          <th class="nosort" i18n:translate="projection_label_title">Title</th>
-          <tal:loop_years repeat="year view/budget_years">
-            <th class="nosort" tal:content="year"></th>
-          </tal:loop_years>
-        </tr>
-      </thead>
-      <tbody>
-        <tr tal:repeat="line python:sorted(lines.keys())">
-          <td class="projection_service" tal:content="line/service">Service</td>
-          <td class="projection_btype" tal:content="line/btype">R/D</td>
-          <td class="projection_group" tal:content="line/group">Eco group</td>
-          <td class="projection_title" tal:content="line/title">Title</td>
-          <tal:loop tal:define="year_amounts python:lines[line]"
-                    tal:repeat="year year_amounts">
-            <td class="projection_amount" tal:content="python:year_amounts[year]">Year</td>
-          </tal:loop>
-        </tr>
-      </tbody>
-    </tal:defines>
+    <thead>
+      <tr>
+        <th class="nosort" i18n:translate="projection_label_service">Service</th>
+        <th class="nosort" i18n:translate="projection_label_btype">R/D</th>
+        <th class="nosort" i18n:translate="projection_label_group">Eco group</th>
+        <th class="nosort" i18n:translate="projection_label_title">Title</th>
+        <tal:loop_years repeat="year view/budget_years">
+          <th class="nosort" tal:content="year"></th>
+        </tal:loop_years>
+      </tr>
+    </thead>
+    <tbody>
+      <tr tal:repeat="line python:sorted(lines.keys())">
+        <td class="projection_service" tal:content="line/service">Service</td>
+        <td class="projection_btype" tal:content="line/btype">R/D</td>
+        <td class="projection_group" tal:content="line/group">Eco group</td>
+        <td class="projection_title" tal:content="line/title">Title</td>
+        <tal:loop tal:define="year_amounts python:lines[line]"
+                  tal:repeat="year year_amounts">
+          <td class="projection_amount" tal:content="python:year_amounts[year]">Year</td>
+        </tal:loop>
+      </tr>
+    </tbody>
   </table>
 </fieldset>
 

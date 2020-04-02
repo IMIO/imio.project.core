@@ -21,8 +21,10 @@ class BudgetInfosDataGridField(DataGridField):
           We override renderer so we can call original DataGridField renderer without customizing the template and add
           our own rendered template under.
         """
+        template = u''
         # render original template
-        template = DataGridField.render(self)
+        if self.mode != 'display' or (base_hasattr(self.context, 'budget') and self.context.budget):
+            template = DataGridField.render(self)
         # render our own template we will display just under original one
         if self.mode == 'display':
             # we will display the originally rendered template in our template, so set it on self
@@ -137,8 +139,10 @@ class AnalyticBudgetDataGridField(DataGridField):
           We override renderer so we can call original DataGridField renderer without customizing the template and add
           our own rendered template under.
         """
+        template = u''
         # render original template
-        template = DataGridField.render(self)
+        if self.mode != 'display' or (base_hasattr(self.context, 'analytic_budget') and self.context.analytic_budget):
+            template = DataGridField.render(self)
         # render our own template we will display just under original one
         if self.mode == 'display':
             # we will display the originally rendered template in our template, so set it on self

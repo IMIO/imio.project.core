@@ -6,7 +6,7 @@
       i18n:domain="imio.project.core">
 
 <tal:comment replace="nothing">Render original template, this will render DataGridField data</tal:comment>
-<fieldset>
+<fieldset tal:condition="view/original_template">
   <legend i18n:translate="budgetinfos_legend_local_data">Locally encoded data</legend>
     <tal:block replace="structure view/original_template" />
 </fieldset>
