@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-03-30 07:36+0000\n"
+"POT-Creation-Date: 2020-03-27 14:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,11 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: imio.project.core\n"
 
-#: ./browser/controlpanel.py:113
+#: ./browser/controlpanel.py:138
+msgid "${type} budget globalization states"
+msgstr ""
+
+#: ./browser/controlpanel.py:131
 msgid "${type} fields display"
 msgstr ""
 
@@ -25,12 +29,12 @@ msgstr ""
 msgid "'${fld}' at position ${i}"
 msgstr ""
 
-#: ./browser/behaviors.py:47
-#: ./content/project.py:119
+#: ./browser/behaviors.py:64
+#: ./content/project.py:106
 msgid "Amount"
 msgstr ""
 
-#: ./browser/behaviors.py:102
+#: ./browser/behaviors.py:119
 msgid "Analytic budget"
 msgstr ""
 
@@ -42,31 +46,31 @@ msgstr ""
 msgid "Behavior with analytic budget fields"
 msgstr ""
 
-#: ./content/project.py:159
+#: ./content/project.py:146
 msgid "Budget"
 msgstr ""
 
-#: ./browser/behaviors.py:38
+#: ./browser/behaviors.py:55
 msgid "Budget Article"
 msgstr ""
 
-#: ./browser/behaviors.py:67
+#: ./browser/behaviors.py:84
 msgid "Budget Group"
 msgstr ""
 
-#: ./browser/behaviors.py:30
+#: ./browser/behaviors.py:47
 msgid "Budget Service"
 msgstr ""
 
-#: ./browser/behaviors.py:43
+#: ./browser/behaviors.py:60
 msgid "Budget Title"
 msgstr ""
 
-#: ./browser/behaviors.py:34
+#: ./browser/behaviors.py:51
 msgid "Budget Type"
 msgstr ""
 
-#: ./content/project.py:170
+#: ./content/project.py:157
 msgid "Budget comments"
 msgstr ""
 
@@ -78,11 +82,11 @@ msgstr ""
 msgid "Budget types values"
 msgstr ""
 
-#: ./content/project.py:108
+#: ./content/project.py:95
 msgid "Budget_type"
 msgstr ""
 
-#: ./content/project.py:144
+#: ./content/project.py:131
 msgid "Categories"
 msgstr ""
 
@@ -90,7 +94,7 @@ msgstr ""
 msgid "Categories values"
 msgstr ""
 
-#: ./content/project.py:265
+#: ./content/project.py:252
 msgid "Comments"
 msgstr ""
 
@@ -98,11 +102,11 @@ msgstr ""
 msgid "Current fiscal year"
 msgstr ""
 
-#: ./content/project.py:225
+#: ./content/project.py:212
 msgid "Effective begin date"
 msgstr ""
 
-#: ./content/project.py:241
+#: ./content/project.py:228
 msgid "Effective end date"
 msgstr ""
 
@@ -110,15 +114,15 @@ msgstr ""
 msgid "Enter one different value by row. Label is the displayed value. Key is the stored value: in lowercase, without space."
 msgstr ""
 
-#: ./content/project.py:207
+#: ./content/project.py:194
 msgid "Enter one indicator by row. Value is a number. Label must precise the signification of this number."
 msgstr ""
 
-#: ./content/project.py:91
+#: ./content/project.py:78
 msgid "Expected value"
 msgstr ""
 
-#: ./content/project.py:199
+#: ./content/project.py:186
 msgid "Extra concerned people"
 msgstr ""
 
@@ -126,11 +130,11 @@ msgstr ""
 msgid "INS Code"
 msgstr ""
 
-#: ./browser/views.py:355
+#: ./browser/views.py:358
 msgid "Import"
 msgstr ""
 
-#: ./browser/views.py:282
+#: ./browser/views.py:279
 msgid "Import data from eComptes"
 msgstr ""
 
@@ -142,7 +146,7 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: ./content/project.py:88
+#: ./content/project.py:75
 #: ./content/projectspace.py:138
 msgid "Label"
 msgstr ""
@@ -151,35 +155,27 @@ msgstr ""
 msgid "Last reference number"
 msgstr ""
 
-#: ./content/project.py:179
+#: ./content/project.py:166
 msgid "Manager"
 msgstr ""
 
-#: ./browser/controlpanel.py:72
+#: ./browser/controlpanel.py:74
 msgid "Missing mandatory fields: ${msg}"
 msgstr ""
 
-#: ./content/project.py:256
+#: ./content/project.py:243
 msgid "Observation"
 msgstr ""
 
-#: ./content/project.py:274
-msgid "Plan"
-msgstr ""
-
-#: ./content/projectspace.py:219
-msgid "Plan values"
-msgstr ""
-
-#: ./content/project.py:217
+#: ./content/project.py:204
 msgid "Planned begin date"
 msgstr ""
 
-#: ./content/project.py:233
+#: ./content/project.py:220
 msgid "Planned end date"
 msgstr ""
 
-#: ./content/project.py:153
+#: ./content/project.py:140
 msgid "Priority"
 msgstr ""
 
@@ -187,20 +183,20 @@ msgstr ""
 msgid "Priority values"
 msgstr ""
 
-#: ./content/project.py:249
+#: ./content/project.py:236
 msgid "Progress"
 msgstr ""
 
-#: ./content/project.py:250
+#: ./content/project.py:237
 msgid "Progress estimation in %."
 msgstr ""
 
-#: ./browser/controlpanel.py:113
+#: ./browser/controlpanel.py:131
 #: ./profiles/default/types/project.xml
 msgid "Project"
 msgstr ""
 
-#: ./browser/controlpanel.py:131
+#: ./browser/controlpanel.py:155
 #: ./profiles/default/controlpanel.xml
 msgid "Project settings"
 msgstr ""
@@ -209,27 +205,31 @@ msgstr ""
 msgid "Project space"
 msgstr ""
 
-#: ./browser/behaviors.py:112
+#: ./browser/behaviors.py:129
 msgid "Projection"
 msgstr ""
 
-#: ./browser/controlpanel.py:114
+#: ./browser/controlpanel.py:132
 msgid "Put fields on the right to display it. Flags are : ..."
 msgstr ""
 
-#: ./content/project.py:94
+#: ./browser/controlpanel.py:139
+msgid "Put states on the right for which you want to globalize budget fields."
+msgstr ""
+
+#: ./content/project.py:81
 msgid "Reached value"
 msgstr ""
 
-#: ./content/project.py:137
+#: ./content/project.py:124
 msgid "Reference number"
 msgstr ""
 
-#: ./content/project.py:206
+#: ./content/project.py:193
 msgid "Result indicator"
 msgstr ""
 
-#: ./browser/controlpanel.py:94
+#: ./browser/controlpanel.py:96
 msgid "Some fields have to be at a specific position: ${msg}"
 msgstr ""
 
@@ -237,11 +237,11 @@ msgstr ""
 msgid "Steps to ease tests of imio.project.core"
 msgstr ""
 
-#: ./browser/views.py:371
+#: ./browser/views.py:374
 msgid "The XML document has been successfully imported."
 msgstr ""
 
-#: ./browser/views.py:365
+#: ./browser/views.py:368
 msgid "The imported document is not recognized as a valid eComptes export."
 msgstr ""
 
@@ -258,7 +258,7 @@ msgstr ""
 msgid "Used in Title, documents, etc."
 msgstr ""
 
-#: ./content/project.py:190
+#: ./content/project.py:177
 msgid "Visible for"
 msgstr ""
 
@@ -266,13 +266,43 @@ msgstr ""
 msgid "Will contain projects sharing same configuration values"
 msgstr ""
 
-#: ./browser/views.py:275
+#: ./browser/views.py:272
 msgid "XML document exported from eComptes"
 msgstr ""
 
-#: ./browser/behaviors.py:23
-#: ./content/project.py:98
+#: ./browser/behaviors.py:40
+#: ./content/project.py:85
 msgid "Year"
+msgstr ""
+
+#. Default: "Expenses"
+#: ./browser/analytic_budget_datagridfield_display.pt:23
+msgid "analytic_budget_label_expenses"
+msgstr ""
+
+#. Default: "Revenues"
+#: ./browser/analytic_budget_datagridfield_display.pt:22
+msgid "analytic_budget_label_revenues"
+msgstr ""
+
+#. Default: "Total"
+#: ./browser/analytic_budget_datagridfield_display.pt:24
+msgid "analytic_budget_label_total"
+msgstr ""
+
+#. Default: "Year"
+#: ./browser/analytic_budget_datagridfield_display.pt:21
+msgid "analytic_budget_label_year"
+msgstr ""
+
+#. Default: "Data taken from analytic budgets encoded in sub-element"
+#: ./browser/analytic_budget_datagridfield_display.pt:16
+msgid "analytic_budget_legend_global_data"
+msgstr ""
+
+#. Default: "Locally encoded data"
+#: ./browser/analytic_budget_datagridfield_display.pt:10
+msgid "analytic_budget_legend_local_data"
 msgstr ""
 
 #: ./browser/behaviors.zcml:14
@@ -313,4 +343,34 @@ msgstr ""
 
 #: ./browser/controlpanel.py:55
 msgid "project"
+msgstr ""
+
+#. Default: "R/D"
+#: ./browser/projection_datagridfield_display.pt:15
+msgid "projection_label_btype"
+msgstr ""
+
+#. Default: "Eco group"
+#: ./browser/projection_datagridfield_display.pt:16
+msgid "projection_label_group"
+msgstr ""
+
+#. Default: "Service"
+#: ./browser/projection_datagridfield_display.pt:14
+msgid "projection_label_service"
+msgstr ""
+
+#. Default: "Title"
+#: ./browser/projection_datagridfield_display.pt:17
+msgid "projection_label_title"
+msgstr ""
+
+#. Default: "Data taken from budget infos encoded in sub-element"
+#: ./browser/projection_datagridfield_display.pt:41
+msgid "projection_legend_global_data"
+msgstr ""
+
+#. Default: "Locally encoded data"
+#: ./browser/projection_datagridfield_display.pt:9
+msgid "projection_legend_local_data"
 msgstr ""
