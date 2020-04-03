@@ -53,7 +53,7 @@
                             <Valeur/>
                         </RemarqueStatut>
                         <ETP>0</ETP>
-                        <Plans tal:define="plans python:view.plans(os)" tal:condition="python: len(plans)">
+                        <Plans tal:define="plans python:view.plans(os)">
                             <Plan tal:repeat="plan plans" tal:content="plan"></Plan>
                         </Plans>
                         <Partenaires/>
@@ -91,7 +91,7 @@
                                     <Valeur/>
                                 </RemarqueStatut>
                                 <ETP>0</ETP>
-                                <Plans tal:define="plans python:view.plans(oo)" tal:condition="python: len(plans)">
+                                <Plans tal:define="plans python:view.plans(oo)">
                                     <Plan tal:repeat="plan plans" tal:content="plan"></Plan>
                                 </Plans>
                                 <Partenaires/>
@@ -127,7 +127,7 @@
                                             <Valeur/>
                                         </RemarqueStatut>
                                         <ETP>0</ETP>
-                                        <Plans tal:define="plans python:view.plans(action)" tal:condition="python: len(plans)">
+                                        <Plans tal:define="plans python:view.plans(action)">
                                             <Plan tal:repeat="plan plans" tal:content="plan"></Plan>
                                         </Plans>
                                         <Partenaires/>
