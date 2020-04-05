@@ -18,6 +18,7 @@ from plone.formwidget.datetime.z3cform.widget import DateFieldWidget
 from plone.supermodel import model
 from Products.CMFPlone.utils import base_hasattr
 from z3c.form import interfaces
+from z3c.form.browser.select import SelectFieldWidget
 from z3c.form.widget import FieldWidget
 from zope import schema
 from zope.interface import implements
@@ -66,6 +67,18 @@ def default_categories(context):
         return []
     elif IProject.providedBy(context) and base_hasattr(context, 'categories') and context.categories:
         return context.categories
+    return []
+
+
+@provider(IContextAwareDefaultFactory)
+def default_plan(context):
+    """
+      defaultFactory for the field plan.
+    """
+    if IProjectSpace.providedBy(context):
+        return []
+    elif IProject.providedBy(context) and base_hasattr(context, 'plan') and context.plan:
+        return context.plan
     return []
 
 
@@ -257,6 +270,15 @@ class IProject(model.Schema):
         allowed_mime_types=('text/html',),
     )
 
+    plan = schema.List(
+        title=_(u'Plan'),
+        # description=_(u"Choose plan."),
+        required=False,
+        value_type=schema.Choice(source='imio.project.core.content.project.plan_vocabulary'),
+        defaultFactory=default_plan,
+    )
+    directives.widget('plan', AjaxChosenMultiFieldWidget, populate_select=True)
+
 
 class Project(Container):
     """ """
@@ -334,6 +356,18 @@ class VisibleForVocabulary(object):
     def __call__(self, context):
         """"""
         return getVocabularyTermsForOrganization(context, states='active')
+
+
+class PlanVocabulary(object):
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        """"""
+        projectspace = getProjectSpace(context)
+        terms = []
+        for plan in projectspace.plan_values or []:
+            terms.append(SimpleTerm(plan['key'], plan['key'], plan['label'], ))
+        return SimpleVocabulary(terms)
 
 
 class ProjectSchemaPolicy(DexteritySchemaPolicy):

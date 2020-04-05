@@ -31,7 +31,7 @@ def getVocabularyTermsForOrganization(context, organization_id='services', state
             'sort_on': sort_on}
     if states:
         crit['review_state'] = states
-    brains = catalog(**crit)
+    brains = catalog.unrestrictedSearchResults(**crit)
     levels = {}
     for brain in brains:
         path = brain.getPath()[sub_path_len:]

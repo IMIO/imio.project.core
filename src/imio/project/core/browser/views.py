@@ -6,6 +6,7 @@ from os.path import dirname
 from Products.Five.browser import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
 from imio.helpers.browser.views import ContainerView
+from imio.helpers.content import get_vocab
 from imio.project.core import _
 from lxml import etree
 from lxml.etree import XMLSyntaxError
@@ -94,6 +95,9 @@ class PSTExportAsXML(BrowserView):
     def __init__(self, context, request):
         super(PSTExportAsXML, self).__init__(context, request)
         self.ploneview = getMultiAdapter((context, request), name='plone')
+        self.plan_vocab = get_vocab(self.context, 'imio.project.core.content.project.plan_vocabulary')
+        self.manager_vocab = get_vocab(self.context, 'imio.project.core.content.project.manager_vocabulary')
+        self.repr_resp_vocab = get_vocab(self.context, 'imio.project.pst.content.operational.representative_responsible_vocabulary')
 
     def __call__(self, *args, **kwargs):
 
@@ -173,43 +177,27 @@ class PSTExportAsXML(BrowserView):
         return ecompte_status.get(element_state)
 
     def responsable(self, element):
-        factory = api.portal.getUtility(
-            IVocabularyFactory,
-            name='imio.project.core.content.project.manager_vocabulary',
-        )
-
         if element.administrative_responsible:
             term_id = element.administrative_responsible[0]
-            return factory(element).getTerm(term_id).title
+            return self.manager_vocab.getTerm(term_id).title
         else:
             return None
 
     def mandataire(self, element, oo=None):
-        factory = api.portal.getUtility(
-            IVocabularyFactory,
-            name='imio.project.pst.content.operational.representative_responsible_vocabulary',
-        )
-
         if element.representative_responsible:
             term_id = element.representative_responsible[0]
-            return factory(element).getTerm(term_id).title
+            return self.repr_resp_vocab.getTerm(term_id).title
         elif oo and oo.representative_responsible:
             term_id = oo.representative_responsible[0]
-            return factory(oo).getTerm(term_id).title
+            return self.repr_resp_vocab.getTerm(term_id).title
         else:
             return None
 
     def departement(self, element):
-        factory = api.portal.getUtility(
-            IVocabularyFactory,
-            name='imio.project.core.content.project.manager_vocabulary',
-        )
-
         if element.manager:
-            voc = factory(element)
             for term_id in element.manager:
-                if term_id in voc:
-                    return voc.getTerm(term_id).title
+                if term_id in self.manager_vocab:
+                    return self.manager_vocab.getTerm(term_id).title
                 else:
                     tit = ''
                     brains = self.context.portal_catalog(UID=term_id)
@@ -264,6 +252,13 @@ class PSTExportAsXML(BrowserView):
         except ValueError:
             return 0
         return prog
+
+    def plans(self, element):
+        plans = []
+        if base_hasattr(element, 'plan') and element.plan is not None:
+            for term_id in element.plan:
+                plans.append(self.plan_vocab.getTerm(term_id).title)
+        return plans
 
 
 class IPSTImportFromEcomptesSchema(model.Schema):

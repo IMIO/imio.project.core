@@ -215,6 +215,17 @@ class IProjectSpace(model.Schema):
         required=False,
     )
 
+    plan_values = schema.List(
+        title=_(u'Plan values'),
+        description=_(u"Enter one different value by row. Label is the displayed value. Key is the stored value:"
+                      " in lowercase, without space."),
+        required=True,
+        value_type=DictRow(title=u"",
+                           schema=IVocabularySchema,
+                           required=False),
+    )
+    directives.widget('plan_values', DataGridFieldFactory, display_table_css_class='listing', allow_reorder=True)
+
 
 validator.WidgetValidatorDiscriminators(RemovedValueIsNotUsedByCategoriesFieldValidator,
                                         field=IProjectSpace['categories_values'])

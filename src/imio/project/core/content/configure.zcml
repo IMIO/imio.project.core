@@ -32,5 +32,10 @@
       factory=".project.VisibleForVocabulary"
       name="imio.project.core.content.project.visible_for_vocabulary"
     />
+    <utility
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      factory=".project.PlanVocabulary"
+      name="imio.project.core.content.project.plan_vocabulary"
+    />
 
 </configure>

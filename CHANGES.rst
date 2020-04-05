@@ -1,10 +1,12 @@
 Changelog
 =========
 
-1.3 (unreleased)
+1.4 (unreleased)
 ----------------
 
-- To be continued ...
+- Integrate plans into ecomptes export
+  add plan and plan_values fields with vocabularies, translations and test
+  [fngaha]
 
 1.3 (2020-03-05)
 ----------------
