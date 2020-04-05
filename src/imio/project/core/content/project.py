@@ -365,7 +365,7 @@ class PlanVocabulary(object):
         """"""
         projectspace = getProjectSpace(context)
         terms = []
-        for plan in projectspace.plan_values:
+        for plan in projectspace.plan_values or []:
             terms.append(SimpleTerm(plan['key'], plan['key'], plan['label'], ))
         return SimpleVocabulary(terms)
 

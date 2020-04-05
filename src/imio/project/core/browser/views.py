@@ -254,9 +254,8 @@ class PSTExportAsXML(BrowserView):
 
     def plans(self, element):
         plans = []
-        if base_hasattr(element, 'plan'):
-            term_ids = element.plan
-            for term_id in term_ids:
+        if base_hasattr(element, 'plan') and element.plan is not None:
+            for term_id in element.plan:
                 plans.append(self.plan_vocab.getTerm(term_id).title)
         return plans
 

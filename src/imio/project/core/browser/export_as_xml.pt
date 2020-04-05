@@ -53,9 +53,12 @@
                             <Valeur/>
                         </RemarqueStatut>
                         <ETP>0</ETP>
-                        <Plans tal:define="plans python:view.plans(os)">
+                        <tal:plan define="plans python:view.plans(os)">
+                        <Plans tal:condition="not: plans"/>
+                        <Plans tal:condition="plans">
                             <Plan tal:repeat="plan plans" tal:content="plan"></Plan>
                         </Plans>
+                        </tal:plan>
                         <Partenaires/>
                         <ObjectifsOperationnels tal:define="oos python:view.operational_objectives(os)"
                                                 tal:condition="python: len(oos)">
@@ -91,9 +94,12 @@
                                     <Valeur/>
                                 </RemarqueStatut>
                                 <ETP>0</ETP>
-                                <Plans tal:define="plans python:view.plans(oo)">
+                                <tal:plan define="plans python:view.plans(oo)">
+                                <Plans tal:condition="not: plans"/>
+                                <Plans tal:condition="plans">
                                     <Plan tal:repeat="plan plans" tal:content="plan"></Plan>
                                 </Plans>
+                                </tal:plan>
                                 <Partenaires/>
                                 <Actions tal:define="actions python:view.actions_and_subactions(oo)"
                                          tal:condition="python: len(actions)">
@@ -127,9 +133,12 @@
                                             <Valeur/>
                                         </RemarqueStatut>
                                         <ETP>0</ETP>
-                                        <Plans tal:define="plans python:view.plans(action)">
+                                        <tal:plan define="plans python:view.plans(action)">
+                                        <Plans tal:condition="not: plans"/>
+                                        <Plans tal:condition="plans">
                                             <Plan tal:repeat="plan plans" tal:content="plan"></Plan>
                                         </Plans>
+                                        </tal:plan>
                                         <Partenaires/>
                                     </Action>
                                 </Actions>
