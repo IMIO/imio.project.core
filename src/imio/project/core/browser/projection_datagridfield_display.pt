@@ -6,7 +6,7 @@
       i18n:domain="imio.project.core">
 
 <fieldset tal:define="ret python: view.prepareProjectionForSingleDisplay();
-                      lines python: ret[0];"
+                      lines python: ret and ret[0];"
           tal:condition="lines">
   <legend i18n:translate="projection_legend_local_data">Locally encoded data</legend>
   <table class="listing projection_table">
