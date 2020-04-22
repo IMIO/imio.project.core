@@ -132,13 +132,6 @@ class ProjectStatesVocabulary(object):
 class IImioProjectSettings(Interface):
     """"""
 
-    project_fields = schema.List(
-        title=_(u"${type} fields display", mapping={'type': _('Project')}),
-        description=_(u'Put fields on the right to display it. Flags are : ...'),
-        value_type=schema.Choice(vocabulary=u'imio.project.core.ProjectFieldsVocabulary'),
-#        value_type=schema.Choice(source=IMFields),  # a source is not managed by registry !!
-    )
-
     project_budget_states = schema.List(
         title=_(u"${type} budget globalization states", mapping={'type': _('Project')}),
         description=_(u'Put states on the right for which you want to globalize budget fields.'),

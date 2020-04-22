@@ -226,6 +226,13 @@ class IProjectSpace(model.Schema):
     )
     directives.widget('plan_values', DataGridFieldFactory, display_table_css_class='listing', allow_reorder=True)
 
+    project_fields = schema.List(
+        title=_(u"${type} fields display", mapping={'type': _('Project')}),
+        description=_(u'Put fields on the right to display it. Flags are : ...'),
+        value_type=schema.Choice(vocabulary=u'imio.project.core.ProjectFieldsVocabulary'),
+#        value_type=schema.Choice(source=IMFields),  # a source is not managed by registry !!
+    )
+
 
 validator.WidgetValidatorDiscriminators(RemovedValueIsNotUsedByCategoriesFieldValidator,
                                         field=IProjectSpace['categories_values'])
