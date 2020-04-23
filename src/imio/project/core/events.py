@@ -2,7 +2,7 @@
 
 from OFS.Application import Application
 from imio.helpers.cache import cleanRamCacheFor
-from imio.project.core.browser.controlpanel import field_constraints
+from imio.project.core.content.projectspace import field_constraints
 from imio.project.core.browser.controlpanel import get_budget_states
 from imio.project.core.config import SUMMARIZED_FIELDS
 from imio.project.core.content.project import IProject
