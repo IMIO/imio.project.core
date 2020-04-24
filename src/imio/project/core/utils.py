@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from Products.CMFPlone.utils import base_hasattr
 from collective.contact.plonegroup.utils import get_own_organization
 from plone import api
 from plone.app.dexterity.interfaces import ITypeSchemaContext
@@ -74,3 +75,32 @@ def getProjectSpace(context):
     while not parent.portal_type in ('projectspace', 'Plone Site'):
         parent = parent.aq_inner.aq_parent
     return parent
+
+
+def reference_numbers_title(obj):
+    """
+    Describes the path of a Project, using reference numbers.
+    Symlinks are marked with an (L).
+    examples:
+        - "OS.1 - OO.2 - A.4"
+        - "OS.1 - OO.6 - A.4 (L)"
+    """
+
+    def short_title(obj):
+        initials = {
+            'strategicobjective': 'OS',
+            'operationalobjective': 'OO',
+            'pstaction': 'A',
+            'pstsubaction': 'SA',
+        }.get(obj.portal_type, '')
+        reference_number = obj.reference_number or 0
+        is_link = ' (L)' if base_hasattr(obj, '_link_portal_type') else ''
+        return u'{}.{}{}'.format(initials, reference_number, is_link)
+
+    refs = [short_title(obj)]
+    parent = obj.aq_inner.aq_parent
+    while not parent.portal_type == 'projectspace':
+        refs.append(short_title(parent))
+        parent = parent.aq_inner.aq_parent
+    refs.reverse()
+    return u" - ".join(refs)
