@@ -1,16 +1,22 @@
 # -*- coding: utf-8 -*-
 
 from OFS.Application import Application
+from copy import deepcopy
 from imio.helpers.cache import cleanRamCacheFor
 from imio.project.core.browser.controlpanel import field_constraints
 from imio.project.core.browser.controlpanel import get_budget_states
 from imio.project.core.config import SUMMARIZED_FIELDS
 from imio.project.core.content.project import IProject
 from imio.project.core.utils import getProjectSpace
+from imio.project.core.utils import reference_numbers_title
 from plone import api
 from plone.registry.interfaces import IRecordModifiedEvent
 from Products.CMFPlone.utils import base_hasattr
+from zc.relation.interfaces import ICatalog
 from zope.annotation import IAnnotations
+from zope.component import getUtility
+from zope.intid.interfaces import IIntIds
+from zope.lifecycleevent.interfaces import IObjectAddedEvent
 
 """
 Removing act: onRemoveProject on act, onModifyProject on oo
@@ -48,6 +54,9 @@ def _updateSummarizedFields(obj, fields=None):
 
     pw = obj.portal_workflow
     obj_uid = obj.UID()
+    # retrieve splitting coefficient to apply to amounts
+    # useful for actions, subactions or their symlinks
+    coefficient = amount_coefficient(obj)
     # we take the field data saved on obj annotation
     obj_annotations = IAnnotations(obj)
     formatted_fields = {}
@@ -56,8 +65,12 @@ def _updateSummarizedFields(obj, fields=None):
         if annotation_key in obj_annotations:
             formatted_field = dict(obj_annotations[annotation_key])
         # add self in field if not empty
-        if getattr(obj, field_id, None):
-            formatted_field[obj_uid] = getattr(obj, field_id, None)
+        field = deepcopy(getattr(obj, field_id, None))
+        if field:
+            for line in field:
+                if 'amount' in line:
+                    line['amount'] *= coefficient
+            formatted_field[obj_uid] = field
         formatted_fields[field_id] = formatted_field
 
     parent = obj.aq_inner.aq_parent
@@ -78,6 +91,68 @@ def _updateSummarizedFields(obj, fields=None):
             parent_annotations[annotation_key] = dict(new_annotations)
 
         parent = parent.aq_inner.aq_parent
+
+    # if obj isn't a symlink, find all its potential symlinks and _updateSummarizedFields them.
+    if not base_hasattr(obj, '_link_portal_type') and base_hasattr(obj, 'back_references'):
+        for rel in obj.back_references():
+            _updateSummarizedFields(rel)
+
+def amount_coefficient(obj):
+    """
+    Calculates the coefficient to apply when splitting budget lines.
+    If not applicable, defaults to 1.
+    """
+
+    obj_uid = obj.UID()
+    coefficient = 1
+    if base_hasattr(obj, '_link_portal_type'):
+        obj = obj._link
+    budget_split = getattr(obj, 'budget_split', None) or []
+    for line in budget_split:
+        if line.get('uid') == obj_uid:
+            coefficient = line.get('percentage', 100.0) / 100.0
+            break
+    return coefficient
+
+
+def update_budget_splits(obj, event=None):
+    print "update_budget_splits", reference_numbers_title(obj)
+    base_obj = obj._link if base_hasattr(obj, '_link_portal_type') else obj
+    expected_objects = {base_obj}
+    if IObjectAddedEvent.providedBy(event):
+        expected_objects.add(obj)
+    for rel in base_obj.back_references():
+        expected_objects.add(rel)
+    if getattr(base_obj, 'budget_split', None) is None:
+        base_obj.budget_split = []
+    expected_line_uids = [expected_obj.UID() for expected_obj in expected_objects]
+    existing_line_uids = [line['uid'] for line in base_obj.budget_split]
+
+    # remove old lines
+    for uid_to_remove in set(existing_line_uids).difference(expected_line_uids):
+        line_to_remove = [line for line in base_obj.budget_split if line['uid'] == uid_to_remove][0]
+        base_obj.budget_split.remove(line_to_remove)
+
+    # add new lines (100 % for base object, 0 % for links)
+    for uid_to_add in set(expected_line_uids).difference(existing_line_uids):
+        if obj.UID() == uid_to_add:
+            object_to_add = obj
+        else:
+            object_to_add = api.content.get(UID=uid_to_add)
+        percentage = 0.0 if base_hasattr(object_to_add, '_link_portal_type') else 100.0
+        title = reference_numbers_title(object_to_add)
+        base_obj.budget_split.append({
+            'uid': uid_to_add,
+            'percentage': percentage,
+            'title': title,
+        })
+
+    # fix percentages if total isn't equal to 100.0
+    current_percentages = sum([line['percentage'] for line in base_obj.budget_split])
+    if current_percentages != 100.0:
+        corrective_coefficient = 100.0 / current_percentages
+        for line in base_obj.budget_split:
+            line['percentage'] *= corrective_coefficient
 
 
 def _cleanParentsFields(obj, parent=None):
@@ -124,17 +199,20 @@ def onAddProject(obj, event):
     """
       Handler when a project is added
     """
-    # Update field data on every parents
-    pw = obj.portal_workflow
-    workflows = pw.getWorkflowsFor(obj)
-    if not workflows or pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
-        _updateSummarizedFields(obj)
     # compute reference number
     if not base_hasattr(obj, 'symbolic_link'):
         projectspace = getProjectSpace(obj)
         projectspace.last_reference_number += 1
         obj.reference_number = projectspace.last_reference_number
         obj.reindexObject(['reference_number'])
+    # refresh budget split lines
+    if base_hasattr(obj, 'budget_split'):
+        update_budget_splits(obj, event)
+    # Update field data on every parents
+    pw = obj.portal_workflow
+    workflows = pw.getWorkflowsFor(obj)
+    if not workflows or pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
+        _updateSummarizedFields(obj)
 
 
 def onModifyProject(obj, event):
@@ -162,12 +240,21 @@ def onTransitionProject(obj, event):
         _updateSummarizedFields(obj)
     elif old_in and not new_in:
         _cleanParentsFields(obj)
+        # clean link parents in both directions
+        catalog = getUtility(ICatalog)
+        intids = getUtility(IIntIds)
+        for rel in catalog.findRelations({'to_id': intids.getId(obj), 'from_attribute': 'symbolic_link'}):
+            _cleanParentsFields(rel.from_object)
+        for rel in catalog.findRelations({'from_id': intids.getId(obj), 'from_attribute': 'symbolic_link'}):
+            _cleanParentsFields(rel.to_object)
 
 
 def onRemoveProject(obj, event):
     """
         When a project is removed
     """
+    if base_hasattr(obj, 'budget_split'):
+        update_budget_splits(obj)
     _cleanParentsFields(obj)
 
 
