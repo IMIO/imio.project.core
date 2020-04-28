@@ -6,6 +6,7 @@ from imio.project.core.content.projectspace import field_constraints
 from imio.project.core.browser.controlpanel import get_budget_states
 from imio.project.core.config import SUMMARIZED_FIELDS
 from imio.project.core.content.project import IProject
+from imio.project.core.content.projectspace import IProjectSpace
 from imio.project.core.utils import getProjectSpace
 from plone import api
 from plone.registry.interfaces import IRecordModifiedEvent
@@ -61,7 +62,7 @@ def _updateSummarizedFields(obj, fields=None):
         formatted_fields[field_id] = formatted_field
 
     parent = obj.aq_inner.aq_parent
-    while not parent.portal_type == 'projectspace':
+    while not IProjectSpace.providedBy(parent):
         workflows = pw.getWorkflowsFor(parent)
         # if parent state is initial_state, we don't set children field
         if workflows and workflows[0].initial_state == pw.getInfoFor(parent, 'review_state'):
@@ -104,7 +105,7 @@ def _cleanParentsFields(obj, parent=None):
     if isinstance(parent, Application):
         return  # This can happen when we try to remove a plone object
 
-    while not parent.portal_type == 'projectspace':
+    while not IProjectSpace.providedBy(parent):
         parent_annotations = IAnnotations(parent)
 
         for field_id, annotation_key in SUMMARIZED_FIELDS.items():
