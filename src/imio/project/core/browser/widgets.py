@@ -173,11 +173,7 @@ class AnalyticBudgetDataGridField(DataGridField):
                     res_year['expenses'] += amount
 
         for amounts in res.values():
-            margin = amounts['revenues'] - amounts['expenses']
-            amounts['total'] = '{:+.2f}'.format(margin) if margin else '-'
-            for key in ('revenues', 'expenses'):
-                if not amounts[key]:
-                    amounts[key] = '-'
+            amounts['total'] = amounts['revenues'] - amounts['expenses']
 
         return res
 
