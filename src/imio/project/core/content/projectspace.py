@@ -67,7 +67,7 @@ def mandatory_check(data, constraints):
     for pt in mandatory:
         pt_fld = '{}_fields'.format(pt)
         for mand in mandatory[pt]:
-            if not mand in dic[pt_fld]:
+            if mand not in dic[pt_fld]:
                 if pt not in missing:
                     missing[pt] = []
                 missing[pt].append(mand)
