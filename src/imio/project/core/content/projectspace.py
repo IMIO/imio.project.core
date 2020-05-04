@@ -66,11 +66,12 @@ def mandatory_check(data, constraints):
     missing = {}
     for pt in mandatory:
         pt_fld = '{}_fields'.format(pt)
-        for mand in mandatory[pt]:
-            if mand not in dic[pt_fld]:
-                if pt not in missing:
-                    missing[pt] = []
-                missing[pt].append(mand)
+        if pt_fld in dic:
+            for mand in mandatory[pt]:
+                if mand not in dic[pt_fld]:
+                    if pt not in missing:
+                        missing[pt] = []
+                    missing[pt].append(mand)
     msg = u''
     for pt in missing:
         fields = [u"'{}'".format(constraints['titles'][pt][fld]) for fld in missing[pt]]
@@ -87,11 +88,12 @@ def position_check(data, constraints):
     errors = {}
     for pt in indexes:
         pt_fld = '{}_fields'.format(pt)
-        for (fld, i) in indexes[pt]:
-            if dic[pt_fld].index(fld) + 1 != i:
-                if pt not in errors:
-                    errors[pt] = []
-                errors[pt].append((fld, i))
+        if pt_fld in dic:
+            for (fld, i) in indexes[pt]:
+                if dic[pt_fld].index(fld) + 1 != i:
+                    if pt not in errors:
+                        errors[pt] = []
+                    errors[pt].append((fld, i))
     msg = u''
     for pt in errors:
         fields = [_tr(u"'${fld}' at position ${i}",
