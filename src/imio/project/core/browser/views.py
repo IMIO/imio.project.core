@@ -8,6 +8,7 @@ from Products.statusmessages.interfaces import IStatusMessage
 from imio.helpers.browser.views import ContainerView
 from imio.helpers.content import get_vocab
 from imio.project.core import _
+from imio.project.core.utils import getProjectSpace
 from lxml import etree
 from lxml.etree import XMLSyntaxError
 from plone import api
@@ -38,11 +39,11 @@ class PSContainerView(ContainerView):
     collapse_all_fields_onload = True
 
 
-def manage_fields(the_form, portal_type, mode):
+def manage_fields(the_form, context, mode):
     """
         Remove and reorder fields
     """
-    ordered = api.portal.get_registry_record('imio.project.settings.{}_fields'.format(portal_type), default=[]) or []
+    ordered = getattr(getProjectSpace(context), '{}_fields'.format(context.portal_type))
     # order kept fields
     for field_name in reversed(ordered):
         field = remove(the_form, field_name)
@@ -63,7 +64,7 @@ class ProjectContainerView(ContainerView):
 
     def updateFieldsFromSchemata(self):
         super(ProjectContainerView, self).updateFieldsFromSchemata()
-        manage_fields(self, self.context.portal_type, 'view')
+        manage_fields(self, self.context, 'view')
 
 
 class ProjectContainerEdit(DefaultEditForm):
@@ -73,16 +74,14 @@ class ProjectContainerEdit(DefaultEditForm):
 
     def updateFields(self):
         super(ProjectContainerEdit, self).updateFields()
-        manage_fields(self, self.context.portal_type, 'edit')
+        manage_fields(self, self.context, 'edit')
 
 
 class ProjectAddForm(DefaultAddForm):
 
-    portal_type = 'project'
-
     def updateFields(self):
         super(ProjectAddForm, self).updateFields()
-        manage_fields(self, self.portal_type, 'add')
+        manage_fields(self, self.context, 'add')
 
 
 class ProjectContainerAdd(DefaultAddView):
