@@ -39,11 +39,11 @@ class PSContainerView(ContainerView):
     collapse_all_fields_onload = True
 
 
-def manage_fields(the_form, context, mode):
+def manage_fields(the_form, portal_type, mode):
     """
         Remove and reorder fields
     """
-    ordered = getattr(getProjectSpace(context), '{}_fields'.format(context.portal_type))
+    ordered = getattr(getProjectSpace(the_form.context), '{}_fields'.format(portal_type))
     # order kept fields
     for field_name in reversed(ordered):
         field = remove(the_form, field_name)
@@ -64,7 +64,7 @@ class ProjectContainerView(ContainerView):
 
     def updateFieldsFromSchemata(self):
         super(ProjectContainerView, self).updateFieldsFromSchemata()
-        manage_fields(self, self.context, 'view')
+        manage_fields(self, self.context.portal_type, 'view')
 
 
 class ProjectContainerEdit(DefaultEditForm):
@@ -74,14 +74,16 @@ class ProjectContainerEdit(DefaultEditForm):
 
     def updateFields(self):
         super(ProjectContainerEdit, self).updateFields()
-        manage_fields(self, self.context, 'edit')
+        manage_fields(self, self.context.portal_type, 'edit')
 
 
 class ProjectAddForm(DefaultAddForm):
 
+    portal_type = 'project'
+
     def updateFields(self):
         super(ProjectAddForm, self).updateFields()
-        manage_fields(self, self.context, 'add')
+        manage_fields(self, self.portal_type, 'add')
 
 
 class ProjectContainerAdd(DefaultAddView):
