@@ -207,29 +207,6 @@ def onModifyProjectSpace(obj, event):
                 brain.getObject().reindexObject(['Title', 'sortable_title'])
             cleanRamCacheFor('imio.prettylink.adapters.getLink')
 
-        #Update customViewFields defined on DashboardCollection
-        for attr in desc.attributes:
-            pc = api.portal.get_tool('portal_catalog')
-            if 'strategicobjective_columns' in attr:
-                ps_path = '/'.join(obj.getPhysicalPath()) + '/strategicobjectives'
-                for brain in pc(path={'query': ps_path, 'depth': 1}):
-                    brain.getObject().customViewFields = obj.strategicobjective_columns
-            if 'operationalobjective_columns' in attr:
-                ps_path = '/'.join(obj.getPhysicalPath()) + '/operationalobjectives'
-                for brain in pc(path={'query': ps_path, 'depth': 1}):
-                    brain.getObject().customViewFields = obj.operationalobjective_columns
-            if 'pstaction_columns' in attr:
-                ps_path = '/'.join(obj.getPhysicalPath()) + '/pstactions'
-                for brain in pc(path={'query': ps_path, 'depth': 1}):
-                    brain.getObject().customViewFields = obj.pstaction_columns
-                ps_path = '/'.join(obj.getPhysicalPath()) + '/pstsubactions'
-                for brain in pc(path={'query': ps_path, 'depth': 1}):
-                    brain.getObject().customViewFields = obj.pstaction_columns
-            if 'tasks_columns' in attr:
-                ps_path = '/'.join(obj.getPhysicalPath()) + '/tasks'
-                for brain in pc(path={'query': ps_path, 'depth': 1}):
-                    brain.getObject().customViewFields = obj.tasks_columns
-
 
 def empty_fields(event, dic):
     if event.oldValue is None:
