@@ -236,9 +236,6 @@ def registry_changed(event):
     """ Handler when the registry is changed """
     if IRecordModifiedEvent.providedBy(event):
         if event.record.interfaceName == 'imio.project.pst.browser.controlpanel.IImioPSTSettings':
-            # empty some fields if necessary
-            empty = field_constraints.get('empty', {})
-            empty_fields(event, empty)
             # we redo budget globalization if states change
             catalog = api.portal.get_tool('portal_catalog')
             if event.record.fieldName.endswith('_budget_states'):
