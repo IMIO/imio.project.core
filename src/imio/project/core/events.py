@@ -209,15 +209,21 @@ def onModifyProjectSpace(obj, event):
 
 
 def empty_fields(event, dic):
-    if event.oldValue is None:
-        return  # site creation: nothing to do
-    pt = event.record.fieldName[:-7]
-    if pt not in dic:
-        return  # nothing to do
-    ovs, nvs = set(event.oldValue), set(event.newValue)
-    removed = ovs - nvs
-    es = set(dic[pt])  # set of configured fields to empty
-    to_empty = es.intersection(removed)
+    """
+    Remove value to field which are hided in project space config
+    :param event: pstprojectspace_modified
+    :param dic: empty key in field_constraints
+    :return: None
+    """
+    to_empty = []
+    pt = ""
+    for desc in event.descriptions:
+        for attr in desc.attributes:
+            if attr.endswith('fields'):
+                pt = attr[:-7]
+                for field in dic[pt]:
+                    if field not in getattr(event.object, attr):
+                        to_empty.append(field)
     if not to_empty:
         return
     to_empty = [fld.split('.')[-1] for fld in to_empty]
