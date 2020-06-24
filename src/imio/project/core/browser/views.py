@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from imio.helpers.browser.views import ContainerView
+from imio.project.core.utils import getProjectSpace
 from plone import api
 from plone.dexterity.browser.add import DefaultAddForm
 from plone.dexterity.browser.add import DefaultAddView
@@ -20,7 +21,7 @@ def manage_fields(the_form, portal_type, mode):
     """
         Remove and reorder fields
     """
-    ordered = api.portal.get_registry_record('imio.project.settings.{}_fields'.format(portal_type), default=[]) or []
+    ordered = getattr(getProjectSpace(the_form.context), '{}_fields'.format(portal_type))
     # order kept fields
     for field_name in reversed(ordered):
         field = remove(the_form, field_name)

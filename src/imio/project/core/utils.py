@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from collective.contact.plonegroup.utils import get_own_organization
+from imio.project.core.content.projectspace import IProjectSpace
 from plone import api
 from plone.app.dexterity.interfaces import ITypeSchemaContext
 from plone.dexterity.interfaces import IDexterityContent
@@ -65,12 +66,12 @@ def getProjectSpace(context):
             context = portal.REQUEST['PARENTS'][0]
     # when editing dexterity fields in configuration, like on operationalobjective
     if ITypeSchemaContext.providedBy(context):
-        return api.content.find(portal_type='projectspace')[0].getObject()
+        return api.content.find(object_provides=IProjectSpace.__identifier__)[0].getObject()
     # sometimes, for inline validation for example on addView, context is not the object
     # but a Form of different kind, the real object is the form.context
     if not IDexterityContent.providedBy(context):
         context = context.context
     parent = context
-    while not parent.portal_type in ('projectspace', 'Plone Site'):
+    while not IProjectSpace.providedBy(parent) and parent.portal_type != 'Plone Site':
         parent = parent.aq_inner.aq_parent
     return parent
