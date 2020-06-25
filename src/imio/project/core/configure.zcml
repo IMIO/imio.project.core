@@ -78,7 +78,7 @@
 
     <utility
         name="imio.project.core.ProjectFieldsVocabulary"
-        factory="imio.project.core.browser.controlpanel.ProjectFieldsVocabulary"
+        factory="imio.project.core.content.projectspace.ProjectFieldsVocabulary"
         />
 
     <utility

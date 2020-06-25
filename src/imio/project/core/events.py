@@ -3,10 +3,11 @@
 from OFS.Application import Application
 from copy import deepcopy
 from imio.helpers.cache import cleanRamCacheFor
-from imio.project.core.browser.controlpanel import field_constraints
+from imio.project.core.content.projectspace import field_constraints
 from imio.project.core.browser.controlpanel import get_budget_states
 from imio.project.core.config import SUMMARIZED_FIELDS
 from imio.project.core.content.project import IProject
+from imio.project.core.content.projectspace import IProjectSpace
 from imio.project.core.utils import getProjectSpace
 from imio.project.core.utils import reference_numbers_title
 from plone import api
@@ -74,7 +75,7 @@ def _updateSummarizedFields(obj, fields=None):
         formatted_fields[field_id] = formatted_field
 
     parent = obj.aq_inner.aq_parent
-    while not parent.portal_type == 'projectspace':
+    while not IProjectSpace.providedBy(parent):
         workflows = pw.getWorkflowsFor(parent)
         # if parent state is initial_state, we don't set children field
         if workflows and workflows[0].initial_state == pw.getInfoFor(parent, 'review_state'):
@@ -179,7 +180,7 @@ def _cleanParentsFields(obj, parent=None):
     if isinstance(parent, Application):
         return  # This can happen when we try to remove a plone object
 
-    while not parent.portal_type == 'projectspace':
+    while not IProjectSpace.providedBy(parent):
         parent_annotations = IAnnotations(parent)
 
         for field_id, annotation_key in SUMMARIZED_FIELDS.items():
@@ -295,15 +296,21 @@ def onModifyProjectSpace(obj, event):
 
 
 def empty_fields(event, dic):
-    if event.oldValue is None:
-        return  # site creation: nothing to do
-    pt = event.record.fieldName[:-7]
-    if pt not in dic:
-        return  # nothing to do
-    ovs, nvs = set(event.oldValue), set(event.newValue)
-    removed = ovs - nvs
-    es = set(dic[pt])  # set of configured fields to empty
-    to_empty = es.intersection(removed)
+    """
+    Remove value to field which are hided in project space config
+    :param event: pstprojectspace_modified
+    :param dic: empty key in field_constraints
+    :return: None
+    """
+    to_empty = []
+    pt = ""
+    for desc in event.descriptions:
+        for attr in desc.attributes:
+            if attr.endswith('fields'):
+                pt = attr[:-7]
+                for field in dic[pt]:
+                    if field not in getattr(event.object, attr):
+                        to_empty.append(field)
     if not to_empty:
         return
     to_empty = [fld.split('.')[-1] for fld in to_empty]
@@ -322,9 +329,6 @@ def registry_changed(event):
     """ Handler when the registry is changed """
     if IRecordModifiedEvent.providedBy(event):
         if event.record.interfaceName == 'imio.project.pst.browser.controlpanel.IImioPSTSettings':
-            # empty some fields if necessary
-            empty = field_constraints.get('empty', {})
-            empty_fields(event, empty)
             # we redo budget globalization if states change
             catalog = api.portal.get_tool('portal_catalog')
             if event.record.fieldName.endswith('_budget_states'):

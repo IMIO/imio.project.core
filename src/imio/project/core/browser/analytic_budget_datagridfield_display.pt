@@ -30,7 +30,7 @@
           <td class="analytic_budget_year" tal:content="year">Year</td>
           <td class="analytic_budget_revenues" tal:content="python: '{:+.2f}'.format(line['revenues'])">Revenues</td>
           <td class="analytic_budget_expenses" tal:content="python: '{:+.2f}'.format(line['expenses'])">Expenses</td>
-          <td class="analytic_budget_total" tal:content="line/total">Total</td>
+          <td class="analytic_budget_total" tal:content="python: '{:+.2f}'.format(line['total'])">Total</td>
           </tal:defines>
         </tr>
       </tbody>
