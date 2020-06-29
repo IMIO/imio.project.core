@@ -100,7 +100,7 @@ def reference_numbers_title(obj):
 
     refs = [short_title(obj)]
     parent = obj.aq_inner.aq_parent
-    while not parent.portal_type == 'projectspace':
+    while not IProjectSpace.providedBy(parent):
         refs.append(short_title(parent))
         parent = parent.aq_inner.aq_parent
     refs.reverse()

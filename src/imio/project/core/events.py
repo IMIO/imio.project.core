@@ -5,6 +5,7 @@ from copy import deepcopy
 from imio.helpers.cache import cleanRamCacheFor
 from imio.project.core.config import SUMMARIZED_FIELDS
 from imio.project.core.content.project import IProject
+from imio.project.core.content.projectspace import get_budget_states
 from imio.project.core.content.projectspace import IProjectSpace
 from imio.project.core.utils import getProjectSpace
 from imio.project.core.utils import reference_numbers_title
@@ -96,6 +97,7 @@ def _updateSummarizedFields(obj, fields=None):
     if not base_hasattr(obj, '_link_portal_type') and base_hasattr(obj, 'back_references'):
         for rel in obj.back_references():
             _updateSummarizedFields(rel)
+
 
 def amount_coefficient(obj):
     """
@@ -270,8 +272,8 @@ def onMoveProject(obj, event):
     if event.newParent is None and event.newName is None:
         return
     # bypass if we are removing the Plone Site => no more necessary ?
-#    if event.object.portal_type == 'Plone Site':
-#        return
+    #    if event.object.portal_type == 'Plone Site':
+    #        return
     pw = obj.portal_workflow
     workflows = pw.getWorkflowsFor(obj)
     # Update field data on old and new parents
