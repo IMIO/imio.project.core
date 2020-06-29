@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from imio.migrator.migrator import Migrator
-from imio.project.core.browser.controlpanel import get_budget_states
+from imio.project.core.content.projectspace import get_budget_states
 from imio.project.core.config import SUMMARIZED_FIELDS
 from imio.project.core.content.project import IProject
 from imio.project.core.content.projectspace import IProjectSpace

@@ -83,7 +83,7 @@
 
     <utility
         name="imio.project.core.ProjectStatesVocabulary"
-        factory="imio.project.core.browser.controlpanel.ProjectStatesVocabulary"
+        factory="imio.project.core.content.projectspace.ProjectStatesVocabulary"
         />
 
 </configure>

@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from OFS.Application import Application
 from copy import deepcopy
+
 from imio.helpers.cache import cleanRamCacheFor
-from imio.project.core.content.projectspace import field_constraints
-from imio.project.core.browser.controlpanel import get_budget_states
 from imio.project.core.config import SUMMARIZED_FIELDS
 from imio.project.core.content.project import IProject
 from imio.project.core.content.projectspace import IProjectSpace
 from imio.project.core.utils import getProjectSpace
 from imio.project.core.utils import reference_numbers_title
+from OFS.Application import Application
 from plone import api
 from plone.registry.interfaces import IRecordModifiedEvent
 from Products.CMFPlone.utils import base_hasattr
