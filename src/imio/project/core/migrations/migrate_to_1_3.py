@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from imio.migrator.migrator import Migrator
-from imio.project.core.content.projectspace import get_budget_states
 from imio.project.core.config import SUMMARIZED_FIELDS
 from imio.project.core.content.project import IProject
 from imio.project.core.content.projectspace import IProjectSpace
 from imio.project.core.events import _updateSummarizedFields
+from imio.project.core.utils import get_budget_states
 from plone import api
 from Products.CMFPlone.utils import base_hasattr
 from zope.annotation import IAnnotations

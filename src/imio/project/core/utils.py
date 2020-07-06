@@ -105,3 +105,15 @@ def reference_numbers_title(obj):
         parent = parent.aq_inner.aq_parent
     refs.reverse()
     return u" - ".join(refs)
+
+
+def get_budget_states(portal_type):
+    """
+    Get the list of budget states of a given type
+    :param portal_type:
+    :type portal_type: str
+    :return: budget states field
+    :rtype: list
+    """
+    project_space = getProjectSpace(None)
+    return getattr(project_space, '{}_budget_states'.format(portal_type))

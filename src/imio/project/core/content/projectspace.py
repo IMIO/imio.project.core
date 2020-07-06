@@ -374,11 +374,6 @@ class ProjectSpaceSchemaPolicy(DexteritySchemaPolicy):
         return (IProjectSpace, )
 
 
-def get_budget_states(portal_type):
-    return api.portal.get_registry_record('imio.project.settings.{}_budget_states'.format(portal_type),
-                                          default=[]) or []
-
-
 class ProjectStatesVocabulary(object):
     """ Project workflow states """
     implements(IVocabularyFactory)

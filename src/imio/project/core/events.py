@@ -5,8 +5,8 @@ from copy import deepcopy
 from imio.helpers.cache import cleanRamCacheFor
 from imio.project.core.config import SUMMARIZED_FIELDS
 from imio.project.core.content.project import IProject
-from imio.project.core.content.projectspace import get_budget_states
 from imio.project.core.content.projectspace import IProjectSpace
+from imio.project.core.utils import get_budget_states
 from imio.project.core.utils import getProjectSpace
 from imio.project.core.utils import reference_numbers_title
 from OFS.Application import Application
@@ -118,7 +118,6 @@ def amount_coefficient(obj):
 
 
 def update_budget_splits(obj, event=None):
-    print "update_budget_splits", reference_numbers_title(obj)
     base_obj = obj._link if base_hasattr(obj, '_link_portal_type') else obj
     expected_objects = {base_obj}
     if IObjectAddedEvent.providedBy(event):
@@ -255,6 +254,9 @@ def onRemoveProject(obj, event):
     """
         When a project is removed
     """
+    # Handle ComponentLookupError: (<InterfaceClass zc.relation.interfaces.ICatalog>, '') on site deletion
+    if event.object.portal_type == 'Plone Site':
+        return
     if base_hasattr(obj, 'budget_split'):
         update_budget_splits(obj)
     _cleanParentsFields(obj)
@@ -324,34 +326,3 @@ def empty_fields(event, dic):
                 changed = True
         if changed:
             obj.reindexObject()
-
-
-def registry_changed(event):
-    """ Handler when the registry is changed """
-    if IRecordModifiedEvent.providedBy(event):
-        if event.record.interfaceName == 'imio.project.pst.browser.controlpanel.IImioPSTSettings':
-            # we redo budget globalization if states change
-            catalog = api.portal.get_tool('portal_catalog')
-            if event.record.fieldName.endswith('_budget_states'):
-                # first remove all
-                brains = catalog.searchResults(object_provides=IProject.__identifier__, sort_on='path',
-                                               sort_order='reverse')
-                for brain in brains:
-                    obj = brain.getObject()
-                    changed = False
-                    obj_annotations = IAnnotations(obj)
-                    for fld, AK in SUMMARIZED_FIELDS.items():
-                        if AK in obj_annotations:
-                            changed = True
-                            del obj_annotations[AK]
-                    if changed:
-                        print "%s changed" % obj
-                        obj.reindexObject()
-                # globalize again
-                brains = catalog.searchResults(object_provides=IProject.__identifier__, sort_on='path',
-                                               sort_order='reverse')
-                pw = api.portal.get_tool('portal_workflow')
-                for brain in brains:
-                    obj = brain.getObject()
-                    if pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
-                        _updateSummarizedFields(obj)
