@@ -296,7 +296,7 @@ def onModifyProjectSpace(obj, event):
         return
     for desc in event.descriptions:
         for attr in desc.attributes:
-            if 'use_ref_number' in attr:
+            if attr == 'use_ref_number':
                 pc = api.portal.get_tool('portal_catalog')
                 for brain in pc(object_provides=IProject.__identifier__):
                     brain.getObject().reindexObject(['Title', 'sortable_title'])
@@ -315,7 +315,6 @@ def onModifyProjectSpace(obj, event):
                             changed = True
                             del obj_annotations[AK]
                     if changed:
-                        print "%s changed" % obj
                         obj.reindexObject()
                 # globalize again
                 brains = pc.searchResults(object_provides=IProject.__identifier__, sort_on='path', sort_order='reverse')
