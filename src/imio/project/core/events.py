@@ -287,15 +287,43 @@ def onMoveProject(obj, event):
 def onModifyProjectSpace(obj, event):
     """
       Handler when a projectspace is modified
+      Update :
+      - projects
+      - budget globalization when projects budget states modified
+
     """
     if not event.descriptions:
         return
     for desc in event.descriptions:
-        if 'use_ref_number' in desc.attributes:
-            pc = api.portal.get_tool('portal_catalog')
-            for brain in pc(object_provides=IProject.__identifier__):
-                brain.getObject().reindexObject(['Title', 'sortable_title'])
-            cleanRamCacheFor('imio.prettylink.adapters.getLink')
+        for attr in desc.attributes:
+            if 'use_ref_number' in attr:
+                pc = api.portal.get_tool('portal_catalog')
+                for brain in pc(object_provides=IProject.__identifier__):
+                    brain.getObject().reindexObject(['Title', 'sortable_title'])
+                cleanRamCacheFor('imio.prettylink.adapters.getLink')
+            if attr.endswith('budget_states'):
+                # we redo budget globalization if states change
+                pc = api.portal.get_tool('portal_catalog')
+                # first remove all
+                brains = pc.searchResults(object_provides=IProject.__identifier__, sort_on='path', sort_order='reverse')
+                for brain in brains:
+                    obj = brain.getObject()
+                    changed = False
+                    obj_annotations = IAnnotations(obj)
+                    for fld, AK in SUMMARIZED_FIELDS.items():
+                        if AK in obj_annotations:
+                            changed = True
+                            del obj_annotations[AK]
+                    if changed:
+                        print "%s changed" % obj
+                        obj.reindexObject()
+                # globalize again
+                brains = pc.searchResults(object_provides=IProject.__identifier__, sort_on='path', sort_order='reverse')
+                pw = api.portal.get_tool('portal_workflow')
+                for brain in brains:
+                    obj = brain.getObject()
+                    if pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
+                        _updateSummarizedFields(obj)
 
 
 def empty_fields(event, dic):
