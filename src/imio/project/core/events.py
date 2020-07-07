@@ -212,7 +212,7 @@ def onAddProject(obj, event):
     # Update field data on every parents
     pw = obj.portal_workflow
     workflows = pw.getWorkflowsFor(obj)
-    if not workflows or pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
+    if not workflows or pw.getInfoFor(obj, 'review_state') in get_budget_states(obj):
         _updateSummarizedFields(obj)
 
 
@@ -223,7 +223,7 @@ def onModifyProject(obj, event):
     # Update field data on every parents
     pw = obj.portal_workflow
     workflows = pw.getWorkflowsFor(obj)
-    if not workflows or pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
+    if not workflows or pw.getInfoFor(obj, 'review_state') in get_budget_states(obj):
         _updateSummarizedFields(obj)
 
 
@@ -234,8 +234,8 @@ def onTransitionProject(obj, event):
     # we pass creation, already managed by add event
     if event.transition is None:
         return
-    old_in = event.old_state.id in get_budget_states(obj.portal_type)
-    new_in = event.new_state.id in get_budget_states(obj.portal_type)
+    old_in = event.old_state.id in get_budget_states(obj)
+    new_in = event.new_state.id in get_budget_states(obj)
     # Update field data on parents
     if not old_in and new_in:
         _updateSummarizedFields(obj)
@@ -279,7 +279,7 @@ def onMoveProject(obj, event):
     pw = obj.portal_workflow
     workflows = pw.getWorkflowsFor(obj)
     # Update field data on old and new parents
-    if not workflows or pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
+    if not workflows or pw.getInfoFor(obj, 'review_state') in get_budget_states(obj):
         _cleanParentsFields(obj, parent=event.oldParent)
         _updateSummarizedFields(obj)
 
@@ -321,7 +321,7 @@ def onModifyProjectSpace(obj, event):
                 pw = api.portal.get_tool('portal_workflow')
                 for brain in brains:
                     obj = brain.getObject()
-                    if pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
+                    if pw.getInfoFor(obj, 'review_state') in get_budget_states(obj):
                         _updateSummarizedFields(obj)
 
 

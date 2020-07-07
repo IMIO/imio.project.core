@@ -52,7 +52,7 @@ class Migrate_To_1_3(Migrator):
         pw = api.portal.get_tool('portal_workflow')
         for brain in brains:
             obj = brain.getObject()
-            if pw.getInfoFor(obj, 'review_state') in get_budget_states(obj.portal_type):
+            if pw.getInfoFor(obj, 'review_state') in get_budget_states(obj):
                 _updateSummarizedFields(obj)
 
         # Display duration

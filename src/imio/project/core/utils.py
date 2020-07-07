@@ -107,13 +107,14 @@ def reference_numbers_title(obj):
     return u" - ".join(refs)
 
 
-def get_budget_states(portal_type):
+def get_budget_states(project):
     """
-    Get the list of budget states of a given type
-    :param portal_type:
-    :type portal_type: str
+    Get the list of budget states of a given project type
+    :param project:
+    :type project: object
     :return: budget states field
     :rtype: list
     """
-    project_space = getProjectSpace(None)
-    return getattr(project_space, '{}_budget_states'.format(portal_type))
+    import ipdb; ipdb.set_trace()
+    project_space = getProjectSpace(project)
+    return getattr(project_space, '{}_budget_states'.format(project.portal_type))
