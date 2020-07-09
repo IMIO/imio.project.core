@@ -115,6 +115,5 @@ def get_budget_states(project):
     :return: budget states field
     :rtype: list
     """
-    import ipdb; ipdb.set_trace()
     project_space = getProjectSpace(project)
     return getattr(project_space, '{}_budget_states'.format(project.portal_type))
