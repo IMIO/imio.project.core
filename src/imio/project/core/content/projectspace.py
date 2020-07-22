@@ -3,22 +3,30 @@ from collective.z3cform.datagridfield import DictRow
 from imio.helpers.content import get_schema_fields
 from imio.project.core import _
 from imio.project.core import _tr
+from imio.project.core import _tr
+from plone import api
+from plone import api
 from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.supermodel import model
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import base_hasattr
+from Products.CMFPlone.utils import safe_unicode
 from z3c.form import validator
 from z3c.form.browser.select import SelectFieldWidget
 from zope import schema
 from zope.component import provideAdapter
 from zope.interface import implements
+from zope.interface import implements
 from zope.interface import Interface
 from zope.interface import Invalid
 from zope.interface import invariant
 from zope.schema.interfaces import IVocabularyFactory
+from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.vocabulary import SimpleVocabulary
 
 ERROR_VALUE_REMOVED_IS_IN_USE = "The key '${removed_key}' can not be removed because it is currently " \
@@ -292,6 +300,13 @@ class IProjectSpace(model.Schema):
     )
     directives.widget('budget_years', SelectFieldWidget, multiple='multiple', size=6)
 
+    project_budget_states = schema.List(
+        title=_(u"${type} budget globalization states", mapping={'type': _('Project')}),
+        description=_(u'Put states on the right for which you want to globalize budget fields.'),
+        required=False,
+        value_type=schema.Choice(vocabulary=u'imio.project.core.ProjectStatesVocabulary'),
+    )
+
     use_ref_number = schema.Bool(
         title=_(u'Use reference number'),
         description=_(u'Used in Title, documents, etc.'),
@@ -325,7 +340,7 @@ class IProjectSpace(model.Schema):
         title=_(u"${type} fields display", mapping={'type': _('Project')}),
         description=_(u'Put fields on the right to display it. Flags are : ...'),
         value_type=schema.Choice(vocabulary=u'imio.project.core.ProjectFieldsVocabulary'),
-#        value_type=schema.Choice(source=IMFields),  # a source is not managed by registry !!
+        # value_type=schema.Choice(source=IMFields),  # a source is not managed by registry !!
     )
 
     @invariant
@@ -357,3 +372,19 @@ class ProjectSpaceSchemaPolicy(DexteritySchemaPolicy):
 
     def bases(self, schemaName, tree):
         return (IProjectSpace, )
+
+
+class ProjectStatesVocabulary(object):
+    """ Project workflow states """
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+
+        pw = api.portal.get_tool('portal_workflow')
+
+        for workflow in pw.getWorkflowsFor('project'):
+            states = [value for value in workflow.states.values()]
+        terms = []
+        for state in states:
+            terms.append(SimpleTerm(state.id, title=_tr(safe_unicode(state.title), domain='plone')))
+        return SimpleVocabulary(terms)

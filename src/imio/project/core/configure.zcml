@@ -67,9 +67,6 @@
                      zope.lifecycleevent.IObjectModifiedEvent"
                 handler=".events.onModifyProjectSpace"/>
 
-    <subscriber for="plone.registry.interfaces.IRecordModifiedEvent"
-                handler=".events.registry_changed"/>
-
     <utility
       component=".vocabularies.PlanComptableCommunalVocabulary"
       name="imio.project.core.PCCVocabulary"
@@ -83,7 +80,7 @@
 
     <utility
         name="imio.project.core.ProjectStatesVocabulary"
-        factory="imio.project.core.browser.controlpanel.ProjectStatesVocabulary"
+        factory="imio.project.core.content.projectspace.ProjectStatesVocabulary"
         />
 
 </configure>

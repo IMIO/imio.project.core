@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<registry xmlns:i18n="http://xml.zope.org/namespaces/i18n">
-
-  <records interface="imio.project.core.browser.controlpanel.IImioProjectSettings" prefix="imio.project.settings" />
-
-</registry>
