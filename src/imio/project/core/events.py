@@ -11,7 +11,6 @@ from imio.project.core.utils import getProjectSpace
 from imio.project.core.utils import reference_numbers_title
 from OFS.Application import Application
 from plone import api
-from plone.registry.interfaces import IRecordModifiedEvent
 from Products.CMFPlone.utils import base_hasattr
 from zc.relation.interfaces import ICatalog
 from zope.annotation import IAnnotations
