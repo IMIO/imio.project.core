@@ -3,6 +3,7 @@
 from copy import deepcopy
 
 from imio.helpers.cache import cleanRamCacheFor
+from imio.helpers.cache import invalidate_cachekey_volatile_for
 from imio.project.core.config import SUMMARIZED_FIELDS
 from imio.project.core.content.project import IProject
 from imio.project.core.content.projectspace import IProjectSpace
@@ -11,7 +12,6 @@ from imio.project.core.utils import getProjectSpace
 from imio.project.core.utils import reference_numbers_title
 from OFS.Application import Application
 from plone import api
-from plone.registry.interfaces import IRecordModifiedEvent
 from Products.CMFPlone.utils import base_hasattr
 from zc.relation.interfaces import ICatalog
 from zope.annotation import IAnnotations
@@ -353,3 +353,10 @@ def empty_fields(event, dic):
                 changed = True
         if changed:
             obj.reindexObject()
+
+
+def group_assignment(event):
+    """
+        manage the add of a user in a plone group
+    """
+    invalidate_cachekey_volatile_for('imio.project.pst.vocabularies.ActionEditorsVocabulary')

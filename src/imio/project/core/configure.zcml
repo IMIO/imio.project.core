@@ -67,6 +67,11 @@
                      zope.lifecycleevent.IObjectModifiedEvent"
                 handler=".events.onModifyProjectSpace"/>
 
+    <subscriber
+        for="Products.PluggableAuthService.interfaces.events.IPrincipalAddedToGroupEvent"
+        handler=".events.group_assignment"
+        />
+
     <utility
       component=".vocabularies.PlanComptableCommunalVocabulary"
       name="imio.project.core.PCCVocabulary"
