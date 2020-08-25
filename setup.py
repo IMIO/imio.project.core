@@ -55,6 +55,7 @@ setup(
         'plone.principalsource',
         'plone.formwidget.datetime',
         'setuptools',
+        'Products.PluggableAuthService>=1.11.3',
     ],
     extras_require={
         'test': [
