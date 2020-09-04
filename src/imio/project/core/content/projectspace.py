@@ -67,6 +67,20 @@ def get_pt_fields_voc(pt, excluded, constraints={}):
     return SimpleVocabulary(terms)
 
 
+def field_list(dic, pt_fld):
+    """
+    Used in field checks,
+    allows transition between unconditional and conditional fields.
+    """
+    dic_pt_flds = []
+    for field in dic[pt_fld]:
+        if isinstance(field, basestring):
+            dic_pt_flds.append(field)
+        elif isinstance(field, dict):
+            dic_pt_flds.append(field['field_name'])
+    return dic_pt_flds
+
+
 def mandatory_check(data, constraints):
     """ Check the presence of mandatory fields """
     dic = data._Data_data___
@@ -75,11 +89,11 @@ def mandatory_check(data, constraints):
     for pt in mandatory:
         pt_fld = '{}_fields'.format(pt)
         if pt_fld in dic:
+            dic_pt_flds = field_list(dic, pt_fld)
             for mand in mandatory[pt]:
-                if mand not in dic[pt_fld]:
-                    if pt not in missing:
-                        missing[pt] = []
-                    missing[pt].append(mand)
+                if mand not in dic_pt_flds:
+                    missing_pt = missing.setdefault(pt, [])
+                    missing_pt.append(mand)
     msg = u''
     for pt in missing:
         fields = [u"'{}'".format(constraints['titles'][pt][fld]) for fld in missing[pt]]
@@ -97,8 +111,9 @@ def position_check(data, constraints):
     for pt in indexes:
         pt_fld = '{}_fields'.format(pt)
         if pt_fld in dic:
+            dic_pt_flds = field_list(dic, pt_fld)
             for (fld, i) in indexes[pt]:
-                if dic[pt_fld].index(fld) + 1 != i:
+                if dic_pt_flds.index(fld) + 1 != i:
                     if pt not in errors:
                         errors[pt] = []
                     errors[pt].append((fld, i))
