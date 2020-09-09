@@ -19,34 +19,6 @@ class PSContainerView(ContainerView):
 
 
 def manage_fields(the_form, portal_type, mode):
-    field_params = getattr(getProjectSpace(the_form.context), '{}_fields'.format(portal_type), [])
-    if field_params and isinstance(field_params[0], dict):
-        manage_fields_conditional(the_form, portal_type, mode)
-    else:
-        manage_fields_unconditional(the_form, portal_type, mode)
-
-
-def manage_fields_unconditional(the_form, portal_type, mode):
-    """
-        Remove and reorder fields
-    """
-    ordered = getattr(getProjectSpace(the_form.context), '{}_fields'.format(portal_type))
-    # order kept fields
-    for field_name in reversed(ordered):
-        field = remove(the_form, field_name)
-        if field is not None:
-            add(the_form, field, index=0)
-    # remove all other fields
-    for group in [the_form] + the_form.groups:
-        for field_name in group.fields:
-            if field_name not in ordered:
-                # we remove reference_number in view mode. It is needed in edit or add to manage it automatically.
-                if field_name == 'reference_number' and mode != 'view':
-                    continue
-                group.fields = group.fields.omit(field_name)
-
-
-def manage_fields_conditional(the_form, portal_type, mode):
     """
         Remove, reorder and restrict fields
     """

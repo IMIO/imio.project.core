@@ -69,15 +69,11 @@ def get_pt_fields_voc(pt, excluded, constraints={}):
 
 def field_list(dic, pt_fld):
     """
-    Used in field checks,
-    allows transition between unconditional and conditional fields.
+    Used in field checks
     """
     dic_pt_flds = []
     for field in dic[pt_fld]:
-        if isinstance(field, basestring):
-            dic_pt_flds.append(field)
-        elif isinstance(field, dict):
-            dic_pt_flds.append(field['field_name'])
+        dic_pt_flds.append(field['field_name'])
     return dic_pt_flds
 
 
