@@ -259,6 +259,23 @@ class IVocabularySchema(Interface):
 possible_years = SimpleVocabulary([SimpleTerm(y) for y in range(2012, 2030)])
 
 
+class IProjectFieldsSchema(Interface):
+    field_name = schema.Choice(
+        title=_(u'Field name'),
+        vocabulary=u'imio.project.core.ProjectFieldsVocabulary',
+    )
+
+    read_tal_condition = schema.TextLine(
+        title=_("Read TAL condition"),
+        required=False,
+    )
+
+    write_tal_condition = schema.TextLine(
+        title=_("Write TAL condition"),
+        required=False,
+    )
+
+
 class IProjectSpace(model.Schema):
     """
         Project schema, field ordering
@@ -350,9 +367,12 @@ class IProjectSpace(model.Schema):
     project_fields = schema.List(
         title=_(u"${type} fields display", mapping={'type': _('Project')}),
         description=_(u'Put fields on the right to display it. Flags are : ...'),
-        value_type=schema.Choice(vocabulary=u'imio.project.core.ProjectFieldsVocabulary'),
-        # value_type=schema.Choice(source=IMFields),  # a source is not managed by registry !!
+        value_type=DictRow(title=_(u'Field'),
+                           schema=IProjectFieldsSchema,
+                           required=False),
     )
+    directives.widget('project_fields', DataGridFieldFactory, display_table_css_class='listing',
+                      allow_reorder=True, auto_append=False)
 
     @invariant
     def validateSettings(data):
