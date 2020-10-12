@@ -5,7 +5,7 @@
         tal:define="identifiants view/identifiants">
     <Identifiants>
         <Id tal:content="identifiants/identifiant_id"/>
-        <TypeAdmin>AC</TypeAdmin>
+        <TypeAdmin tal:content="python:view.typeAdmin()"/>
         <INS tal:content="identifiants/INS"/>
         <Type>PST</Type>
         <Exercice tal:content="identifiants/exercice"/>

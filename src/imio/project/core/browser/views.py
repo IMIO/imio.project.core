@@ -264,6 +264,11 @@ class PSTExportAsXML(BrowserView):
             return 0
         return prog
 
+    def typeAdmin(self):
+        if 'cpas' in self.request.getURL():
+            return 'CPAS'
+        return 'AC'
+
 
 class IPSTImportFromEcomptesSchema(model.Schema):
 
