@@ -23,16 +23,16 @@ def manage_fields(the_form, portal_type, mode):
         Remove, reorder and restrict fields
     """
 
-    field_params = getattr(getProjectSpace(the_form.context), '{}_fields'.format(portal_type), [])
-    if not field_params:
+    fields_schemas = getattr(getProjectSpace(the_form.context), '{}_fields'.format(portal_type), [])
+    if not fields_schemas:
         return
     to_input = []
     to_display = []
 
-    for field_param in reversed(field_params):
-        field_name = field_param['field_name']
-        read_condition = field_param.get('read_tal_condition') or ""
-        write_condition = field_param.get('write_tal_condition') or ""
+    for fields_schema in reversed(fields_schemas):
+        field_name = fields_schema['field_name']
+        read_condition = fields_schema.get('read_tal_condition') or ""
+        write_condition = fields_schema.get('write_tal_condition') or ""
         if _evaluateExpression(the_form.context, expression=read_condition):
             to_display.append(field_name)
         if _evaluateExpression(the_form.context, expression=write_condition):
