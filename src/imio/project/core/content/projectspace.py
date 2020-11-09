@@ -67,6 +67,16 @@ def get_pt_fields_voc(pt, excluded, constraints={}):
     return SimpleVocabulary(terms)
 
 
+def field_list(dic, pt_fld):
+    """
+    Used in field checks
+    """
+    dic_pt_flds = []
+    for field in dic[pt_fld]:
+        dic_pt_flds.append(field['field_name'])
+    return dic_pt_flds
+
+
 def mandatory_check(data, constraints):
     """ Check the presence of mandatory fields """
     dic = data._Data_data___
@@ -75,11 +85,11 @@ def mandatory_check(data, constraints):
     for pt in mandatory:
         pt_fld = '{}_fields'.format(pt)
         if pt_fld in dic:
+            dic_pt_flds = field_list(dic, pt_fld)
             for mand in mandatory[pt]:
-                if mand not in dic[pt_fld]:
-                    if pt not in missing:
-                        missing[pt] = []
-                    missing[pt].append(mand)
+                if mand not in dic_pt_flds:
+                    missing_pt = missing.setdefault(pt, [])
+                    missing_pt.append(mand)
     msg = u''
     for pt in missing:
         fields = [u"'{}'".format(constraints['titles'][pt][fld]) for fld in missing[pt]]
@@ -97,8 +107,9 @@ def position_check(data, constraints):
     for pt in indexes:
         pt_fld = '{}_fields'.format(pt)
         if pt_fld in dic:
+            dic_pt_flds = field_list(dic, pt_fld)
             for (fld, i) in indexes[pt]:
-                if dic[pt_fld].index(fld) + 1 != i:
+                if dic_pt_flds.index(fld) + 1 != i:
                     if pt not in errors:
                         errors[pt] = []
                     errors[pt].append((fld, i))
@@ -248,6 +259,23 @@ class IVocabularySchema(Interface):
 possible_years = SimpleVocabulary([SimpleTerm(y) for y in range(2012, 2030)])
 
 
+class IProjectFieldsSchema(Interface):
+    field_name = schema.Choice(
+        title=_(u'Field name'),
+        vocabulary=u'imio.project.core.ProjectFieldsVocabulary',
+    )
+
+    read_tal_condition = schema.TextLine(
+        title=_("Read TAL condition"),
+        required=False,
+    )
+
+    write_tal_condition = schema.TextLine(
+        title=_("Write TAL condition"),
+        required=False,
+    )
+
+
 class IProjectSpace(model.Schema):
     """
         Project schema, field ordering
@@ -339,9 +367,12 @@ class IProjectSpace(model.Schema):
     project_fields = schema.List(
         title=_(u"${type} fields display", mapping={'type': _('Project')}),
         description=_(u'Put fields on the right to display it. Flags are : ...'),
-        value_type=schema.Choice(vocabulary=u'imio.project.core.ProjectFieldsVocabulary'),
-        # value_type=schema.Choice(source=IMFields),  # a source is not managed by registry !!
+        value_type=DictRow(title=_(u'Field'),
+                           schema=IProjectFieldsSchema,
+                           required=False),
     )
+    directives.widget('project_fields', DataGridFieldFactory, display_table_css_class='listing',
+                      allow_reorder=True, auto_append=False)
 
     @invariant
     def validateSettings(data):

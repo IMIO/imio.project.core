@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from collective.behavior.talcondition.utils import _evaluateExpression
 from imio.helpers.browser.views import ContainerView
 from imio.project.core.utils import getProjectSpace
 from plone import api
@@ -19,21 +20,35 @@ class PSContainerView(ContainerView):
 
 def manage_fields(the_form, portal_type, mode):
     """
-        Remove and reorder fields
+        Remove, reorder and restrict fields
     """
-    ordered = getattr(getProjectSpace(the_form.context), '{}_fields'.format(portal_type))
-    # order kept fields
-    for field_name in reversed(ordered):
+
+    fields_schemas = getattr(getProjectSpace(the_form.context), '{}_fields'.format(portal_type), [])
+    if not fields_schemas:
+        return
+    to_input = []
+    to_display = []
+
+    for fields_schema in reversed(fields_schemas):
+        field_name = fields_schema['field_name']
+        read_condition = fields_schema.get('read_tal_condition') or ""
+        write_condition = fields_schema.get('write_tal_condition') or ""
+        if _evaluateExpression(the_form.context, expression=read_condition):
+            to_display.append(field_name)
+        if _evaluateExpression(the_form.context, expression=write_condition):
+            to_input.append(field_name)
+
         field = remove(the_form, field_name)
-        if field is not None:
+        if field is not None and field_name in to_display:
             add(the_form, field, index=0)
-    # remove all other fields
+            if mode != 'view' and field_name not in to_input:
+                field.mode = "display"
+
     for group in [the_form] + the_form.groups:
         for field_name in group.fields:
-            if field_name not in ordered:
-                # we remove reference_number in view mode. It is needed in edit or add to manage it automatically.
-                if field_name == 'reference_number' and mode != 'view':
-                    continue
+            if field_name == 'reference_number' and mode != 'view':
+                continue
+            if field_name not in to_display:
                 group.fields = group.fields.omit(field_name)
 
 
