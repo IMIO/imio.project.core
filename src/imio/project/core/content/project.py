@@ -9,6 +9,7 @@ from imio.project.core.browser.widgets import BudgetInfosDataGridField
 from imio.project.core.content.projectspace import IProjectSpace
 from imio.project.core.utils import getProjectSpace
 from imio.project.core.utils import getVocabularyTermsForOrganization
+from plone import api
 from plone.app.dexterity import PloneMessageFactory as _PMF
 from plone.app.textfield import RichText
 from plone.autoform import directives
@@ -86,14 +87,14 @@ class IResultIndicatorSchema(Interface):
     """Schema used for the datagrid field 'result_indicator' of IProject."""
     label = schema.TextLine(
         title=_("Label"),
-        required=True,)
+        required=True, )
     value = schema.Int(
         title=_("Expected value"),
-        required=True,)
+        required=True, )
     reached_value = schema.Int(
         title=_("Reached value"),
         required=True,
-        default=0,)
+        default=0, )
     year = schema.Choice(
         title=_(u'Year'),
         # description=_(u"Choose a year."),
@@ -118,7 +119,7 @@ class IBudgetSchema(Interface):
     amount = schema.Float(
         title=_("Amount"),
         required=True,
-        default=0.0,)
+        default=0.0, )
 
 
 class IProject(model.Schema):
@@ -217,7 +218,7 @@ class IProject(model.Schema):
         title=_(u'Planned begin date'),
         # description=_(u"Enter the planned begin date."),
         required=False,
-#        defaultFactory=datetime.date.today,
+        #        defaultFactory=datetime.date.today,
     )
     directives.widget(planned_begin_date=DateFieldWidget)
 
@@ -225,7 +226,7 @@ class IProject(model.Schema):
         title=_(u'Effective begin date'),
         # description=_(u"Enter the effective begin date."),
         required=False,
-#        defaultFactory=datetime.date.today,
+        #        defaultFactory=datetime.date.today,
     )
     directives.widget(effective_begin_date=DateFieldWidget)
 
@@ -233,7 +234,7 @@ class IProject(model.Schema):
         title=_(u'Planned end date'),
         # description=_(u"Enter the planned end date."),
         required=False,
-#        defaultFactory=datetime.date.today,
+        #        defaultFactory=datetime.date.today,
     )
     directives.widget(planned_end_date=DateFieldWidget)
 
@@ -241,7 +242,7 @@ class IProject(model.Schema):
         title=_(u'Effective end date'),
         # description=_(u"Enter the effective end date."),
         required=False,
-#        defaultFactory=datetime.date.today,
+        #        defaultFactory=datetime.date.today,
     )
     directives.widget(effective_end_date=DateFieldWidget)
 
@@ -290,6 +291,75 @@ class Project(Container):
             return '%s (REF.%s)' % (self.title.encode('utf8'), self.reference_number)
         else:
             return self.title.encode('utf8')
+
+    def list_contained_brains(self, portal_types=['project']):
+        """
+        List contained brains.
+        :param portal_types: Portal types to query catalog.
+        :type portal_types: List
+        :returns: Catalog brains
+        :rtype: List
+        """
+        return api.content.find(self, portal_type=portal_types)
+
+    def list_planned_end_date_of_contained_brains(self, portal_types=['project']):
+        """
+        List planned end dates of the contained brains.
+        :param portal_types: Portal types to query catalog.
+        :type portal_types: List
+        :returns: Planned end dates (zope.schema._field.Datetime)
+        :rtype: List
+        """
+        brains = self.list_contained_brains(portal_types)
+        return [brain.planned_end_date for brain in brains]
+
+    def get_max_planned_end_date_of_contained_brains(self, portal_types=['project']):
+        """
+        Get max planned end dates of the contained brains.
+        :param portal_types: Portal types to query.
+        :type portal_types: List
+        :returns: max planned end dates (zope.schema._field.Datetime), or None
+        :rtype: zope.schema.Date
+        """
+        max_planned_end_date = None
+        planned_end_dates = self.list_planned_end_date_of_contained_brains(portal_types)
+        if planned_end_dates:
+            max_planned_end_date = max(planned_end_dates)
+        return max_planned_end_date
+
+    def list_containers_brains(self):
+        """
+        List containers brains.
+        :returns: List of Catalog brains
+        :rtype: List
+        """
+        containers_brains = []
+        parent = self.__parent__
+        while not IProjectSpace.providedBy(parent) and parent.portal_type != 'Plone Site':
+            containers_brains.append(api.content.find(parent, depth=0))
+            parent = parent.__parent__
+        return containers_brains
+
+    def list_planned_end_date_of_containers_brains(self):
+        """
+        List planned end dates of containers brains.
+        :returns: Planned end dates (zope.schema._field.Datetime)
+        :rtype: List
+        """
+        containers_brains = self.list_containers_brains()
+        return [brains[0].planned_end_date for brains in containers_brains if brains[0].planned_end_date]
+
+    def get_max_planned_end_date_of_containers_brains(self):
+        """
+        Get max planned end dates of containers brains.
+        :returns: max planned end dates (zope.schema._field.Datetime), or None
+        :rtype: zope.schema._field.Datetime
+        """
+        max_date = None
+        dates = self.list_planned_end_date_of_containers_brains()
+        if dates:
+            max_date = max(dates)
+        return max_date
 
 
 class CategoriesVocabulary(object):
@@ -374,4 +444,4 @@ class ProjectSchemaPolicy(DexteritySchemaPolicy):
     """ """
 
     def bases(self, schemaName, tree):
-        return (IProject, )
+        return (IProject,)
