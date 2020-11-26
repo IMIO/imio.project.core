@@ -1,3 +1,6 @@
+import datetime
+
+import zope.interface
 from collective import dexteritytextindexer
 from collective.contact.plonegroup.browser.settings import selectedOrganizationsVocabulary
 from collective.z3cform.chosen.widget import AjaxChosenMultiFieldWidget
@@ -19,7 +22,6 @@ from plone.formwidget.datetime.z3cform.widget import DateFieldWidget
 from plone.supermodel import model
 from Products.CMFPlone.utils import base_hasattr
 from z3c.form import interfaces
-from z3c.form.browser.select import SelectFieldWidget
 from z3c.form.widget import FieldWidget
 from zope import schema
 from zope.interface import implements
@@ -29,9 +31,6 @@ from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-
-import datetime
-import zope.interface
 
 
 @zope.interface.implementer(interfaces.IFieldWidget)
@@ -129,8 +128,6 @@ class IProject(model.Schema):
     description_rich = RichText(
         title=_PMF(u'label_description', default=u'Summary'),
         required=False,
-        default_mime_type='text/html',
-        output_mime_type='text/x-html-safe',
     )
 
     dexteritytextindexer.searchable('reference_number')
@@ -171,8 +168,6 @@ class IProject(model.Schema):
         title=_(u"Budget comments"),
         # description=_(u"Write here comments you have about budget."),
         required=False,
-        default_mime_type='text/html',
-        output_mime_type='text/html',
         allowed_mime_types=('text/html',),
     )
 
@@ -257,8 +252,6 @@ class IProject(model.Schema):
         title=_(u"Observation"),
         # description=_(u"Prior determination"),
         required=False,
-        default_mime_type='text/html',
-        output_mime_type='text/html',
         allowed_mime_types=('text/html',),
     )
 
@@ -266,8 +259,6 @@ class IProject(model.Schema):
         title=_(u"Comments"),
         # description=_(u"Various comments"),
         required=False,
-        default_mime_type='text/html',
-        output_mime_type='text/html',
         allowed_mime_types=('text/html',),
     )
 
