@@ -322,7 +322,8 @@ class Project(Container):
         dates = self.list_planned_end_date_of_contained_brains(portal_types)
         if dates:
             dates = [date for date in dates if date]
-            max_date = max(dates)
+            if dates:
+                max_date = max(dates)
         return max_date
 
     def list_containers_brains(self):
