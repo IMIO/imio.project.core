@@ -283,7 +283,7 @@ class Project(Container):
         else:
             return self.title.encode('utf8')
 
-    def list_contained_brains(self, portal_types=['project']):
+    def list_contained_brains(self, portal_types=None):
         """
         List contained brains.
         :param portal_types: Portal types to query catalog.
@@ -291,9 +291,11 @@ class Project(Container):
         :returns: Catalog brains
         :rtype: List
         """
+        if portal_types is None:
+            portal_types = ['project']
         return api.content.find(self, portal_type=portal_types)
 
-    def list_planned_end_date_of_contained_brains(self, portal_types=['project']):
+    def list_planned_end_date_of_contained_brains(self, portal_types=None):
         """
         List planned end dates of the contained brains.
         :param portal_types: Portal types to query catalog.
@@ -301,10 +303,12 @@ class Project(Container):
         :returns: Planned end dates (zope.schema._field.Datetime)
         :rtype: List
         """
+        if portal_types is None:
+            portal_types = ['project']
         brains = self.list_contained_brains(portal_types)
         return [brain.planned_end_date for brain in brains]
 
-    def get_max_planned_end_date_of_contained_brains(self, portal_types=['project']):
+    def get_max_planned_end_date_of_contained_brains(self, portal_types=None):
         """
         Get max planned end dates of the contained brains.
         :param portal_types: Portal types to query.
@@ -312,11 +316,14 @@ class Project(Container):
         :returns: max planned end dates (zope.schema._field.Datetime), or None
         :rtype: zope.schema.Date
         """
-        max_planned_end_date = None
-        planned_end_dates = self.list_planned_end_date_of_contained_brains(portal_types)
-        if planned_end_dates:
-            max_planned_end_date = max(planned_end_dates)
-        return max_planned_end_date
+        if portal_types is None:
+            portal_types = ['project']
+        max_date = None
+        dates = self.list_planned_end_date_of_contained_brains(portal_types)
+        if dates:
+            dates = [date for date in dates if date]
+            max_date = max(dates)
+        return max_date
 
     def list_containers_brains(self):
         """
@@ -349,6 +356,7 @@ class Project(Container):
         max_date = None
         dates = self.list_planned_end_date_of_containers_brains()
         if dates:
+            dates = [date for date in dates if date]
             max_date = max(dates)
         return max_date
 
