@@ -54,9 +54,6 @@ class FunctionalTestCase(unittest.TestCase):
         # login as Manager and add a projectspace and 2 projects into it
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         login(self.portal, TEST_USER_NAME)
-        # set registry config
-        api.portal.set_registry_record('imio.project.settings.project_budget_states',
-                                       ['to_be_scheduled', 'ongoing', 'terminated'])
         params = {'id': u"projectspace",
                   'title': u"projectspace"}
         # datagridfield categories
@@ -89,6 +86,7 @@ class FunctionalTestCase(unittest.TestCase):
              'key': 'budget-type-3'},
         ]
         params['budget_types'] = budget_types
+        params['project_budget_states'] = ['to_be_scheduled', 'ongoing', 'terminated']
         params['budget_years'] = [2013, 2014, 2015, 2016, 2017, 2018]
         # datagridfield plan
         plan_values = [
