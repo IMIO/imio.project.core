@@ -1,6 +1,7 @@
 import datetime
 
 import zope.interface
+from Products.CMFPlone.utils import base_hasattr
 from collective import dexteritytextindexer
 from collective.contact.plonegroup.browser.settings import selectedOrganizationsVocabulary
 from collective.z3cform.chosen.widget import AjaxChosenMultiFieldWidget
@@ -12,7 +13,6 @@ from imio.project.core.browser.widgets import BudgetInfosDataGridField
 from imio.project.core.content.projectspace import IProjectSpace
 from imio.project.core.utils import getProjectSpace
 from imio.project.core.utils import getVocabularyTermsForOrganization
-from plone import api
 from plone.app.dexterity import PloneMessageFactory as _PMF
 from plone.app.textfield import RichText
 from plone.autoform import directives
@@ -20,12 +20,11 @@ from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.formwidget.datetime.z3cform.widget import DateFieldWidget
 from plone.supermodel import model
-from Products.CMFPlone.utils import base_hasattr
 from z3c.form import interfaces
 from z3c.form.widget import FieldWidget
 from zope import schema
-from zope.interface import implements
 from zope.interface import Interface
+from zope.interface import implements
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.interfaces import IVocabularyFactory
@@ -282,84 +281,6 @@ class Project(Container):
             return '%s (REF.%s)' % (self.title.encode('utf8'), self.reference_number)
         else:
             return self.title.encode('utf8')
-
-    def list_contained_brains(self, portal_types=None):
-        """
-        List contained brains.
-        :param portal_types: Portal types to query catalog.
-        :type portal_types: List
-        :returns: Catalog brains
-        :rtype: List
-        """
-        if portal_types is None:
-            portal_types = ['project']
-        return api.content.find(self, portal_type=portal_types)
-
-    def list_planned_end_date_of_contained_brains(self, portal_types=None):
-        """
-        List planned end dates of the contained brains.
-        :param portal_types: Portal types to query catalog.
-        :type portal_types: List
-        :returns: Planned end dates (zope.schema._field.Datetime)
-        :rtype: List
-        """
-        if portal_types is None:
-            portal_types = ['project']
-        brains = self.list_contained_brains(portal_types)
-        return [brain.planned_end_date for brain in brains]
-
-    def get_max_planned_end_date_of_contained_brains(self, portal_types=None):
-        """
-        Get max planned end dates of the contained brains.
-        :param portal_types: Portal types to query.
-        :type portal_types: List
-        :returns: max planned end dates (zope.schema._field.Datetime), or None
-        :rtype: zope.schema.Date
-        """
-        if portal_types is None:
-            portal_types = ['project']
-        max_date = None
-        dates = self.list_planned_end_date_of_contained_brains(portal_types)
-        if dates:
-            dates = [date for date in dates if date]
-            if dates:
-                max_date = max(dates)
-        return max_date
-
-    def list_containers_brains(self):
-        """
-        List containers brains.
-        :returns: List of Catalog brains
-        :rtype: List
-        """
-        containers_brains = []
-        parent = self.__parent__
-        while not IProjectSpace.providedBy(parent) and parent.portal_type != 'Plone Site':
-            containers_brains.append(api.content.find(parent, depth=0))
-            parent = parent.__parent__
-        return containers_brains
-
-    def list_planned_end_date_of_containers_brains(self):
-        """
-        List planned end dates of containers brains.
-        :returns: Planned end dates (zope.schema._field.Datetime)
-        :rtype: List
-        """
-        containers_brains = self.list_containers_brains()
-        return [brains[0].planned_end_date for brains in containers_brains if brains[0].planned_end_date]
-
-    def get_max_planned_end_date_of_containers_brains(self):
-        """
-        Get max planned end dates of containers brains.
-        :returns: max planned end dates (zope.schema._field.Datetime), or None
-        :rtype: zope.schema._field.Datetime
-        """
-        max_date = None
-        dates = self.list_planned_end_date_of_containers_brains()
-        if dates:
-            dates = [date for date in dates if date]
-            max_date = max(dates)
-        return max_date
 
 
 class CategoriesVocabulary(object):
