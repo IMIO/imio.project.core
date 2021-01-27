@@ -1,3 +1,7 @@
+import datetime
+
+import zope.interface
+from Products.CMFPlone.utils import base_hasattr
 from collective import dexteritytextindexer
 from collective.contact.plonegroup.browser.settings import selectedOrganizationsVocabulary
 from collective.z3cform.chosen.widget import AjaxChosenMultiFieldWidget
@@ -16,21 +20,16 @@ from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.formwidget.datetime.z3cform.widget import DateFieldWidget
 from plone.supermodel import model
-from Products.CMFPlone.utils import base_hasattr
 from z3c.form import interfaces
-from z3c.form.browser.select import SelectFieldWidget
 from z3c.form.widget import FieldWidget
 from zope import schema
-from zope.interface import implements
 from zope.interface import Interface
+from zope.interface import implements
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-
-import datetime
-import zope.interface
 
 
 @zope.interface.implementer(interfaces.IFieldWidget)
@@ -86,14 +85,14 @@ class IResultIndicatorSchema(Interface):
     """Schema used for the datagrid field 'result_indicator' of IProject."""
     label = schema.TextLine(
         title=_("Label"),
-        required=True,)
+        required=True, )
     value = schema.Int(
         title=_("Expected value"),
-        required=True,)
+        required=True, )
     reached_value = schema.Int(
         title=_("Reached value"),
         required=True,
-        default=0,)
+        default=0, )
     year = schema.Choice(
         title=_(u'Year'),
         # description=_(u"Choose a year."),
@@ -118,7 +117,7 @@ class IBudgetSchema(Interface):
     amount = schema.Float(
         title=_("Amount"),
         required=True,
-        default=0.0,)
+        default=0.0, )
 
 
 class IProject(model.Schema):
@@ -128,8 +127,6 @@ class IProject(model.Schema):
     description_rich = RichText(
         title=_PMF(u'label_description', default=u'Summary'),
         required=False,
-        default_mime_type='text/html',
-        output_mime_type='text/x-html-safe',
     )
 
     dexteritytextindexer.searchable('reference_number')
@@ -170,8 +167,6 @@ class IProject(model.Schema):
         title=_(u"Budget comments"),
         # description=_(u"Write here comments you have about budget."),
         required=False,
-        default_mime_type='text/html',
-        output_mime_type='text/html',
         allowed_mime_types=('text/html',),
     )
 
@@ -217,7 +212,7 @@ class IProject(model.Schema):
         title=_(u'Planned begin date'),
         # description=_(u"Enter the planned begin date."),
         required=False,
-#        defaultFactory=datetime.date.today,
+        #        defaultFactory=datetime.date.today,
     )
     directives.widget(planned_begin_date=DateFieldWidget)
 
@@ -225,7 +220,7 @@ class IProject(model.Schema):
         title=_(u'Effective begin date'),
         # description=_(u"Enter the effective begin date."),
         required=False,
-#        defaultFactory=datetime.date.today,
+        #        defaultFactory=datetime.date.today,
     )
     directives.widget(effective_begin_date=DateFieldWidget)
 
@@ -233,7 +228,7 @@ class IProject(model.Schema):
         title=_(u'Planned end date'),
         # description=_(u"Enter the planned end date."),
         required=False,
-#        defaultFactory=datetime.date.today,
+        #        defaultFactory=datetime.date.today,
     )
     directives.widget(planned_end_date=DateFieldWidget)
 
@@ -241,7 +236,7 @@ class IProject(model.Schema):
         title=_(u'Effective end date'),
         # description=_(u"Enter the effective end date."),
         required=False,
-#        defaultFactory=datetime.date.today,
+        #        defaultFactory=datetime.date.today,
     )
     directives.widget(effective_end_date=DateFieldWidget)
 
@@ -256,8 +251,6 @@ class IProject(model.Schema):
         title=_(u"Observation"),
         # description=_(u"Prior determination"),
         required=False,
-        default_mime_type='text/html',
-        output_mime_type='text/html',
         allowed_mime_types=('text/html',),
     )
 
@@ -265,8 +258,6 @@ class IProject(model.Schema):
         title=_(u"Comments"),
         # description=_(u"Various comments"),
         required=False,
-        default_mime_type='text/html',
-        output_mime_type='text/html',
         allowed_mime_types=('text/html',),
     )
 
@@ -374,4 +365,4 @@ class ProjectSchemaPolicy(DexteritySchemaPolicy):
     """ """
 
     def bases(self, schemaName, tree):
-        return (IProject, )
+        return (IProject,)
