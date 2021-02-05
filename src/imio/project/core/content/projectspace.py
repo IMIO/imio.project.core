@@ -1,37 +1,29 @@
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import base_hasattr
+from Products.CMFPlone.utils import safe_unicode
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
 from imio.helpers.content import get_schema_fields
 from imio.project.core import _
-from imio.project.core import _tr
-from imio.project.core import _tr
-from plone import api
 from plone import api
 from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.supermodel import model
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.utils import base_hasattr
-from Products.CMFPlone.utils import safe_unicode
 from z3c.form import validator
 from z3c.form.browser.select import SelectFieldWidget
 from zope import schema
 from zope.component import provideAdapter
-from zope.interface import implements
-from zope.interface import implements
 from zope.interface import Interface
 from zope.interface import Invalid
+from zope.interface import implements
 from zope.interface import invariant
 from zope.schema.interfaces import IVocabularyFactory
-from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
-from zope.schema.vocabulary import SimpleTerm
-from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.vocabulary import SimpleVocabulary
 
 ERROR_VALUE_REMOVED_IS_IN_USE = "The key '${removed_key}' can not be removed because it is currently " \
                                 "used (for example by '${used_by_url}')."
-
 
 field_constraints = {
     'titles': {},
@@ -55,7 +47,7 @@ def get_pt_fields_voc(pt, excluded, constraints={}):
     for name, field in get_schema_fields(type_name=pt, prefix=True):
         if name in excluded:
             continue
-        title = _tr(field.title)
+        title = _(field.title)
         constraints['titles'][pt][name] = title
         if name in mandatory:
             title = u'{} *'.format(title)
@@ -93,8 +85,8 @@ def mandatory_check(data, constraints):
     msg = u''
     for pt in missing:
         fields = [u"'{}'".format(constraints['titles'][pt][fld]) for fld in missing[pt]]
-        msg += _tr(u"for '${type}' type => ${fields}. ", mapping={'type': _tr(pt),
-                                                                  'fields': ', '.join(fields)})
+        msg += _(u"for '${type}' type => ${fields}. ", mapping={'type': _(pt),
+                                                                'fields': ', '.join(fields)})
     if msg:
         raise Invalid(_(u'Missing mandatory fields: ${msg}', mapping={'msg': msg}))
 
@@ -115,10 +107,10 @@ def position_check(data, constraints):
                     errors[pt].append((fld, i))
     msg = u''
     for pt in errors:
-        fields = [_tr(u"'${fld}' at position ${i}",
-                      mapping={'fld': constraints['titles'][pt][fld], 'i': i}) for (fld, i) in errors[pt]]
-        msg += _tr(u"for '${type}' type => ${fields}. ", mapping={'type': _tr(pt),
-                                                                  'fields': ', '.join(fields)})
+        fields = [_(u"'${fld}' at position ${i}",
+                    mapping={'fld': constraints['titles'][pt][fld], 'i': i}) for (fld, i) in errors[pt]]
+        msg += _(u"for '${type}' type => ${fields}. ", mapping={'type': _(pt),
+                                                                'fields': ', '.join(fields)})
     if msg:
         raise Invalid(_(u'Some fields have to be at a specific position: ${msg}', mapping={'msg': msg}))
 
@@ -160,7 +152,7 @@ def _validateKeyNotUsed(context,
         # we need a tuple so 'set' here under works...
         # this is because we want this method to be a bit generic...
         if isinstance(used_value, unicode):
-            used_value = (used_value, )
+            used_value = (used_value,)
         # if we use a datagridfield, we have to get the relevant column
         if sub_attribute_using_key:
             # it means that we use a datagridfield and that data is stored
@@ -175,8 +167,8 @@ def _validateKeyNotUsed(context,
         if intersectionValues:
             wrong_removed_key = intersectionValues.pop()
             raise Invalid(_(ERROR_VALUE_REMOVED_IS_IN_USE,
-                          mapping={'removed_key': wrong_removed_key,
-                                   'used_by_url': obj.absolute_url(), }))
+                            mapping={'removed_key': wrong_removed_key,
+                                     'used_by_url': obj.absolute_url(), }))
 
 
 class RemovedValueIsNotUsedByCategoriesFieldValidator(validator.SimpleFieldValidator):
@@ -250,10 +242,10 @@ class IVocabularySchema(Interface):
     """
     label = schema.TextLine(
         title=_("Label"),
-        required=True,)
+        required=True, )
     key = schema.ASCIILine(
         title=_("Key"),
-        required=True,)
+        required=True, )
 
 
 possible_years = SimpleVocabulary([SimpleTerm(y) for y in range(2012, 2030)])
@@ -374,6 +366,12 @@ class IProjectSpace(model.Schema):
     directives.widget('project_fields', DataGridFieldFactory, display_table_css_class='listing',
                       allow_reorder=True, auto_append=False)
 
+    organization_type = schema.Choice(
+        title=_(u'Organization type'),
+        vocabulary=u'imio.project.core.content.projectspace.organization_type_vocabulary',
+        default='ac',
+    )
+
     @invariant
     def validateSettings(data):
         mandatory_check(data, field_constraints)
@@ -402,7 +400,7 @@ class ProjectSpaceSchemaPolicy(DexteritySchemaPolicy):
     """ """
 
     def bases(self, schemaName, tree):
-        return (IProjectSpace, )
+        return (IProjectSpace,)
 
 
 class ProjectStatesVocabulary(object):
@@ -417,5 +415,14 @@ class ProjectStatesVocabulary(object):
             states = [value for value in workflow.states.values()]
         terms = []
         for state in states:
-            terms.append(SimpleTerm(state.id, title=_tr(safe_unicode(state.title), domain='plone')))
+            terms.append(SimpleTerm(state.id, title=_(safe_unicode(state.title), domain='plone')))
+        return SimpleVocabulary(terms)
+
+
+class OrganizationTypeVocabulary(object):
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        """"""
+        terms = [SimpleTerm(u'ac', u'ac', u'AC'), SimpleTerm(u'cpas', u'cpas', u'CPAS')]
         return SimpleVocabulary(terms)
