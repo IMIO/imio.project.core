@@ -37,5 +37,10 @@
       factory=".project.PlanVocabulary"
       name="imio.project.core.content.project.plan_vocabulary"
     />
+    <utility
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      factory=".projectspace.OrganizationTypeVocabulary"
+      name="imio.project.core.content.projectspace.organization_type_vocabulary"
+    />
 
 </configure>
