@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-02-04 19:00+0000\n"
+"POT-Creation-Date: 2021-02-05 19:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,15 +15,15 @@ msgstr ""
 "Domain: imio.project.core\n"
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
-#: ./content/projectspace.py:327
+#: ./content/projectspace.py:324
 msgid "${type} budget globalization states"
 msgstr "États à considérer pour la globalisation des champs financiers du type ${type}"
 
-#: ./content/projectspace.py:363
+#: ./content/projectspace.py:360
 msgid "${type} fields display"
 msgstr "Affichage et ordre des champs du type ${type}"
 
-#: ./content/projectspace.py:111
+#: ./content/projectspace.py:110
 msgid "'${fld}' at position ${i}"
 msgstr "'${fld}' à la position ${i}"
 
@@ -72,11 +72,11 @@ msgstr "Type"
 msgid "Budget comments"
 msgstr "Commentaires sur le financement/budget"
 
-#: ./content/projectspace.py:319
+#: ./content/projectspace.py:316
 msgid "Budget concerned years"
 msgstr "Années budget"
 
-#: ./content/projectspace.py:308
+#: ./content/projectspace.py:305
 msgid "Budget types values"
 msgstr "Types de budget possibles"
 
@@ -88,7 +88,7 @@ msgstr "Type de budget"
 msgid "Categories"
 msgstr "Catégories"
 
-#: ./content/projectspace.py:286
+#: ./content/projectspace.py:283
 msgid "Categories values"
 msgstr "Catégories possibles"
 
@@ -96,7 +96,7 @@ msgstr "Catégories possibles"
 msgid "Comments"
 msgstr "Commentaires"
 
-#: ./content/projectspace.py:346
+#: ./content/projectspace.py:343
 msgid "Current fiscal year"
 msgstr "Exercice en cours"
 
@@ -108,7 +108,7 @@ msgstr "Date de début effective"
 msgid "Effective end date"
 msgstr "Date de fin effective"
 
-#: ./content/projectspace.py:287
+#: ./content/projectspace.py:284
 msgid "Enter one different value by row. Label is the displayed value. Key is the stored value: in lowercase, without space."
 msgstr "Entrer une valeur différente par ligne. Le libellé est la valeur affichée. La clé est la valeur stockée: en minuscule, sans espace, sans accent."
 
@@ -124,15 +124,15 @@ msgstr "Valeur à atteindre"
 msgid "Extra concerned people"
 msgstr "Partenaires externes"
 
-#: ./content/projectspace.py:365
+#: ./content/projectspace.py:362
 msgid "Field"
 msgstr ""
 
-#: ./content/projectspace.py:259
+#: ./content/projectspace.py:256
 msgid "Field name"
 msgstr ""
 
-#: ./content/projectspace.py:340
+#: ./content/projectspace.py:337
 msgid "INS Code"
 msgstr "Code INS"
 
@@ -140,16 +140,16 @@ msgstr "Code INS"
 msgid "Installs the imio.project.core add-on."
 msgstr "Installs the imio.project.core add-on."
 
-#: ./content/projectspace.py:248
+#: ./content/projectspace.py:247
 msgid "Key"
 msgstr "Clé"
 
 #: ./content/project.py:87
-#: ./content/projectspace.py:245
+#: ./content/projectspace.py:244
 msgid "Label"
 msgstr "Libellé"
 
-#: ./content/projectspace.py:279
+#: ./content/projectspace.py:276
 msgid "Last reference number"
 msgstr "Dernier numéro de référence"
 
@@ -157,7 +157,7 @@ msgstr "Dernier numéro de référence"
 msgid "Manager"
 msgstr "Gestionnaire"
 
-#: ./content/projectspace.py:92
+#: ./content/projectspace.py:91
 msgid "Missing mandatory fields: ${msg}"
 msgstr "Des champs obligatoires sont manquants: ${msg}"
 
@@ -165,7 +165,7 @@ msgstr "Des champs obligatoires sont manquants: ${msg}"
 msgid "Observation"
 msgstr "Constat"
 
-#: ./content/projectspace.py:373
+#: ./content/projectspace.py:370
 msgid "Organization type"
 msgstr "Type d'organisation"
 
@@ -173,7 +173,7 @@ msgstr "Type d'organisation"
 msgid "Plan"
 msgstr "Plans"
 
-#: ./content/projectspace.py:352
+#: ./content/projectspace.py:349
 msgid "Plan values"
 msgstr "Plans possibles"
 
@@ -189,7 +189,7 @@ msgstr "Échéance"
 msgid "Priority"
 msgstr "Priorité"
 
-#: ./content/projectspace.py:297
+#: ./content/projectspace.py:294
 msgid "Priority values"
 msgstr "Priorités possibles"
 
@@ -201,7 +201,7 @@ msgstr "Progression"
 msgid "Progress estimation in %."
 msgstr "Entrer la progression en %."
 
-#: ./content/projectspace.py:327
+#: ./content/projectspace.py:324
 #: ./profiles/default/types/project.xml
 msgid "Project"
 msgstr "Projet"
@@ -214,11 +214,11 @@ msgstr "Espace de projets"
 msgid "Projection"
 msgstr "Projections"
 
-#: ./content/projectspace.py:364
+#: ./content/projectspace.py:361
 msgid "Put fields on the right to display it. Flags are : ..."
 msgstr "Placer les champs à droite pour les afficher. Les indicateurs après le nom du champ signifient : <ul><li>* = obligatoire ! </li><li>nombre = position obligatoire ! </li><li>- = si retiré, le contenu du champ va être supprimé !</li></ul>"
 
-#: ./content/projectspace.py:328
+#: ./content/projectspace.py:325
 msgid "Put states on the right for which you want to globalize budget fields."
 msgstr "Placer les états à droite pour en tenir compte."
 
@@ -226,7 +226,7 @@ msgstr "Placer les états à droite pour en tenir compte."
 msgid "Reached value"
 msgstr "Valeur déjà atteinte"
 
-#: ./content/projectspace.py:264
+#: ./content/projectspace.py:261
 msgid "Read TAL condition"
 msgstr "Condition d'écriture"
 
@@ -238,7 +238,7 @@ msgstr "Numéro de référence"
 msgid "Result indicator"
 msgstr "Indicateur de résultat"
 
-#: ./content/projectspace.py:116
+#: ./content/projectspace.py:115
 msgid "Some fields have to be at a specific position: ${msg}"
 msgstr "Certains champs doivent être à une position précise: ${msg}"
 
@@ -251,11 +251,11 @@ msgstr "Steps to ease tests of imio.project.core"
 msgid "The key '${removed_key}' can not be removed because it is currently used (for example by '${used_by_url}')."
 msgstr "La clé '${removed_key}' ne peut pas être effacée car elle est actuellement utilisée (par exemple par '${used_by_url}')."
 
-#: ./content/projectspace.py:334
+#: ./content/projectspace.py:331
 msgid "Use reference number"
 msgstr "Utiliser le numéro de référence"
 
-#: ./content/projectspace.py:335
+#: ./content/projectspace.py:332
 msgid "Used in Title, documents, etc."
 msgstr "Utilisé dans le titre, les documents, etc."
 
@@ -263,11 +263,15 @@ msgstr "Utilisé dans le titre, les documents, etc."
 msgid "Visible for"
 msgstr "Visible pour"
 
+#: ./content/projectspace.py:377
+msgid "Visual way to highlight internal panes in dashboards"
+msgstr "Manière visuelle de mettre en évidence les volets internes dans les tableaux de bord"
+
 #: ./profiles/default/types/projectspace.xml
 msgid "Will contain projects sharing same configuration values"
 msgstr "Espace pour des projets partageant la même configuration"
 
-#: ./content/projectspace.py:269
+#: ./content/projectspace.py:266
 msgid "Write TAL condition"
 msgstr ""
 
@@ -330,7 +334,11 @@ msgstr "Informations budgétaires collectées sur les sous-éléments"
 msgid "budgetinfos_legend_local_data"
 msgstr "Informations budgétaires encodées sur l'élément courant"
 
-#: ./content/projectspace.py:89
+#: ./content/projectspace.py:376
+msgid "colorize project's rows"
+msgstr "coloriser les lignes de projet"
+
+#: ./content/projectspace.py:88
 msgid "for '${type}' type => ${fields}. "
 msgstr "pour le type '${type}' => ${fields}. "
 
