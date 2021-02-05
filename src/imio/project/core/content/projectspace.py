@@ -372,6 +372,12 @@ class IProjectSpace(model.Schema):
         default='ac',
     )
 
+    colorize_project_rows = schema.Bool(
+        title=_(u"colorize project's rows"),
+        description=_(u"Visual way to highlight internal panes in dashboards"),
+        default=False,
+    )
+
     @invariant
     def validateSettings(data):
         mandatory_check(data, field_constraints)
