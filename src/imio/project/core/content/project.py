@@ -62,9 +62,7 @@ def default_categories(context):
       defaultFactory for the field categories.
       It's called when categories is None or missing ?, in view or edit mode.
     """
-    if IProjectSpace.providedBy(context):
-        return []
-    elif IProject.providedBy(context) and base_hasattr(context, 'categories') and context.categories:
+    if IProject.providedBy(context) and hasattr(context, 'categories') and context.categories:
         return context.categories
     return []
 
