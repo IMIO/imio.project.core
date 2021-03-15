@@ -74,7 +74,7 @@ def default_plan(context):
     """
     if IProjectSpace.providedBy(context):
         return []
-    elif IProject.providedBy(context) and base_hasattr(context, 'plan') and context.plan:
+    elif IProject.providedBy(context) and hasattr(context, 'plan') and context.plan:
         return context.plan
     return []
 
