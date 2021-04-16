@@ -7,6 +7,7 @@ from plone import api
 from plone.app.dexterity.interfaces import ITypeSchemaContext
 from plone.dexterity.interfaces import IDexterityContent
 from Products.CMFPlone.utils import safe_unicode
+from zope.annotation import IAnnotations
 from zope.component.hooks import getSite
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
@@ -117,3 +118,24 @@ def get_budget_states(project):
     """
     project_space = getProjectSpace(project)
     return getattr(project_space, '{}_budget_states'.format(project.portal_type))
+
+
+def get_global_budget_infos(project):
+    """
+    Globalise children budget infos
+    :param project: Project
+    :type project: object
+    :return: global budget
+    :rtype: dict
+    """
+    annotations = IAnnotations(project)
+    children_budget_infos = annotations['imio.project.core-budgetinfos']
+    global_budget = {}
+    for child_budget_infos in children_budget_infos.items():
+        for budget_infos in child_budget_infos[1]:
+            if budget_infos['budget_type'] in global_budget:
+                global_budget[budget_infos['budget_type']] = global_budget[budget_infos['budget_type']] + budget_infos[
+                    'amount']
+            else:
+                global_budget.update({budget_infos['budget_type']:budget_infos['amount']})
+    return global_budget
