@@ -301,27 +301,29 @@ def onModifyProjectSpace(obj, event):
                     brain.getObject().reindexObject(['Title', 'sortable_title'])
                 cleanRamCacheFor('imio.prettylink.adapters.getLink')
             if attr.endswith('budget_states'):
+                if attr == 'pstaction_budget_states':
+                    obj.pstsubaction_budget_states = obj.pstaction_budget_states
                 # we redo budget globalization if states change
                 pc = api.portal.get_tool('portal_catalog')
                 # first remove all
                 brains = pc.searchResults(object_provides=IProject.__identifier__, sort_on='path', sort_order='reverse')
                 for brain in brains:
-                    obj = brain.getObject()
+                    ob = brain.getObject()
                     changed = False
-                    obj_annotations = IAnnotations(obj)
+                    obj_annotations = IAnnotations(ob)
                     for fld, AK in SUMMARIZED_FIELDS.items():
                         if AK in obj_annotations:
                             changed = True
                             del obj_annotations[AK]
                     if changed:
-                        obj.reindexObject()
+                        ob.reindexObject()
                 # globalize again
                 brains = pc.searchResults(object_provides=IProject.__identifier__, sort_on='path', sort_order='reverse')
                 pw = api.portal.get_tool('portal_workflow')
                 for brain in brains:
-                    obj = brain.getObject()
-                    if pw.getInfoFor(obj, 'review_state') in get_budget_states(obj):
-                        _updateSummarizedFields(obj)
+                    ob = brain.getObject()
+                    if pw.getInfoFor(ob, 'review_state') in getattr(obj, '{}_budget_states'.format(ob.portal_type)):
+                        _updateSummarizedFields(ob)
 
 
 def empty_fields(event, dic):
