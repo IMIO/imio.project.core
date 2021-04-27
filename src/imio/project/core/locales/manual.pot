@@ -15,3 +15,15 @@ msgstr ""
 #: ./browser/controlpanel.py:55
 msgid "project"
 msgstr ""
+
+#: ./browser/views.py:240
+msgid "XML document exported from eComptes"
+msgstr ""
+
+#: ./browser/views.py:247
+msgid "Import data from eComptes"
+msgstr ""
+
+#: ./browser/views.py:330
+msgid "Import"
+msgstr ""
