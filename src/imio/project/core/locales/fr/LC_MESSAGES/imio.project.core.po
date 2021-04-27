@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-02-05 19:43+0000\n"
+"POT-Creation-Date: 2021-04-27 16:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgid "'${fld}' at position ${i}"
 msgstr "'${fld}' à la position ${i}"
 
 #: ./browser/behaviors.py:64
-#: ./content/project.py:118
+#: ./content/project.py:116
 msgid "Amount"
 msgstr "Montant"
 
@@ -44,7 +44,7 @@ msgstr "Annexes"
 msgid "Behavior with analytic budget fields"
 msgstr "Behavior avec les champs de budget analytique"
 
-#: ./content/project.py:156
+#: ./content/project.py:154
 msgid "Budget"
 msgstr "Financement/Budget"
 
@@ -68,7 +68,7 @@ msgstr "Intitulé"
 msgid "Budget Type"
 msgstr "Type"
 
-#: ./content/project.py:167
+#: ./content/project.py:165
 msgid "Budget comments"
 msgstr "Commentaires sur le financement/budget"
 
@@ -80,11 +80,11 @@ msgstr "Années budget"
 msgid "Budget types values"
 msgstr "Types de budget possibles"
 
-#: ./content/project.py:107
+#: ./content/project.py:105
 msgid "Budget_type"
 msgstr "Type de budget"
 
-#: ./content/project.py:141
+#: ./content/project.py:139
 msgid "Categories"
 msgstr "Catégories"
 
@@ -92,7 +92,7 @@ msgstr "Catégories"
 msgid "Categories values"
 msgstr "Catégories possibles"
 
-#: ./content/project.py:258
+#: ./content/project.py:256
 msgid "Comments"
 msgstr "Commentaires"
 
@@ -100,11 +100,11 @@ msgstr "Commentaires"
 msgid "Current fiscal year"
 msgstr "Exercice en cours"
 
-#: ./content/project.py:220
+#: ./content/project.py:218
 msgid "Effective begin date"
 msgstr "Date de début effective"
 
-#: ./content/project.py:236
+#: ./content/project.py:234
 msgid "Effective end date"
 msgstr "Date de fin effective"
 
@@ -112,15 +112,15 @@ msgstr "Date de fin effective"
 msgid "Enter one different value by row. Label is the displayed value. Key is the stored value: in lowercase, without space."
 msgstr "Entrer une valeur différente par ligne. Le libellé est la valeur affichée. La clé est la valeur stockée: en minuscule, sans espace, sans accent."
 
-#: ./content/project.py:202
+#: ./content/project.py:200
 msgid "Enter one indicator by row. Value is a number. Label must precise the signification of this number."
 msgstr "Entrer un indicateur par ligne. La valeur est un nombre. Le libellé doit préciser la signification de ce nombre."
 
-#: ./content/project.py:90
+#: ./content/project.py:88
 msgid "Expected value"
 msgstr "Valeur à atteindre"
 
-#: ./content/project.py:194
+#: ./content/project.py:192
 msgid "Extra concerned people"
 msgstr "Partenaires externes"
 
@@ -136,6 +136,14 @@ msgstr ""
 msgid "INS Code"
 msgstr "Code INS"
 
+#: ./browser/views.py:330
+msgid "Import"
+msgstr "Importer"
+
+#: ./browser/views.py:247
+msgid "Import data from eComptes"
+msgstr "Importer des données depuis eComptes"
+
 #: ./configure.zcml:32
 msgid "Installs the imio.project.core add-on."
 msgstr "Installs the imio.project.core add-on."
@@ -144,7 +152,7 @@ msgstr "Installs the imio.project.core add-on."
 msgid "Key"
 msgstr "Clé"
 
-#: ./content/project.py:87
+#: ./content/project.py:85
 #: ./content/projectspace.py:244
 msgid "Label"
 msgstr "Libellé"
@@ -153,7 +161,7 @@ msgstr "Libellé"
 msgid "Last reference number"
 msgstr "Dernier numéro de référence"
 
-#: ./content/project.py:174
+#: ./content/project.py:172
 msgid "Manager"
 msgstr "Gestionnaire"
 
@@ -161,7 +169,7 @@ msgstr "Gestionnaire"
 msgid "Missing mandatory fields: ${msg}"
 msgstr "Des champs obligatoires sont manquants: ${msg}"
 
-#: ./content/project.py:251
+#: ./content/project.py:249
 msgid "Observation"
 msgstr "Constat"
 
@@ -169,7 +177,7 @@ msgstr "Constat"
 msgid "Organization type"
 msgstr "Type d'organisation"
 
-#: ./content/project.py:265
+#: ./content/project.py:263
 msgid "Plan"
 msgstr "Plans"
 
@@ -177,15 +185,15 @@ msgstr "Plans"
 msgid "Plan values"
 msgstr "Plans possibles"
 
-#: ./content/project.py:212
+#: ./content/project.py:210
 msgid "Planned begin date"
 msgstr "Date de début prévue"
 
-#: ./content/project.py:228
+#: ./content/project.py:226
 msgid "Planned end date"
 msgstr "Échéance"
 
-#: ./content/project.py:150
+#: ./content/project.py:148
 msgid "Priority"
 msgstr "Priorité"
 
@@ -193,11 +201,11 @@ msgstr "Priorité"
 msgid "Priority values"
 msgstr "Priorités possibles"
 
-#: ./content/project.py:244
+#: ./content/project.py:242
 msgid "Progress"
 msgstr "Progression"
 
-#: ./content/project.py:245
+#: ./content/project.py:243
 msgid "Progress estimation in %."
 msgstr "Entrer la progression en %."
 
@@ -222,7 +230,7 @@ msgstr "Placer les champs à droite pour les afficher. Les indicateurs après le
 msgid "Put states on the right for which you want to globalize budget fields."
 msgstr "Placer les états à droite pour en tenir compte."
 
-#: ./content/project.py:93
+#: ./content/project.py:91
 msgid "Reached value"
 msgstr "Valeur déjà atteinte"
 
@@ -230,11 +238,11 @@ msgstr "Valeur déjà atteinte"
 msgid "Read TAL condition"
 msgstr "Condition d'écriture"
 
-#: ./content/project.py:134
+#: ./content/project.py:132
 msgid "Reference number"
 msgstr "Numéro de référence"
 
-#: ./content/project.py:201
+#: ./content/project.py:199
 msgid "Result indicator"
 msgstr "Indicateur de résultat"
 
@@ -259,7 +267,7 @@ msgstr "Utiliser le numéro de référence"
 msgid "Used in Title, documents, etc."
 msgstr "Utilisé dans le titre, les documents, etc."
 
-#: ./content/project.py:185
+#: ./content/project.py:183
 msgid "Visible for"
 msgstr "Visible pour"
 
@@ -275,8 +283,12 @@ msgstr "Espace pour des projets partageant la même configuration"
 msgid "Write TAL condition"
 msgstr ""
 
+#: ./browser/views.py:240
+msgid "XML document exported from eComptes"
+msgstr "Document XML exporté depuis eComptes"
+
 #: ./browser/behaviors.py:40
-#: ./content/project.py:97
+#: ./content/project.py:95
 msgid "Year"
 msgstr "Année"
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-02-05 19:43+0000\n"
+"POT-Creation-Date: 2021-04-27 16:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgid "'${fld}' at position ${i}"
 msgstr ""
 
 #: ./browser/behaviors.py:64
-#: ./content/project.py:118
+#: ./content/project.py:116
 msgid "Amount"
 msgstr ""
 
@@ -44,7 +44,7 @@ msgstr ""
 msgid "Behavior with analytic budget fields"
 msgstr ""
 
-#: ./content/project.py:156
+#: ./content/project.py:154
 msgid "Budget"
 msgstr "Budget"
 
@@ -68,7 +68,7 @@ msgstr ""
 msgid "Budget Type"
 msgstr ""
 
-#: ./content/project.py:167
+#: ./content/project.py:165
 msgid "Budget comments"
 msgstr ""
 
@@ -80,11 +80,11 @@ msgstr ""
 msgid "Budget types values"
 msgstr ""
 
-#: ./content/project.py:107
+#: ./content/project.py:105
 msgid "Budget_type"
 msgstr ""
 
-#: ./content/project.py:141
+#: ./content/project.py:139
 msgid "Categories"
 msgstr ""
 
@@ -92,7 +92,7 @@ msgstr ""
 msgid "Categories values"
 msgstr "Categories values"
 
-#: ./content/project.py:258
+#: ./content/project.py:256
 msgid "Comments"
 msgstr "Comments"
 
@@ -100,11 +100,11 @@ msgstr "Comments"
 msgid "Current fiscal year"
 msgstr ""
 
-#: ./content/project.py:220
+#: ./content/project.py:218
 msgid "Effective begin date"
 msgstr "Effective begin date"
 
-#: ./content/project.py:236
+#: ./content/project.py:234
 msgid "Effective end date"
 msgstr "Effective end date"
 
@@ -112,15 +112,15 @@ msgstr "Effective end date"
 msgid "Enter one different value by row. Label is the displayed value. Key is the stored value: in lowercase, without space."
 msgstr "Enter one different value by row. Label is the displayed value. Key is the stored value: in lowercase, without space."
 
-#: ./content/project.py:202
+#: ./content/project.py:200
 msgid "Enter one indicator by row. Value is a number. Label must precise the signification of this number."
 msgstr "Enter one indicator by row. Value is a number. Label must precise the signification of this number."
 
-#: ./content/project.py:90
+#: ./content/project.py:88
 msgid "Expected value"
 msgstr "Expected value"
 
-#: ./content/project.py:194
+#: ./content/project.py:192
 msgid "Extra concerned people"
 msgstr "Extra concerned people"
 
@@ -136,6 +136,14 @@ msgstr ""
 msgid "INS Code"
 msgstr ""
 
+#: ./browser/views.py:330
+msgid "Import"
+msgstr ""
+
+#: ./browser/views.py:247
+msgid "Import data from eComptes"
+msgstr ""
+
 #: ./configure.zcml:32
 msgid "Installs the imio.project.core add-on."
 msgstr ""
@@ -144,7 +152,7 @@ msgstr ""
 msgid "Key"
 msgstr "Key"
 
-#: ./content/project.py:87
+#: ./content/project.py:85
 #: ./content/projectspace.py:244
 msgid "Label"
 msgstr "Label"
@@ -153,7 +161,7 @@ msgstr "Label"
 msgid "Last reference number"
 msgstr ""
 
-#: ./content/project.py:174
+#: ./content/project.py:172
 msgid "Manager"
 msgstr "Manager"
 
@@ -161,7 +169,7 @@ msgstr "Manager"
 msgid "Missing mandatory fields: ${msg}"
 msgstr ""
 
-#: ./content/project.py:251
+#: ./content/project.py:249
 msgid "Observation"
 msgstr ""
 
@@ -169,7 +177,7 @@ msgstr ""
 msgid "Organization type"
 msgstr "Organization type"
 
-#: ./content/project.py:265
+#: ./content/project.py:263
 msgid "Plan"
 msgstr ""
 
@@ -177,15 +185,15 @@ msgstr ""
 msgid "Plan values"
 msgstr ""
 
-#: ./content/project.py:212
+#: ./content/project.py:210
 msgid "Planned begin date"
 msgstr "Planned begin date"
 
-#: ./content/project.py:228
+#: ./content/project.py:226
 msgid "Planned end date"
 msgstr "Planned end date"
 
-#: ./content/project.py:150
+#: ./content/project.py:148
 msgid "Priority"
 msgstr "Priority"
 
@@ -193,11 +201,11 @@ msgstr "Priority"
 msgid "Priority values"
 msgstr "Priority values"
 
-#: ./content/project.py:244
+#: ./content/project.py:242
 msgid "Progress"
 msgstr "Progress"
 
-#: ./content/project.py:245
+#: ./content/project.py:243
 msgid "Progress estimation in %."
 msgstr "Progress estimation in %."
 
@@ -222,7 +230,7 @@ msgstr "Put fields on the right to display it. Flags are : '*' = mandatory ! 'nu
 msgid "Put states on the right for which you want to globalize budget fields."
 msgstr ""
 
-#: ./content/project.py:93
+#: ./content/project.py:91
 msgid "Reached value"
 msgstr "Reached value"
 
@@ -230,11 +238,11 @@ msgstr "Reached value"
 msgid "Read TAL condition"
 msgstr "Read TAL condition"
 
-#: ./content/project.py:134
+#: ./content/project.py:132
 msgid "Reference number"
 msgstr ""
 
-#: ./content/project.py:201
+#: ./content/project.py:199
 msgid "Result indicator"
 msgstr "Result indicator"
 
@@ -259,7 +267,7 @@ msgstr ""
 msgid "Used in Title, documents, etc."
 msgstr ""
 
-#: ./content/project.py:185
+#: ./content/project.py:183
 msgid "Visible for"
 msgstr "Visible for"
 
@@ -275,8 +283,12 @@ msgstr "Will contain projects sharing same configuration values"
 msgid "Write TAL condition"
 msgstr ""
 
+#: ./browser/views.py:240
+msgid "XML document exported from eComptes"
+msgstr ""
+
 #: ./browser/behaviors.py:40
-#: ./content/project.py:97
+#: ./content/project.py:95
 msgid "Year"
 msgstr ""
 
