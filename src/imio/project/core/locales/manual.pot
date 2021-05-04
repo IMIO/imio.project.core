@@ -27,3 +27,9 @@ msgstr ""
 #: ./browser/views.py:330
 msgid "Import"
 msgstr ""
+
+msgid "The XML document has been successfully imported."
+msgstr ""
+
+msgid "The imported document is not recognized as a valid eComptes export."
+msgstr ""
