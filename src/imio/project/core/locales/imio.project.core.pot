@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-05-04 11:50+0000\n"
+"POT-Creation-Date: 2021-06-16 12:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr ""
 msgid "Behavior with analytic budget fields"
 msgstr ""
 
-#: ./content/project.py:154
+#: ./content/project.py:159
 msgid "Budget"
 msgstr ""
 
@@ -70,7 +70,7 @@ msgstr ""
 msgid "Budget Type"
 msgstr ""
 
-#: ./content/project.py:165
+#: ./content/project.py:170
 msgid "Budget comments"
 msgstr ""
 
@@ -82,11 +82,15 @@ msgstr ""
 msgid "Budget types values"
 msgstr ""
 
+#: ./content/project.py:121
+msgid "Budget_comment"
+msgstr ""
+
 #: ./content/project.py:105
 msgid "Budget_type"
 msgstr ""
 
-#: ./content/project.py:139
+#: ./content/project.py:144
 msgid "Categories"
 msgstr ""
 
@@ -94,7 +98,7 @@ msgstr ""
 msgid "Categories values"
 msgstr ""
 
-#: ./content/project.py:256
+#: ./content/project.py:261
 msgid "Comments"
 msgstr ""
 
@@ -102,11 +106,11 @@ msgstr ""
 msgid "Current fiscal year"
 msgstr ""
 
-#: ./content/project.py:218
+#: ./content/project.py:223
 msgid "Effective begin date"
 msgstr ""
 
-#: ./content/project.py:234
+#: ./content/project.py:239
 msgid "Effective end date"
 msgstr ""
 
@@ -114,7 +118,7 @@ msgstr ""
 msgid "Enter one different value by row. Label is the displayed value. Key is the stored value: in lowercase, without space."
 msgstr ""
 
-#: ./content/project.py:200
+#: ./content/project.py:205
 msgid "Enter one indicator by row. Value is a number. Label must precise the signification of this number."
 msgstr ""
 
@@ -122,7 +126,7 @@ msgstr ""
 msgid "Expected value"
 msgstr ""
 
-#: ./content/project.py:192
+#: ./content/project.py:197
 msgid "Extra concerned people"
 msgstr ""
 
@@ -163,7 +167,7 @@ msgstr ""
 msgid "Last reference number"
 msgstr ""
 
-#: ./content/project.py:172
+#: ./content/project.py:177
 msgid "Manager"
 msgstr ""
 
@@ -171,7 +175,7 @@ msgstr ""
 msgid "Missing mandatory fields: ${msg}"
 msgstr ""
 
-#: ./content/project.py:249
+#: ./content/project.py:254
 msgid "Observation"
 msgstr ""
 
@@ -179,7 +183,7 @@ msgstr ""
 msgid "Organization type"
 msgstr ""
 
-#: ./content/project.py:263
+#: ./content/project.py:268
 msgid "Plan"
 msgstr ""
 
@@ -187,15 +191,15 @@ msgstr ""
 msgid "Plan values"
 msgstr ""
 
-#: ./content/project.py:210
+#: ./content/project.py:215
 msgid "Planned begin date"
 msgstr ""
 
-#: ./content/project.py:226
+#: ./content/project.py:231
 msgid "Planned end date"
 msgstr ""
 
-#: ./content/project.py:148
+#: ./content/project.py:153
 msgid "Priority"
 msgstr ""
 
@@ -203,11 +207,11 @@ msgstr ""
 msgid "Priority values"
 msgstr ""
 
-#: ./content/project.py:242
+#: ./content/project.py:247
 msgid "Progress"
 msgstr ""
 
-#: ./content/project.py:243
+#: ./content/project.py:248
 msgid "Progress estimation in %."
 msgstr ""
 
@@ -240,11 +244,11 @@ msgstr ""
 msgid "Read TAL condition"
 msgstr ""
 
-#: ./content/project.py:132
+#: ./content/project.py:137
 msgid "Reference number"
 msgstr ""
 
-#: ./content/project.py:199
+#: ./content/project.py:204
 msgid "Result indicator"
 msgstr ""
 
@@ -275,7 +279,7 @@ msgstr ""
 msgid "Used in Title, documents, etc."
 msgstr ""
 
-#: ./content/project.py:183
+#: ./content/project.py:188
 msgid "Visible for"
 msgstr ""
 
