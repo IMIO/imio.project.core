@@ -115,7 +115,12 @@ class IBudgetSchema(Interface):
     amount = schema.Float(
         title=_("Amount"),
         required=True,
-        default=0.0, )
+        default=0.0,
+    )
+    budget_comment = schema.TextLine(
+        title=_(u"Budget_comment"),
+        required=False,
+    )
 
 
 class IProject(model.Schema):
