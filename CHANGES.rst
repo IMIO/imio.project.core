@@ -1,7 +1,12 @@
 Changelog
 =========
 
-1.4 (unreleased)
+1.3.2 (unreleased)
+----------------
+
+- Nothing changed yet.
+
+1.3.1 (2021-06-02)
 ----------------
 
 - Integrate plans into ecomptes export
