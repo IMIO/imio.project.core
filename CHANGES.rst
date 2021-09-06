@@ -4,7 +4,8 @@ Changelog
 1.3.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Used by default the JS function `setoddeven` of `helpers.js`
+  [fngaha]
 
 1.3.1 (2021-06-02)
 ----------------
