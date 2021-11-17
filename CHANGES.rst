@@ -3,6 +3,8 @@ Changelog
 
 1.3.2 (unreleased)
 ----------------
+- Removed deprecated package collective.z3cform.chosen
+  [fngaha]
 
 1.3.2 (2021-10-05)
 ----------------

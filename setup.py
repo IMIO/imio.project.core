@@ -46,7 +46,6 @@ setup(
         'collective.contact.core',
         'collective.contact.plonegroup',
         'collective.dexteritytextindexer',
-        'collective.z3cform.chosen',
         'collective.z3cform.datagridfield',
         'dexterity.localrolesfield',
         'plone.app.dexterity',
