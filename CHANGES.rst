@@ -4,7 +4,9 @@ Changelog
 2.0 (unreleased)
 ----------------
 
-- Fixed py3 errors.
+- Fix ImportError: use `plone.app.dexterity._` instead of `plone.app.dexterity.PloneMessageFactory`
+  [fngaha]
+- Fix py3 errors.
   [fngaha]
 
 1.3.2 (2021-10-05)

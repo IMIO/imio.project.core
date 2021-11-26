@@ -11,7 +11,7 @@ from imio.project.core.browser.widgets import BudgetInfosDataGridField
 from imio.project.core.content.projectspace import IProjectSpace
 from imio.project.core.utils import getProjectSpace
 from imio.project.core.utils import getVocabularyTermsForOrganization
-from plone.app.dexterity import PloneMessageFactory as _PMF
+from plone.app.dexterity import _ as _PMF
 from plone.app.textfield import RichText
 from plone.autoform import directives
 from plone.dexterity.content import Container
