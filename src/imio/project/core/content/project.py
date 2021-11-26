@@ -1,7 +1,6 @@
 import datetime
 
 import zope.interface
-from Products.CMFPlone.utils import base_hasattr
 from collective import dexteritytextindexer
 from collective.contact.plonegroup.browser.settings import selectedOrganizationsVocabulary
 from collective.z3cform.datagridfield import DataGridFieldFactory
@@ -22,8 +21,7 @@ from plone.supermodel import model
 from z3c.form import interfaces
 from z3c.form.widget import FieldWidget
 from zope import schema
-from zope.interface import Interface
-from zope.interface import implements
+from zope.interface import Interface, implementer
 from zope.interface import provider
 from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.interfaces import IVocabularyFactory
@@ -270,9 +268,9 @@ class IProject(model.Schema):
     )
 
 
+@implementer(IProject)
 class Project(Container):
     """ """
-    implements(IProject)
     __ac_local_roles_block__ = False
 
     def Title(self):
@@ -282,8 +280,8 @@ class Project(Container):
             return self.title.encode('utf8')
 
 
+@implementer(IVocabularyFactory)
 class CategoriesVocabulary(object):
-    implements(IVocabularyFactory)
 
     def __call__(self, context):
         """"""
@@ -294,8 +292,8 @@ class CategoriesVocabulary(object):
         return SimpleVocabulary(terms)
 
 
+@implementer(IVocabularyFactory)
 class PriorityVocabulary(object):
-    implements(IVocabularyFactory)
 
     def __call__(self, context):
         """"""
@@ -306,8 +304,8 @@ class PriorityVocabulary(object):
         return SimpleVocabulary(terms)
 
 
+@implementer(IVocabularyFactory)
 class BudgetTypeVocabulary(object):
-    implements(IVocabularyFactory)
 
     def __call__(self, context):
         """"""
@@ -319,8 +317,8 @@ class BudgetTypeVocabulary(object):
         return SimpleVocabulary(terms)
 
 
+@implementer(IVocabularyFactory)
 class YearVocabulary(object):
-    implements(IVocabularyFactory)
 
     def __call__(self, context):
         """"""
@@ -328,28 +326,28 @@ class YearVocabulary(object):
         return SimpleVocabulary([SimpleTerm(y) for y in years])
 
 
+@implementer(IVocabularyFactory)
 class ManagerVocabulary(object):
     """
         Create a vocabulary from the selected organization groups
     """
-    implements(IVocabularyFactory)
 
     def __call__(self, context):
         return selectedOrganizationsVocabulary()
 
 
+@implementer(IVocabularyFactory)
 class VisibleForVocabulary(object):
     """
     """
-    implements(IVocabularyFactory)
 
     def __call__(self, context):
         """"""
         return getVocabularyTermsForOrganization(context, states='active')
 
 
+@implementer(IVocabularyFactory)
 class PlanVocabulary(object):
-    implements(IVocabularyFactory)
 
     def __call__(self, context):
         """"""

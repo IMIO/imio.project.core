@@ -14,9 +14,8 @@ from z3c.form import validator
 from z3c.form.browser.select import SelectFieldWidget
 from zope import schema
 from zope.component import provideAdapter
-from zope.interface import Interface
+from zope.interface import Interface, implementer
 from zope.interface import Invalid
-from zope.interface import implements
 from zope.interface import invariant
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
@@ -224,8 +223,8 @@ class RemovedValueIsNotUsedByBudgetTypesFieldValidator(validator.SimpleFieldVali
                             [])
 
 
+@implementer(IVocabularyFactory)
 class ProjectFieldsVocabulary(object):
-    implements(IVocabularyFactory)
 
     def __call__(self, context):
         return get_pt_fields_voc('project',
@@ -397,9 +396,9 @@ validator.WidgetValidatorDiscriminators(RemovedValueIsNotUsedByBudgetTypesFieldV
 provideAdapter(RemovedValueIsNotUsedByBudgetTypesFieldValidator)
 
 
+@implementer(IProjectSpace)
 class ProjectSpace(Container):
     """ """
-    implements(IProjectSpace)
 
 
 class ProjectSpaceSchemaPolicy(DexteritySchemaPolicy):
@@ -409,9 +408,9 @@ class ProjectSpaceSchemaPolicy(DexteritySchemaPolicy):
         return (IProjectSpace,)
 
 
+@implementer(IVocabularyFactory)
 class ProjectStatesVocabulary(object):
     """ Project workflow states """
-    implements(IVocabularyFactory)
 
     def __call__(self, context):
 
@@ -425,8 +424,8 @@ class ProjectStatesVocabulary(object):
         return SimpleVocabulary(terms)
 
 
+@implementer(IVocabularyFactory)
 class OrganizationTypeVocabulary(object):
-    implements(IVocabularyFactory)
 
     def __call__(self, context):
         """"""
