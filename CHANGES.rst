@@ -4,6 +4,8 @@ Changelog
 1.3.2 (unreleased)
 ----------------
 
+- Updated possible years
+  [fngaha]
 - Used by default the JS function `setoddeven` of `helpers.js`
   [fngaha]
 
