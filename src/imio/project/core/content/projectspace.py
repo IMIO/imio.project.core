@@ -248,7 +248,7 @@ class IVocabularySchema(Interface):
         required=True, )
 
 
-possible_years = SimpleVocabulary([SimpleTerm(y) for y in range(2012, 2030)])
+possible_years = SimpleVocabulary([SimpleTerm(y) for y in range(2012, 2040)])
 
 
 class IProjectFieldsSchema(Interface):
