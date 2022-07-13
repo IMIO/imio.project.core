@@ -84,13 +84,13 @@ class IResultIndicatorSchema(Interface):
     label = schema.TextLine(
         title=_("Label"),
         required=True, )
-    value = schema.Int(
+    value = schema.Float(
         title=_("Expected value"),
         required=True, )
-    reached_value = schema.Int(
+    reached_value = schema.Float(
         title=_("Reached value"),
         required=True,
-        default=0, )
+        default=0.0, )
     year = schema.Choice(
         title=_(u'Year'),
         # description=_(u"Choose a year."),
