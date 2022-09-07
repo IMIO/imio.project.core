@@ -33,3 +33,11 @@ msgstr ""
 
 msgid "The imported document is not recognized as a valid eComptes export."
 msgstr ""
+
+#: ./content/projectspace.py:50
+msgid "label_title"
+msgstr ""
+
+#: ./content/projectspace.py:50
+msgid "label_description"
+msgstr ""

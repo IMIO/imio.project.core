@@ -7,6 +7,8 @@ Changelog
 1.3.2 (2021-10-05)
 ----------------
 
+- Fix locales language in projectspace
+  [fngaha]
 - Allowed commas to be used in results indicators values
   [fngaha]
 - Updated possible years
