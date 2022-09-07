@@ -5,6 +5,7 @@ from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
 from imio.helpers.content import get_schema_fields
 from imio.project.core import _
+from imio.project.core import _tr
 from plone import api
 from plone.autoform import directives
 from plone.dexterity.content import Container
@@ -47,7 +48,7 @@ def get_pt_fields_voc(pt, excluded, constraints={}):
     for name, field in get_schema_fields(type_name=pt, prefix=True):
         if name in excluded:
             continue
-        title = _(field.title)
+        title = _tr(field.title)
         constraints['titles'][pt][name] = title
         if name in mandatory:
             title = u'{} *'.format(title)
