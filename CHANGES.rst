@@ -4,8 +4,6 @@ Changelog
 1.3.2 (unreleased)
 ----------------
 
-- Fix AttributeError: aq_inner
-  [fngaha]
 - Fix locales language in projectspace
   [fngaha]
 - Allowed commas to be used in results indicators values
