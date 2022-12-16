@@ -75,8 +75,6 @@ def getProjectSpace(context):
         context = context.context
     parent = context
     while not IProjectSpace.providedBy(parent) and parent.portal_type != 'Plone Site':
-        if hasattr(parent, '_link'):
-            parent = parent._link
         parent = parent.aq_inner.aq_parent
     return parent
 
