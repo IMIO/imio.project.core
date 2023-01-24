@@ -126,7 +126,7 @@ msgstr "Valeur à atteindre"
 
 #: ./content/project.py:197
 msgid "Extra concerned people"
-msgstr "Partenaires externes"
+msgstr "Partenaires"
 
 #: ./content/projectspace.py:363
 msgid "Field"

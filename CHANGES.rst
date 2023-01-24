@@ -7,6 +7,8 @@ Changelog
 1.3.2 (2021-10-05)
 ----------------
 
+- Changed translation of "Extra concerned people"
+  [fngaha]
 - Create a new progress_state_comments field
   [fngaha]
 - Fix locales language in projectspace
