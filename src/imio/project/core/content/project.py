@@ -264,6 +264,13 @@ class IProject(model.Schema):
         allowed_mime_types=('text/html',),
     )
 
+    progress_state_comments = RichText(
+        title=_(u"Progress state comments"),
+        # description=_(u"Various comments"),
+        required=False,
+        allowed_mime_types=('text/html',),
+    )
+
     plan = schema.List(
         title=_(u'Plan'),
         # description=_(u"Choose plan."),
