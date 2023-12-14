@@ -4,6 +4,8 @@ Changelog
 1.3.2 (unreleased)
 ----------------
 
+- Provide a utility for action type vocabularies
+  [fngaha]
 - Changed translation of "Extra concerned people"
   [fngaha]
 - Create a new progress_state_comments field
