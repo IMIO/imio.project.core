@@ -293,6 +293,14 @@ class Project(Container):
             return self.title.encode('utf8')
 
 
+class TypeActionsVocabulary(object):
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        """"""
+        return SimpleVocabulary([SimpleTerm('PSTAction', 'PSTAction', 'A'), SimpleTerm('PSTSubAction', 'PSTSubAction', 'SA')])
+
+
 class CategoriesVocabulary(object):
     implements(IVocabularyFactory)
 
