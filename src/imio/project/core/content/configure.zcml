@@ -4,6 +4,11 @@
 
     <utility
       provides="zope.schema.interfaces.IVocabularyFactory"
+      factory=".project.TypeActionsVocabulary"
+      name="imio.project.core.content.project.type_actions_vocabulary"
+    />
+    <utility
+      provides="zope.schema.interfaces.IVocabularyFactory"
       factory=".project.CategoriesVocabulary"
       name="imio.project.core.content.project.categories_vocabulary"
     />
