@@ -422,7 +422,7 @@ class ProjectStatesVocabulary(object):
             states = [value for value in workflow.states.values()]
         terms = []
         for state in states:
-            terms.append(SimpleTerm(state.id, title=_(safe_unicode(state.title), domain='plone')))
+            terms.append(SimpleTerm(state.id, title=_tr(safe_unicode(state.title), domain='plone')))
         return SimpleVocabulary(terms)
 
 
