@@ -4,6 +4,8 @@ Changelog
 1.3.2 (unreleased)
 ----------------
 
+- Use _tr to fix projectspace export with collective.exportimport
+  [sverbois]
 - Allowed commas to be used in results indicators values
   [fngaha]
 - Updated possible years
